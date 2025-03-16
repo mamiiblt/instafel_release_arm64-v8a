@@ -1,3 +1,7 @@
 rootProject.name = "instafel"
 
-include("instafel.website", "instafel.app", "instafel.updater", "instafel.gplayapi", "instafel.patcher")
+rootDir.listFiles()
+    .filter { it.isDirectory && it.name.startsWith("instafel") && File(it, "build.gradle.kts").exists() }
+    .forEach {
+        include(it.name)
+    }

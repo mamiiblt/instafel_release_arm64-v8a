@@ -3,3 +3,6 @@
 
 # Ignore Gradle build output directory
 build
+
+# Ingore IntelliJ IDEA 
+.intellij_idea

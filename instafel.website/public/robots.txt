@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap URL
+Sitemap: https://mamiiblt.me/sitemap.xml
