@@ -10,12 +10,6 @@ plugins {
     id("com.github.node-gradle.node") version "7.1.0"
 }
 
-node {
-    download = false
-    nodeProjectDir = file("${layout.projectDirectory}")
-    npmInstallCommand = "install"
-}
-
 abstract class RunCommandWithArgsTask @Inject constructor(
     private val execOps: ExecOperations
 ) : DefaultTask() {
