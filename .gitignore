@@ -8,8 +8,5 @@ build
 .intellij_idea
 .vscode
 
-/instafel.app
-/instafel.gplayapi
-/instafel.patcher
-/instafel.updater
-/instafel.website
+/instafel.websitea
+
