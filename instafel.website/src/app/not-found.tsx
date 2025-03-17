@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Home } from "@/components/Icons";
+import { Button } from "../components/ui/button";
+import { Home } from "../components/Icons";
 
 export default function NotFound() {
   return (

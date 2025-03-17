@@ -2,11 +2,11 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { Book } from "@/components/Icons";
-import { getAllPostsSync } from "@/lib/blog";
+import { Book } from "../../components/Icons";
+import { getAllPostsSync } from "../../lib/blog";
 import { useState } from "react";
-import { Separator } from "@/components/ui/separator";
-import Footer from "@/components/Footer";
+import { Separator } from "../../components/ui/separator";
+import Footer from "../../components/Footer";
 
 export default function GuidePage() {
   const [hoveredId, setHoveredId] = useState<number | null>(null);

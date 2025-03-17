@@ -2,12 +2,12 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { Book, IflLibraryBackup } from "@/components/Icons";
-import { getAllPostsSync, getInstafelBackups } from "@/lib/blog";
+import { Book, IflLibraryBackup } from "../../components/Icons";
+import { getAllPostsSync, getInstafelBackups } from "../../lib/blog";
 import { useEffect, useState } from "react";
-import { LoadingBar } from "@/components/ifl";
+import { LoadingBar } from "../../components/ifl";
 import { Separator } from "@radix-ui/react-dropdown-menu";
-import Footer from "@/components/Footer";
+import Footer from "../../components/Footer";
 
 interface Backup {
   id: string;

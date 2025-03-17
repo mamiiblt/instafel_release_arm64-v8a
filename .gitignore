@@ -7,3 +7,4 @@ build
 # Ingore IntelliJ IDEA 
 .intellij_idea
 .vscode
+.vercel

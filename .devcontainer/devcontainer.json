@@ -16,5 +16,12 @@
 			"vncPort": "5901"
 		},
 		"ghcr.io/tailscale/codespace/tailscale": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"redhat.java"
+			]
+		}
 	}
 }

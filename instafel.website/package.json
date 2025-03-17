@@ -43,7 +43,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^20.17.24",
     "@types/react": "^19.0.4",
     "@types/react-dom": "^19",
     "eslint": "9.22.0",
@@ -51,6 +51,6 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "tailwindcss-border-image": "^1.1.2",
-    "typescript": "^5.7.3"
+    "typescript": "^5.8.2"
   }
 }

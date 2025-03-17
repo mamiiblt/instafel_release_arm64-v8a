@@ -1,24 +1,19 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { Button } from "../../components/ui/button";
 import { Suspense, useEffect, useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Link from "next/link";
+import { Card, CardContent } from "../../components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
 
 import {
   ArrowRight,
-  Check,
   ChevronRight,
-  ChevronRightCircle,
   Download,
   DownloadIcon,
-  GitFork,
   Info,
   LucideFileText,
   Shapes,
-  TypeIcon,
 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import {
@@ -28,11 +23,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { LoadingBar } from "@/components/ifl";
-import { Label } from "@/components/ui/label";
-import Footer from "@/components/Footer";
+} from "../../components/ui/table";
+import { Badge } from "../../components/ui/badge";
+import { LoadingBar } from "../../components/ifl";
+import Footer from "../../components/Footer";
 
 export default function DownloadInstafelPage() {
   return (

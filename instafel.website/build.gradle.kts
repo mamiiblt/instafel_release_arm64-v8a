@@ -1,4 +1,6 @@
 import com.github.gradle.node.npm.task.NpmTask
+import org.gradle.process.ExecOperations
+import javax.inject.Inject
 
 repositories {
     gradlePluginPortal()
@@ -9,34 +11,46 @@ plugins {
 }
 
 node {
-    download = true
-    version = "20.9.0"
-    workDir = file("${layout.projectDirectory}/.gradle/nodejs")
+    download = false
     nodeProjectDir = file("${layout.projectDirectory}")
     npmInstallCommand = "install"
 }
 
-tasks.register<NpmTask>("install") { 
-    println("Installing deps")
-    args.set(listOf("install"))
+abstract class RunCommandWithArgsTask @Inject constructor(
+    private val execOps: ExecOperations
+) : DefaultTask() {
+
+    @Input
+    lateinit var commandArgs: List<String> 
+
+    @TaskAction
+    fun run() {
+        execOps.exec {
+            commandLine(commandArgs) 
+        }
+    }
+}
+
+tasks.register<RunCommandWithArgsTask>("install") { 
+    println("Installing depencendies")
+    
+    commandArgs = listOf("npm", "install")
 
     doLast {
         println("Dependencies installed")
         val envFile = File("${layout.projectDirectory}/.env")
         val textToWrite = "SITE_URL=https://instafel.mamiiblt.me"
         envFile.writeText(textToWrite)
-        println("SITE_URL writed into .env file succesfully.")
+        println("Environment veriables writed into .env succesfully.")
     }
 }
 
+tasks.register<RunCommandWithArgsTask>("build") {    
+    commandArgs = listOf("npm", "run", "build")
+}
 
 tasks.register<NpmTask>("lint") {    
     args.set(listOf("run", "lint"))
-}
-
-tasks.register<NpmTask>("build") {    
-    dependsOn("install")
-    args.set(listOf("run", "build"))
 }
 
 tasks.register("clear-cache") {

@@ -1,11 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
-import CustomSocialLinks from "@/components/CustomSocialLinks";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Book, Code, Coffee, Instagram, Rocket } from "@/components/Icons";
 import { Suspense, useEffect, useState } from "react";
 import {
   Card,
@@ -14,10 +10,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+} from "../../components/ui/card";
+import { RadioGroupItem } from "../../components/ui/radio-group";
+import { Label } from "../../components/ui/label";
 import {
   Check,
   ChevronRight,
@@ -32,10 +27,9 @@ import {
   Zap,
 } from "lucide-react";
 import { RadioGroup } from "@radix-ui/react-radio-group";
-import { Separator } from "@/components/ui/separator";
 import { useSearchParams } from "next/navigation";
-import { LoadingBar } from "@/components/ifl";
-import Footer from "@/components/Footer";
+import { LoadingBar } from "../../components/ifl";
+import Footer from "../../components/Footer";
 
 export default function DownloadPage() {
   return (
