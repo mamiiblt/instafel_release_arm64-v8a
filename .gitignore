@@ -1,0 +1,15 @@
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+
+# Ingore IntelliJ IDEA 
+.intellij_idea
+.vscode
+
+/instafel.app
+/instafel.gplayapi
+/instafel.patcher
+/instafel.updater
+/instafel.website
