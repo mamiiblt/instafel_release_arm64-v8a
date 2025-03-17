@@ -1,0 +1,34 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Grid -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#E5E7EB" stroke-width="0.5" opacity="0.2"/>
+  </pattern>
+  <rect width="1600" height="900" fill="#F3F4F6"/>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+
+  <!-- Browser Window -->
+  <rect x="400" y="200" width="800" height="500" rx="8" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="2"/>
+  
+  <!-- Browser Header -->
+  <rect x="400" y="200" width="800" height="40" rx="8" fill="#F3F4F6"/>
+  <circle cx="440" cy="220" r="6" fill="#EF4444"/>
+  <circle cx="470" cy="220" r="6" fill="#F59E0B"/>
+  <circle cx="500" cy="220" r="6" fill="#10B981"/>
+  
+  <!-- Code Editor Section -->
+  <rect x="440" y="270" width="300" height="400" rx="4" fill="#1E293B"/>
+  <rect x="460" y="290" width="260" height="12" rx="2" fill="#4F46E5" opacity="0.6"/>
+  <rect x="460" y="312" width="200" height="12" rx="2" fill="#8B5CF6" opacity="0.5"/>
+  <rect x="460" y="334" width="240" height="12" rx="2" fill="#EC4899" opacity="0.5"/>
+  
+  <!-- Preview Section -->
+  <rect x="780" y="270" width="380" height="400" rx="4" fill="#FFFFFF"/>
+  <rect x="800" y="290" width="340" height="40" rx="4" fill="#F3F4F6"/>
+  <rect x="800" y="350" width="340" height="120" rx="4" fill="#F3F4F6"/>
+  <rect x="800" y="490" width="240" height="20" rx="4" fill="#F3F4F6"/>
+  
+  <!-- Decorative Elements -->
+  <circle cx="300" cy="400" r="40" fill="#4F46E5" opacity="0.1"/>
+  <circle cx="1300" cy="500" r="60" fill="#8B5CF6" opacity="0.1"/>
+  <circle cx="1200" cy="200" r="30" fill="#EC4899" opacity="0.1"/>
+</svg>

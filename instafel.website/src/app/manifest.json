@@ -1,0 +1,15 @@
+{
+  "name": "mamiiblt",
+  "short_name": "mami's blog",
+  "icons": [
+    {
+      "src": "/web-app-manifest-150x150.png",
+      "sizes": "150x150",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}

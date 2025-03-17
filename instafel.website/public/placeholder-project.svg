@@ -1,0 +1,19 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Grid -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#E5E7EB" stroke-width="0.5" opacity="0.2"/>
+  </pattern>
+  <rect width="1600" height="900" fill="#F3F4F6"/>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+  
+  <!-- Central Design -->
+  <rect x="680" y="350" width="240" height="160" rx="8" fill="#D1D5DB" opacity="0.6"/>
+  <rect x="700" y="370" width="200" height="20" rx="4" fill="#9CA3AF"/>
+  <rect x="700" y="410" width="160" height="10" rx="2" fill="#9CA3AF"/>
+  <rect x="700" y="430" width="140" height="10" rx="2" fill="#9CA3AF"/>
+  
+  <!-- Decorative Elements -->
+  <circle cx="800" cy="300" r="40" fill="#9CA3AF" opacity="0.4"/>
+  <circle cx="900" cy="500" r="25" fill="#9CA3AF" opacity="0.3"/>
+  <circle cx="700" cy="550" r="30" fill="#9CA3AF" opacity="0.3"/>
+</svg>
