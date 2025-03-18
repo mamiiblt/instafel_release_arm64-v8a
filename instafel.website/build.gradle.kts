@@ -2,6 +2,9 @@ import com.github.gradle.node.npm.task.NpmTask
 import org.gradle.process.ExecOperations
 import javax.inject.Inject
 
+group = "me.mamiiblt.instafel"
+version = "1.0"
+
 repositories {
     gradlePluginPortal()
 }

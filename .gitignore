@@ -8,3 +8,4 @@ build
 .intellij_idea
 .vscode
 .vercel
+/instafel.website/package-lock.json
