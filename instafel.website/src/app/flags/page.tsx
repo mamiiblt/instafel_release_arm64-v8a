@@ -2,8 +2,8 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import React, { Suspense, useEffect, useState } from "react";
-import { LoadingBar, LoadingBarNotCenter } from "../../components/ifl";
-import Footer from "../../components/Footer";
+import { LoadingBar, LoadingBarNotCenter } from "@/components/ifl";
+import Footer from "@/components/Footer";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   ArrowRight,
@@ -18,7 +18,7 @@ import {
   X,
 } from "lucide-react";
 import Link from "next/link";
-import { Button } from "../../components/ui/button";
+import { Button } from "@/components/ui/button";
 
 export default function FlagListPage() {
   return (

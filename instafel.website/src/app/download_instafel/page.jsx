@@ -1,10 +1,10 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Button } from "../../components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Suspense, useEffect, useState } from "react";
-import { Card, CardContent } from "../../components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
+import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import {
   ArrowRight,
@@ -23,10 +23,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../../components/ui/table";
-import { Badge } from "../../components/ui/badge";
-import { LoadingBar } from "../../components/ifl";
-import Footer from "../../components/Footer";
+} from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import { LoadingBar } from "@/components/ifl";
+import Footer from "@/components/Footer";
 
 export default function DownloadInstafelPage() {
   return (

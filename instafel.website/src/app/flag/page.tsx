@@ -2,8 +2,8 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import React, { Suspense, useEffect, useState } from "react";
-import { LoadingBar } from "../../components/ifl";
-import Footer from "../../components/Footer";
+import { LoadingBar } from "@/components/ifl";
+import Footer from "@/components/Footer";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   AlertTriangle,
@@ -33,17 +33,17 @@ import {
   X,
 } from "lucide-react";
 import Link from "next/link";
-import { Button } from "../../components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "../../components/ui/card";
-import { Badge } from "../../components/ui/badge";
-import { FlagLibrartCarousel } from "../../components/carousel";
-import { Switch } from "../../components/ui/switch";
-import { Separator } from "../../components/ui/separator";
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { FlagLibrartCarousel } from "@/components/carousel";
+import { Switch } from "@/components/ui/switch";
+import { Separator } from "@/components/ui/separator";
 
 export default function FlagListPage() {
   return (

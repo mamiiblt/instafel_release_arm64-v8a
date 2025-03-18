@@ -7,19 +7,19 @@ import {
   IflGuide,
   IflLibrary,
   IflLibraryBackup,
-} from "../../components/Icons";
+} from "@/components/Icons";
 import { Suspense, useEffect, useState } from "react";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from "../../components/ui/card";
-import { Badge } from "../../components/ui/badge";
-import { Button } from "../../components/ui/button";
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
-import { LoadingBar } from "../../components/ifl";
-import Footer from "../../components/Footer";
+import { LoadingBar } from "@/components/ifl";
+import Footer from "@/components/Footer";
 
 interface Manifest {
   version_name: string;

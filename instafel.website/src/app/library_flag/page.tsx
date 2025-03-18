@@ -2,8 +2,8 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { LoadingBar } from "../../components/ifl";
-import Footer from "../../components/Footer";
+import { LoadingBar } from "@/components/ifl";
+import Footer from "@/components/Footer";
 import { useRouter } from "next/navigation";
 import {
   Camera,

@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { Card } from "../../components/ui/card";
+import { Card } from "@/components/ui/card";
 import {
   ArrowDownToLine,
   AudioLines,
@@ -18,10 +18,10 @@ import {
   VolumeX,
   Zap,
 } from "lucide-react";
-import { Button } from "../../components/ui/button";
+import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { LoadingBar } from "../../components/ifl";
-import Footer from "../../components/Footer";
+import { LoadingBar } from "@/components/ifl";
+import Footer from "@/components/Footer";
 
 interface Asset {
   name: string;

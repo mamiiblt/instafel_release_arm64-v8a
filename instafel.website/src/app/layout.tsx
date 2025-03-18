@@ -7,7 +7,6 @@ import Footer from "@/components/Footer";
 import { SITE_CONFIG } from "@/config/config";
 import { defaultMetadata } from "@/config/metadata";
 import { Toaster } from "@/components/ui/toaster";
-
 const appleTitle = SITE_CONFIG.siteName;
 
 const geist = Geist({

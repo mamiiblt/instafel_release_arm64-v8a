@@ -10,9 +10,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../../components/ui/card";
-import { RadioGroupItem } from "../../components/ui/radio-group";
-import { Label } from "../../components/ui/label";
+} from "@/components/ui/card";
+import { RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 import {
   Check,
   ChevronRight,
@@ -28,8 +28,8 @@ import {
 } from "lucide-react";
 import { RadioGroup } from "@radix-ui/react-radio-group";
 import { useSearchParams } from "next/navigation";
-import { LoadingBar } from "../../components/ifl";
-import Footer from "../../components/Footer";
+import { LoadingBar } from "@/components/ifl";
+import Footer from "@/components/Footer";
 
 export default function DownloadPage() {
   return (
