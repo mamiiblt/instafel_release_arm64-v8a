@@ -16,6 +16,10 @@ aas_token = aas_et/.....
 
 You are ready to use Aurora Store's GPlayAPI now!
 
+# How to build
+
+You can build project with `./gradlew :instafel.gplayapi:build-jar` command. Output JAR will be saved in `/instafel.gplayapi/output/ifl-gplayapi-..-snapshot.jar` format 
+
 # Don't Forget
 
 Thanks [AuroraOSS/gplayapi](https://gitlab.com/AuroraOSS/gplayapi) for made this project possible.
