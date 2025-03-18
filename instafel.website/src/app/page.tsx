@@ -12,11 +12,11 @@ import {
   Instagram,
   Notification,
   Telegram,
-} from "../components/Icons";
-import { Button } from "../components/ui/button";
+} from "@/components/Icons";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import Footer from "../components/Footer";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (

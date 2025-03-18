@@ -25,7 +25,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="apple-mobile-web-app-title" content={appleTitle} />
-        <body className={`${geist.className} flex min-h-screen flex-col`}>
+      </head>
+      <body className={`${geist.className} flex min-h-screen flex-col`}>
           <ThemeProvider
             attribute="class"
             enableSystem={false}
@@ -37,7 +38,6 @@ export default function RootLayout({
             <main className="flex-1">{children}</main>
           </ThemeProvider>
         </body>
-      </head>
     </html>
   );
 }

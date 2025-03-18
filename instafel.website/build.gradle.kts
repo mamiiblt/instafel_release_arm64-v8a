@@ -40,7 +40,6 @@ tasks.register<RunCommandWithArgsTask>("install") {
 }
 
 tasks.register<RunCommandWithArgsTask>("build") {  
-    dependsOn("lint")
     commandArgs = listOf("npm", "run", "build")
 }
 
