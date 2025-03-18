@@ -39,12 +39,13 @@ tasks.register<RunCommandWithArgsTask>("install") {
     }
 }
 
-tasks.register<RunCommandWithArgsTask>("build") {    
+tasks.register<RunCommandWithArgsTask>("build") {  
+    dependsOn("lint")
     commandArgs = listOf("npm", "run", "build")
 }
 
-tasks.register<NpmTask>("lint") {    
-    args.set(listOf("run", "lint"))
+tasks.register<RunCommandWithArgsTask>("lint") {    
+    commandArgs = listOf("npm", "run", "lint")
 }
 
 tasks.register("clear-cache") {
@@ -52,9 +53,7 @@ tasks.register("clear-cache") {
         file("${project.projectDir}/build"),
         file("${project.projectDir}/node_modules"),
         file("${project.projectDir}/dist"),
-        file("${project.projectDir}/package-lock.json"),
         file("${project.projectDir}/.next"),
-        file("${project.projectDir}/.gradle"),
         file("${project.projectDir}/.env")
     )
 
