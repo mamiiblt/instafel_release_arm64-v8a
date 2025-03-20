@@ -9,3 +9,21 @@ build
 .vscode
 .vercel
 /instafel.website/package-lock.json
+
+# Instafel Updater
+
+/instafel.updater/*.iml
+/instafel.updater/.gradle
+/instafel.updater/local.properties
+/instafel.updater/.idea/caches
+/instafel.updater/.idea/libraries
+/instafel.updater/.idea/modules.xml
+/instafel.updater/.idea/workspace.xml
+/instafel.updater/.idea/navEditor.xml
+/instafel.updater/.idea/assetWizardSettings.xml
+/instafel.updater/.DS_Store
+/instafel.updater/build
+/instafel.updater/captures
+/instafel.updater/.externalNativeBuild
+/instafel.updater/.cxx
+/instafel.updater/local.properties
