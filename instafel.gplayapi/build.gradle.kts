@@ -4,14 +4,27 @@ plugins {
     id("com.gradleup.shadow") version "8.3.6"
 }
 
+/************************************************/
+/* BUILD CONFIG INITIALIZATION PASHE */
+
+var config = rootProject.extra["instafelConfig"] as Map<*, *>
+val projectConfig = config[project.name] as Map<*, *>
+val projectVersion = projectConfig["version"] as String
+val projectTag = projectConfig["tag"] as String 
+
 val commitHash: String by rootProject.extra
 
 group = "me.mamiiblt.instafel"
-version = "v1.5-$commitHash"
-var releaseTag: String = "snapshot"
+version = "v$projectVersion-$projectTag-$commitHash"
 
+println("Build configuration info")
+println("")
+println("pname: ${project.name}")
 println("commit: $commitHash")
-println("version: $version")
+println("version: $projectVersion")
+println("tag: $projectTag")
+println("formated: $version")
+/************************************************/
 
 repositories {
     mavenCentral()
@@ -30,19 +43,6 @@ application {
     mainClass = "me.mamiiblt.instafel.gplayapi.Main"
 }
 
-tasks.register("setTag") {
-    val releaseArg = project.findProperty("release") != null
-
-    if (releaseArg) {
-        releaseTag = "release"
-    }
-
-    doLast {
-        version = "$version-$releaseTag"
-        println("Version set to: $version")
-    }
-}
-
 tasks.register("clear-cache") {
     val filesToDelete = listOf(
         file("${project.projectDir}/build"),
@@ -53,8 +53,6 @@ tasks.register("clear-cache") {
     doLast {
         println("Cache successfully deleted.")
     }
-
-    mustRunAfter("setTag")
 }
 
 tasks.shadowJar {
@@ -84,7 +82,7 @@ tasks.withType<JavaCompile> {
 }
 
 tasks.register("build-jar") {
-    dependsOn("setTag", "clear-cache", "shadowJar", "makeClear")
+    dependsOn("clear-cache", "shadowJar", "makeClear")
 
     doLast {
         println("All tasks completed succesfully")

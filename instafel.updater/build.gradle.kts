@@ -2,6 +2,32 @@ plugins {
     alias(libs.plugins.android.application)
 }
 
+/************************************************/
+/* BUILD CONFIG INITIALIZATION PASHE */
+
+var config = rootProject.extra["instafelConfig"] as Map<*, *>
+val projectConfig = config[project.name] as Map<*, *>
+val androidConfig = projectConfig["androidConfig"] as Map<*, *>
+val keystoreConfig = androidConfig["keystore"] as Map<*, *>
+val depsConfig = projectConfig["dependencyConfig"] as Map<*, *>
+
+val projectVersion = projectConfig["version"] as String
+val projectTag = projectConfig["tag"] as String 
+
+val commitHash: String by rootProject.extra
+
+group = "me.mamiiblt.instafel"
+version = "v$projectVersion-$projectTag-$commitHash"
+
+println("Build configuration info")
+println("")
+println("pname: ${project.name}")
+println("commit: $commitHash")
+println("version: $projectVersion")
+println("tag: $projectTag")
+println("formated: $version")
+/************************************************/
+
 android {
     namespace = "me.mamiiblt.instafel.updater"
     compileSdk = 34
@@ -16,7 +42,7 @@ android {
         applicationId = "me.mamiiblt.instafel.updater"
         minSdk = 26
         targetSdk = 34
-        versionCode = 1
+        versionCode = androidConfig["versionCode"] as Int
         versionName = "1.0.0-cmmt"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -24,10 +50,10 @@ android {
 
     signingConfigs{
         create("release") {
-            storeFile = file("../keystore.jks")
-            storePassword = System.getenv("RELEASE_KEYSTORE_PASSWORD")
-            keyAlias = System.getenv("RELEASE_KEYSTORE_ALIAS")
-            keyPassword = System.getenv("RELEASE_KEY_PASSWORD")
+            storeFile = file(keystoreConfig["ksPath"] as String)
+            storePassword = keystoreConfig["ksKeyPass"] as String
+            keyAlias = keystoreConfig["ksAlias"] as String
+            keyPassword = keystoreConfig["ksPass"] as String
         }
     }
 
@@ -52,21 +78,17 @@ android {
     }
 }
 
-var shizuku_version = "13.1.5"
-var work_version = "2.9.1"
-var okhttp_version = "4.9.0"
-
 dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.navigation.fragment)
-    implementation("dev.rikka.shizuku:api:$shizuku_version")
-    implementation("dev.rikka.shizuku:provider:$shizuku_version")
-    implementation("androidx.work:work-runtime:$work_version")
-    implementation("com.squareup.okhttp3:okhttp:$okhttp_version")
-    implementation("com.github.TTTT55:Material-You-Preferences:0.2.5")
+    implementation("dev.rikka.shizuku:api:${depsConfig["shizuku_version"] as String}")
+    implementation("dev.rikka.shizuku:provider:${depsConfig["shizuku_version"] as String}}")
+    implementation("androidx.work:work-runtime:${depsConfig["android_work_version"] as String}")
+    implementation("com.squareup.okhttp3:okhttp:${depsConfig["okhttp_version"] as String}")
+    implementation("com.github.TTTT55:Material-You-Preferences:${depsConfig["materialyoupreferences_version"] as String}")
     implementation(libs.navigation.ui)
     implementation(libs.preference)
     testImplementation(libs.junit)

@@ -1,3 +1,6 @@
+import org.gradle.process.ExecResult
+import org.gradle.api.tasks.Exec
+import org.gradle.api.DefaultTask
 import java.io.ByteArrayOutputStream
 import java.io.File
 import groovy.json.JsonSlurper
@@ -15,10 +18,19 @@ fun getGitCommitHash(): String {
     return output.toString().trim()
 }
 
-val commitHash = getGitCommitHash()
+
+// read instafel configuration file
+
+val configFile = File(rootDir, "config/instafel.config.json")
+val jsonData = JsonSlurper().parse(configFile) as Map<*, *>
+
+println("Loaded & exported Instafel project configuration file")
+
+// implement veriables to all projects
 
 gradle.rootProject {
-    extensions.extraProperties["commitHash"] = commitHash
+    extra["commitHash"] = getGitCommitHash()
+    extra["instafelConfig"] = jsonData
 }
 
 
