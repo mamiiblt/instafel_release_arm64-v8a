@@ -24,6 +24,7 @@ build
 
 # Instafel Updater
 
+/instafel.updater/output
 /instafel.updater/*.iml
 /instafel.updater/.gradle
 /instafel.updater/local.properties

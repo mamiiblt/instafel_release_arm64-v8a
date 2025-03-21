@@ -15,7 +15,7 @@ val projectTag = projectConfig["tag"] as String
 val commitHash: String by rootProject.extra
 
 group = "me.mamiiblt.instafel"
-version = "v$projectVersion-$projectTag-$commitHash"
+version = "v$projectVersion-$commitHash-$projectTag"
 
 println("Build configuration info")
 println("")
@@ -45,6 +45,7 @@ application {
 
 tasks.register("clear-cache") {
     val filesToDelete = listOf(
+        file("${project.projectDir}/bin"),
         file("${project.projectDir}/build"),
         file("${project.projectDir}/output"),
     )
@@ -61,8 +62,6 @@ tasks.shadowJar {
     destinationDirectory.set(file("${project.projectDir}/output"))
 
     doLast {
-        delete(file("${project.projectDir}/build"))
-        println("Temp build caches cleared.")
         println("JAR generated.")
     }
 
@@ -74,9 +73,12 @@ tasks.withType<JavaCompile> {
 }
 
 tasks.register("build-jar") {
-    dependsOn("clear-cache", "shadowJar", "makeClear")
+    dependsOn("clear-cache", "shadowJar")
 
     doLast {
+        delete(file("${project.projectDir}/build"))
+        delete(file("${project.projectDir}/bin"))
+        println("Temp build caches cleared.")
         println("All tasks completed succesfully")
     }
 }

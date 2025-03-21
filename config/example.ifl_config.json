@@ -3,12 +3,14 @@
         "version": "1.5",
         "tag": "custom"
     },
+    "instafel.website": {
+        "version": null,
+        "tag": "custom"
+    },
     "instafel.updater": {
         "version": "1.0.7",
-        "tag": "custom",
         "androidConfig": {
             "versionCode": 1,
-            "versionName": "USE_CONFIG_BUILDER",
             "keystore": {
                 "ksPath": "/config/keystores/instafel-updater.jks",
                 "ksKeyPass": "value",
@@ -22,9 +24,5 @@
           "okhttp_version": "4.9.0",
           "materialyoupreferences_version": "0.2.5"      
         } 
-    },
-    "instafel.website": {
-        "version": null,
-        "tag": "custom"
     }
 }

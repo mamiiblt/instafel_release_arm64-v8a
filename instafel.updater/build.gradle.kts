@@ -12,20 +12,16 @@ val keystoreConfig = androidConfig["keystore"] as Map<*, *>
 val depsConfig = projectConfig["dependencyConfig"] as Map<*, *>
 
 val projectVersion = projectConfig["version"] as String
-val projectTag = projectConfig["tag"] as String 
 
 val commitHash: String by rootProject.extra
 
 group = "me.mamiiblt.instafel"
-version = "v$projectVersion-$projectTag-$commitHash"
 
 println("Build configuration info")
 println("")
 println("pname: ${project.name}")
 println("commit: $commitHash")
 println("version: $projectVersion")
-println("tag: $projectTag")
-println("formated: $version")
 /************************************************/
 
 repositories {
@@ -40,7 +36,6 @@ repositories {
     gradlePluginPortal()
     maven("https://jitpack.io")
 }
-
 
 android {
     namespace = "me.mamiiblt.instafel.updater"
@@ -96,8 +91,13 @@ tasks.register("generate-app-debug") {
     dependsOn("clear-cache", "assembleDebug")
 
     doLast {
-        // delete(file("${project.projectDir}/build"))
-        println("Temo build caches cleared.")
+        val outputName = "ifl-updater-v$projectVersion-$commitHash-debug.apk"
+        file("${project.projectDir}/build/outputs/apk/debug/instafel.updater-debug.apk")
+            .copyTo(file("${project.projectDir}/output/$outputName"), overwrite = true)
+        println("APK successfully copied: $outputName")
+
+        delete("${project.projectDir}/build")
+        println("Build caches cleared.")
         println("All tasks completed succesfully")
     }
 }
@@ -106,8 +106,13 @@ tasks.register("generate-app-release") {
     dependsOn("clear-cache", "assembleRelease")
 
     doLast {
-        // delete(file("${project.projectDir}/build"))
-        println("Temo build caches cleared.")
+        val outputName = "ifl-updater-v$projectVersion-$commitHash-release.apk"
+        file("${project.projectDir}/build/outputs/apk/release/instafel.updater-release.apk")
+            .copyTo(file("${project.projectDir}/output/$outputName"), overwrite = true)
+        println("APK successfully copied: $outputName")
+
+        delete("${project.projectDir}/build")
+        println("Build caches cleared.")
         println("All tasks completed succesfully")
     }
 }
