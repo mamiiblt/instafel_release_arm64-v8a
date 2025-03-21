@@ -21,7 +21,7 @@ fun getGitCommitHash(): String {
 
 // read instafel configuration file
 
-val configFile = File(rootDir, "config/instafel.config.json")
+val configFile = File(rootDir, "config/ifl_config.json")
 val jsonData = JsonSlurper().parse(configFile) as Map<*, *>
 
 println("Loaded & exported Instafel project configuration file")

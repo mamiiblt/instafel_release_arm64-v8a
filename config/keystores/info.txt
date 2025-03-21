@@ -1,4 +1,0 @@
-Put project keystores there, you need to these keystores for build projects;
-
-instafel-updater.jks
-instafel-app.jks

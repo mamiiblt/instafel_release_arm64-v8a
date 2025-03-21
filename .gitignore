@@ -10,6 +10,18 @@ build
 .vercel
 /instafel.website/package-lock.json
 
+# Ingore Config
+
+/config/ifl_config.json
+/config/keystores
+
+# Instafel GPlayAPI
+
+/instafel.gplayapi/output
+/instafel.gplayapi/build
+/instafel.gplayapi/.gradle
+/instafel.gplayapi/bin
+
 # Instafel Updater
 
 /instafel.updater/*.iml

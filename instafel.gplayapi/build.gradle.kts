@@ -61,20 +61,12 @@ tasks.shadowJar {
     destinationDirectory.set(file("${project.projectDir}/output"))
 
     doLast {
+        delete(file("${project.projectDir}/build"))
+        println("Temp build caches cleared.")
         println("JAR generated.")
     }
 
     mustRunAfter("clear-cache")
-}
-
-tasks.register("makeClear") {
-
-    doLast {
-        delete(file("${project.projectDir}/build"))
-        println("Project cleared.")
-    }
-
-    mustRunAfter("shadowJar")
 }
 
 tasks.withType<JavaCompile> {

@@ -28,6 +28,20 @@ println("tag: $projectTag")
 println("formated: $version")
 /************************************************/
 
+repositories {
+    google {
+        content {
+            includeGroupByRegex("com\\.android.*")
+            includeGroupByRegex("com\\.google.*")
+            includeGroupByRegex("androidx.*")
+        }
+    }
+    mavenCentral()
+    gradlePluginPortal()
+    maven("https://jitpack.io")
+}
+
+
 android {
     namespace = "me.mamiiblt.instafel.updater"
     compileSdk = 34
@@ -50,7 +64,7 @@ android {
 
     signingConfigs{
         create("release") {
-            storeFile = file(keystoreConfig["ksPath"] as String)
+            storeFile = File(rootDir, keystoreConfig["ksPath"] as String)
             storePassword = keystoreConfig["ksKeyPass"] as String
             keyAlias = keystoreConfig["ksAlias"] as String
             keyPassword = keystoreConfig["ksPass"] as String
@@ -78,6 +92,38 @@ android {
     }
 }
 
+tasks.register("generate-app-debug") {
+    dependsOn("clear-cache", "assembleDebug")
+
+    doLast {
+        // delete(file("${project.projectDir}/build"))
+        println("Temo build caches cleared.")
+        println("All tasks completed succesfully")
+    }
+}
+
+tasks.register("generate-app-release") {
+    dependsOn("clear-cache", "assembleRelease")
+
+    doLast {
+        // delete(file("${project.projectDir}/build"))
+        println("Temo build caches cleared.")
+        println("All tasks completed succesfully")
+    }
+}
+
+tasks.register("clear-cache") {
+    val filesToDelete = listOf(
+        file("${project.projectDir}/build"),
+        file("${project.projectDir}/output"),
+    )
+
+    delete(filesToDelete)
+    doLast {
+        println("Cache successfully deleted.")
+    }
+}
+
 dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
@@ -85,7 +131,7 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.navigation.fragment)
     implementation("dev.rikka.shizuku:api:${depsConfig["shizuku_version"] as String}")
-    implementation("dev.rikka.shizuku:provider:${depsConfig["shizuku_version"] as String}}")
+    implementation("dev.rikka.shizuku:provider:${depsConfig["shizuku_version"] as String}")
     implementation("androidx.work:work-runtime:${depsConfig["android_work_version"] as String}")
     implementation("com.squareup.okhttp3:okhttp:${depsConfig["okhttp_version"] as String}")
     implementation("com.github.TTTT55:Material-You-Preferences:${depsConfig["materialyoupreferences_version"] as String}")
