@@ -33,22 +33,6 @@ gradle.rootProject {
     extra["instafelConfig"] = jsonData
 }
 
-
-pluginManagement {
-    repositories {
-        google {
-            content {
-                includeGroupByRegex("com\\.android.*")
-                includeGroupByRegex("com\\.google.*")
-                includeGroupByRegex("androidx.*")
-            }
-        }
-        mavenCentral()
-        gradlePluginPortal()
-        maven("https://jitpack.io")
-    }
-}
-
 rootDir.listFiles()
     .filter { it.isDirectory && it.name.startsWith("instafel") && File(it, "build.gradle.kts").exists() }
     .forEach {
