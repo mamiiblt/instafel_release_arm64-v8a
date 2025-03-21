@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="?ifl_attr_background_color"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/ifl_ui_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="_text"
+        android:textColor="?attr/ifl_attr_title_color"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="22sp"
+        android:textStyle="normal" />
+</LinearLayout>

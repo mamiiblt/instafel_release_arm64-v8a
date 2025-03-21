@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?ifl_attr_background_color"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Space
+        android:id="@+id/ifl_ui_space_top"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="0dp"
+        app:cardCornerRadius="17dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/ifl_attr_tile_color">
+
+            <ImageView
+                android:id="@+id/ifl_ui_icon"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ifl_base"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="?attr/ifl_attr_iview_tint" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ifl_ui_item_box"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/ifl_ui_subicon"
+                app:layout_constraintStart_toEndOf="@id/ifl_ui_icon"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/ifl_ui_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/ifl_ui_title"
+                    android:text="title"
+                    android:textColor="?attr/ifl_attr_title_color"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/ifl_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/ifl_edittext_background"
+                    android:hint="_hint"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:paddingStart="15dp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:textColor="?ifl_attr_title_color"
+                    android:textColorHighlight="?ifl_attr_title_color"
+                    android:textColorHint="?ifl_attr_subtitle_color"
+                    android:textColorLink="?ifl_attr_title_color"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ifl_ui_title"/>
+
+                <!-- <TextView
+                    android:id="@+id/ifl_ui_subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:layout_toEndOf="@id/ifl_ui_title"
+                    android:text="subtitle"
+                    android:textColor="?attr/ifl_attr_subtitle_color"
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ifl_ui_title" /> -->
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/ifl_ui_subicon"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="15dp"
+                android:padding="8dp"
+                android:visibility="gone"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ifl_tick"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="?attr/ifl_attr_iview_tint" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+    <Space
+        android:id="@+id/ifl_ui_space_bottom"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="15dp" />
+</LinearLayout>

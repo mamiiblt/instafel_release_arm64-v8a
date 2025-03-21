@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<me.mamiiblt.instafel.ui.Page
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="me.mamiiblt.instafel.activity.about.ifl_a_about">
+
+    <me.mamiiblt.instafel.ui.PageTitle
+        android:id="@+id/ifl_page_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ifl_attr_ui_titleText="Admin Login" />
+
+    <me.mamiiblt.instafel.ui.PageContentArea
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ifl_page_title">
+
+        <EditText
+            android:id="@+id/ifl_tile_admin_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/ifl_edittext_background"
+            android:hint="Username"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:paddingStart="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:textColor="?ifl_attr_title_color"
+            android:textColorHighlight="?ifl_attr_title_color"
+            android:textColorHint="?ifl_attr_subtitle_color"
+            android:textColorLink="?ifl_attr_title_color"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="20dp" />
+
+        <EditText
+            android:id="@+id/ifl_tile_admin_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/ifl_edittext_background"
+            android:hint="Password"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:paddingStart="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:textColor="?ifl_attr_title_color"
+            android:textColorHighlight="?ifl_attr_title_color"
+            android:textColorHint="?ifl_attr_subtitle_color"
+            android:textColorLink="?ifl_attr_title_color"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="20dp"/>
+
+        <LinearLayout
+            android:id="@+id/ifl_tile_admin_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/ifl_button_background"
+            app:layout_constraintBottom_toBottomOf="@+id/ifl_page_area"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/ifl_button_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="Login"
+                android:textAlignment="center"
+                android:textColor="?ifl_attr_subtitle_color" />
+        </LinearLayout>
+
+    </me.mamiiblt.instafel.ui.PageContentArea>
+
+</me.mamiiblt.instafel.ui.Page>

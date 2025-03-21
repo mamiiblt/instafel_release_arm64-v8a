@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2024. mamiiblt.dev
+  -->
+
+<resources>
+    ;Translated by Rüşan Gür
+    <!-- sa -->>
+    <string name="ifl_a11_49">Bitte füllen Sie die erforderlichen Felder aus.</string>
+    <string name="ifl_a11_50">Bitte geben Sie einen gültigen Versionsnamen ein</string>
+    <string name="ifl_a11_51">Backup exportieren</string>
+    <string name="ifl_a11_52">Backup-Name</string>
+    <string name="ifl_a11_53">"Wie Mamis perfektes Backup"</string>
+    <string name="ifl_a11_54">Autorname</string>
+    <string name="ifl_a11_55">Wie Albert Einstein</string>
+    <string name="ifl_a11_56">Backup-Version</string>
+    <string name="ifl_a11_57">Wie 1.0, 1.0-hotfix usw.</string>
+    <string name="ifl_a11_58">Änderungsprotokoll</string>
+    <string name="ifl_a11_59">Hier können Sie das Änderungsprotokoll des Backups schreiben</string>
+    <string name="ifl_a11_60">Backup aktualisieren</string>
+    <string name="ifl_a11_61">Alte JSON-Backups importieren</string>
+    <string name="ifl_a11_62">Backup-Vergleicher</string>
+    <string name="ifl_a11_63">Wird verwendet, um eine Backup-Datei vollständig mit allen Flags zu importieren</string>
+    <string name="ifl_a11_64">Fügt der von Ihnen verwendeten Backup-Datei Flags hinzu, die nicht in der ausgewählten Sicherung enthalten sind.</string>
+    <string name="ifl_a11_65">Mit dieser Option können Sie alte .json-Backups importieren</string>
+    <string name="ifl_a11_66">Backup 1 auswählen</string>
+    <string name="ifl_a11_67">Backup 2 auswählen</string>
+    <string name="ifl_a11_68">Drücken, um Backup auszuwählen</string>
+    <string name="ifl_a11_69">Backups vergleichen</string>
+    <string name="ifl_a11_70">Fehler beim Starten der Komprimierung</string>
+    <string name="ifl_a11_71">Ausgewählt</string>
+    <string name="ifl_a11_72">Bitte wählen Sie zwei Backups zum Vergleichen</string>
+    <string name="ifl_a11_73">Vergleichsergebnis</string>
+    <string name="ifl_a11_74">Unterschiede B1 zu B2</string>
+    <string name="ifl_a11_75">Unterschiede B2 zu B1</string>
+    <string name="ifl_a11_76">Entfernte Flag-IDs</string>
+    <string name="ifl_a11_77">Fehler beim Vergleichen der Backups</string>
+
+    <string name="ifl_a0_08">Miscellaneous</string>
+    <string name="ifl_a0_09">Amoled Theme</string>
+    <string name="ifl_a0_10">Enable amoled theme for Instafel activities, dialogs and other parts.</string>
+    <string name="ifl_a0_11">Remove Ads</string>
+    <string name="ifl_a0_12">Removes ads displayed in the feed, reels, or other places.</string>
+    <string name="ifl_a0_13">Restart app for apply changes.</string>
+    <string name="ifl_a5_10">Erlaubnis verweigert</string>
+    <string name="ifl_a5_11">Die Benachrichtigungsberechtigung von Instafels wurde verweigert. Wenn dieses Problem weiterhin besteht, vergessen Sie nicht, die Benachrichtigungen in den Anwendungseinstellungen zu aktivieren.</string>
+    <string name="ifl_a0_01">Backup-Optionen</string>
+    <string name="ifl_a11_45">Version</string>
+    <string name="ifl_a11_46">%1$s erfolgreich mit %2$s-Flag importiert</string>
+    <string name="ifl_a11_47">Bitte wählen Sie eine gültige Backup-Datei aus</string>
+    <string name="ifl_a11_48">Alte Backups importieren (.json)</string>
+
+    <!--  me.mamiiblt.instafel.ifl_a_menu  -->
+    <string name="ifl_a0_02">Updateeinstellungen</string>
+    <string name="ifl_a0_03">Sprache</string>
+    <string name="ifl_a0_04">Bibliothek</string>
+    <string name="ifl_a0_05">Über</string>
+    <string name="ifl_a0_06">Diese Funktion wurde noch nicht hinzugefügt</string>
+    <string name="ifl_a0_07">Absturzbericht</string>
+    <string name="ifl_a0_15">Instafel Updater</string>
+    <string name="ifl_a0_16">Verwenden Sie den Instafel Updater für automatische Updates mit Root / Shizuku.</string>
+    <!--  me.mamiiblt.instafel.ifl_a_about_ifl  -->
+    <string name="ifl_a1_01">Über Instafel</string>
+    <string name="ifl_a1_02">Instafel Version</string>
+    <string name="ifl_a1_03">Installation Typ</string>
+    <string name="ifl_a1_04">Projekt</string>
+    <string name="ifl_a1_05">Entwickler</string>
+    <string name="ifl_a1_06">Alle, die zu diesem Projekt beigetragen haben</string>
+    <string name="ifl_a1_07">Klone</string>
+    <string name="ifl_a1_08">Nicht geklont</string>
+    <string name="ifl_a1_09">Generation ID</string>
+    <string name="ifl_a1_10">Instagram Version</string>
+    <string name="ifl_a1_11">Mitwirkende an der Übersetzung von Instafel</string>
+    <!--  me.mamiiblt.instafel.ifl_a_about_ig  -->
+    <string name="ifl_a2_01">Über Instagram</string>
+    <string name="ifl_a2_02">Version</string>
+    <string name="ifl_a2_03">Version Code</string>
+    <string name="ifl_a2_04">Kanal</string>
+    <string name="ifl_a2_05">Architektur</string>
+    <string name="ifl_a3_01">Über</string>
+    <!--  me.mamiiblt.instafel.ifl_a_devmode  -->
+    <string name="ifl_a4_01">Export</string>
+    <string name="ifl_a4_02">Import</string>
+    <string name="ifl_a4_03">Lokale Überschreibungsdatei löschen</string>
+    <string name="ifl_a4_04">Zum Speichern wählen Sie bitte einen Dateipfad.</string>
+    <string name="ifl_a4_05">Sicherungsdatei erfolgreich gespeichert.</string>
+    <string name="ifl_a4_06">Überschreibungsdatei nicht gefunden.</string>
+    <string name="ifl_a4_07">Beim Speichern der Sicherungsdatei ist ein Fehler aufgetreten.</string>
+    <string name="ifl_a4_08">Sicherungsdatei teilen</string>
+    <string name="ifl_a4_09">Bitte wählen Sie eine Datei für den Import aus.</string>
+    <string name="ifl_a4_10">Sicherungsdatei erfolgreich importiert.</string>
+    <string name="ifl_a4_11">Überschreibungsdatei nicht gefunden.</string>
+    <string name="ifl_a4_12">Beim Importieren der Sicherungsdatei ist ein Fehler aufgetreten.</string>
+    <string name="ifl_a4_13">Überschreibungsdatei erfolgreich gelöscht.</string>
+    <string name="ifl_a4_14">Überschreibungsdatei nicht gefunden.</string>
+    <string name="ifl_a4_15">Beim Importieren der Sicherungsdatei ist ein Fehler aufgetreten.</string>
+    <string name="ifl_a4_16">MobileConfig Editor</string>
+    <string name="ifl_a4_17">Flag Analyzer</string>
+    <string name="ifl_a4_18">Vollständig importieren</string>
+    <string name="ifl_a4_19">Importieren mit Zusammenführen</string>
+    <string name="ifl_a4_20">Analysieren Sie Ergebnis</string>
+    <string name="ifl_a4_21">Use Custom Mapping File</string>
+    <string name="ifl_a4_22">Ermöglicht die Analyse mit einer benutzerdefinierten Mapping-Datei anstelle der Standard-Mapping-Datei von Instagram</string>
+    <string name="ifl_a4_23">Matched Flags</string>
+    <string name="ifl_a4_24">Mismatched Flags</string>
+    <string name="ifl_a4_25">Suchen</string>
+    <string name="ifl_a4_26">Überschreibungen aus der Sicherung importieren</string>
+    <string name="ifl_a4_27">Verwendung einer Sicherungsdatei anstelle der Analyse einer vorhandenen Überschreibungsdatei</string>
+    <string name="ifl_a4_28">Analyse starten</string>
+    <string name="ifl_a4_29">Start Analysis with Custom Backup</string>
+    <string name="ifl_a4_30">Start Analysis with Custom Mapping</string>
+    <string name="ifl_a4_31">Start Analysis with Custom Backup and Mapping</string>
+    <string name="ifl_a4_32">Copy Raw Mapping</string>
+    <string name="ifl_a4_33">Copy Parsed Mapping</string>
+    <string name="ifl_a4_34">Überschreibungsdatei fehlt oder ist beschädigt</string>
+    <string name="ifl_a4_35">Bist du dir Sicher?</string>
+    <string name="ifl_a4_36">Es gibt keine Möglichkeit, eine gelöschte Überschreibungsdatei wiederherzustellen</string>
+    <string name="ifl_a4_37">Okay</string>
+    <string name="ifl_a4_38">Abbrechen</string>
+    <string name="ifl_a4_39">Fehler beim Lesen der Überschreibungsdatei.</string>
+    <string name="ifl_a4_40">%1$s Flaggen erfolgreich exportiert</string>
+    <string name="ifl_a4_41">Fehler beim Schreiben des Inhalts in die Sicherungsdatei.</string>
+    <string name="ifl_a4_42">Fehler beim Exportieren einer Sicherungsdatei</string>
+    <!--  me.mamiiblt.instafel.ifl_a_about_ota  -->
+    <string name="ifl_a5_01">Suche nach Updates</string>
+    <string name="ifl_a5_02">Letzte Überprüfung: %1$s</string>
+    <string name="ifl_a5_03">Häufigkeit prüfen</string>
+    <string name="ifl_a5_05">Niemals</string>
+    <string name="ifl_a5_06">Aktiviere Updates</string>
+    <string name="ifl_a5_07">Aktivieren Sie Update-Einstellungen</string>
+    <string name="ifl_a5_08">Hintergrund Download</string>
+    <string name="ifl_a5_09">Nach dem Herunterladen von Updates im Hintergrund wird eine Benachrichtigung gesendet</string>
+    <string name="ifl_a5_sub_freq_00">Auf jede Öffnung einstellen.</string>
+    <string name="ifl_a5_sub_freq_01">Auf nie einstellen</string>
+    <string name="ifl_a5_sub_freq_02">Auf täglich einstellen</string>
+    <string name="ifl_a5_sub_freq_03">Einmal in drei Tagen</string>
+    <string name="ifl_a5_sub_freq_04">Einmal in fünf Tagen</string>
+    <string name="ifl_a5_sub_freq_05">Einmal pro Woche einstellen</string>
+    <string name="ifl_a5_dia_freq_00">Bei jeder Öffnung (Standard)</string>
+    <string name="ifl_a5_dia_freq_01">Niemals</string>
+    <string name="ifl_a5_dia_freq_02">Jeden Tag</string>
+    <string name="ifl_a5_dia_freq_03">Einmal in drei Tagen</string>
+    <string name="ifl_a5_dia_freq_04">Einmal in fünf Tagen</string>
+    <string name="ifl_a5_dia_freq_05">Einmal pro Woche</string>
+    <!--  me.mamiiblt.instafel.ifl_a_language  -->
+    <string name="ifl_a6_01">Sprache des Geräts verwenden</string>
+    <!--  me.mamiiblt.instafel.ifl_a_crashlog  -->
+    <string name="ifl_a7_01">Berichte</string>
+    <string name="ifl_a7_02">Berichte löschen</string>
+    <!--  me.mamiiblt.instafel.ifl_a_crashviewer  -->
+    <string name="ifl_a8_01">Details</string>
+    <string name="ifl_a8_02">Log kopieren</string>
+    <string name="ifl_a8_03">Log teilen</string>
+    <string name="ifl_a8_04">Geräte-Infos</string>
+    <string name="ifl_a8_05">Android Version</string>
+    <string name="ifl_a8_06">IG- und IFL-Ausgabe</string>
+    <string name="ifl_a8_07">Absturzdatum</string>
+    <string name="ifl_a8_08">Absturz-Info</string>
+    <string name="ifl_a8_09">Grund</string>
+    <string name="ifl_a8_10">Stack Trace</string>
+    <string name="ifl_a9_01">Details</string>
+    <!--  me.mamiiblt.instafel.ifl_a_about_contributors and translators  -->
+    <string name="ifl_a10_01">Mitwirkende</string>
+    <string name="ifl_a10_02">Übersetzer</string>
+    <!--  me.mamiiblt.instafel.ifl_a_library_menu  -->
+    <string name="ifl_a11_01">Flaggenbibliothek</string>
+    <string name="ifl_a11_02">Sicherungsbibliothek</string>
+    <string name="ifl_a11_03">Fehler beim Abrufen von Backups von der API</string>
+    <string name="ifl_a11_04">Erstellt von %1$s</string>
+    <string name="ifl_a11_05">Sicherungsinfo</string>
+    <string name="ifl_a11_06">Name</string>
+    <string name="ifl_a11_07">Beschreibung</string>
+    <string name="ifl_a11_08">Zuletzt aktualisiert</string>
+    <string name="ifl_a11_09">Änderungsliste</string>
+    <string name="ifl_a11_10">Sicherung anwenden</string>
+    <string name="ifl_a11_11">Mehr</string>
+    <string name="ifl_a11_12">Automatisches Update einschalten</string>
+    <string name="ifl_a11_13">Wenn ein neues Update für Ihr Backup veröffentlicht wird, wird das Backup automatisch aktualisiert.</string>
+    <string name="ifl_a11_14">Diese Sicherung wird vorerst angewendet und aktualisiert, wenn die automatische Aktualisierung aktiviert ist.</string>
+    <string name="ifl_a11_15">Sicherungen</string>
+    <string name="ifl_a11_16">Über den Author</string>
+    <string name="ifl_a11_17">Fehler beim Abrufen von Sicherungsinformationen</string>
+    <string name="ifl_a11_18">Aktualisiert auf v%1$s am %2$s</string>
+    <string name="ifl_a11_19">Über den Author</string>
+    <string name="ifl_a11_20">Author Name</string>
+    <string name="ifl_a11_21">Fehler beim Abrufen von Informationen über den Autor</string>
+    <string name="ifl_a11_22">Fehler beim Herunterladen der Sicherungsdatei</string>
+    <string name="ifl_a11_23">Um diese Einstellung zu aktivieren, müssen Sie mindestens ein Backup aus der Bibliothek anwenden</string>
+    <string name="ifl_a11_24">%1$s die Sicherung wird nun automatisch aktualisiert.</string>
+    <string name="ifl_a11_25">Automatische Aktualisierung deaktiviert</string>
+    <string name="ifl_a11_26">Fehler beim Aktualisieren der Sicherung</string>
+    <string name="ifl_a11_27">Änderungvorschau von der Sicherung</string>
+    <string name="ifl_a11_28">App neu starten</string>
+    <string name="ifl_a11_29">Später neu starten</string>
+    <string name="ifl_a11_30">Fehler beim Parsen der Sicherungsdatei</string>
+    <string name="ifl_a11_31">Fehler beim Parsen der Mapping-Datei</string>
+    <string name="ifl_a11_32">Fehler beim Lesen der Zuordnungsdatei von Instagram</string>
+    <string name="ifl_a11_33">Fehler beim Parsen der Überschreibungsdatei</string>
+    <string name="ifl_a11_34">Mapping-Datei nicht gefunden</string>
+    <string name="ifl_a11_35">Fehler beim Vergleich von Backup und Mapping</string>
+    <string name="ifl_a11_36">Fehler beim Kopieren des Flaggeninhalts</string>
+    <string name="ifl_a11_37">Fehler beim Starten der Analyse</string>
+    <string name="ifl_a11_38">Bitte wählen Sie eine Datei aus</string>
+    <string name="ifl_a11_39">Fehler beim Lesen der Sicherungsdatei</string>
+    <string name="ifl_a11_40">Fehler beim Lesen der Zuordnungsdatei</string>
+    <string name="ifl_a11_41">%1$s Flag aus Sicherungsdatei importiert</string>
+    <string name="ifl_a11_42">Fehler beim Importieren von Überschreibungen aus der Sicherungsdatei</string>
+    <string name="ifl_a11_43">%1$s Flagge erfolgreich importiert</string>
+    <string name="ifl_a11_44">%1$s erfolgreich importiert</string>
+    <!--  me.mamiiblt.instafel.ifl_a_admin_login  -->
+    <!--  OTA FOUND DIALOG  -->
+    <string name="ifl_d1_01">Neue Update</string>
+    <string name="ifl_d1_02">Instafel wird aktualisiert version v%1$d (Instagram v%2$s)</string>
+    <string name="ifl_d1_03">Abbrechen</string>
+    <string name="ifl_d1_04">Installieren</string>
+    <string name="ifl_d1_05">Verstecken</string>
+    <string name="ifl_d1_06">Fehler beim Lesen der Überschreibungsdatei.</string>
+    <!--  OTA UP-TO-DATE DIALOG  -->
+    <string name="ifl_d2_02">Instafel ist auf\'m aktuellen Stand.</string>
+    <string name="ifl_d2_01">Aktuell</string>
+    <string name="ifl_d2_03">Okay</string>
+    <!--  AUTOUPDATE TEXTS  -->
+    <string name="ifl_t1_01">Beim Öffnen des APK-Installers ist ein Fehler aufgetreten.</string>
+    <string name="ifl_t1_03">Instafel Update fehlgeschlagen.</string>
+    <!--  GENERAL_FN CLASS  -->
+    <string name="ifl_c1_01">Auf Ihrem Gerät wurde kein Webbrowser gefunden</string>
+    <!-- - DIALOG SET FREQ  -->
+    <string name="ifl_d3_01">Häufigkeit einstellen</string>
+    <string name="ifl_d3_02">Okay</string>
+    <!--  WELCOME_DIALOG  -->
+    <string name="ifl_d4_01">Willkommen</string>
+    <string name="ifl_d4_02">Willkommen bei Instafel, dieser Mod wurde entwickelt, um jedem die neuesten Funktionen auf Instagram zur Verfügung zu stellen basiert auf die Alphaversion\\n\\nDas Menü kann durch Drücken und Halten der Hamburger-Taste auf der Registerkarte Profil aufgerufen werden.</string>
+    <string name="ifl_a0_14">Standardmäßig aktiviert, nicht änderbar.</string>
+    <!--  CRASH TOAST  -->
+</resources>

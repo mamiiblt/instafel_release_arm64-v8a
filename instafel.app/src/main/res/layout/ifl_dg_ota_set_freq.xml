@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardCornerRadius="16dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ifl_page1"
+        android:visibility="visible"
+        android:background="?ifl_attr_tile_color"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/ifl_dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ifl_d3_01"
+            android:textColor="?ifl_attr_title_color"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginTop="25dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <Spinner
+            android:id="@+id/ifl_dialog_spinner"
+            android:layout_width="310dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="24dp"
+            android:textColor="?ifl_attr_title_color"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/ifl_dialog_title"
+            app:layout_constraintStart_toStartOf="@+id/ifl_dialog_title"
+            app:layout_constraintTop_toBottomOf="@+id/ifl_dialog_title" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="22dp"
+            android:layout_marginBottom="27dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ifl_dialog_spinner">
+
+            <!-- Negative Button -->
+            <LinearLayout
+                android:id="@+id/ifl_dg_button_negative"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="20dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ifl_button_secondary_background_dark"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="13dp"
+                        android:text="@string/ifl_d1_03"
+                        android:textColor="?ifl_attr_title_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <!-- Pozitive Button -->
+            <LinearLayout
+                android:id="@+id/ifl_dg_button_pozitive"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ifl_button_primary_background"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="13dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="@string/ifl_d3_02"
+                        android:textColor="?ifl_attr_background_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

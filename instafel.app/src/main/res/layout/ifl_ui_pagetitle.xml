@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="?ifl_attr_background_color"
+    android:layout_height="wrap_content">
+    <Space
+        android:id="@+id/ifl_titleSpace1"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ifl_titleBar1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ifl_titleSpace1">
+
+        <TextView
+            android:id="@+id/ifl_ui_page_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="_title"
+            android:textColor="?attr/ifl_attr_title_color"
+            android:textSize="26sp"
+            android:textStyle="normal"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Space
+        android:id="@+id/ifl_titleSpace"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ifl_titleBar1" />
+</androidx.constraintlayout.widget.ConstraintLayout>

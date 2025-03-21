@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- STYLE ATTRS -->
+    <attr name="ifl_attr_background_color" format="color" />
+    <attr name="ifl_attr_tile_color" format="color" />
+    <attr name="ifl_attr_title_color" format="color"/>
+    <attr name="ifl_attr_subtitle_color" format="color" />
+    <attr name="ifl_attr_iview_tint" format="color" />
+
+    <!-- UI ATTRS -->
+    <attr name="ifl_attr_ui_titleText" format="string" />
+    <attr name="ifl_attr_ui_subtitleText" format="string" />
+    <attr name="ifl_attr_ui_enableIcon" format="string" />
+    <attr name="ifl_attr_ui_iconRes" format="reference" />
+    <attr name="ifl_attr_ui_spaceBottom" format="string" />
+    <attr name="ifl_attr_ui_spaceTop" format="string" />
+    <attr name="ifl_attr_ui_enableSubIcon" format="string" />
+    <attr name="ifl_attr_ui_enableStartPadding" format="boolean" />
+    <attr name="ifl_attr_ui_subIconRes" format="reference" />
+    <attr name="ifl_attr_ui_iconResTint" format="boolean" />
+    <attr name="ifl_attr_ui_iconPadding" format="integer" />
+</resources>

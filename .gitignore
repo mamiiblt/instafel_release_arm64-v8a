@@ -15,6 +15,11 @@ build
 /config/ifl_config.json
 /config/keystores
 
+# Instafel APP
+
+/instafel.app/build
+/instafel.app/output
+
 # Instafel GPlayAPI
 
 /instafel.gplayapi/output

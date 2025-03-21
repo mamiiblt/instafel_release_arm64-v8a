@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?ifl_attr_background_color"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="me.mamiiblt.instafel.activity.library.backup.ifl_a_library_backup">
+
+    <me.mamiiblt.instafel.ui.PageTitle
+        android:id="@+id/ifl_page_title"
+        android:layout_width="match_parent"
+        android:onClick="showExample"
+        android:layout_height="wrap_content"
+        app:ifl_attr_ui_titleText="@string/ifl_a11_02"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Arama kutusu -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ifl_search_layout"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/ifl_page_title">
+
+        <EditText
+            android:id="@+id/ifl_backup_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/ifl_edittext_background"
+            android:hint="@string/ifl_a4_25"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:paddingStart="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:textColor="?ifl_attr_title_color"
+            android:textColorHighlight="?ifl_attr_title_color"
+            android:textColorHint="?ifl_attr_subtitle_color"
+            android:textColorLink="?ifl_attr_title_color"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Yükleniyor arayüzü -->
+    <me.mamiiblt.instafel.ui.PageContentArea
+        android:id="@+id/ifl_loading_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ifl_page_title">
+
+        <ProgressBar
+            style="@style/ifl_theme_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateBehavior="repeat"
+            android:indeterminateTint="?ifl_attr_subtitle_color" />
+
+    </me.mamiiblt.instafel.ui.PageContentArea>
+
+    <!-- Sonuç -->
+    <me.mamiiblt.instafel.ui.PageContentArea
+        android:id="@+id/ifl_page_area_backup"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:layout_marginTop="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ifl_search_layout">
+
+        <me.mamiiblt.instafel.ui.TileLargeSwitch
+            android:id="@+id/ifl_tile_backup_library_enableAutoUpdates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ifl_attr_ui_iconRes="@drawable/ifl_enable_updates"
+            app:ifl_attr_ui_subtitleText="@string/ifl_a11_13"
+            app:ifl_attr_ui_titleText="@string/ifl_a11_12" />
+
+        <me.mamiiblt.instafel.ui.TileTitle
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ifl_attr_ui_titleText="@string/ifl_a11_15" />
+
+        <!-- Sonucun olduğu kısım -->
+        <LinearLayout
+            android:id="@+id/ifl_backups_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        </LinearLayout>
+    </me.mamiiblt.instafel.ui.PageContentArea>
+</androidx.constraintlayout.widget.ConstraintLayout>
