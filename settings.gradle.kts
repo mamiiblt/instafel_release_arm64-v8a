@@ -17,7 +17,14 @@ fun getGitCommitHash(): String {
 }
 
 val configFile = File(rootDir, "config/ifl_config.json")
-val jsonData = JsonSlurper().parse(configFile) as Map<*, *>
+val fallbackConfigFile = File(rootDir, "config/example.ifl_config.json")
+
+val jsonData: Map<*, *> = if (configFile.exists()) {
+    JsonSlurper().parse(configFile) as Map<*, *>
+} else {
+    println("Warning: ifl_config.json not found, using example.ifl_config.json instead.")
+    JsonSlurper().parse(fallbackConfigFile) as Map<*, *>
+}
 
 println("Loaded & exported Instafel project configuration file")
 

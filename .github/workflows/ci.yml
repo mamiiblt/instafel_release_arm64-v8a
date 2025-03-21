@@ -43,3 +43,7 @@ jobs:
     - name: Build instafel.updater
       run: |
         ./gradlew :instafel.updater:generate-app-debug
+
+    - name: Build instafel.app
+      run: |
+        ./gradlew :instafel.app:generate-app-debug
