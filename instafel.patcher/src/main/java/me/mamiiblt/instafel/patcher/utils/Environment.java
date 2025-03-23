@@ -1,5 +1,9 @@
 package me.mamiiblt.instafel.patcher.utils;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 import java.util.logging.Handler;
 
 import me.mamiiblt.instafel.patcher.apk.DecompileAPK;
@@ -7,19 +11,30 @@ import me.mamiiblt.instafel.patcher.apk.DecompileAPK;
 public class Environment extends Configuration {
     private enum Verbosity { NORMAL, VERBOSE, QUIET }
 
-    public static String VERSION_STRING = "";
-    public static String COMMIT_HASH = "";
-    public static String PROJECT_DIR = "";
+    public static String PROP_VERSION_STRING = null;
+    public static String PROP_COMMIT_HASH = null;
+    public static String PROP_PROJECT_TAG = null;    
+    public static String PROJECT_DIR = null;
 
-    public static void organizeEnvironment() {
-        VERSION_STRING = "v1.0.5";
-        COMMIT_HASH = "3e64v5e";
+    public static void organizeEnvironment()  {
+        try {
+            Properties patcherProperties = new Properties();
+            InputStream in = Environment.class.getClassLoader().getResourceAsStream("patcher.properties");
+            patcherProperties.load(in);
+    
+            PROP_VERSION_STRING = patcherProperties.getProperty("patcher.version");
+            PROP_COMMIT_HASH = patcherProperties.getProperty("patcher.commit");
+            PROP_PROJECT_TAG = patcherProperties.getProperty("patcher.tag");
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.pr("Error while organizing environment.");
+            System.exit(-1);
+        }
     }
 
     public static void printPatcherHeader() {
-        String versionLine = "Version " + VERSION_STRING + " (commit " + COMMIT_HASH + ")";
-        System.out.println("Instafel Patcher ");
-        System.out.println(versionLine);
+        System.out.println("Instafel Patcher v" + PROP_VERSION_STRING);
+        System.out.println(PROP_PROJECT_TAG + "/" + PROP_COMMIT_HASH);
         System.out.println("");
     }
 

@@ -44,7 +44,7 @@ public class WorkingDir {
     public void createConfigFile(String projectDir) throws IOException {
         JSONObject configContent = new JSONObject();
         configContent.put("manifest_version", 1);
-        configContent.put("patcher_commit", Environment.COMMIT_HASH);
+        configContent.put("patcher_commit", Environment.PROP_COMMIT_HASH);
 
         FileUtils.writeStringToFile(
                 new File(projectDir + "/config.json"),

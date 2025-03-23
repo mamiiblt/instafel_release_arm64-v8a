@@ -60,6 +60,22 @@ tasks.register("clear-cache") {
     }
 }
 
+tasks.register("generate-patcher-props") {
+    doLast {
+        val outputFile = File("${project.projectDir}/src/main/resources/patcher.properties")
+        outputFile.writeText("""
+            patcher.version=$projectVersion
+            patcher.commit=$commitHash
+            patcher.tag=$projectTag
+        """.trimIndent())
+
+        println("Patcher property file created")
+    }
+
+    mustRunAfter("clear-cache")
+
+}
+
 tasks.shadowJar {
     archiveBaseName = "ifl-patcher"
     archiveClassifier = ""
@@ -69,7 +85,7 @@ tasks.shadowJar {
         println("JAR generated.")
     }
 
-    mustRunAfter("clear-cache")
+    mustRunAfter("generate-patcher-props")
 }
 
 tasks.withType<JavaCompile> {
@@ -77,7 +93,7 @@ tasks.withType<JavaCompile> {
 }
 
 tasks.register("build-jar") {
-    dependsOn("clear-cache", "shadowJar")
+    dependsOn("clear-cache", "generate-patcher-props", "shadowJar")
 
     doLast {
         delete(file("${project.projectDir}/build"))
