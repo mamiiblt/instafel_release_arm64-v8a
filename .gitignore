@@ -6,6 +6,7 @@ build
 
 # Ingore IntelliJ IDEA 
 .intellij_idea
+.idea
 .vscode
 .vercel
 /instafel.website/package-lock.json
@@ -19,6 +20,11 @@ build
 
 /instafel.app/build
 /instafel.app/output
+
+# Instafel Patcher
+
+/instafel.patcher/output
+/instafel.patcher/apktool.jar
 
 # Instafel GPlayAPI
 

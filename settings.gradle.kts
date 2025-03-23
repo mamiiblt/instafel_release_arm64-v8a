@@ -5,7 +5,7 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import groovy.json.JsonSlurper
 
-rootProject.name = "me.mamiiblt.instafel"
+rootProject.name = "Instafel"
 
 fun getGitCommitHash(): String {
     val output = ByteArrayOutputStream()

@@ -3,6 +3,10 @@
         "version": "1.5",
         "tag": "custom"
     },
+    "instafel.patcher": {
+        "version": "1.0",
+        "tag": "custom"
+    },
     "instafel.website": {
         "version": null,
         "tag": "custom"
