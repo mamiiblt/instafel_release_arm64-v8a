@@ -21,10 +21,12 @@ build
 /instafel.app/build
 /instafel.app/output
 
+
 # Instafel Patcher
 
 /instafel.patcher/output
 /instafel.patcher/apktool.jar
+/instafel.patcher/bin
 
 # Instafel GPlayAPI
 

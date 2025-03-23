@@ -56,8 +56,9 @@ public class DecompileAPK {
         Log.pr("Instagram APK decompiled succesfully");
     }
 
-    public void configureParams() {
+    public void configureParams() throws AndrolibException {
         config.setBaksmaliDebugMode(false);
+        config.setDecodeResources(Config.DECODE_RESOURCES_NONE);
         Log.pr("Baksmali parameters configured.");
     }
 
