@@ -14,12 +14,12 @@ public class WorkingDir {
         String folderName = igApkFileName.replace(".apk", "");
         File dirPath = new File(Environment.USER_DIR + folderName);
         if (dirPath.exists()) {
-            Log.pr("Working dir already exists, delete it or continue from the project.");
+            Log.severe("Working dir already exists, delete it or continue from the project.");
             System.exit(-1);
             return null;
         } else {
             FileUtils.forceMkdir(dirPath);
-            Log.pr("Working dir created on directory named " + folderName);
+            Log.info("Project working directory succesfully created.");
             return dirPath.getAbsolutePath();
         }
     }
@@ -30,12 +30,12 @@ public class WorkingDir {
             if (dirPath.exists()) {
                 return dirPath.getAbsolutePath();
             } else {
-                Log.pr("Working dir not exists, please create it or use different working dir.");
+                Log.severe("Working dir not exists, please create it or use different working dir.");
                 System.exit(-1);
                 return null;
             }
         } else {
-            Log.pr("Its's not an directory.");
+            Log.severe("Its's not an directory.");
             System.exit(-1);
             return null;
         }
@@ -51,6 +51,6 @@ public class WorkingDir {
                 configContent.toString(2),
                 StandardCharsets.UTF_8
         );
-        Log.pr("Configuration file created.");
+        Log.info("Configuration file created.");
     }
 }

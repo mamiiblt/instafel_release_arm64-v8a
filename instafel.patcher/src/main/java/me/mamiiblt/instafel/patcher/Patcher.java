@@ -11,6 +11,8 @@ public class Patcher {
         System.setProperty("jdk.nio.zipfs.allowDotZipEntry", "true");
         System.setProperty("jdk.util.zip.disableZip64ExtraFieldValidation", "true");
 
+        Log.setLogger();
+
         Environment.organizeEnvironment();
         Environment.printPatcherHeader();
         Environment.configurePatcher(args);

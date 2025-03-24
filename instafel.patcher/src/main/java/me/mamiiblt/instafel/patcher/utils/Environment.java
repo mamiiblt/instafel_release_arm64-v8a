@@ -7,9 +7,9 @@ import java.util.Properties;
 import java.util.logging.Handler;
 
 import me.mamiiblt.instafel.patcher.apk.DecompileAPK;
+import me.mamiiblt.instafel.patcher.patches.ExamplePatch;
 
 public class Environment extends Configuration {
-    private enum Verbosity { NORMAL, VERBOSE, QUIET }
 
     public static String PROP_VERSION_STRING = null;
     public static String PROP_COMMIT_HASH = null;
@@ -27,7 +27,7 @@ public class Environment extends Configuration {
             PROP_PROJECT_TAG = patcherProperties.getProperty("patcher.tag");
         } catch (Exception e) {
             e.printStackTrace();
-            Log.pr("Error while organizing environment.");
+            Log.severe("Error while organizing environment.");
             System.exit(-1);
         }
     }
@@ -41,12 +41,17 @@ public class Environment extends Configuration {
     public static void configurePatcher(String[] args) {
         String stringHelp = "Visit this link for learn anything about patcher!\nhttps://mamiiblt.me/blogs/patcher-guide";
         if (args.length == 0) {
-            Log.pr(stringHelp);
+            Log.info(stringHelp);
         } else {
             String firstArg = args[0];
             switch (firstArg) {
                 case "--help":
-                    Log.pr(stringHelp);
+                    Log.info(stringHelp);
+                    break;
+                case "run":
+                        ExamplePatch examplePatch = new ExamplePatch();
+                        examplePatch.initializeSteps();
+                        examplePatch.execute();
                     break;
                 case "create":
                     if (args.length >= 2) {
@@ -59,13 +64,16 @@ public class Environment extends Configuration {
 
                                 DecompileAPK decompileAPK = new DecompileAPK(PROJECT_DIR, USER_DIR + fileArg);
                                 decompileAPK.copyFrameworksToWorkdir();
-                                decompileAPK.setFrameworkDirectory(PROJECT_DIR + "/fw");
+                                decompileAPK.setFrameworkDirectory("/fw");
                                 decompileAPK.configureParams();
                                 decompileAPK.decompile();
+                                decompileAPK.copyInstafelSources();
+                                Log.info("Project created succesfully");
+                                Log.info("use -run <patch.name> parameters for applying patches");
 
                             } catch (Exception e) {
                                 e.printStackTrace();
-                                Log.pr("Error while creating project: " + e.getMessage());
+                                Log.severe("Error while creating project: " + e.getMessage());
                             }
                         } else {
                             try {
@@ -73,16 +81,16 @@ public class Environment extends Configuration {
                                 PROJECT_DIR = workingDir.getExistsWorkingDir(fileArg);
                             } catch (Exception e) {
                                 e.printStackTrace();
-                                Log.pr("Error while creating working dir: " + e.getMessage());
+                                Log.severe("Error while creating working dir: " + e.getMessage());
                             }
                         }
                     } else {
-                        Log.pr("Please specify an Instagram APK file or working directory for use patcher!");
+                        Log.warning("Please specify an Instagram APK file or working directory for use patcher!");
                     }
                     break;
                 default:
-                    Log.pr("Unknown command: " + firstArg);
-                    Log.pr("Use --help for show help information.");
+                    Log.warning("Unknown command: " + firstArg);
+                    Log.info("Use --help for show help information.");
                     break;
             }
 
