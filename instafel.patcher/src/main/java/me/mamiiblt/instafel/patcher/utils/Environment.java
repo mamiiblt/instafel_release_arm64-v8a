@@ -64,8 +64,6 @@ public class Environment extends Configuration {
 
                                 DecompileAPK decompileAPK = new DecompileAPK(PROJECT_DIR, USER_DIR + fileArg);
                                 decompileAPK.copyFrameworksToWorkdir();
-                                decompileAPK.setFrameworkDirectory("/fw");
-                                decompileAPK.configureParams();
                                 decompileAPK.decompile();
                                 decompileAPK.copyInstafelSources();
                                 Log.info("Project created succesfully");
