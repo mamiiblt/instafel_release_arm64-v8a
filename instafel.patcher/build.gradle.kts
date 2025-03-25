@@ -42,6 +42,7 @@ dependencies {
     implementation("com.android.tools.smali:smali-dexlib2:3.0.9")
     implementation("com.android.tools.smali:smali-util:3.0.9")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("org.apktool:apktool-lib:2.11.1")
 }
 
 application {
@@ -102,8 +103,4 @@ tasks.register("build-jar") {
         println("Temp build caches cleared.")
         println("All tasks completed succesfully")
     }
-}
-
-tasks.test {
-    useJUnitPlatform()
 }
