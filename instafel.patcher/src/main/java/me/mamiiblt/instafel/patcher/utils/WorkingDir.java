@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 
 public class WorkingDir {
 
-    public String createWorkingDir(String igApkFileName) throws IOException {
+    public static String createWorkingDir(String igApkFileName) throws IOException {
         String folderName = igApkFileName.replace(".apk", "");
         File dirPath = new File(Environment.USER_DIR + folderName);
         if (dirPath.exists()) {
@@ -24,7 +24,7 @@ public class WorkingDir {
         }
     }
 
-    public String getExistsWorkingDir(String folderName) {
+    public static String getExistsWorkingDir(String folderName) {
         File dirPath = new File(Environment.USER_DIR + folderName);
         if (dirPath.isDirectory()) {
             if (dirPath.exists()) {
@@ -41,16 +41,25 @@ public class WorkingDir {
         }
     }
 
-    public void createConfigFile(String projectDir) throws IOException {
+    public static void createConfigFile(String projectDir) throws IOException {
         JSONObject configContent = new JSONObject();
         configContent.put("manifest_version", 1);
         configContent.put("patcher_commit", Environment.PROP_COMMIT_HASH);
+        configContent.put("productionMode", false);
 
         FileUtils.writeStringToFile(
                 new File(projectDir + "/config.json"),
                 configContent.toString(2),
                 StandardCharsets.UTF_8
-        );
-        Log.info("Configuration file created.");
+        ); 
+
+        FileUtils.writeStringToFile(
+            new File(projectDir, "/env.json"),
+            new JSONObject()
+                .put("ready", false)
+                .toString(2),
+            StandardCharsets.UTF_8);
+
+        Log.info("Configuration files created.");
     }
 }

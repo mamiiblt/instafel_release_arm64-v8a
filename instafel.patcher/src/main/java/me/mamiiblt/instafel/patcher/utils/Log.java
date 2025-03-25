@@ -14,7 +14,7 @@ public class Log {
 
     private static final Logger LOGGER = Logger.getLogger(Log.class.getName());
 
-    public static void setLogger() {
+    public static void setupLogger() {
         Logger logger = Logger.getLogger("");
         for (Handler handler : logger.getHandlers()) {
             logger.removeHandler(handler);

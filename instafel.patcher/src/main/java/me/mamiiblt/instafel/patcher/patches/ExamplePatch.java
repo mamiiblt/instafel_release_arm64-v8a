@@ -1,7 +1,7 @@
 package me.mamiiblt.instafel.patcher.patches;
 
-import me.mamiiblt.instafel.patcher.InstafelPatch;
-import me.mamiiblt.instafel.patcher.InstafelTask;
+import me.mamiiblt.instafel.patcher.putils.InstafelPatch;
+import me.mamiiblt.instafel.patcher.putils.InstafelTask;
 
 public class ExamplePatch extends InstafelPatch {
 
