@@ -1,36 +1,35 @@
 package me.mamiiblt.instafel.patcher.patches;
 
-import me.mamiiblt.instafel.patcher.putils.InstafelPatch;
-import me.mamiiblt.instafel.patcher.putils.InstafelTask;
+import java.util.List;
 
+import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatch;
+import me.mamiiblt.instafel.patcher.utils.patch.InstafelTask;
+import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
+
+@PatchInfo(
+    name = "Example Patch",
+    desc = "You can do everything with this patch!",
+    author = "mamiiblt"
+)
 public class ExamplePatch extends InstafelPatch {
 
     public ExamplePatch() {
-        super(new PatchBuilder()
-            .patchName("Example Patch")
-            .patchAuthor("mamiiblt")
-            .patchDesc("açıklama işte"));
+        List.of(
+            new InstafelTask("Örnek task 1") {
+                @Override
+                public void execute() {
+                    System.out.println("naber high");
+                    success("bu nedir lO");
+                    failure("naber kafam high");
+                }
+            },
+            new InstafelTask("Örnek task 2") {
+                @Override
+                public void execute() {
+                    System.out.println("pisu pisu");
+                    success("leaaaawww");
+                }
+            }
+        ).forEach(this::addTask);
     }
-
-    @Override
-    public void initializeSteps() {
-        addTask(step1);
-        addTask(step2);
-    }
-
-    InstafelTask step1 = new InstafelTask("Örnek task 1") {
-        @Override
-        public void execute() {
-            System.out.println("naber high");
-            success("bu nedir lO");
-        }
-    };
-
-    InstafelTask step2 = new InstafelTask("Örnek task 2") {
-        @Override
-        public void execute() {
-            System.out.println("pisu pisu");
-            success("leaaaawww");
-        }
-    };
 }

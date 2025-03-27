@@ -1,4 +1,4 @@
-package me.mamiiblt.instafel.patcher.putils;
+package me.mamiiblt.instafel.patcher.utils.patch;
 
 public abstract class InstafelTask {
     protected String stepName;
