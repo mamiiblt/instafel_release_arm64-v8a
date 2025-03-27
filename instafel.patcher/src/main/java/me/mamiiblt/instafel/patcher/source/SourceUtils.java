@@ -17,7 +17,7 @@ public class SourceUtils {
         config.setApiLevel(35);
         config.setCopyOriginalFiles(false);
         config.setJobs(getSuggesstedThreadCount());
-        config.setAaptVersion(2);
+        config.setAaptVersion(1);
 
         return config;
     }
