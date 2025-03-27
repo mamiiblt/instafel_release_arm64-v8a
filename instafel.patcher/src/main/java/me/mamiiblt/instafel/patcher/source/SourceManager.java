@@ -8,8 +8,10 @@ import brut.androlib.ApkDecoder;
 import brut.androlib.Config;
 import brut.androlib.exceptions.AndrolibException;
 import brut.directory.ExtFile;
+import me.mamiiblt.instafel.patcher.utils.Environment;
 import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.Utils;
+import okhttp3.internal.Util;
 
 import java.io.*;
 import java.util.zip.ZipEntry;
@@ -17,18 +19,16 @@ import java.util.zip.ZipInputStream;
 
 public class SourceManager {
 
-    private String projectDir;
     private Config config;
     private ExtFile extFile;
 
-    public SourceManager(String projectDir, String igApkFileName) {
-        this.projectDir = projectDir;
+    public SourceManager(String igApkFileName) {
         this.config = new Config();
-        this.extFile = new ExtFile(Utils.mergePaths(projectDir, igApkFileName));
+        this.extFile = new ExtFile(Utils.mergePaths(Environment.USER_DIR, igApkFileName));
     }
 
     public void copyFrameworksToWorkdir() throws IOException {
-        File workdirFrameworks = new File(projectDir + "/fw");
+        File workdirFrameworks = new File(Environment.PROJECT_DIR + "/fw");
         FileUtils.forceMkdir(workdirFrameworks);
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream("fw_default.apk");
@@ -41,13 +41,13 @@ public class SourceManager {
     public void decompile() throws IOException, AndrolibException {
         Log.info("Decompiling Instagram APK...");        
         ApkDecoder apkDecoder = new ApkDecoder(extFile, config);
-        apkDecoder.decode(new File(Utils.mergePaths(projectDir, "sources")));
+        apkDecoder.decode(new File(Utils.mergePaths(Environment.PROJECT_DIR, "sources")));
         Log.info("APK decompiled succesfully");
     }
 
     public void build() throws AndrolibException, IOException {
         Log.info("Building APK");
-        File buildDir = new File(Utils.mergePaths(projectDir, "build"));
+        File buildDir = new File(Utils.mergePaths(Environment.PROJECT_DIR, "build"));
         FileUtils.forceMkdir(buildDir);
         ApkBuilder apkBuilder = new ApkBuilder(extFile, config);
         apkBuilder.build(new File(Utils.mergePaths(buildDir.getAbsolutePath(), "ig_build.apk")));
@@ -65,7 +65,7 @@ public class SourceManager {
     public void copyInstafelSources() throws IOException {
     
         Log.info("Extracting Instafel sources...");
-        File iflSourceDir = new File(Utils.mergePaths(projectDir, "iflr"));
+        File iflSourceDir = new File(Utils.mergePaths(Environment.PROJECT_DIR, "iflr"));
         
         File tempZipFile = File.createTempFile("temp_zip", ".zip");
         try (InputStream zipStream = SourceManager.class.getClassLoader().getResourceAsStream("instafel_sr.zip");

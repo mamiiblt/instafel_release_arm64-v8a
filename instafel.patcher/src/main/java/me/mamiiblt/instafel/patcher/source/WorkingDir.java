@@ -1,11 +1,14 @@
-package me.mamiiblt.instafel.patcher.utils;
+package me.mamiiblt.instafel.patcher.source;
 
 import org.apache.commons.io.FileUtils;
-import org.json.JSONObject;
+
+import me.mamiiblt.instafel.patcher.utils.Environment;
+import me.mamiiblt.instafel.patcher.utils.Log;
+import me.mamiiblt.instafel.patcher.utils.PropertyManager;
+import me.mamiiblt.instafel.patcher.utils.Utils;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 public class WorkingDir {
 
@@ -40,25 +43,18 @@ public class WorkingDir {
         }
     }
 
-    public static void createConfigFile(String projectDir) throws IOException {
-        JSONObject configContent = new JSONObject();
-        configContent.put("manifest_version", 1);
-        configContent.put("patcher_commit", Environment.PROP_COMMIT_HASH);
-        configContent.put("productionMode", false);
+    public static void createConfigFile() throws IOException {
+        PropertyManager propertyManager = new PropertyManager(
+            new File(Utils.mergePaths(Environment.PROJECT_DIR, "config.properties"))
+        );
+        propertyManager.addInteger("manifest_version", 1);
+        propertyManager.addBoolean("production_mode", false);
+        propertyManager.addString("custom_fw_folder_dir", "");
+        propertyManager.addString("source_dir", "/sources");
+        propertyManager.save();
+    }
 
-        FileUtils.writeStringToFile(
-                new File(Utils.mergePaths(projectDir, "config.json")),
-                configContent.toString(2),
-                StandardCharsets.UTF_8
-        ); 
+    public static void createEmptyEnvironmentFile() {
 
-        FileUtils.writeStringToFile(
-            new File(Utils.mergePaths(projectDir, "env.json")),
-            new JSONObject()
-                .put("ready", false)
-                .toString(2),
-            StandardCharsets.UTF_8);
-
-        Log.info("Configuration files created.");
     }
 }

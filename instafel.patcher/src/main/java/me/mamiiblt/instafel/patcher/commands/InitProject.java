@@ -6,9 +6,9 @@ import java.nio.file.Paths;
 import me.mamiiblt.instafel.patcher.cmdhandler.Command;
 import me.mamiiblt.instafel.patcher.source.SourceManager;
 import me.mamiiblt.instafel.patcher.source.SourceUtil;
+import me.mamiiblt.instafel.patcher.source.WorkingDir;
 import me.mamiiblt.instafel.patcher.utils.Environment;
 import me.mamiiblt.instafel.patcher.utils.Log;
-import me.mamiiblt.instafel.patcher.utils.WorkingDir;
 
 public class InitProject implements Command {
 
@@ -16,17 +16,16 @@ public class InitProject implements Command {
     public void execute(String[] args) {
         try {
             String fileArgument = args[0];
+            Log.info(fileArgument);
             if (args.length != 0) {
                 if (fileArgument.contains(".apk") || fileArgument.contains(".zip")) {
                     File apkPath = new File(Paths.get(Environment.USER_DIR, fileArgument).toString());
-                    Environment.PROJECT_DIR = WorkingDir.createWorkingDir(apkPath.getAbsolutePath()); 
-    
-                    SourceManager decompileAPK = new SourceManager(Environment.PROJECT_DIR, apkPath.getName());
+                    Environment.PROJECT_DIR = WorkingDir.createWorkingDir(apkPath.getName()); 
+                    SourceManager decompileAPK = new SourceManager(apkPath.getName());
                     decompileAPK.copyFrameworksToWorkdir();
                     decompileAPK.setConfig(
                         SourceUtil.getIflConfig(
-                            decompileAPK.getConfig(),
-                            Environment.PROJECT_DIR
+                            decompileAPK.getConfig()
                         ));
                     decompileAPK.decompile();
                     decompileAPK.copyInstafelSources();
