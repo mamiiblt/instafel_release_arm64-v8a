@@ -3,6 +3,7 @@ package me.mamiiblt.instafel.patcher.cmdhandler;
 import java.util.HashMap;
 import java.util.Map;
 
+import me.mamiiblt.instafel.patcher.commands.BuildProject;
 import me.mamiiblt.instafel.patcher.commands.HelpCmd;
 import me.mamiiblt.instafel.patcher.commands.InitProject;
 import me.mamiiblt.instafel.patcher.commands.VersionCmd;
@@ -43,6 +44,7 @@ public class CommandHandler {
 
     private void registerCommands() {
         commands.put("cwith", new InitProject());
+        commands.put("build", new BuildProject());
         commands.put("version", new VersionCmd());
         commands.put("help", new HelpCmd());
     }

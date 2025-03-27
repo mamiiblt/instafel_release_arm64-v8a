@@ -3,6 +3,7 @@ package me.mamiiblt.instafel.patcher.commands;
 import java.io.File;
 import java.nio.file.Paths;
 
+import brut.directory.ExtFile;
 import me.mamiiblt.instafel.patcher.cmdhandler.Command;
 import me.mamiiblt.instafel.patcher.source.SourceManager;
 import me.mamiiblt.instafel.patcher.source.SourceUtils;
@@ -16,15 +17,17 @@ public class InitProject implements Command {
     @Override
     public void execute(String[] args) {
         try {
-            String fileArgument = args[0];
             if (args.length != 0) {
+                String fileArgument = args[0];
                 if (fileArgument.contains(".apk") || fileArgument.contains(".zip")) {
                     File apkPath = new File(Paths.get(Environment.USER_DIR, fileArgument).toString());
                     Environment.PROJECT_DIR = WorkingDir.createWorkingDir(apkPath.getName()); 
-                    SourceManager sourceManager = new SourceManager(apkPath.getName());
+                    SourceManager sourceManager = new SourceManager();
                     sourceManager.setConfig(SourceUtils.getDefaultIflConfig(sourceManager.getConfig()));
                     sourceManager.getConfig().setFrameworkDirectory(SourceUtils.getDefaultFrameworkDirectory());
-                    sourceManager.decompile();
+                    sourceManager.decompile(new ExtFile(
+                        Utils.mergePaths(apkPath.getAbsolutePath())
+                    ));
                     sourceManager.createConfigFile();
                     sourceManager.copyInstafelSources();
                     Log.info("Project succesfully created");

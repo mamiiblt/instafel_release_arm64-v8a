@@ -20,16 +20,14 @@ import java.util.zip.ZipInputStream;
 public class SourceManager {
 
     private Config config;
-    private ExtFile extFile;
 
-    public SourceManager(String igApkFileName) {
+    public SourceManager() {
         this.config = new Config();
-        this.extFile = new ExtFile(Utils.mergePaths(Environment.USER_DIR, igApkFileName));
     }
 
-    public void decompile() throws IOException, AndrolibException {
+    public void decompile(ExtFile apkFile) throws IOException, AndrolibException {
         Log.info("Decompiling Instagram APK...");        
-        ApkDecoder apkDecoder = new ApkDecoder(extFile, config);
+        ApkDecoder apkDecoder = new ApkDecoder(apkFile, config);
         apkDecoder.decode(new File(Utils.mergePaths(Environment.PROJECT_DIR, "sources")));
         Log.info("APK decompiled succesfully");
     }
@@ -38,7 +36,10 @@ public class SourceManager {
         Log.info("Building APK");
         File buildDir = new File(Utils.mergePaths(Environment.PROJECT_DIR, "build"));
         FileUtils.forceMkdir(buildDir);
-        ApkBuilder apkBuilder = new ApkBuilder(extFile, config);
+        ApkBuilder apkBuilder = new ApkBuilder(
+            new ExtFile(
+                Utils.mergePaths(Environment.PROJECT_DIR, "sources")
+            ), config);
         apkBuilder.build(new File(Utils.mergePaths(buildDir.getAbsolutePath(), "ig_build.apk")));
         Log.info("APK builded succesfully");
     }
