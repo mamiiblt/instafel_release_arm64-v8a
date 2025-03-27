@@ -55,9 +55,9 @@ public class PropertyManager {
         properties.setProperty(key, String.valueOf(value));
     }
 
-    public void save() {
+    public void save(String comment) {
         try (FileOutputStream output = new FileOutputStream(propertyFile)) {
-            properties.store(output, "Updated Properties File");
+            properties.store(output, comment);
         } catch (IOException e) {
             Log.severe("Error while saving property file " + propertyFile.getName());
             Log.severe(e.getMessage());

@@ -1,7 +1,6 @@
 package me.mamiiblt.instafel.patcher.source;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 
 import brut.androlib.ApkBuilder;
 import brut.androlib.ApkDecoder;
@@ -11,9 +10,10 @@ import brut.directory.ExtFile;
 import me.mamiiblt.instafel.patcher.utils.Environment;
 import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.Utils;
-import okhttp3.internal.Util;
+import okio.Source;
 
 import java.io.*;
+
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -25,17 +25,6 @@ public class SourceManager {
     public SourceManager(String igApkFileName) {
         this.config = new Config();
         this.extFile = new ExtFile(Utils.mergePaths(Environment.USER_DIR, igApkFileName));
-    }
-
-    public void copyFrameworksToWorkdir() throws IOException {
-        File workdirFrameworks = new File(Environment.PROJECT_DIR + "/fw");
-        FileUtils.forceMkdir(workdirFrameworks);
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream("fw_default.apk");
-        File targetDir = new File(Utils.mergePaths(workdirFrameworks.getAbsolutePath(), "fw_default.apk"));
-        OutputStream outputStream = new FileOutputStream(targetDir);
-        IOUtils.copy(inputStream, outputStream);
-        Log.info("Default framework file extracted");
     }
 
     public void decompile() throws IOException, AndrolibException {
@@ -54,14 +43,12 @@ public class SourceManager {
         Log.info("APK builded succesfully");
     }
 
-    public Config getConfig() {
-        return config;
+    public void createConfigFile() throws IOException {
+        SourceUtils.createDefaultConfigFile(
+            Utils.mergePaths(Environment.PROJECT_DIR, "config.properties")
+        );
     }
-
-    public void setConfig(Config config) {
-        this.config = config;
-    }
-
+    
     public void copyInstafelSources() throws IOException {
     
         Log.info("Extracting Instafel sources...");
@@ -101,5 +88,13 @@ public class SourceManager {
         }
 
         Log.info("Instafel sources extracted succesfully");
+    }
+
+    public Config getConfig() {
+        return config;
+    }
+
+    public void setConfig(Config config) {
+        this.config = config;
     }
 }

@@ -12,7 +12,7 @@ public class HelpCmd implements Command {
             "  version - Shows patcher, baksmali version etc.",
             "  list - Lists available patches",
             "  info - Shows patch info details",
-            "  cwdir <apk file> - Creates an workdir with Instagram APK",
+            "  cwith <apk file> - Creates an workdir with Instagram APK",
             "  run <dir> <patch name> - Run selected patch",
             "",
             "For guide, visit this link,",

@@ -42,7 +42,7 @@ public class CommandHandler {
     }
 
     private void registerCommands() {
-        commands.put("cwdir", new InitProject());
+        commands.put("cwith", new InitProject());
         commands.put("version", new VersionCmd());
         commands.put("help", new HelpCmd());
     }

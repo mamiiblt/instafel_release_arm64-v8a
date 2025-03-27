@@ -4,7 +4,6 @@ import org.apache.commons.io.FileUtils;
 
 import me.mamiiblt.instafel.patcher.utils.Environment;
 import me.mamiiblt.instafel.patcher.utils.Log;
-import me.mamiiblt.instafel.patcher.utils.PropertyManager;
 import me.mamiiblt.instafel.patcher.utils.Utils;
 
 import java.io.File;
@@ -16,7 +15,7 @@ public class WorkingDir {
         String folderName = igApkFileName.replace(".apk", "");
         File dirPath = new File(Utils.mergePaths(Environment.USER_DIR, folderName));
         if (dirPath.exists()) {
-            Log.severe("Working dir already exists, delete it or continue from the project.");
+            Log.severe("Working directory for this apk is already exists, delete it or continue from the project.");
             System.exit(-1);
             return null;
         } else {
@@ -32,29 +31,14 @@ public class WorkingDir {
             if (dirPath.exists()) {
                 return dirPath.getAbsolutePath();
             } else {
-                Log.severe("Working dir not exists, please create it or use different working dir.");
+                Log.severe("Working directory not exists, please create it or use different working dir.");
                 System.exit(-1);
                 return null;
             }
         } else {
-            Log.severe("Its's not an directory.");
+            Log.severe("Its's not an directory bro...");
             System.exit(-1);
             return null;
         }
-    }
-
-    public static void createConfigFile() throws IOException {
-        PropertyManager propertyManager = new PropertyManager(
-            new File(Utils.mergePaths(Environment.PROJECT_DIR, "config.properties"))
-        );
-        propertyManager.addInteger("manifest_version", 1);
-        propertyManager.addBoolean("production_mode", false);
-        propertyManager.addString("custom_fw_folder_dir", "");
-        propertyManager.addString("source_dir", "/sources");
-        propertyManager.save();
-    }
-
-    public static void createEmptyEnvironmentFile() {
-
     }
 }

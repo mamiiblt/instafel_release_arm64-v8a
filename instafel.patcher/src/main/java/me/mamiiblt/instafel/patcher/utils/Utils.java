@@ -3,6 +3,7 @@ package me.mamiiblt.instafel.patcher.utils;
 import java.nio.file.Paths;
 
 public class Utils {
+
     public static String mergePaths(String basePath, String... args) {
         return Paths.get(basePath, args).toString();
     }
