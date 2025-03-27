@@ -8,10 +8,10 @@ public class HelpCmd implements Command {
     public void execute(String[] args) {
         String[] lines = {
             "usage:",
-            "  help - Displays help command",
-            "  version - Displays patcher, baksmali version etc.",
+            "  help - Shows help command",
+            "  version - Shows patcher, baksmali version etc.",
             "  list - Lists available patches",
-            "  patch - Shows patch info details",
+            "  info - Shows patch info details",
             "  cwdir <apk file> - Creates an workdir with Instagram APK",
             "  run <dir> <patch name> - Run selected patch",
             "",

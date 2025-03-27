@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +16,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 
 import me.mamiiblt.instafel.patcher.utils.Log;
+import me.mamiiblt.instafel.patcher.utils.Utils;
 import me.mamiiblt.instafel.patcher.utils.models.LineData;
 
 public class SmaliUtils {
@@ -83,7 +83,7 @@ public class SmaliUtils {
 
     public File[] getSmaliFolders() {
 
-        File decompiledClassesFolder = new File(projectDir + "/sources");
+        File decompiledClassesFolder = new File(Utils.mergePaths(projectDir, "sources"));
         if (decompiledClassesFolder.exists() && decompiledClassesFolder.isDirectory()) {
             File[] folders = decompiledClassesFolder.listFiles(File::isDirectory);
             Arrays.sort(folders, (f1, f2) -> f1.getName().compareToIgnoreCase(f2.getName()));

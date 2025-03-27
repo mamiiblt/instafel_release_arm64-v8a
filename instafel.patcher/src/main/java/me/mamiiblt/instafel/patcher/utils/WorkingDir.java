@@ -1,7 +1,6 @@
 package me.mamiiblt.instafel.patcher.utils;
 
 import org.apache.commons.io.FileUtils;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -12,7 +11,7 @@ public class WorkingDir {
 
     public static String createWorkingDir(String igApkFileName) throws IOException {
         String folderName = igApkFileName.replace(".apk", "");
-        File dirPath = new File(Environment.USER_DIR + folderName);
+        File dirPath = new File(Utils.mergePaths(Environment.USER_DIR, folderName));
         if (dirPath.exists()) {
             Log.severe("Working dir already exists, delete it or continue from the project.");
             System.exit(-1);
@@ -25,7 +24,7 @@ public class WorkingDir {
     }
 
     public static String getExistsWorkingDir(String folderName) {
-        File dirPath = new File(Environment.USER_DIR + folderName);
+        File dirPath = new File(Utils.mergePaths(Environment.USER_DIR, folderName));
         if (dirPath.isDirectory()) {
             if (dirPath.exists()) {
                 return dirPath.getAbsolutePath();
@@ -48,13 +47,13 @@ public class WorkingDir {
         configContent.put("productionMode", false);
 
         FileUtils.writeStringToFile(
-                new File(projectDir + "/config.json"),
+                new File(Utils.mergePaths(projectDir, "config.json")),
                 configContent.toString(2),
                 StandardCharsets.UTF_8
         ); 
 
         FileUtils.writeStringToFile(
-            new File(projectDir, "/env.json"),
+            new File(Utils.mergePaths(projectDir, "env.json")),
             new JSONObject()
                 .put("ready", false)
                 .toString(2),

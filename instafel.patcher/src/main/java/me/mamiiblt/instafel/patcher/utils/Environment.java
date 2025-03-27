@@ -1,13 +1,15 @@
 package me.mamiiblt.instafel.patcher.utils;
 
 import java.io.InputStream;
+import java.nio.file.Paths;
 import java.util.Properties;
 
-public class Environment extends Configuration {
+public class Environment {
 
     public static String PROP_VERSION_STRING = null;
     public static String PROP_COMMIT_HASH = null;
-    public static String PROP_PROJECT_TAG = null;    
+    public static String PROP_PROJECT_TAG = null;   
+    public static String USER_DIR = System.getProperty("user.dir"); 
     public static String PROJECT_DIR = null;
 
     public static void readPatcherProps()  {

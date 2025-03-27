@@ -15,16 +15,16 @@ public class InitProject implements Command {
     @Override
     public void execute(String[] args) {
         try {
-            String path = args[0];
+            String fileArgument = args[0];
             if (args.length != 0) {
-                if (path.contains(".apk") || path.contains(".zip")) {
-                    File apkPath = new File(Paths.get(Environment.USER_DIR, path).toString());
+                if (fileArgument.contains(".apk") || fileArgument.contains(".zip")) {
+                    File apkPath = new File(Paths.get(Environment.USER_DIR, fileArgument).toString());
                     Environment.PROJECT_DIR = WorkingDir.createWorkingDir(apkPath.getAbsolutePath()); 
     
-                    SourceManager decompileAPK = new SourceManager(Environment.PROJECT_DIR, apkPath.getAbsolutePath());
+                    SourceManager decompileAPK = new SourceManager(Environment.PROJECT_DIR, apkPath.getName());
                     decompileAPK.copyFrameworksToWorkdir();
                     decompileAPK.setConfig(
-                        SourceUtil.setConfig(
+                        SourceUtil.getIflConfig(
                             decompileAPK.getConfig(),
                             Environment.PROJECT_DIR
                         ));
