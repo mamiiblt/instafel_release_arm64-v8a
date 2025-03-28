@@ -47,6 +47,12 @@ application {
     mainClass = "me.mamiiblt.instafel.patcher.Patcher"
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+
 tasks.register("clear-cache") {
     val filesToDelete = listOf(
         file("${project.projectDir}/bin"),
