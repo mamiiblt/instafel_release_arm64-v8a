@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.mamiiblt.instafel.patcher.cmdhandler.Command;
+import me.mamiiblt.instafel.patcher.source.WorkingDir;
 import me.mamiiblt.instafel.patcher.utils.Environment;
 import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatch;
@@ -14,9 +15,14 @@ public class RunPatch implements Command {
 
     @Override
     public void execute(String[] args) {
+
+        String wdirFolder = args[0];
+        Environment.PROJECT_DIR = WorkingDir.getExistsWorkingDir(wdirFolder);
+
         List<InstafelPatch> runnablePatches = new ArrayList<>();
         Log.info("Loading patches...");
-        for (String patchShortName : args) {
+        for (int i = 1; i < args.length; i++) {
+            String patchShortName = args[i];
             InstafelPatch patch = PatchLoader.findPatchByShortname(patchShortName);
             if (patch != null) {
                 runnablePatches.add(patch);

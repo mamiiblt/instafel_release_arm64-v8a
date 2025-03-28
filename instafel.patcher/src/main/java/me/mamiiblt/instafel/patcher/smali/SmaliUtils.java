@@ -37,7 +37,7 @@ public class SmaliUtils {
             Collection<File> files = FileUtils.listFiles(smaliFolder, TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE);
 
             for (File file : files) {
-                if (file.getName().contains(fileNamePart)) {
+                if (file.getAbsolutePath().contains(fileNamePart)) {
                     smaliFiles.add(file);
                 }
             }
@@ -47,17 +47,18 @@ public class SmaliUtils {
     }
 
     public void writeContentIntoFile(String filePath, List<String> fContent) throws IOException {
-        BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
-        for (String line : fContent) {
-            bw.write(line);
-            bw.newLine();   
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+            for (String line : fContent) {
+                bw.write(line);
+                bw.newLine();
+            }
         }
     }
 
-    public List<LineData> getContainLines(List<String> fContent, String regexString) {
+    public List<LineData> getContainLines(List<String> fContent, String... searchParams) {
         List<LineData> lineDatas = new ArrayList<>();
         for (int i = 0; i < fContent.size(); i++) {
-            if (fContent.get(i).contains(regexString)) {
+            if (containsAllKeys(fContent.get(i), searchParams)) {
                 lineDatas.add(
                     new LineData(i, fContent.get(i))
                 );
@@ -93,5 +94,14 @@ public class SmaliUtils {
             System.exit(-1);
             return null;
         }
+    }
+
+    private boolean containsAllKeys(String input, String... keys) {
+        for (String key : keys) {
+            if (!input.contains(key)) {
+                return false; 
+            }
+        }
+        return true; 
     }
 }

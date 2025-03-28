@@ -27,6 +27,14 @@ public class PropertyManager {
         properties.load(inputStream);
     }
 
+    public void add(String key, Object value) {
+        properties.put(key, value);
+    }
+
+    public Properties getProperties() {
+        return properties;
+    }
+
     public String getString(String key, String defaultValue) {
         return properties.getProperty(key, defaultValue);
     }
