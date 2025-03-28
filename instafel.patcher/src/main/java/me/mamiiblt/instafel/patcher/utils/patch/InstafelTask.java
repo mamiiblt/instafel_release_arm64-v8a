@@ -1,7 +1,7 @@
 package me.mamiiblt.instafel.patcher.utils.patch;
 
 public abstract class InstafelTask {
-    protected String stepName;
+    public String stepName;
 
     public InstafelTask(String stepName) {
         this.stepName = stepName;

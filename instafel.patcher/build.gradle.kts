@@ -38,11 +38,9 @@ dependencies {
     implementation("org.json:json:20240303")
     implementation("commons-io:commons-io:2.18.0")
     implementation("com.android.tools.smali:smali:3.0.9")
-    implementation("com.android.tools.smali:smali-baksmali:3.0.9")
-    implementation("com.android.tools.smali:smali-dexlib2:3.0.9")
-    implementation("com.android.tools.smali:smali-util:3.0.9")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("org.apktool:apktool-lib:2.11.1")
+    implementation("io.github.classgraph:classgraph:4.8.179")
 }
 
 application {

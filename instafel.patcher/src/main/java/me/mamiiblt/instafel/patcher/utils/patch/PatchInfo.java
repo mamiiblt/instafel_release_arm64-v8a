@@ -8,4 +8,5 @@ public @interface PatchInfo {
     String name();
     String author();
     String desc();
+    String shortname();
 }

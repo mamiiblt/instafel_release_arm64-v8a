@@ -11,6 +11,7 @@ public class Environment {
     public static String PROP_PROJECT_TAG = null;   
     public static String USER_DIR = System.getProperty("user.dir"); 
     public static String PROJECT_DIR = null;
+    public static String SPERATOR_STR = "---------------------------";
 
     public static void readPatcherProps()  {
         try {
