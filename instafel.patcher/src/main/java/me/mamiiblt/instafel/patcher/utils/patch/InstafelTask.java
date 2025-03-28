@@ -1,5 +1,7 @@
 package me.mamiiblt.instafel.patcher.utils.patch;
 
+import java.io.FileNotFoundException;
+
 import me.mamiiblt.instafel.patcher.utils.Environment;
 import me.mamiiblt.instafel.patcher.utils.Log;
 
@@ -12,15 +14,15 @@ public abstract class InstafelTask {
         this.stepName = stepName;
     }
 
-    public abstract void execute();
+    public abstract void execute() throws Exception;
 
-    protected void success(String message) {
+    public void success(String message) {
         taskStatus = 1;
         finishString = message;
         finishTask();
     }
 
-    protected void failure(String message) {
+    public void failure(String message) {
         taskStatus = 2;
         finishString = message;
         finishTask();

@@ -54,7 +54,12 @@ public class RunPatch implements Command {
             for (InstafelTask task : patch.tasks){
                 Log.info("");
                 Log.info("Executing task " + task.stepName);
-                task.execute();
+                try {
+                    task.execute();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    task.failure("Error while running task: " + e.getMessage());
+                }
             }
             Log.info("");
             Log.info("All tasks runned succesfully.");
