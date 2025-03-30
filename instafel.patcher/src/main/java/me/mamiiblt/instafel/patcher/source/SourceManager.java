@@ -32,6 +32,13 @@ public class SourceManager {
         Log.info("APK decompiled succesfully");
     }
 
+    public void decompileIflBaseAPK(ExtFile apkFile) throws IOException, AndrolibException {
+        Log.info("Decompiling Instafel Base APK...");        
+        ApkDecoder apkDecoder = new ApkDecoder(apkFile, config);
+        apkDecoder.decode(new File(Utils.mergePaths(Environment.PROJECT_DIR, "sources")));
+        Log.info("APK decompiled succesfully");
+    }
+
     public void build() throws AndrolibException, IOException {
         Log.info("Building APK");
         File buildDir = new File(Utils.mergePaths(Environment.PROJECT_DIR, "build"));

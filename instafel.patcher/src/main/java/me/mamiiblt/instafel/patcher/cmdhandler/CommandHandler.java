@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import me.mamiiblt.instafel.patcher.commands.BuildProject;
+import me.mamiiblt.instafel.patcher.commands.CreateIflSourceZip;
 import me.mamiiblt.instafel.patcher.commands.HelpCmd;
 import me.mamiiblt.instafel.patcher.commands.InitProject;
 import me.mamiiblt.instafel.patcher.commands.ListPatches;
@@ -45,6 +46,7 @@ public class CommandHandler {
     }
 
     private void registerCommands() {
+        commands.put("csrc", new CreateIflSourceZip());
         commands.put("run", new RunPatch());
         commands.put("list", new ListPatches());
         commands.put("cwith", new InitProject());
