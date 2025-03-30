@@ -10,28 +10,91 @@ import javax.xml.parsers.*;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
+import me.mamiiblt.instafel.patcher.resources.types.TAttr;
+import me.mamiiblt.instafel.patcher.resources.types.TColor;
+import me.mamiiblt.instafel.patcher.resources.types.TId;
+import me.mamiiblt.instafel.patcher.resources.types.TPublic;
 import me.mamiiblt.instafel.patcher.resources.types.TString;
+import me.mamiiblt.instafel.patcher.resources.types.TStyle;
+import me.mamiiblt.instafel.patcher.resources.vt.ResourcesAttr;
+import me.mamiiblt.instafel.patcher.resources.vt.ResourcesColor;
+import me.mamiiblt.instafel.patcher.resources.vt.ResourcesId;
+import me.mamiiblt.instafel.patcher.resources.vt.ResourcesPublic;
 import me.mamiiblt.instafel.patcher.resources.vt.ResourcesString;
+import me.mamiiblt.instafel.patcher.resources.vt.ResourcesStyle;
 
 public class ResourceParser {
     public static ResourcesString parseResString(File inpFile) throws ParserConfigurationException, IOException, SAXException {
         ResourcesString resourcesString = new ResourcesString();
         Document document = parseResourceDocument(inpFile);
-        document.normalize();
         List<Element> elements = getElementsFromResFile(document, "string");
         for (Element element : elements) {
-            resourcesString.add(
-                new TString(element.getAttribute("name"), element.getTextContent())
-            );
+            resourcesString.add(new TString(element));
         }
     
         return resourcesString;
+    }
+
+    public static ResourcesColor parseResColor(File inpFile) throws ParserConfigurationException, IOException, SAXException {
+        ResourcesColor resourcesColor = new ResourcesColor();
+        Document document = parseResourceDocument(inpFile);
+        List<Element> elements = getElementsFromResFile(document, "color");
+        for (Element element : elements) {
+            resourcesColor.add(new TColor(element));
+        }
+    
+        return resourcesColor;
+    }
+
+    public static ResourcesAttr parseResAttr(File inpFile) throws ParserConfigurationException, IOException, SAXException {
+        ResourcesAttr resourcesAttr = new ResourcesAttr();
+        Document document = parseResourceDocument(inpFile);
+        List<Element> elements = getElementsFromResFile(document, "attr");
+        for (Element element : elements) {
+            resourcesAttr.add(new TAttr(element));
+        }
+    
+        return resourcesAttr;
+    }
+
+    public static ResourcesId parseResId(File inpFile) throws ParserConfigurationException, IOException, SAXException {
+        ResourcesId resourcesId = new ResourcesId();
+        Document document = parseResourceDocument(inpFile);
+        List<Element> elements = getElementsFromResFile(document, "item");
+        for (Element element : elements) {
+            resourcesId.add(new TId(element));
+        }
+    
+        return resourcesId;
+    }
+
+    public static ResourcesPublic parseResPublic(File inpFile) throws ParserConfigurationException, IOException, SAXException {
+        ResourcesPublic resourcesPublic = new ResourcesPublic();
+        Document document = parseResourceDocument(inpFile);
+        List<Element> elements = getElementsFromResFile(document, "public");
+        for (Element element : elements) {
+            resourcesPublic.add(new TPublic(element));
+        }
+    
+        return resourcesPublic;
+    }
+
+    public static ResourcesStyle parseResStyle(File inpFile) throws ParserConfigurationException, IOException, SAXException {
+        ResourcesStyle resourcesStyle = new ResourcesStyle();
+        Document document = parseResourceDocument(inpFile);
+        List<Element> elements = getElementsFromResFile(document, "style");
+        for (Element element : elements) {
+            resourcesStyle.add(new TStyle(element));
+        }
+    
+        return resourcesStyle;
     }
 
     public static Document parseResourceDocument(File inputFile) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document document = builder.parse(inputFile);
+        document.normalize();
         return document;
     }
     

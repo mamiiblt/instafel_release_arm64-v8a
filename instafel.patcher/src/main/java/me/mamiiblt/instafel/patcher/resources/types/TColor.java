@@ -2,9 +2,9 @@ package me.mamiiblt.instafel.patcher.resources.types;
 
 import org.w3c.dom.Element;
 
-public class TString extends ResourceType {
+public class TColor extends ResourceType {
 
-    public TString(Element element) {
+    public TColor(Element element) {
         super(element);
     }
 

@@ -35,7 +35,11 @@ public class IFLResDataBuilder {
         DocumentBuilder builder = factory.newDocumentBuilder();
         doc = builder.newDocument();
 
+        createCategory("styles");
+        createCategory("public");
+        createCategory("ids");
         createCategory("attrs");
+        createCategory("colors");
         createCategory("strings");
         for (String langCode : Environment.INSTAFEL_LOCALES) {
             createCategory("strings-" + langCode);
@@ -44,7 +48,8 @@ public class IFLResDataBuilder {
 
     public void addElToCategory(String categoryName, Element element) {
         Element category = categories.get(categoryName);
-        category.appendChild(element);
+        Node importedNode = doc.importNode(element, true);
+        category.appendChild(importedNode);
     }
 
     public void buildXml() throws TransformerException {
