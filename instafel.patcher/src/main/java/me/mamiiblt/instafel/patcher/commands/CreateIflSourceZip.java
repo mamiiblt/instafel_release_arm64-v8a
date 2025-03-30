@@ -2,13 +2,18 @@ package me.mamiiblt.instafel.patcher.commands;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.annotation.Documented;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.PrefixFileFilter;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 import brut.directory.ExtFile;
 import me.mamiiblt.instafel.patcher.cmdhandler.Command;
@@ -25,6 +30,9 @@ import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.Utils;
 
 public class CreateIflSourceZip implements Command {
+
+    private File baseValuesDir;
+    private IFLResDataBuilder resDataBuilder;
 
     @Override
     public void execute(String[] args) {
@@ -49,6 +57,8 @@ public class CreateIflSourceZip implements Command {
                         ));
                         Log.info("Base APK succesfully decompiled.");
                     }
+
+                    baseValuesDir = new File(Utils.mergePaths(Environment.PROJECT_DIR, "sources", "res", "values"));
                     
                     copyInstafelSmaliSources();
                     copyRawSources();
@@ -81,29 +91,37 @@ public class CreateIflSourceZip implements Command {
         copyRawResource("drawable", resFolder);
         copyRawResource("layout", resFolder);
         copyRawResource("xml", resFolder);
-        parseResources(new File(Utils.mergePaths(Environment.PROJECT_DIR, "sources", "res", "values")));
+        parseResources();
     }
 
-    private void parseResources(File baseValuesDir) {
+    private void getAndAddInstafelString(String langCode) throws ParserConfigurationException, IOException, SAXException {
+        if (!langCode.isEmpty()) {
+            langCode = "-" + langCode;
+        }
+        ResourcesString resStrings = ResourceParser.parseResString(new File(
+            Utils.mergePaths(baseValuesDir.getAbsolutePath() + langCode, "strings.xml")
+        ));
+        List<TString> iflStrings = resStrings.getAll();
+        iflStrings.removeIf(item -> !item.getName().startsWith("ifl_"));
+        
+        Document doc = resDataBuilder.getDocument();
+        for (TString iflStr : iflStrings) {
+            resDataBuilder.addElToCategory("strings" + langCode, ResElementBuilder.buildString(
+                doc, iflStr));
+        }
+        Log.info("Totally " + iflStrings.size() + " strings added from " + langCode + " managed.");
+    }
+
+    private void parseResources() {
         try {
-            File resDataFile = new File(Utils.mergePaths(
-                Environment.PROJECT_DIR, "res", "ifl_res.xml"));
-            IFLResDataBuilder resDataBuilder = new IFLResDataBuilder(resDataFile);
-            resDataBuilder.buildXml();
-            /*ResourcesString resStrings = ResourceParser.parseResString(new File(
-                Utils.mergePaths(baseValuesDir.getAbsolutePath(), "strings.xml")));
+            resDataBuilder = new IFLResDataBuilder(new File(Utils.mergePaths(
+                Environment.PROJECT_DIR, "res", "ifl_res.xml")));
 
-            List<TString> iflStrings = new ArrayList<>(); 
-            for (TString tString : resStrings.getAll()) {
-                if (tString.getName().startsWith("ifl_")) {
-                    iflStrings.add(tString);
-                }
+            getAndAddInstafelString("");
+            for (String locale : Environment.INSTAFEL_LOCALES) {
+                getAndAddInstafelString(locale);
             }
-
-            for (TString iflString : iflStrings) {
-               resDataBuilder.addElToCategory("strings", 
-               ResElementBuilder.buildString(resDataBuilder.getDocument(), iflString));
-            }  */
+            resDataBuilder.buildXml();
         } catch (Exception e) {
             e.printStackTrace();
             Log.severe("Error while parsing / extracting resources");

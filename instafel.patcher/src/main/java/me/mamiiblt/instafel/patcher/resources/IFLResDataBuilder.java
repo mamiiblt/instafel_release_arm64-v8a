@@ -14,11 +14,12 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.*;
 
+import me.mamiiblt.instafel.patcher.utils.Environment;
+
 public class IFLResDataBuilder {
     
     private File distFile;
     private Document doc;
-    private Element valuesEl;
     private Map<String, Element> categories = new HashMap<>();
 
     public IFLResDataBuilder(File distFile) throws Exception {
@@ -34,9 +35,11 @@ public class IFLResDataBuilder {
         DocumentBuilder builder = factory.newDocumentBuilder();
         doc = builder.newDocument();
 
-        createCategory("strings");
         createCategory("attrs");
-        createCategory("public");
+        createCategory("strings");
+        for (String langCode : Environment.INSTAFEL_LOCALES) {
+            createCategory("strings-" + langCode);
+        }
     }
 
     public void addElToCategory(String categoryName, Element element) {
