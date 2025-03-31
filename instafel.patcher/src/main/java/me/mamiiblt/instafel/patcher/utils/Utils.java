@@ -2,9 +2,10 @@ package me.mamiiblt.instafel.patcher.utils;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,6 +19,22 @@ public class Utils {
 
     public static String mergePaths(String basePath, String... args) {
         return Paths.get(basePath, args).toString();
+    }
+
+    public static void copyResourceToFile(String resourcePath, File destFile) throws IOException {
+        try (InputStream inputStream = Utils.class.getResourceAsStream(resourcePath);
+            FileOutputStream outputStream = new FileOutputStream(destFile)) {
+
+            if (inputStream == null) {
+                throw new FileNotFoundException("Resource not found: " + resourcePath);
+            }
+
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = inputStream.read(buffer)) > 0) {
+                outputStream.write(buffer, 0, length);
+            }
+        }
     }
 
     public static class OSDedector {
@@ -47,7 +64,7 @@ public class Utils {
         }
     }
 
-    public static void unzipFromResources(String zipFilePath, String destDirectory) throws IOException {
+    public static void unzipFromResources(boolean showLog, String zipFilePath, String destDirectory) throws IOException {
         File destDir = new File(destDirectory);
         if (!destDir.exists()) destDir.mkdirs();
 
@@ -66,6 +83,9 @@ public class Utils {
                             bos.write(buffer, 0, bytesRead);
                         }
                     }
+                }
+                if (showLog == true) {
+                    Log.info("Copying " + file.getName());
                 }
                 zipIn.closeEntry();
             }

@@ -1,53 +1,30 @@
 package me.mamiiblt.instafel.patcher.commands;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.antlr.misc.Graph.Node;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.PrefixFileFilter;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import brut.directory.ExtFile;
 import me.mamiiblt.instafel.patcher.cmdhandler.Command;
-import me.mamiiblt.instafel.patcher.resources.IFLResDataBuilder;
-import me.mamiiblt.instafel.patcher.resources.ResourceParser;
-import me.mamiiblt.instafel.patcher.resources.types.TAttr;
-import me.mamiiblt.instafel.patcher.resources.types.TColor;
-import me.mamiiblt.instafel.patcher.resources.types.TId;
-import me.mamiiblt.instafel.patcher.resources.types.TPublic;
-import me.mamiiblt.instafel.patcher.resources.types.TString;
-import me.mamiiblt.instafel.patcher.resources.types.TStyle;
-import me.mamiiblt.instafel.patcher.resources.vt.ResourcesAttr;
-import me.mamiiblt.instafel.patcher.resources.vt.ResourcesColor;
-import me.mamiiblt.instafel.patcher.resources.vt.ResourcesId;
-import me.mamiiblt.instafel.patcher.resources.vt.ResourcesPublic;
-import me.mamiiblt.instafel.patcher.resources.vt.ResourcesString;
-import me.mamiiblt.instafel.patcher.resources.vt.ResourcesStyle;
-import me.mamiiblt.instafel.patcher.source.SourceManager;
-import me.mamiiblt.instafel.patcher.source.SourceUtils;
-import me.mamiiblt.instafel.patcher.source.isource.IflSourceCreator;
-import me.mamiiblt.instafel.patcher.utils.Environment;
-import me.mamiiblt.instafel.patcher.utils.Log;
-import me.mamiiblt.instafel.patcher.utils.Utils;
+import me.mamiiblt.instafel.patcher.resources.*;
+import me.mamiiblt.instafel.patcher.resources.types.*;
+import me.mamiiblt.instafel.patcher.source.*;
+import me.mamiiblt.instafel.patcher.source.isource.*;
+import me.mamiiblt.instafel.patcher.utils.*;
 
 public class CreateIflSourceZip implements Command {
 
     private File baseValuesDir;
-    private IFLResDataBuilder resDataBuilder;
+    private IFLResData.Builder resDataBuilder;
 
     @Override
     public void execute(String[] args) {
@@ -123,7 +100,7 @@ public class CreateIflSourceZip implements Command {
 
     private void parseResources() {
         try {
-            resDataBuilder = new IFLResDataBuilder(new File(Utils.mergePaths(
+            resDataBuilder = new IFLResData.Builder(new File(Utils.mergePaths(
                 Environment.PROJECT_DIR, "ifl_data.xml")));
 
             getAndAddInstafelString("");
@@ -181,7 +158,7 @@ public class CreateIflSourceZip implements Command {
     }
 
     private void copyResourceColor() throws ParserConfigurationException, IOException, SAXException {
-        ResourcesColor resColors = ResourceParser.parseResColor(new File(
+        Resources<TColor> resColors = ResourceParser.parseResColor(new File(
             Utils.mergePaths(baseValuesDir.getAbsolutePath(), "colors.xml")
         ));
         List<TColor> iflColors = resColors.getAll();
@@ -194,7 +171,7 @@ public class CreateIflSourceZip implements Command {
     }
 
     private void copyResourceAttr() throws ParserConfigurationException, IOException, SAXException {
-        ResourcesAttr resAttrs = ResourceParser.parseResAttr(new File(
+        Resources<TAttr> resAttrs = ResourceParser.parseResAttr(new File(
             Utils.mergePaths(baseValuesDir.getAbsolutePath(), "attrs.xml")
         ));
         List<TAttr> iflAttrs = resAttrs.getAll();
@@ -207,7 +184,7 @@ public class CreateIflSourceZip implements Command {
     }
 
     private void copyResourceId() throws ParserConfigurationException, IOException, SAXException {
-        ResourcesId resIds = ResourceParser.parseResId(new File(
+        Resources<TId> resIds = ResourceParser.parseResId(new File(
             Utils.mergePaths(baseValuesDir.getAbsolutePath(), "ids.xml")
         ));
         List<TId> iflIds = resIds.getAll();
@@ -220,7 +197,7 @@ public class CreateIflSourceZip implements Command {
     }
 
     private void copyResourcePublic() throws ParserConfigurationException, IOException, SAXException {
-        ResourcesPublic resPublics = ResourceParser.parseResPublic(new File(
+        Resources<TPublic> resPublics = ResourceParser.parseResPublic(new File(
             Utils.mergePaths(baseValuesDir.getAbsolutePath(), "public.xml")
         ));
         List<TPublic> iflPublics = resPublics.getAll();
@@ -234,7 +211,7 @@ public class CreateIflSourceZip implements Command {
     }
 
     private void copyResourceStyle() throws ParserConfigurationException, IOException, SAXException {
-        ResourcesStyle resStyles = ResourceParser.parseResStyle(new File(
+        Resources<TStyle> resStyles = ResourceParser.parseResStyle(new File(
             Utils.mergePaths(baseValuesDir.getAbsolutePath(), "styles.xml")
         ));
         List<TStyle> iflStyles = resStyles.getAll();
@@ -250,7 +227,7 @@ public class CreateIflSourceZip implements Command {
         if (!langCode.isEmpty()) {
             langCode = "-" + langCode;
         }
-        ResourcesString resStrings = ResourceParser.parseResString(new File(
+        Resources<TString> resStrings = ResourceParser.parseResString(new File(
             Utils.mergePaths(baseValuesDir.getAbsolutePath() + langCode, "strings.xml")
         ));
         List<TString> iflStrings = resStrings.getAll();

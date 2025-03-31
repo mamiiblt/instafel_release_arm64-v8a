@@ -4,8 +4,17 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 import javax.xml.parsers.*;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
@@ -16,57 +25,46 @@ import me.mamiiblt.instafel.patcher.resources.types.TId;
 import me.mamiiblt.instafel.patcher.resources.types.TPublic;
 import me.mamiiblt.instafel.patcher.resources.types.TString;
 import me.mamiiblt.instafel.patcher.resources.types.TStyle;
-import me.mamiiblt.instafel.patcher.resources.vt.ResourcesAttr;
-import me.mamiiblt.instafel.patcher.resources.vt.ResourcesColor;
-import me.mamiiblt.instafel.patcher.resources.vt.ResourcesId;
-import me.mamiiblt.instafel.patcher.resources.vt.ResourcesPublic;
-import me.mamiiblt.instafel.patcher.resources.vt.ResourcesString;
-import me.mamiiblt.instafel.patcher.resources.vt.ResourcesStyle;
 import me.mamiiblt.instafel.patcher.utils.Log;
 
 public class ResourceParser {
-    public static ResourcesString parseResString(File inpFile) throws ParserConfigurationException, IOException, SAXException {
-        ResourcesString resourcesString = new ResourcesString();
-        Document document = parseResourceDocument(inpFile);
-        List<Element> elements = getElementsFromResFile(document, "string");
-        for (Element element : elements) {
-            resourcesString.add(new TString(element));
+
+    private static <T> Resources<T> parseResource(File file, String tag, Function<Element, T> constructor) 
+        throws ParserConfigurationException, IOException, SAXException {
+
+        Document doc = parseResourceDocument(file);
+        Resources<T> resources = new Resources<>();
+        resources.setDocument(doc);
+
+        for (Element element : getElementsFromResFile(doc, tag)) {
+            resources.addResource(constructor.apply(element));
         }
-    
-        return resourcesString;
+
+        return resources;
     }
 
-    public static ResourcesColor parseResColor(File inpFile) throws ParserConfigurationException, IOException, SAXException {
-        ResourcesColor resourcesColor = new ResourcesColor();
-        Document document = parseResourceDocument(inpFile);
-        List<Element> elements = getElementsFromResFile(document, "color");
-        for (Element element : elements) {
-            resourcesColor.add(new TColor(element));
-        }
-    
-        return resourcesColor;
+    public static Resources<TString> parseResString(File file) throws ParserConfigurationException, IOException, SAXException {
+        return parseResource(file, "string", TString::new);
     }
 
-    public static ResourcesAttr parseResAttr(File inpFile) throws ParserConfigurationException, IOException, SAXException {
-        ResourcesAttr resourcesAttr = new ResourcesAttr();
-        Document document = parseResourceDocument(inpFile);
-        List<Element> elements = getElementsFromResFile(document, "attr");
-        for (Element element : elements) {
-            resourcesAttr.add(new TAttr(element));
-        }
-    
-        return resourcesAttr;
+    public static Resources<TColor> parseResColor(File file) throws ParserConfigurationException, IOException, SAXException {
+        return parseResource(file, "color", TColor::new);
     }
 
-    public static ResourcesId parseResId(File inpFile) throws ParserConfigurationException, IOException, SAXException {
-        ResourcesId resourcesId = new ResourcesId();
-        Document document = parseResourceDocument(inpFile);
-        List<Element> elements = getElementsFromResFile(document, "item");
-        for (Element element : elements) {
-            resourcesId.add(new TId(element));
-        }
-    
-        return resourcesId;
+    public static Resources<TAttr> parseResAttr(File file) throws ParserConfigurationException, IOException, SAXException {
+        return parseResource(file, "attr", TAttr::new);
+    }
+
+    public static Resources<TId> parseResId(File file) throws ParserConfigurationException, IOException, SAXException {
+        return parseResource(file, "id", TId::new);
+    }
+
+    public static Resources<TPublic> parseResPublic(File file) throws ParserConfigurationException, IOException, SAXException {
+        return parseResource(file, "public", TPublic::new);
+    }
+
+    public static Resources<TStyle> parseResStyle(File file) throws ParserConfigurationException, IOException, SAXException {
+        return parseResource(file, "styşe", TStyle::new);
     }
 
     public static List<Element> getActivitiesFromManifest(File inpFile) throws ParserConfigurationException, IOException, SAXException {
@@ -87,34 +85,24 @@ public class ResourceParser {
         return getElementsFromResFile(document, "provider");
     }
 
-    public static ResourcesPublic parseResPublic(File inpFile) throws ParserConfigurationException, IOException, SAXException {
-        ResourcesPublic resourcesPublic = new ResourcesPublic();
-        Document document = parseResourceDocument(inpFile);
-        List<Element> elements = getElementsFromResFile(document, "public");
-        for (Element element : elements) {
-            resourcesPublic.add(new TPublic(element));
-        }
-    
-        return resourcesPublic;
-    }
-
-    public static ResourcesStyle parseResStyle(File inpFile) throws ParserConfigurationException, IOException, SAXException {
-        ResourcesStyle resourcesStyle = new ResourcesStyle();
-        Document document = parseResourceDocument(inpFile);
-        List<Element> elements = getElementsFromResFile(document, "style");
-        for (Element element : elements) {
-            resourcesStyle.add(new TStyle(element));
-        }
-    
-        return resourcesStyle;
-    }
-
     public static Document parseResourceDocument(File inputFile) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document document = builder.parse(inputFile);
         document.normalize();
         return document;
+    }
+
+    public static void buildXmlFile(Document doc, File distFile) throws TransformerException {
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer(
+            new StreamSource(ResourceParser.class.getResourceAsStream("/styling.xslt")));
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformer.setOutputProperty(OutputKeys.ENCODING, "utf-8");
+        transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+        DOMSource source = new DOMSource(doc);
+        StreamResult result = new StreamResult(distFile);
+        transformer.transform(source, result);
     }
     
     public static List<Element> getElementsFromResFile(Document document, String tagName) {
@@ -128,5 +116,10 @@ public class ResourceParser {
             }
         }
         return elements;
+    }
+
+    public static NodeList getNodesFromResFile(Document document, String tagName) {
+        document.normalize();
+        return document.getElementsByTagName(tagName);
     }
 }

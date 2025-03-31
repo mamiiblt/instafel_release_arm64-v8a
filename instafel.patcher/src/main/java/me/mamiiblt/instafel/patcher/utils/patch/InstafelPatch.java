@@ -51,9 +51,9 @@ public abstract class InstafelPatch {
         return pEnvironment;
     }
 
-    public abstract List<InstafelTask> initializeTasks();
+    public abstract List<InstafelTask> initializeTasks() throws Exception;
 
-    public void loadTasks() {
+    public void loadTasks() throws Exception {
         tasks = initializeTasks();
     }
 }

@@ -48,8 +48,13 @@ public class RunPatch implements Command {
             System.out.println(patch.description);
             System.out.println("");
             Log.info("Loading tasks..");
-            patch.loadTasks();
-            Log.info(patch.tasks.size() + " task loaded");
+            try {
+                patch.loadTasks();
+                Log.info(patch.tasks.size() + " task loaded");
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.severe("Error while loading task in " + patch.name);
+            }
             Log.info("Executing tasks...");
             for (InstafelTask task : patch.tasks){
                 Log.info("");
