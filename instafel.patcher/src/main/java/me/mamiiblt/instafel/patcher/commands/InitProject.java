@@ -29,7 +29,6 @@ public class InitProject implements Command {
                         Utils.mergePaths(apkPath.getAbsolutePath())
                     ));
                     sourceManager.createConfigFile();
-                    sourceManager.copyInstafelSources();
                     Log.info("Project succesfully created");
                 } else {
                     Log.warning("Please select an .apk file");

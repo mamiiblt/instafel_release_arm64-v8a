@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<instafel>
+<instafel xmlns:android="http://schemas.android.com/apk/res/android">
     <values>
         <vcategory name="strings-tr">
             <string name="ifl_a0_01">Yedekleme Seçenekleri</string>
@@ -2033,6 +2033,33 @@
             <string name="ifl_t1_03">Instafel update failed.</string>
             <string name="ifl_version">_version</string>
         </vcategory>
+        <vcategory name="activities">
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.devmode.comparator.ifl_a_devmode_backup_comparator"/>
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.devmode.comparator.ifl_a_devmode_backup_comparator_menu"/>
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.devmode.backup.ifl_a_export_backup"/>
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.ifl_a_misc"/>
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.devmode.ifl_a_devmode_import"/>
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.crash_manager.ifl_a_crash_viewer"/>
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.about.ifl_a_about_contributors"/>
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.crash_manager.ifl_a_crash_reports"/>
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.devmode.analyzer.ifl_a_devmode_backup_analyzer"/>
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.devmode.analyzer.ifl_a_devmode_backup_analyzer_menu"/>
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.about.ifl_a_about_translators"/>
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.library.ifl_a_library_menu"/>
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.admin.ifl_a_admin_login"/>
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.admin.ifl_a_admin_dashboard"/>
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.library.backup.ifl_a_library_backup"/>
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.library.backup.ifl_a_library_backup_info"/>
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.library.backup.ifl_a_library_backup_info_author"/>
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.admin.ifl_a_admin_action_updatebackup"/>
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.admin.ifl_a_admin_action_approvepreview"/>
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.admin.ifl_a_admin_pref_manager"/>
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.ifl_a_ota"/>
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.ifl_a_language"/>
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.devmode.ifl_a_devmode"/>
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.ifl_a_menu"/>
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.about.ifl_a_about"/>
+        </vcategory>
         <vcategory name="ids">
             <item name="ifl_about_title" type="id"/>
             <item name="ifl_backup_editText" type="id"/>
@@ -2442,6 +2469,13 @@
             <string name="ifl_d4_02">Καλωσήρθατε στο Instafel, μια τροποποιημένη εκδοχή του Instagram με στόχο την άμεση πρόσβαση στις πειραματικές εκδόσεις της εφαρμογής.\\n\\nΠατήστε τον εικόνα του προφίλ σας στο κάτω μέρος και μετά πιέστε παρατεταμένα τις τρεις γραμμές πάνω δεξιά για να μεταφερθείτε στις ρυθμίσεις του Instafel.</string>
             <string name="ifl_t1_01">Σφάλμα κατά το άνοιγμα του προγράμματος εγκατάστασης του αρχείου ενημέρωσης.</string>
             <string name="ifl_t1_03">Σφάλμα ενημέρωσης του Instafel.</string>
+        </vcategory>
+        <vcategory name="providers">
+            <provider android:authorities="me.mamiiblt.instafel.test" android:exported="false" android:grantUriPermissions="true" android:name="androidx.core.content.FileProvider">
+                            
+                <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/ifl_file_provider"/>
+                        
+            </provider>
         </vcategory>
         <vcategory name="strings-fr">
             <string name="ifl_a0_01">Options de sauvegarde</string>

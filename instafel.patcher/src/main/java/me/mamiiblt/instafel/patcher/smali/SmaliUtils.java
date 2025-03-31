@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
@@ -82,11 +83,39 @@ public class SmaliUtils {
         return fContent;
     }
 
+    public File getSmallSizeSmaliFolder(File[] smaliFolders) {
+        if (smaliFolders == null || smaliFolders.length == 0) {
+            return null;
+        }
+
+        Optional<File> smallestFolder = Arrays.stream(smaliFolders)
+                .filter(File::isDirectory) 
+                .min((f1, f2) -> Long.compare(getFolderSize(f1), getFolderSize(f2)));
+
+        return smallestFolder.orElse(null);
+    }
+
+    public static long getFolderSize(File folder) {
+        if (!folder.exists() || folder.isFile()) {
+            return 0;
+        }
+        File[] files = folder.listFiles();
+        if (files == null) return 0;
+        long size = 0;
+        for (File file : files) {
+            size += file.isFile() ? file.length() : getFolderSize(file);
+        }
+        return size;
+    }
+
     public File[] getSmaliFolders() {
 
         File decompiledClassesFolder = new File(Utils.mergePaths(projectDir, "sources"));
         if (decompiledClassesFolder.exists() && decompiledClassesFolder.isDirectory()) {
             File[] folders = decompiledClassesFolder.listFiles(File::isDirectory);
+            folders = Arrays.stream(folders)
+                .filter(f -> f.getName().toLowerCase().contains("smali"))
+                .toArray(File[]::new);
             Arrays.sort(folders, (f1, f2) -> f1.getName().compareToIgnoreCase(f2.getName()));
             return folders;
         } else {

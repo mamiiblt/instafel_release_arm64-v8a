@@ -20,6 +20,7 @@ public class IFLResDataBuilder {
     
     private File distFile;
     private Document doc;
+    private Element elValues;
     private Map<String, Element> categories = new HashMap<>();
 
     public IFLResDataBuilder(File distFile) throws Exception {
@@ -32,9 +33,17 @@ public class IFLResDataBuilder {
 
     private void createDataDocument() throws ParserConfigurationException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(false);
         DocumentBuilder builder = factory.newDocumentBuilder();
         doc = builder.newDocument();
+        Element elRoot = doc.createElement("instafel");
+        elRoot.setAttribute("xmlns:android", "http://schemas.android.com/apk/res/android");
+        doc.appendChild(elRoot);
+        elValues = doc.createElement("values");
+        elRoot.appendChild(elValues);
 
+        createCategory("providers");
+        createCategory("activities");
         createCategory("styles");
         createCategory("public");
         createCategory("ids");
@@ -53,11 +62,7 @@ public class IFLResDataBuilder {
     }
 
     public void buildXml() throws TransformerException {
-        Element elRoot = doc.createElement("instafel");
-        doc.appendChild(elRoot);
-        Element elValues = doc.createElement("values");
-        elRoot.appendChild(elValues);
-
+    
         for (Map.Entry<String, Element> entry : categories.entrySet()) {
             elValues.appendChild(entry.getValue());
         }

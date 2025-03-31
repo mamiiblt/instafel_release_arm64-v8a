@@ -22,6 +22,7 @@ import me.mamiiblt.instafel.patcher.resources.vt.ResourcesId;
 import me.mamiiblt.instafel.patcher.resources.vt.ResourcesPublic;
 import me.mamiiblt.instafel.patcher.resources.vt.ResourcesString;
 import me.mamiiblt.instafel.patcher.resources.vt.ResourcesStyle;
+import me.mamiiblt.instafel.patcher.utils.Log;
 
 public class ResourceParser {
     public static ResourcesString parseResString(File inpFile) throws ParserConfigurationException, IOException, SAXException {
@@ -66,6 +67,24 @@ public class ResourceParser {
         }
     
         return resourcesId;
+    }
+
+    public static List<Element> getActivitiesFromManifest(File inpFile) throws ParserConfigurationException, IOException, SAXException {
+        if (!inpFile.getName().equals("AndroidManifest.xml")) {
+            Log.severe("Input file is not an AndroidManifest file");
+        }
+
+        Document document = parseResourceDocument(inpFile);
+        return getElementsFromResFile(document, "activity");
+    }
+
+    public static List<Element> getProvidersFromManifest(File inpFile) throws ParserConfigurationException, IOException, SAXException {
+        if (!inpFile.getName().equals("AndroidManifest.xml")) {
+            Log.severe("Input file is not an AndroidManifest file");
+        }
+
+        Document document = parseResourceDocument(inpFile);
+        return getElementsFromResFile(document, "provider");
     }
 
     public static ResourcesPublic parseResPublic(File inpFile) throws ParserConfigurationException, IOException, SAXException {

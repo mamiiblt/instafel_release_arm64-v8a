@@ -57,47 +57,6 @@ public class SourceManager {
         );
     }
     
-    public void copyInstafelSources() throws IOException {
-    
-        Log.info("Extracting Instafel sources...");
-        File iflSourceDir = new File(Utils.mergePaths(Environment.PROJECT_DIR, "iflr"));
-        
-        File tempZipFile = File.createTempFile("temp_zip", ".zip");
-        try (InputStream zipStream = SourceManager.class.getClassLoader().getResourceAsStream("instafel_sr.zip");
-            FileOutputStream fos = new FileOutputStream(tempZipFile)) {
-       
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = zipStream.read(buffer)) != -1) {
-                fos.write(buffer, 0, bytesRead);
-            }
-        }
-
-        try (ZipInputStream zis = new ZipInputStream(new FileInputStream(tempZipFile))) {
-            ZipEntry entry;
-            while ((entry = zis.getNextEntry()) != null) {
-                File newFile = new File(iflSourceDir, entry.getName());
-                
-                if (entry.isDirectory()) {
-                    newFile.mkdirs();
-                    continue;
-                }
-
-                newFile.getParentFile().mkdirs();
-
-                try (FileOutputStream fos = new FileOutputStream(newFile)) {
-                    byte[] buffer = new byte[1024];
-                    int len;
-                    while ((len = zis.read(buffer)) > 0) {
-                        fos.write(buffer, 0, len);
-                    }
-                }
-            }
-        }
-
-        Log.info("Instafel sources extracted succesfully");
-    }
-
     public Config getConfig() {
         return config;
     }

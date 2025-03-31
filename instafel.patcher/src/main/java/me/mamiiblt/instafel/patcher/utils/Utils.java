@@ -1,12 +1,15 @@
 package me.mamiiblt.instafel.patcher.utils;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.io.FileUtils;
@@ -41,6 +44,31 @@ public class Utils {
         File file = new File(path);
         if (file.exists()) {
             FileUtils.deleteDirectory(file);
+        }
+    }
+
+    public static void unzipFromResources(String zipFilePath, String destDirectory) throws IOException {
+        File destDir = new File(destDirectory);
+        if (!destDir.exists()) destDir.mkdirs();
+
+        try (ZipInputStream zipIn = new ZipInputStream(Utils.class.getResourceAsStream(zipFilePath))) {
+            ZipEntry entry;
+            while ((entry = zipIn.getNextEntry()) != null) {
+                File file = new File(destDirectory, entry.getName());
+                if (entry.isDirectory()) {
+                    file.mkdirs();
+                } else {
+                    file.getParentFile().mkdirs();
+                    try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file))) {
+                        byte[] buffer = new byte[4096];
+                        int bytesRead;
+                        while ((bytesRead = zipIn.read(buffer)) != -1) {
+                            bos.write(buffer, 0, bytesRead);
+                        }
+                    }
+                }
+                zipIn.closeEntry();
+            }
         }
     }
 

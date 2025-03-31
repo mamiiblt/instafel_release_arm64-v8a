@@ -13,9 +13,12 @@ import java.util.zip.ZipOutputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.antlr.misc.Graph.Node;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.PrefixFileFilter;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import brut.directory.ExtFile;
@@ -132,6 +135,7 @@ public class CreateIflSourceZip implements Command {
             copyResourceId();
             copyResourceStyle();
             copyResourcePublic();
+            exportManifestThingsToResData();
             resDataBuilder.buildXml();
         } catch (Exception e) {
             e.printStackTrace();
@@ -151,6 +155,29 @@ public class CreateIflSourceZip implements Command {
             Log.info(file.getName() + " copied.");
         }
         Log.info("Totally " + files.size() + " resource copied from " + folderName);
+    }
+
+    private void exportManifestThingsToResData() throws ParserConfigurationException, IOException, SAXException {
+        Log.info("Exporting activities from Instafel base");
+        File fPath = new File(Utils.mergePaths(Environment.PROJECT_DIR, "sources", "AndroidManifest.xml"));
+        List<Element> activities = ResourceParser.getActivitiesFromManifest(fPath);
+
+        for (Element element : activities) {
+            if (element.getAttribute("android:name").contains("ifl_a_menu")) {
+                element.setAttribute("android:exported", "false");
+                while (element.hasChildNodes()) {
+                    element.removeChild(element.getFirstChild());
+                }
+            }
+            resDataBuilder.addElToCategory("activities", element);
+        }
+
+        Log.info("Exporting providers from Instafel base");
+        List<Element> providers = ResourceParser.getProvidersFromManifest(fPath);
+        providers.removeIf(item -> item.getAttribute("android:authorities").contains("androidx-startup"));
+        for (Element provider : providers) {
+            resDataBuilder.addElToCategory("providers", provider);
+        }
     }
 
     private void copyResourceColor() throws ParserConfigurationException, IOException, SAXException {
