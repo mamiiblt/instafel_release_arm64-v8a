@@ -47,7 +47,7 @@ export default function Home() {
                 className="text-muted-foreground  mb-6 text-xl max-w-xl"
               >
                 You can try out latest Alpha builds as quickly as possible with
-                Instafel Project{" "}
+                Instafel
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -57,31 +57,43 @@ export default function Home() {
                   duration: 0.8,
                   ease: "easeOut",
                 }}
-              >
-                <div className="flex space-x-4 mb-16">
-                  <Button
-                    asChild
-                    size={"lg"}
-                    variant="default"
-                    className="w-full sm:w-auto transform hover:scale-105 transition-transform duration-200"
-                  >
-                    <Link href="/download?version=latest">
-                      <IflDownload className="mr-2" />
-                      Download
-                    </Link>
-                  </Button>
-                  <Button
-                    asChild
-                    size={"lg"}
-                    variant="outline-gradient"
-                    className="w-full sm:w-auto transform hover:scale-105 transition-transform duration-200"
-                  >
-                    <Link href="/guides">
-                      <Book className="mr-2" />
-                      Read Guide
-                    </Link>
-                  </Button>
-                </div>
+              > 
+                  <div className="grid grid-cols-2 grid-rows-[auto_1fr] h-screen gap-2">
+  <Button
+    asChild
+    size={"lg"}
+    variant={"default"}
+    className="flex justify-center items-center"
+  >
+    <Link href="/download?version=latest">
+      <IflDownload className="flex-shrink-0 w-5 h-5 mr-1" />
+      Download
+    </Link>
+  </Button>
+
+  <Button
+    asChild
+    size={"lg"}
+    variant={"outline-gradient"}
+  >
+    <Link href="/guides">
+      <Book className="flex-shrink-0 w-4 h-4 mr-1" />
+      Read Guide
+    </Link>
+  </Button>
+
+  <Button
+    asChild
+    size="lg"
+    variant={"gradient"}
+    className="flex justify-center items-center col-span-2"
+  >
+    <Link href="https://t.me/instafel">
+      <Telegram className="flex-shrink-0 w-4 h-4 mr-1" />
+      Join Community
+    </Link>
+  </Button>
+</div>
               </motion.div>
 
               <motion.div
