@@ -202,7 +202,7 @@ public class CreateIflSourceZip implements Command {
         ));
         List<TPublic> iflPublics = resPublics.getAll();
         iflPublics.removeIf(item -> !item.getName().startsWith("ifl_"));
-
+        iflPublics.removeIf(item -> item.getName().equals("ifl_ic_launcher") || item.getName().equals("ifl_ic_launcher_round"));
         for (TPublic iflPublic : iflPublics) {
             iflPublic.getElement().removeAttribute("id");
             resDataBuilder.addElToCategory("public", iflPublic.getElement());
@@ -217,8 +217,11 @@ public class CreateIflSourceZip implements Command {
         List<TStyle> iflStyles = resStyles.getAll();
         iflStyles.removeIf(item -> !item.getName().startsWith("ifl_"));
 
-        for (TStyle iflAttr : iflStyles) {
-            resDataBuilder.addElToCategory("styles", iflAttr.getElement());
+        for (TStyle iflStyle : iflStyles) {
+            if (iflStyle.getName().equals("ifl_theme_light")) {
+                iflStyle.getElement().removeAttribute("parent");
+            }
+            resDataBuilder.addElToCategory("styles", iflStyle.getElement());
         }
         Log.info("Totally " + iflStyles.size() + " style added to resource data.");
     }
