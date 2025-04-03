@@ -63,7 +63,9 @@ public class ResourceParser {
     }
 
     public static Resources<TId> parseResId(File file) throws ParserConfigurationException, IOException, SAXException {
-        return parseResource(file, "item", TId::new, "ids");
+        Resources<TId> res = parseResource(file, "item", TId::new, "ids");
+        res.getAll().removeIf(item -> !item.getElement().hasAttribute("type"));
+        return res;
     }
 
     public static Resources<TPublic> parseResPublic(File file) throws ParserConfigurationException, IOException, SAXException {
