@@ -8,6 +8,7 @@ import me.mamiiblt.instafel.patcher.smali.SmaliUtils;
 import me.mamiiblt.instafel.patcher.utils.Environment;
 import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.PEnvironment;
+import me.mamiiblt.instafel.patcher.utils.PEnvironment.Keys;
 import me.mamiiblt.instafel.patcher.utils.Utils;
 
 public abstract class InstafelPatch {
@@ -15,6 +16,8 @@ public abstract class InstafelPatch {
     public PEnvironment PEnvironment;
     public SmaliUtils SmaliUtils;
     public List<InstafelTask> tasks;
+
+    public boolean isProdMode = false;
 
     public InstafelPatch() {
         try {
@@ -31,6 +34,7 @@ public abstract class InstafelPatch {
     
             PEnvironment = getOrCreateEnvironmentFile();
             SmaliUtils = new SmaliUtils(Environment.PROJECT_DIR);
+            isProdMode = PEnvironment.getBoolean(Keys.PRODUCTION_MODE, false);
         } catch (Exception e) {
             e.printStackTrace();
             Log.severe("Error while creating InstafelPatch");

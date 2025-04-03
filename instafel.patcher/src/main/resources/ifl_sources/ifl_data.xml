@@ -1592,8 +1592,6 @@
             <public name="ifl_ui_tilelarge_switch" type="layout"/>
             <public name="ifl_ui_tilesocials" type="layout"/>
             <public name="ifl_ui_tiletitle" type="layout"/>
-            <public name="ifl_ic_launcher" type="mipmap"/>
-            <public name="ifl_ic_launcher_round" type="mipmap"/>
             <public name="ifl_a0_01" type="string"/>
             <public name="ifl_a0_02" type="string"/>
             <public name="ifl_a0_03" type="string"/>

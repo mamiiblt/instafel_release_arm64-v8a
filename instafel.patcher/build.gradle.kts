@@ -41,6 +41,8 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("org.apktool:apktool-lib:2.11.1")
     implementation("io.github.classgraph:classgraph:4.8.179")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.18.3")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.18.3")
 }
 
 application {

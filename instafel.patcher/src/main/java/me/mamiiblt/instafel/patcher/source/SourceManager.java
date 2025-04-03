@@ -10,12 +10,8 @@ import brut.directory.ExtFile;
 import me.mamiiblt.instafel.patcher.utils.Environment;
 import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.Utils;
-import okio.Source;
 
 import java.io.*;
-
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 
 public class SourceManager {
 

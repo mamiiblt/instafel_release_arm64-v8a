@@ -95,6 +95,21 @@ public class SmaliUtils {
         return smallestFolder.orElse(null);
     }
 
+    public File getSmaliFolderByPaths(String... folders) {
+        if (smaliFolders == null) {
+            return null;
+        }
+
+
+        for (File smaliFolder : smaliFolders) {
+            File extPath = new File(Utils.mergePaths(smaliFolder.getAbsolutePath(), folders));
+            if (extPath.exists()) {
+                return smaliFolder;
+            }
+        }
+        return null;
+    }
+
     public static long getFolderSize(File folder) {
         if (!folder.exists() || folder.isFile()) {
             return 0;

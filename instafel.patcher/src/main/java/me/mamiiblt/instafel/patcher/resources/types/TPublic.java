@@ -4,6 +4,8 @@ import org.w3c.dom.Element;
 
 public class TPublic extends ResourceType {
 
+    private long convertedID = 0;
+
     public TPublic(Element element) {
         super(element);
     }
@@ -18,6 +20,18 @@ public class TPublic extends ResourceType {
 
     public String getId() {
         return element.getAttribute("id");
+    }
+    
+    public void setId(String val) {
+        element.setAttribute("id", val);
+    }
+
+    public void setConvertedId(long id) {
+        convertedID = id;
+    }
+
+    public long getConvertedId() {
+        return convertedID;
     }
 
 }
