@@ -2246,7 +2246,7 @@
                 <item name="ifl_attr_title_color">@color/ifl_white</item>
                     
             </style>
-            <style name="ifl_theme_light" parent="@style/Theme.Material3.DayNight.NoActionBar">
+            <style name="ifl_theme_light">
                         
                 <item name="ifl_attr_background_color">@color/ifl_background_color_light</item>
                         
