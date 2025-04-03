@@ -16,55 +16,62 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.antlr.grammar.v3.ANTLRParser.ruleScopeSpec_return;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
+import me.mamiiblt.instafel.patcher.resources.types.ResourceType;
 import me.mamiiblt.instafel.patcher.resources.types.TAttr;
 import me.mamiiblt.instafel.patcher.resources.types.TColor;
 import me.mamiiblt.instafel.patcher.resources.types.TId;
 import me.mamiiblt.instafel.patcher.resources.types.TPublic;
 import me.mamiiblt.instafel.patcher.resources.types.TString;
 import me.mamiiblt.instafel.patcher.resources.types.TStyle;
+import me.mamiiblt.instafel.patcher.utils.Environment;
 import me.mamiiblt.instafel.patcher.utils.Log;
 
 public class ResourceParser {
 
-    private static <T> Resources<T> parseResource(File file, String tag, Function<Element, T> constructor) 
+    private static <T extends ResourceType> Resources<T> parseResource(File file, String tag, Function<Element, T> constructor, String typeName) 
         throws ParserConfigurationException, IOException, SAXException {
 
         Document doc = parseResourceDocument(file);
         Resources<T> resources = new Resources<>();
+        resources.setFile(file);
         resources.setDocument(doc);
-
-        for (Element element : getElementsFromResFile(doc, tag)) {
-            resources.addResource(constructor.apply(element));
-        }
+        resources.setTypeName(typeName);
+        resources.parse(tag, constructor);
 
         return resources;
     }
 
     public static Resources<TString> parseResString(File file) throws ParserConfigurationException, IOException, SAXException {
-        return parseResource(file, "string", TString::new);
+        for (String locale : Environment.INSTAFEL_LOCALES) {
+            if (file.getAbsolutePath().contains("values-" + locale)) {
+                return parseResource(file, "string", TString::new, "strings-" + locale);
+            }
+        }
+        return parseResource(file, "string", TString::new, "strings");
     }
 
     public static Resources<TColor> parseResColor(File file) throws ParserConfigurationException, IOException, SAXException {
-        return parseResource(file, "color", TColor::new);
+        return parseResource(file, "color", TColor::new, "colors");
     }
 
     public static Resources<TAttr> parseResAttr(File file) throws ParserConfigurationException, IOException, SAXException {
-        return parseResource(file, "attr", TAttr::new);
+        return parseResource(file, "attr", TAttr::new, "attrs");
     }
 
     public static Resources<TId> parseResId(File file) throws ParserConfigurationException, IOException, SAXException {
-        return parseResource(file, "id", TId::new);
+        return parseResource(file, "item", TId::new, "ids");
     }
 
     public static Resources<TPublic> parseResPublic(File file) throws ParserConfigurationException, IOException, SAXException {
-        return parseResource(file, "public", TPublic::new);
+        return parseResource(file, "public", TPublic::new, "publics");
     }
 
     public static Resources<TStyle> parseResStyle(File file) throws ParserConfigurationException, IOException, SAXException {
-        return parseResource(file, "styşe", TStyle::new);
+        return parseResource(file, "style", TStyle::new, "styles");
     }
 
     public static List<Element> getActivitiesFromManifest(File inpFile) throws ParserConfigurationException, IOException, SAXException {

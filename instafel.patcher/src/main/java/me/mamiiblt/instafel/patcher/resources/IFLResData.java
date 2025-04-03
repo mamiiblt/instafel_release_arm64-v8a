@@ -56,11 +56,13 @@ public class IFLResData {
 
             for (Element category : categories) {
                 Resources<TString> resourcesString = new Resources<TString>();
+                resourcesString.setFile(inputFile);
+                resourcesString.setDocument(document);
                 NodeList categoryElements = category.getChildNodes();
                 for (int i = 0; i < categoryElements.getLength(); i++) {
                     Node node = categoryElements.item(i);
                     if (node.getNodeType() == Node.ELEMENT_NODE) {
-                        resourcesString.addResource(new TString((Element) node));
+                        resourcesString.getAll().add(new TString((Element) node));
                     }
                 }
                 resourcesStrings.put(category.getAttribute("name"), resourcesString);

@@ -12,4 +12,8 @@ public class ResourceType {
     public Element getElement() {
         return this.element;
     }
+
+    public void setElement(Element element) {
+        this.element = element;
+    }
 }
