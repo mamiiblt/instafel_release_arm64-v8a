@@ -31,32 +31,6 @@ public class ExtendSnoozeWarningDuration extends InstafelPatch {
         );
     }
 
-    InstafelTask extendConstraint = new InstafelTask("Change 7 day constraint to 50 day") {
-
-        @Override
-        public void execute() throws Exception {
-            List<String> fContent = SmaliUtils.getSmaliFileContent(dogfoodingClass.getAbsolutePath());
-            boolean status = false;
-            for (int i = 0; i < fContent.size(); i++) {
-                String line = fContent.get(i);
-
-                if (line.contains("const") && line.contains("0x7")) {
-                    fContent.set(i, "    const/16 v0, 0x32");
-                    Log.info("Day constraint extended at line " + fContent.get(i) + " to 50 day.");
-                    status = true;
-                }
-            }  
-
-            if (status) {
-                FileUtils.writeLines(dogfoodingClass, fContent);
-                success("Day constraint succesfully extended.");
-            } else {
-                failure("Patcher can't found constraint line...");
-            }
-        }
-        
-    };
-
     InstafelTask findDogfoodingClass = new InstafelTask("Find constraint in DogfoodingEligibilityApi included classes") {
 
         @Override
@@ -96,5 +70,31 @@ public class ExtendSnoozeWarningDuration extends InstafelPatch {
                 failure("DogfoodingEligibilityApi class cannot found");
             }
         }
+    };
+
+    InstafelTask extendConstraint = new InstafelTask("Change 7 day constraint to 50 day") {
+
+        @Override
+        public void execute() throws Exception {
+            List<String> fContent = SmaliUtils.getSmaliFileContent(dogfoodingClass.getAbsolutePath());
+            boolean status = false;
+            for (int i = 0; i < fContent.size(); i++) {
+                String line = fContent.get(i);
+
+                if (line.contains("const") && line.contains("0x7")) {
+                    fContent.set(i, "    const/16 v0, 0x32");
+                    Log.info("Day constraint extended at line " + fContent.get(i) + " to 50 day.");
+                    status = true;
+                }
+            }  
+
+            if (status) {
+                FileUtils.writeLines(dogfoodingClass, fContent);
+                success("Day constraint succesfully extended.");
+            } else {
+                failure("Patcher can't found constraint line...");
+            }
+        }
+        
     };
 }
