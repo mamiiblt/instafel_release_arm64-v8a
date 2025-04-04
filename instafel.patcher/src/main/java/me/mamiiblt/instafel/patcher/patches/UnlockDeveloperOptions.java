@@ -1,7 +1,6 @@
 package me.mamiiblt.instafel.patcher.patches;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +31,7 @@ public class UnlockDeveloperOptions extends InstafelPatch {
 
     InstafelTask getDevOptionsTask = new InstafelTask("Get dev options class from whoptions") {
         @Override
-        public void execute() throws FileNotFoundException {
+        public void execute() throws IOException {
             String imageDebugSessionHelperPath = "com/instagram/debug/image/sessionhelper/ImageDebugSessionHelper.smali";
             List<File> whOptionsFileQuery = SmaliUtils.getSmaliFilesByName(imageDebugSessionHelperPath);
             File imageDebugSessionSmali = null;

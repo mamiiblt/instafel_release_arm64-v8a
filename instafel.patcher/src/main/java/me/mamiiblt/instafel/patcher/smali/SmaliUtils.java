@@ -3,10 +3,11 @@ package me.mamiiblt.instafel.patcher.smali;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -69,18 +70,8 @@ public class SmaliUtils {
         return lineDatas;
     }
 
-    public List<String> getSmaliFileContent(String filePath) throws FileNotFoundException {
-        List<String> fContent = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                fContent.add(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }        
-
-        return fContent;
+    public List<String> getSmaliFileContent(String filePath) throws IOException {
+        return Files.readAllLines(Paths.get(filePath));
     }
 
     public File getSmallSizeSmaliFolder(File[] smaliFolders) {
