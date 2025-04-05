@@ -55,7 +55,7 @@ public class ExtendSnoozeWarningDuration extends InstafelPatch {
                         
                         if (matchLines.size() == 1) {
                             dogfoodingClass = file;
-                            Log.info("File found in " + dogfoodingClass.getName());
+                            Log.info("File found in " + dogfoodingClass.getName() + " at " + folder.getName());
                             fileFoundLock = true;
                             break;
                         } 
@@ -64,7 +64,7 @@ public class ExtendSnoozeWarningDuration extends InstafelPatch {
             }
 
             if (dogfoodingClass != null) {
-                Log.info("Totally scanned " + scannedFileSize + " folder");
+                Log.info("Totally scanned " + scannedFileSize + " file in X folders");
                 success("DogfoodingEligibilityApi founded.");
             } else {
                 failure("DogfoodingEligibilityApi class cannot found");
