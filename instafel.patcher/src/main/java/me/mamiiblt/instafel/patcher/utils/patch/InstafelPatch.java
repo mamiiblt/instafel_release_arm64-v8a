@@ -1,23 +1,18 @@
 package me.mamiiblt.instafel.patcher.utils.patch;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import me.mamiiblt.instafel.patcher.smali.SmaliUtils;
+import me.mamiiblt.instafel.patcher.source.PConfig;
+import me.mamiiblt.instafel.patcher.source.PEnvironment;
 import me.mamiiblt.instafel.patcher.utils.Environment;
 import me.mamiiblt.instafel.patcher.utils.Log;
-import me.mamiiblt.instafel.patcher.utils.PEnvironment;
-import me.mamiiblt.instafel.patcher.utils.PEnvironment.Keys;
 import me.mamiiblt.instafel.patcher.utils.Utils;
 
 public abstract class InstafelPatch {
     public String name, author, description, shortname;
-    public PEnvironment PEnvironment;
-    public SmaliUtils SmaliUtils;
     public List<InstafelTask> tasks;
-
-    public boolean isProdMode = false;
 
     public InstafelPatch() {
         try {
@@ -32,27 +27,41 @@ public abstract class InstafelPatch {
                 System.exit(-1);
             }
     
-            PEnvironment = getOrCreateEnvironmentFile();
-            SmaliUtils = new SmaliUtils(Environment.PROJECT_DIR);
-            isProdMode = PEnvironment.getBoolean(Keys.PRODUCTION_MODE, false);
         } catch (Exception e) {
             e.printStackTrace();
             Log.severe("Error while creating InstafelPatch");
             System.exit(-1);
         }
     }
+
+    public SmaliUtils getSmaliUtils() {
+        return new SmaliUtils(Environment.PROJECT_DIR);
+    }
         
-    private PEnvironment getOrCreateEnvironmentFile() throws IOException {
-        File file = new File(Utils.mergePaths(Environment.PROJECT_DIR, "env.properties"));
-        PEnvironment pEnvironment;
-        if (!file.exists()) {
-            file.createNewFile();
-            pEnvironment = new PEnvironment(file);
-            pEnvironment.createDefaultEnvFile();
-        } else {
-            pEnvironment = new PEnvironment(file);
+    public PEnvironment getEnv() {
+        try {
+            return new PEnvironment(new File(
+                Utils.mergePaths(Environment.PROJECT_DIR, "env.properties")
+            ));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.severe("Error while loading environment file.");
+            System.exit(-1);
+            return null;
         }
-        return pEnvironment;
+    }
+
+    public PConfig getConfig() {
+        try {
+            return new PConfig(new File(
+                Utils.mergePaths(Environment.PROJECT_DIR, "config.properties")
+            ));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.severe("Error while loading configuration file.");
+            System.exit(-1);
+            return null;
+        }
     }
 
     public abstract List<InstafelTask> initializeTasks() throws Exception;

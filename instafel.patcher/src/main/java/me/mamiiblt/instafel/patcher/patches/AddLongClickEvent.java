@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
+import me.mamiiblt.instafel.patcher.smali.SmaliUtils;
 import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.Utils;
 import me.mamiiblt.instafel.patcher.utils.models.LineData;
@@ -21,6 +22,7 @@ import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
 )
 public class AddLongClickEvent extends InstafelPatch {
 
+    private SmaliUtils smaliUtils = getSmaliUtils();
     private File longClickFile = null;
     
     @Override
@@ -35,7 +37,7 @@ public class AddLongClickEvent extends InstafelPatch {
 
         @Override
         public void execute() throws Exception {
-            List<String> fContent = SmaliUtils.getSmaliFileContent(longClickFile.getAbsolutePath());
+            List<String> fContent = smaliUtils.getSmaliFileContent(longClickFile.getAbsolutePath());
 
             boolean lock = false;
             for (int i = 0; i < fContent.size(); i++) {
@@ -48,8 +50,8 @@ public class AddLongClickEvent extends InstafelPatch {
                     String veriablePart = vNameRw.substring(0, vNameRw.length() - 1);
                     Log.info(veriablePart);
 
-                    fContent.set(i, "    new-instance " + veriablePart + ", Lcalonz/instafel/utils/OpenIflMenu;");
-                    fContent.set(i + 2, "    invoke-direct {" + veriablePart+ "}, Lcalonz/instafel/utils/OpenIflMenu;-><init>()V");
+                    fContent.set(i, "    new-instance " + veriablePart + ", Lme/mamiiblt/instafel/utils/OpenIflMenu;");
+                    fContent.set(i + 2, "    invoke-direct {" + veriablePart+ "}, Lme/mamiiblt/instafel/utils/OpenIflMenu;-><init>()V");
                     Log.info("new-instance & invoke-direct lines modified at " + i + " & " + (i + 2) + " lines");
                     lock = true;
                 }
@@ -69,7 +71,7 @@ public class AddLongClickEvent extends InstafelPatch {
 
         @Override
         public void execute() throws Exception {
-            File[] smaliFolders = SmaliUtils.getSmaliFolders();
+            File[] smaliFolders = smaliUtils.getSmaliFolders();
             int scannedFileSize = 0;
             boolean fileFoundLock = false;
             
@@ -84,8 +86,8 @@ public class AddLongClickEvent extends InstafelPatch {
                     while (fileIterator.hasNext()) {
                         scannedFileSize++;
                         File file = fileIterator.next();
-                        List<String> fContent = SmaliUtils.getSmaliFileContent(file.getAbsolutePath()); 
-                        List<LineData> matchLines = SmaliUtils.getContainLines(fContent,
+                        List<String> fContent = smaliUtils.getSmaliFileContent(file.getAbsolutePath()); 
+                        List<LineData> matchLines = smaliUtils.getContainLines(fContent,
                             "com/instagram/profile/fragment/UserDetailFragment;Lcom/instagram/profile/intf/UserDetailLaunchConfig;");
                         
                         if (matchLines.size() == 1) {

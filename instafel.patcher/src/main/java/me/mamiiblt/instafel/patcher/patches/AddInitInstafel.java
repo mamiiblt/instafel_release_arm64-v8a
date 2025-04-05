@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.io.FileUtils;
 import org.stringtemplate.v4.ST;
 
+import me.mamiiblt.instafel.patcher.smali.SmaliUtils;
 import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatch;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelTask;
@@ -21,6 +22,8 @@ import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
 )
 public class AddInitInstafel extends InstafelPatch {
 
+    private SmaliUtils smaliUtils = getSmaliUtils();
+
     @Override
     public List<InstafelTask> initializeTasks() throws Exception {
         return List.of(
@@ -32,7 +35,7 @@ public class AddInitInstafel extends InstafelPatch {
 
         @Override
         public void execute() throws Exception {
-            List<File> appShellResult = SmaliUtils.getSmaliFilesByName("/com/instagram/app/InstagramAppShell.smali");
+            List<File> appShellResult = smaliUtils.getSmaliFilesByName("/com/instagram/app/InstagramAppShell.smali");
             File appShellFile = null;
             if (appShellResult.size() == 0 || appShellResult.size() > 1) {
                 failure("InstagramAppShell file can't be found / selected.");
@@ -41,7 +44,7 @@ public class AddInitInstafel extends InstafelPatch {
                 Log.info("InstagramAppShell file is " + appShellFile.getPath());
             }
             
-            List<String> fContent = SmaliUtils.getSmaliFileContent(appShellFile.getAbsolutePath());
+            List<String> fContent = smaliUtils.getSmaliFileContent(appShellFile.getAbsolutePath());
 
             boolean lock = false;
             for (int i = 0; i < fContent.size(); i++) {

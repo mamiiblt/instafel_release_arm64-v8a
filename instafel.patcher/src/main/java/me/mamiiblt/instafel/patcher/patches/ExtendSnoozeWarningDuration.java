@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
+import me.mamiiblt.instafel.patcher.smali.SmaliUtils;
 import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.Utils;
 import me.mamiiblt.instafel.patcher.utils.models.LineData;
@@ -22,6 +23,7 @@ import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
 public class ExtendSnoozeWarningDuration extends InstafelPatch {
     
     private File dogfoodingClass = null;
+    private SmaliUtils smaliUtils = getSmaliUtils();
 
     @Override
     public List<InstafelTask> initializeTasks() throws Exception {
@@ -35,7 +37,7 @@ public class ExtendSnoozeWarningDuration extends InstafelPatch {
 
         @Override
         public void execute() throws Exception {
-            File[] smaliFolders = SmaliUtils.getSmaliFolders();
+            File[] smaliFolders = smaliUtils.getSmaliFolders();
             int scannedFileSize = 0;
             boolean fileFoundLock = false;
             for (File folder : smaliFolders) {
@@ -49,8 +51,8 @@ public class ExtendSnoozeWarningDuration extends InstafelPatch {
                     while (fileIterator.hasNext()) {
                         scannedFileSize++;
                         File file = fileIterator.next();
-                        List<String> fContent = SmaliUtils.getSmaliFileContent(file.getAbsolutePath()); 
-                        List<LineData> matchLines = SmaliUtils.getContainLines(fContent,
+                        List<String> fContent = smaliUtils.getSmaliFileContent(file.getAbsolutePath()); 
+                        List<LineData> matchLines = smaliUtils.getContainLines(fContent,
                             ".method", ";Lcom/instagram/release/lockout/DogfoodingEligibilityApi;L", "<init>");
                         
                         if (matchLines.size() == 1) {
@@ -76,7 +78,7 @@ public class ExtendSnoozeWarningDuration extends InstafelPatch {
 
         @Override
         public void execute() throws Exception {
-            List<String> fContent = SmaliUtils.getSmaliFileContent(dogfoodingClass.getAbsolutePath());
+            List<String> fContent = smaliUtils.getSmaliFileContent(dogfoodingClass.getAbsolutePath());
             boolean status = false;
             for (int i = 0; i < fContent.size(); i++) {
                 String line = fContent.get(i);
@@ -95,6 +97,5 @@ public class ExtendSnoozeWarningDuration extends InstafelPatch {
                 failure("Patcher can't found constraint line...");
             }
         }
-        
     };
 }

@@ -20,8 +20,11 @@ import org.xml.sax.SAXException;
 
 import me.mamiiblt.instafel.patcher.resources.*;
 import me.mamiiblt.instafel.patcher.resources.types.*;
+import me.mamiiblt.instafel.patcher.smali.SmaliUtils;
+import me.mamiiblt.instafel.patcher.source.PConfig;
+import me.mamiiblt.instafel.patcher.source.PEnvironment;
+import me.mamiiblt.instafel.patcher.source.PConfig.Keys;
 import me.mamiiblt.instafel.patcher.utils.*;
-import me.mamiiblt.instafel.patcher.utils.PEnvironment.Keys;
 import me.mamiiblt.instafel.patcher.utils.patch.*;
 import me.mamiiblt.instafel.patcher.utils.sub.PublicResHelper;
 import me.mamiiblt.instafel.patcher.utils.sub.PublicResHelper.LastResourceIDs;
@@ -34,6 +37,9 @@ import me.mamiiblt.instafel.patcher.utils.sub.PublicResHelper.LastResourceIDs;
 )
 public class CopyInstafelSources extends InstafelPatch {
 
+    private PConfig pConfig = getConfig();
+    private PEnvironment pEnvironment = getEnv();
+    private SmaliUtils smaliUtils = getSmaliUtils();
     private IFLResData.Parser resDataParser;
     private String valuesFolderPath = Utils.mergePaths(Environment.PROJECT_DIR, "sources", "res", "values");
 
@@ -55,7 +61,7 @@ public class CopyInstafelSources extends InstafelPatch {
         @Override
         public void execute() throws Exception {
             File smaliFolder = new File(Utils.mergePaths(
-                SmaliUtils.getSmaliFolderByPaths("me", "mamiiblt").getAbsolutePath(), "me", "mamiiblt", "instafel"));
+                smaliUtils.getSmaliFolderByPaths("me", "mamiiblt").getAbsolutePath(), "me", "mamiiblt", "instafel"));
             IOFileFilter prefixFilter = new PrefixFileFilter("R$");
             Collection<File> files = FileUtils.listFiles(smaliFolder, prefixFilter, TrueFileFilter.INSTANCE);
             Resources<TPublic> igResources = ResourceParser.parseResPublic(getValueResourceFile("public.xml"));
@@ -95,7 +101,7 @@ public class CopyInstafelSources extends InstafelPatch {
     InstafelTask copySmaliAndResources = new InstafelTask("Copy smali / resources") {
         @Override
         public void execute() throws Exception {
-            File smallDexFolder = SmaliUtils.getSmallSizeSmaliFolder(SmaliUtils.getSmaliFolders());
+            File smallDexFolder = smaliUtils.getSmallSizeSmaliFolder(smaliUtils.getSmaliFolders());
             File destFolder = new File(
                 Utils.mergePaths(smallDexFolder.getAbsolutePath(), "me", "mamiiblt"));
 
@@ -171,7 +177,7 @@ public class CopyInstafelSources extends InstafelPatch {
         public void execute() throws Exception {
             Resources<TString> igResources = ResourceParser.parseResString(getValueResourceFile("strings.xml"));
             mergeResources(igResources, resDataParser.resourcesStrings.get("strings"));
-            if (isProdMode) {
+            if (pConfig.getBoolean(PConfig.Keys.prod_mode, false)) {
                 for (TString res : igResources) {
                     if (res.getName().startsWith("ifl_")) {
                         switch (res.getName()) {
@@ -179,16 +185,16 @@ public class CopyInstafelSources extends InstafelPatch {
                                 res.setValue("arm64-v8a");
                                 break;
                             case "ifl_ig_vercode":
-                                res.setValue(PEnvironment.getString(Keys.INSTAGRAM_VERSION_CODE, res.getValue()));
+                                res.setValue(pEnvironment.getString(PEnvironment.Keys.INSTAGRAM_VERSION_CODE, res.getValue()));
                                 break;
                             case "ifl_ig_version":
-                                res.setValue(PEnvironment.getString(Keys.INSTAGRAM_VERSION, res.getValue()));
+                                res.setValue(pEnvironment.getString(PEnvironment.Keys.INSTAGRAM_VERSION, res.getValue()));
                                 break;
                             case "ifl_version":
-                                res.setValue(PEnvironment.getString(Keys.IFL_VERSION, res.getValue()));
+                                res.setValue(pEnvironment.getString(PEnvironment.Keys.IFL_VERSION, res.getValue()));
                                 break;
                             case "ifl_genid":
-                                res.setValue(PEnvironment.getString(Keys.GENERATION_ID, res.getValue()));
+                                res.setValue(pEnvironment.getString(PEnvironment.Keys.GENERATION_ID, res.getValue()));
                                 break;
                         }
                     }

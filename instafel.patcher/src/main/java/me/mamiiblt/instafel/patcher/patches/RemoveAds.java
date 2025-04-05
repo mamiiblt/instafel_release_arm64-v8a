@@ -7,6 +7,7 @@ import java.util.List;
 import org.antlr.grammar.v3.ANTLRParser.block_return;
 import org.apache.commons.io.FileUtils;
 
+import me.mamiiblt.instafel.patcher.smali.SmaliUtils;
 import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.Utils;
 import me.mamiiblt.instafel.patcher.utils.models.LineData;
@@ -23,6 +24,7 @@ import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
 )
 public class RemoveAds extends InstafelPatch {
 
+    private SmaliUtils smaliUtils = getSmaliUtils();
     private File removeAdsFile = null;
 
     @Override
@@ -37,7 +39,7 @@ public class RemoveAds extends InstafelPatch {
 
         @Override
         public void execute() throws Exception {
-            List<String> fContent = SmaliUtils.getSmaliFileContent(removeAdsFile.getAbsolutePath());
+            List<String> fContent = smaliUtils.getSmaliFileContent(removeAdsFile.getAbsolutePath());
             
             boolean status = false;;
             int methodLine = 0;
@@ -74,7 +76,7 @@ public class RemoveAds extends InstafelPatch {
 
         @Override
         public void execute() throws Exception {
-            File[] smaliFolders = SmaliUtils.getSmaliFolders();
+            File[] smaliFolders = smaliUtils.getSmaliFolders();
             int scannedFileSize = 0;
             boolean fileFoundLock = false;
             for (File folder : smaliFolders) {
@@ -88,8 +90,8 @@ public class RemoveAds extends InstafelPatch {
                     while (fileIterator.hasNext()) {
                         scannedFileSize++;
                         File file = fileIterator.next();
-                        List<String> fContent = SmaliUtils.getSmaliFileContent(file.getAbsolutePath()); 
-                        List<LineData> matchLines = SmaliUtils.getContainLines(fContent,
+                        List<String> fContent = smaliUtils.getSmaliFileContent(file.getAbsolutePath()); 
+                        List<LineData> matchLines = smaliUtils.getContainLines(fContent,
                             "SponsoredContentController.insertItem");
                         
                         if (matchLines.size() == 1) {

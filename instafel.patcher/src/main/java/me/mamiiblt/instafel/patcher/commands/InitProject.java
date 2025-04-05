@@ -28,7 +28,7 @@ public class InitProject implements Command {
                     sourceManager.decompile(new ExtFile(
                         Utils.mergePaths(apkPath.getAbsolutePath())
                     ));
-                    sourceManager.createConfigFile();
+                    sourceManager.createConfigAndEnvFile();
                     Log.info("Project succesfully created");
                 } else {
                     Log.warning("Please select an .apk file");

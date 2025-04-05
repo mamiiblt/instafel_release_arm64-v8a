@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.mamiiblt.instafel.patcher.smali.SmaliUtils;
 import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.models.LineData;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatch;
@@ -19,6 +20,7 @@ import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
 )
 public class UnlockDeveloperOptions extends InstafelPatch {
 
+    private SmaliUtils smaliUtils = getSmaliUtils();
     private String className = null;
 
     @Override
@@ -33,7 +35,7 @@ public class UnlockDeveloperOptions extends InstafelPatch {
         @Override
         public void execute() throws IOException {
             String imageDebugSessionHelperPath = "com/instagram/debug/image/sessionhelper/ImageDebugSessionHelper.smali";
-            List<File> whOptionsFileQuery = SmaliUtils.getSmaliFilesByName(imageDebugSessionHelperPath);
+            List<File> whOptionsFileQuery = smaliUtils.getSmaliFilesByName(imageDebugSessionHelperPath);
             File imageDebugSessionSmali = null;
             if (whOptionsFileQuery.size() == 0 || whOptionsFileQuery.size() > 1) {
                 failure("ImageDebugSessionHelper file can't be found / selected.");
@@ -42,9 +44,9 @@ public class UnlockDeveloperOptions extends InstafelPatch {
                 Log.info("ImageDebugSessionHelper file is " + imageDebugSessionSmali.getPath());
             }
 
-            List<String> imageDebugContent = SmaliUtils.getSmaliFileContent(
+            List<String> imageDebugContent = smaliUtils.getSmaliFileContent(
                 imageDebugSessionSmali.getAbsolutePath());       
-            List<LineData> methodHeaderLines =  SmaliUtils.getContainLines(
+            List<LineData> methodHeaderLines =  smaliUtils.getContainLines(
                 imageDebugContent, "method", "shouldEnableImageDebug");
 
             if (methodHeaderLines.size() != 1) {
@@ -61,7 +63,7 @@ public class UnlockDeveloperOptions extends InstafelPatch {
                 }
             }
 
-            List<LineData> callLines = SmaliUtils.getContainLines(methodContent, 
+            List<LineData> callLines = smaliUtils.getContainLines(methodContent, 
             "invoke-static", "LX/", "A00");
             if (callLines.size() == 0) {
                 failure("callLies is more than 1");
@@ -75,11 +77,11 @@ public class UnlockDeveloperOptions extends InstafelPatch {
     InstafelTask addConstraintLineTask = new InstafelTask("Add constraint line to LX/? class") {
         @Override
         public void execute() throws IOException {
-            File devOptionsFile = SmaliUtils.getSmaliFilesByName(
+            File devOptionsFile = smaliUtils.getSmaliFilesByName(
                 "X/" + className + ".smali"
             ).get(0);
-            List<String> devOptionsContent = SmaliUtils.getSmaliFileContent(devOptionsFile.getAbsolutePath());
-            List<LineData> moveResultLines = SmaliUtils.getContainLines(
+            List<String> devOptionsContent = smaliUtils.getSmaliFileContent(devOptionsFile.getAbsolutePath());
+            List<LineData> moveResultLines = smaliUtils.getContainLines(
                 devOptionsContent, "move-result", "v0");
             if (moveResultLines.size() != 1) {
                 failure("Move result line size is 0 or bigger than 1");
@@ -91,7 +93,7 @@ public class UnlockDeveloperOptions extends InstafelPatch {
 
             devOptionsContent.add(moveResultLine.getNum() + 1, "    ");
             devOptionsContent.add(moveResultLine.getNum() + 2, "    const v0, 0x1");
-            SmaliUtils.writeContentIntoFile(devOptionsFile.getAbsolutePath(), devOptionsContent);
+            smaliUtils.writeContentIntoFile(devOptionsFile.getAbsolutePath(), devOptionsContent);
             Log.info("Contraint added succesfully.");
             success("Developer options unlocked succesfully.");
         }

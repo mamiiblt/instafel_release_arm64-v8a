@@ -47,10 +47,18 @@ public class SourceManager {
         Log.info("APK builded succesfully");
     }
 
-    public void createConfigFile() throws IOException {
-        SourceUtils.createDefaultConfigFile(
-            Utils.mergePaths(Environment.PROJECT_DIR, "config.properties")
-        );
+    public void createConfigAndEnvFile() throws IOException {
+        File pEnvFile = new File(Utils.mergePaths(Environment.PROJECT_DIR, "env.properties"));
+        PEnvironment pEnvironment;
+        pEnvFile.createNewFile();
+        pEnvironment = new PEnvironment(pEnvFile);
+        pEnvironment.createDefaultEnvFile();
+
+        File pConfigFile = new File(Utils.mergePaths(Environment.PROJECT_DIR, "config.properties"));
+        PConfig pConfig;
+        pConfigFile.createNewFile();
+        pConfig = new PConfig(pConfigFile);
+        pConfig.createDefaultConfigFile();
     }
     
     public Config getConfig() {

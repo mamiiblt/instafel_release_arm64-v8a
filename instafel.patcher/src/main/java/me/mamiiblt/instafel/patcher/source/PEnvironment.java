@@ -1,4 +1,4 @@
-package me.mamiiblt.instafel.patcher.utils;
+package me.mamiiblt.instafel.patcher.source;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +10,10 @@ import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+
+import me.mamiiblt.instafel.patcher.utils.Environment;
+import me.mamiiblt.instafel.patcher.utils.PropertyManager;
+import me.mamiiblt.instafel.patcher.utils.Utils;
 
 public class PEnvironment {
     

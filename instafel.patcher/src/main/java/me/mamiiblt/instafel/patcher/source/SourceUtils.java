@@ -44,18 +44,4 @@ public class SourceUtils {
         }
         return path.toString(); 
     }
-
-    public static void createDefaultConfigFile(String filePath) throws IOException {
-        File cFile = new File(filePath);
-        if (!cFile.exists()) {
-            cFile.createNewFile();
-        }
-        PropertyManager propertyManager = new PropertyManager(cFile);
-        propertyManager.addInteger("patcher.manifest_version", 1);
-        propertyManager.addBoolean("project.productionMode", false);
-        propertyManager.addString("project.sourceDir", "/sources");
-        propertyManager.addBoolean("project.useExternalIflSource", false);
-        propertyManager.save("IFL Configuration File");
-        Log.info("Config file created succesfully");
-    }
 }

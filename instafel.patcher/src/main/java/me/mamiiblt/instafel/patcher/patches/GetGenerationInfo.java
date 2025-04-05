@@ -4,11 +4,9 @@ import java.util.List;
 
 import org.json.JSONObject;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
-import me.mamiiblt.instafel.patcher.utils.Environment;
+import me.mamiiblt.instafel.patcher.source.PConfig;
+import me.mamiiblt.instafel.patcher.source.PEnvironment;
 import me.mamiiblt.instafel.patcher.utils.Log;
-import me.mamiiblt.instafel.patcher.utils.PEnvironment.Keys;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatch;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelTask;
 import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
@@ -24,12 +22,16 @@ import okhttp3.Response;
 )
 public class GetGenerationInfo extends InstafelPatch {
 
+    private PEnvironment pEnvironment = getEnv();
+    private PConfig pConfig = getConfig();
     private String API_BASE = null; 
     private OkHttpClient httpClient = new OkHttpClient();
+    private boolean isProdMode = false;
 
     @Override
     public List<InstafelTask> initializeTasks() throws Exception {
-        this.API_BASE = PEnvironment.getString(Keys.API_BASE, "api.mamiiblt.me/ifl");
+        this.API_BASE = pEnvironment.getString(PEnvironment.Keys.API_BASE, "api.mamiiblt.me/ifl");
+        this.isProdMode = pConfig.getBoolean(PConfig.Keys.prod_mode, isProdMode);
         return List.of(
             getIflVersion,
             getGenerationID
@@ -43,7 +45,7 @@ public class GetGenerationInfo extends InstafelPatch {
             if (isProdMode) {
                 Request iflVersionRequest = new Request.Builder()
                     .url("https://" + API_BASE + "/manager_new/lastInstafelData")
-                    .addHeader("Authorization", PEnvironment.getString(Keys.MANAGER_TOKEN, "null"))
+                    .addHeader("Authorization", pEnvironment.getString(PEnvironment.Keys.MANAGER_TOKEN, "null"))
                     .build();
                 Response res = httpClient.newCall(iflVersionRequest).execute();
 
@@ -53,7 +55,7 @@ public class GetGenerationInfo extends InstafelPatch {
 
                 JSONObject iflVRequestParsed = new JSONObject(res.body().string());
                 int IFL_VERSION = iflVRequestParsed.getInt("ifl_version");
-                PEnvironment.setInteger(Keys.IFL_VERSION, IFL_VERSION + 1);
+                pEnvironment.setInteger(PEnvironment.Keys.IFL_VERSION, IFL_VERSION + 1);
                 Log.info("Instafel version for this generation is " + (IFL_VERSION + 1));
                 success("IFL version succesfully saved to env");
             } else {
@@ -70,7 +72,7 @@ public class GetGenerationInfo extends InstafelPatch {
 
                 Request genIDRequest = new Request.Builder()
                 .url("https://" + API_BASE + "/manager_new/createGenerationId")
-                .addHeader("Authorization", PEnvironment.getString(Keys.MANAGER_TOKEN, "null"))
+                .addHeader("Authorization", pEnvironment.getString(PEnvironment.Keys.MANAGER_TOKEN, "null"))
                 .build();
                 Response res = httpClient.newCall(genIDRequest).execute();
 
@@ -80,7 +82,7 @@ public class GetGenerationInfo extends InstafelPatch {
 
                 JSONObject genIdResParsed = new JSONObject(res.body().string());
                 String GEN_ID = genIdResParsed.getString("generation_id");
-                PEnvironment.setString(Keys.GENERATION_ID, GEN_ID);
+                pEnvironment.setString(PEnvironment.Keys.GENERATION_ID, GEN_ID);
                 Log.info("Generation ID for this generation is " + GEN_ID);
                 success("Generation ID succesfully saved to env");
            }
