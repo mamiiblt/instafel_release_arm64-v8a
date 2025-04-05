@@ -13,12 +13,11 @@ public class ListPatches implements Command {
             List<PatchInfo> patchInfos = PatchLoader.getPatchInfos();
             
             for (PatchInfo info : patchInfos) {                
-                System.out.println(info.name() + " (" + info.shortname() + ")");
-                System.out.println("Added by " + info.author());
-                System.out.println(info.desc());
-                System.out.println("");
+                System.out.println(info.name() + " (" + info.shortname() + ") by " + info.author());
             }
 
+            System.out.println("");
+            System.out.println("Use run <wdir> patch_names... for executing patches");
             System.out.println("Totally found " + patchInfos.size() + " patch.");
         } catch (Exception e) {
             e.printStackTrace();
