@@ -18,9 +18,7 @@ import me.mamiiblt.instafel.patcher.utils.Utils;
 public class PEnvironment {
     
     public static enum Keys {
-        PRODUCTION_MODE,
         API_BASE,
-        MANAGER_TOKEN,
         INSTAGRAM_VERSION,
         INSTAGRAM_VERSION_CODE,
         GENERATION_ID,
@@ -69,9 +67,7 @@ public class PEnvironment {
     }
 
     public void createDefaultEnvFile() throws StreamReadException, DatabindException, IOException {
-        propertyManager.add(Keys.PRODUCTION_MODE.toString(), "false");
         propertyManager.add(Keys.API_BASE.toString(), "api.mamiiblt.me/ifl");
-        propertyManager.add(Keys.MANAGER_TOKEN.toString(), "none");        
         setIgVerCodeAndVersion();
         propertyManager.save("Update Environment File");
     }

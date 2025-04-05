@@ -45,7 +45,7 @@ public class GetGenerationInfo extends InstafelPatch {
             if (isProdMode) {
                 Request iflVersionRequest = new Request.Builder()
                     .url("https://" + API_BASE + "/manager_new/lastInstafelData")
-                    .addHeader("Authorization", pEnvironment.getString(PEnvironment.Keys.MANAGER_TOKEN, "null"))
+                    .addHeader("Authorization", pConfig.getString(PConfig.Keys.manager_token, "null"))
                     .build();
                 Response res = httpClient.newCall(iflVersionRequest).execute();
 
@@ -72,7 +72,7 @@ public class GetGenerationInfo extends InstafelPatch {
 
                 Request genIDRequest = new Request.Builder()
                 .url("https://" + API_BASE + "/manager_new/createGenerationId")
-                .addHeader("Authorization", pEnvironment.getString(PEnvironment.Keys.MANAGER_TOKEN, "null"))
+                .addHeader("Authorization", pConfig.getString(PConfig.Keys.manager_token, "null"))
                 .build();
                 Response res = httpClient.newCall(genIDRequest).execute();
 
