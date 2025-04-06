@@ -1,4 +1,4 @@
-package me.mamiiblt.instafel.patcher.patches;
+package me.mamiiblt.instafel.patcher.patches.ifl_general;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,7 +23,6 @@ import me.mamiiblt.instafel.patcher.resources.types.*;
 import me.mamiiblt.instafel.patcher.smali.SmaliUtils;
 import me.mamiiblt.instafel.patcher.source.PConfig;
 import me.mamiiblt.instafel.patcher.source.PEnvironment;
-import me.mamiiblt.instafel.patcher.source.PConfig.Keys;
 import me.mamiiblt.instafel.patcher.utils.*;
 import me.mamiiblt.instafel.patcher.utils.patch.*;
 import me.mamiiblt.instafel.patcher.utils.sub.PublicResHelper;
@@ -33,7 +32,8 @@ import me.mamiiblt.instafel.patcher.utils.sub.PublicResHelper.LastResourceIDs;
     name = "Copy Instafel Sources",
     shortname = "copy_instafel_src",
     desc = "This patch needs to executed for use Instafel stuffs",
-    author = "mamiiblt"
+    author = "mamiiblt",
+    listable = false
 )
 public class CopyInstafelSources extends InstafelPatch {
 

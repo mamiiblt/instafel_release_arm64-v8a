@@ -1,14 +1,20 @@
 package me.mamiiblt.instafel.patcher.commands;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.antlr.grammar.v3.LeftRecursiveRuleWalker.ruleBlock_return;
 
 import me.mamiiblt.instafel.patcher.cmdhandler.Command;
 import me.mamiiblt.instafel.patcher.source.WorkingDir;
 import me.mamiiblt.instafel.patcher.utils.Environment;
 import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatch;
+import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatchGroup;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelTask;
+import me.mamiiblt.instafel.patcher.utils.patch.PatchGroupInfo;
+import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
 import me.mamiiblt.instafel.patcher.utils.patch.PatchLoader;
 
 public class RunPatch implements Command {
@@ -22,13 +28,29 @@ public class RunPatch implements Command {
         List<InstafelPatch> runnablePatches = new ArrayList<>();
         Log.info("Loading patches...");
         for (int i = 1; i < args.length; i++) {
-            String patchShortName = args[i];
-            InstafelPatch patch = PatchLoader.findPatchByShortname(patchShortName);
+            String shortName = args[i];
+            
+            InstafelPatch patch = PatchLoader.findPatchByShortname(shortName);
             if (patch != null) {
+                Log.info("Patch, " + patch.name + " loaded");
                 runnablePatches.add(patch);
-            } else {
-                Log.severe(patchShortName + " not found in patches!");
-                System.exit(-1);
+            } 
+
+            InstafelPatchGroup group = PatchLoader.findPatchGroupByShortname(shortName);
+            if (group != null) {
+                try {
+                    group.loadPatches();
+                    for (Class<? extends InstafelPatch> gPatch : group.patches) {
+                        Constructor<?> constructor = gPatch.getDeclaredConstructor();
+                        InstafelPatch gnPatch = (InstafelPatch) constructor.newInstance();
+                        Log.info("Patch, " + gnPatch.name + " loaded from " + group.name);
+                        runnablePatches.add(gnPatch);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.severe("Error while loading patches in group " + group.name);
+                }
+                
             }
         }
 

@@ -1,4 +1,4 @@
-package me.mamiiblt.instafel.patcher.patches;
+package me.mamiiblt.instafel.patcher.patches.ifl_general;
 
 import java.io.File;
 import java.util.Iterator;
@@ -18,7 +18,8 @@ import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
     name = "Add Long Click Event",
     shortname = "add_long_click_event",
     desc = "This patch must be applied for Instafel Menu",
-    author = "mamiiblt"
+    author = "mamiiblt",
+    listable = false
 )
 public class AddLongClickEvent extends InstafelPatch {
 

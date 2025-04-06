@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 
-import org.antlr.grammar.v3.ANTLRParser.block_return;
 import org.apache.commons.io.FileUtils;
 
 import me.mamiiblt.instafel.patcher.smali.SmaliUtils;
@@ -20,7 +19,8 @@ import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
     name = "Remove Ads",
     shortname = "remove_ads",
     desc = "Remove Ads in Instagram",
-    author = "mamiiblt"
+    author = "mamiiblt",
+    listable = true
 )
 public class RemoveAds extends InstafelPatch {
 

@@ -1,4 +1,4 @@
-package me.mamiiblt.instafel.patcher.patches;
+package me.mamiiblt.instafel.patcher.patches.ifl_general;
 
 import java.util.List;
 
@@ -18,7 +18,8 @@ import okhttp3.Response;
     name = "Get Generation Info",
     shortname = "get_generation_info",
     desc = "Grab IFL Version and Generation ID from API",
-    author = "mamiiblt"
+    author = "mamiiblt",
+    listable = false
 )
 public class GetGenerationInfo extends InstafelPatch {
 

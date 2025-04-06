@@ -1,4 +1,4 @@
-package me.mamiiblt.instafel.patcher.patches;
+package me.mamiiblt.instafel.patcher.patches.ifl_general;
 
 import java.io.File;
 import java.util.List;
@@ -15,7 +15,8 @@ import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
     name = "Add Initialize Instafel",
     shortname = "add_init_instafel",
     desc = "This patch must be applied for Instafel Menu",
-    author = "mamiiblt"
+    author = "mamiiblt",
+    listable = false
 )
 public class AddInitInstafel extends InstafelPatch {
 
@@ -51,9 +52,9 @@ public class AddInitInstafel extends InstafelPatch {
                     
                     String[] content = {
                         "    invoke-static {" + veriableName + "}, Lme/mamiiblt/instafel/utils/InitializeInstafel;->setContext(Landroid/app/Application;)V",
-                        // "    new-instance v2, Lme/mamiiblt/instafel/utils/InstafelCrashHandler;",
-                        // "    invoke-direct {v2, " + veriableName + "}, Lme/mamiiblt/instafel/utils/InstafelCrashHandler;-><init>(Landroid/content/Context;)V",
-                        // "    invoke-static {v2}, Ljava/lang/Thread;->setDefaultUncaughtExceptionHandler(Ljava/lang/Thread$UncaughtExceptionHandler;)V"
+                        "    new-instance v2, Lme/mamiiblt/instafel/utils/InstafelCrashHandler;",
+                        "    invoke-direct {v2, " + veriableName + "}, Lme/mamiiblt/instafel/utils/InstafelCrashHandler;-><init>(Landroid/content/Context;)V",
+                        "    invoke-static {v2}, Ljava/lang/Thread;->setDefaultUncaughtExceptionHandler(Ljava/lang/Thread$UncaughtExceptionHandler;)V"
                     };
 
                     if (fContent.get(i + 2).contains("Lme/mamiiblt/instafel")) {

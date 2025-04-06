@@ -2,7 +2,6 @@ package me.mamiiblt.instafel.patcher.source;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
 import java.util.Properties;
 
 import com.fasterxml.jackson.core.exc.StreamReadException;

@@ -4,10 +4,9 @@ import java.lang.annotation.*;
 
 @Retention(RetentionPolicy.RUNTIME) 
 @Target(ElementType.TYPE)
-public @interface PatchInfo {
+public @interface PatchGroupInfo {
     String name();
     String author();
     String desc();
     String shortname();
-    boolean listable();
 }

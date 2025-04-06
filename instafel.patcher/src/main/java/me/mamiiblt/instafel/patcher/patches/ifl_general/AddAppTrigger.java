@@ -1,14 +1,10 @@
-package me.mamiiblt.instafel.patcher.patches;
+package me.mamiiblt.instafel.patcher.patches.ifl_general;
 
 import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-import org.stringtemplate.v4.ST;
-
-import com.android.tools.smali.smali.smaliParser.line_directive_return;
-import com.android.tools.smali.smali.smaliParser.statements_and_directives_return;
 
 import me.mamiiblt.instafel.patcher.smali.SmaliUtils;
 import me.mamiiblt.instafel.patcher.utils.Log;
@@ -22,7 +18,8 @@ import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
     name = "Add App Trigger",
     shortname = "add_app_trigger",
     desc = "This patch must be applied for Instafel Stuffs",
-    author = "mamiiblt"
+    author = "mamiiblt",
+    listable = false
 )
 public class AddAppTrigger extends InstafelPatch {
 

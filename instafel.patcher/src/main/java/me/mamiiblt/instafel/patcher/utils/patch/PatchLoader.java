@@ -15,6 +15,31 @@ public class PatchLoader {
 
     public static final String DEFAULT_PACKAGE_NAME = "me.mamiiblt.instafel.patcher.patches";
 
+    public static InstafelPatchGroup findPatchGroupByShortname(String shortName) {
+        try (ScanResult scanResult = new ClassGraph()
+                .acceptPackages(DEFAULT_PACKAGE_NAME)
+                .enableClassInfo()
+                .enableAnnotationInfo()
+                .scan()) {
+
+            for (ClassInfo classInfo : scanResult.getSubclasses(InstafelPatchGroup.class.getName())) {
+                Class<?> clazz = Class.forName(classInfo.getName());
+
+                if (!Modifier.isAbstract(clazz.getModifiers()) && clazz.isAnnotationPresent(PatchGroupInfo.class)) {
+                    PatchGroupInfo info = clazz.getAnnotation(PatchGroupInfo.class);
+                    
+                    if (info.shortname().equals(shortName)) {
+                        Constructor<?> constructor = clazz.getDeclaredConstructor();
+                        return (InstafelPatchGroup) constructor.newInstance();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static InstafelPatch findPatchByShortname(String shortPatchName) {
         try (ScanResult scanResult = new ClassGraph()
                 .acceptPackages(DEFAULT_PACKAGE_NAME)
@@ -49,6 +74,37 @@ public class PatchLoader {
         return patchInfos;
     }
 
+    public static List<PatchGroupInfo> getPatchGroupInfos() {
+        List<PatchGroupInfo> patchGroupInfos = new ArrayList<>();
+        Set<Class<? extends InstafelPatchGroup>> patches = findPatchGroupClassesInPackage();
+        for (Class<? extends InstafelPatchGroup> patch : patches) {
+            patchGroupInfos.add(patch.getAnnotation(PatchGroupInfo.class));
+        }
+        return patchGroupInfos;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static Set<Class<? extends InstafelPatchGroup>> findPatchGroupClassesInPackage() {
+        Set<Class<? extends InstafelPatchGroup>> groups = new HashSet<>();
+
+        try (ScanResult scanResult = new ClassGraph()
+                .acceptPackages(DEFAULT_PACKAGE_NAME) 
+                .enableClassInfo()
+                .enableAnnotationInfo()
+                .scan()) {
+
+            for (ClassInfo classInfo : scanResult.getSubclasses(InstafelPatchGroup.class.getName())) {
+                Class<?> clazz = classInfo.loadClass();
+                if (InstafelPatchGroup.class.isAssignableFrom(clazz)) {
+                    groups.add((Class<? extends InstafelPatchGroup>) clazz);
+                }
+            }
+        }
+
+        return groups; 
+    }
+
+    @SuppressWarnings("unchecked")
     public static Set<Class<? extends InstafelPatch>> findPatchClassesInPackage() {
         Set<Class<? extends InstafelPatch>> patches = new HashSet<>();
 

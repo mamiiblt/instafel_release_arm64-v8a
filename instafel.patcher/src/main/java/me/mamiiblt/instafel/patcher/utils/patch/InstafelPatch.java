@@ -12,6 +12,7 @@ import me.mamiiblt.instafel.patcher.utils.Utils;
 
 public abstract class InstafelPatch {
     public String name, author, description, shortname;
+    public boolean listable = true;
     public List<InstafelTask> tasks;
 
     public InstafelPatch() {
@@ -22,6 +23,7 @@ public abstract class InstafelPatch {
                 this.author = patchInfo.author();
                 this.description = patchInfo.desc();
                 this.shortname = patchInfo.shortname();
+                this.listable = patchInfo.listable();
             } else {
                 Log.severe("Please add PatchInfo for running patches normally.");
                 System.exit(-1);
@@ -32,6 +34,10 @@ public abstract class InstafelPatch {
             Log.severe("Error while creating InstafelPatch");
             System.exit(-1);
         }
+    }
+
+    public PatchInfo getPatchInfo() {
+        return this.getClass().getAnnotation(PatchInfo.class);
     }
 
     public SmaliUtils getSmaliUtils() {

@@ -18,7 +18,8 @@ import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
     name = "Extend Snooze Warning Duration",
     shortname = "ext_snooze_warning_dur",
     desc = "You can extend snooze activity duration with this patch",
-    author = "mamiiblt"
+    author = "mamiiblt",
+    listable = true
 )
 public class ExtendSnoozeWarningDuration extends InstafelPatch {
     
