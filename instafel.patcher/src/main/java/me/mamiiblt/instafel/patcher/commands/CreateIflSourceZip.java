@@ -221,6 +221,12 @@ public class CreateIflSourceZip implements Command {
             if (iflStyle.getName().equals("ifl_theme_light")) {
                 iflStyle.getElement().removeAttribute("parent");
             }
+            // If this property is not exist Instagram will be crash.
+            Element igdsColorLink = resStyles.getDocument().createElement("item");
+            igdsColorLink.setAttribute("name", "igds_color_link");
+            igdsColorLink.setTextContent("@color/ifl_white");
+            iflStyle.getElement().appendChild(igdsColorLink);
+
             resDataBuilder.addElToCategory("styles", iflStyle.getElement());
         }
         Log.info("Totally " + iflStyles.size() + " style added to resource data.");
