@@ -55,7 +55,7 @@ public class AddAppTrigger extends InstafelPatch {
                     String[] veriablesArr = line.split("    invoke-direct \\{")[1].split("\\}")[0].split(", ");
 
                     callerLines = new String[] {
-                        "    invoke-virtual {" + veriablesArr[0] + "}, LX/" + interfaceClassName + ";->getRootActivity()Landroid/app/Activity;",
+                        "    invoke-virtual {" + veriablesArr[1] + "}, LX/" + interfaceClassName + ";->getRootActivity()Landroid/app/Activity;",
                         "",
                         "    move-result-object v0",
                         "",
@@ -145,9 +145,9 @@ public class AddAppTrigger extends InstafelPatch {
 
             if (activityFile != null) {
                 Log.info("Totally scanned " + scannedFileSize + " file in X folders");
-                success("Long click event file founded.");
+                success("Activity file founded.");
             } else {
-                failure("Long click event file cannot be found.");
+                failure("Activity file cannot be found.");
             }
         }
         
@@ -190,9 +190,9 @@ public class AddAppTrigger extends InstafelPatch {
             if (interfaceFile != null) {
                 Log.info("Totally scanned " + scannedFileSize + " file in X folders");
                 Log.info("Interface class name is: " + interfaceClassName);
-                success("Long click event file founded.");
+                success("Interface file founded.");
             } else {
-                failure("Long click event file cannot be found.");
+                failure("Interface file cannot be found.");
             }
         }
         
