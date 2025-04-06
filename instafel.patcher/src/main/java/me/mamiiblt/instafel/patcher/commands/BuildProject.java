@@ -16,7 +16,7 @@ public class BuildProject implements Command {
                 String folderArg = args[0];
                 Environment.PROJECT_DIR = WorkingDir.getExistsWorkingDir(folderArg);
                 SourceManager sourceManager = new SourceManager();
-                sourceManager.setConfig(SourceUtils.getDefaultIflConfig(sourceManager.getConfig()));
+                sourceManager.setConfig(SourceUtils.getDefaultIflConfigBuilder(sourceManager.getConfig()));
                 sourceManager.getConfig().setFrameworkDirectory(SourceUtils.getDefaultFrameworkDirectory());
                 sourceManager.build();
                 Log.info("APKs succesfuly generated at /build folder.");

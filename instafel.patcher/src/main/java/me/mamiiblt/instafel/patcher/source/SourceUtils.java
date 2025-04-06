@@ -1,23 +1,24 @@
 package me.mamiiblt.instafel.patcher.source;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import brut.androlib.Config;
-import brut.androlib.exceptions.AndrolibException;
-import me.mamiiblt.instafel.patcher.utils.Log;
-import me.mamiiblt.instafel.patcher.utils.PropertyManager;
 import me.mamiiblt.instafel.patcher.utils.Utils.OSDedector;
 
 public class SourceUtils {
-    public static Config getDefaultIflConfig(Config config) throws AndrolibException {
+    public static Config getDefaultIflConfigDecoder(Config config) {
         config.setBaksmaliDebugMode(false);
-        config.setApiLevel(35);
-        config.setCopyOriginalFiles(false);
         config.setJobs(getSuggesstedThreadCount());
-        config.setAaptVersion(1);
+
+        return config;
+    }
+
+    public static Config getDefaultIflConfigBuilder(Config config) {
+        config.setBaksmaliDebugMode(false);
+        config.setJobs(getSuggesstedThreadCount());
+        config.setAaptVersion(1); // aapt2 is buggy for Instagram in Apktool now.
 
         return config;
     }

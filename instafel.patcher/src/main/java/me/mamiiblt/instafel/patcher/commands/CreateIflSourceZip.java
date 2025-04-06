@@ -42,7 +42,7 @@ public class CreateIflSourceZip implements Command {
                     } else {
                         Environment.PROJECT_DIR = IflSourceCreator.createTempSourceDir(apkPath.getName());
                         SourceManager sourceManager = new SourceManager();
-                        sourceManager.setConfig(SourceUtils.getDefaultIflConfig(sourceManager.getConfig()));
+                        sourceManager.setConfig(SourceUtils.getDefaultIflConfigDecoder(sourceManager.getConfig()));
                         sourceManager.getConfig().setFrameworkDirectory(SourceUtils.getDefaultFrameworkDirectory());
                         sourceManager.decompile(new ExtFile(
                             Utils.mergePaths(apkPath.getAbsolutePath())

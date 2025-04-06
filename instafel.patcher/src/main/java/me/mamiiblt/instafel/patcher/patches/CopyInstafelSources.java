@@ -103,7 +103,7 @@ public class CopyInstafelSources extends InstafelPatch {
         public void execute() throws Exception {
             File smallDexFolder = smaliUtils.getSmallSizeSmaliFolder(smaliUtils.getSmaliFolders());
             File destFolder = new File(
-                Utils.mergePaths(smallDexFolder.getAbsolutePath(), "me", "mamiiblt"));
+                Utils.mergePaths(Environment.PROJECT_DIR, "sources", "smali_classes5", "me", "mamiiblt"));
 
             Utils.unzipFromResources(false, "/ifl_sources/ifl_sources.zip", destFolder.getAbsolutePath());
             Log.info("Copying instafel resources");

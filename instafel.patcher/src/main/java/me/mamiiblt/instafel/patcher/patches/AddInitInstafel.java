@@ -2,11 +2,8 @@ package me.mamiiblt.instafel.patcher.patches;
 
 import java.io.File;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
-import org.stringtemplate.v4.ST;
 
 import me.mamiiblt.instafel.patcher.smali.SmaliUtils;
 import me.mamiiblt.instafel.patcher.utils.Log;
@@ -54,9 +51,9 @@ public class AddInitInstafel extends InstafelPatch {
                     
                     String[] content = {
                         "    invoke-static {" + veriableName + "}, Lme/mamiiblt/instafel/utils/InitializeInstafel;->setContext(Landroid/app/Application;)V",
-                        "    new-instance v1, Lme/mamiiblt/instafel/InstafelCrashHandler;",
-                        "    invoke-direct {v1, " + veriableName + "}, Lme/mamiiblt/instafel/utils/InstafelCrashHandler;-><init>(Landroid/content/Context;)V",
-                        "    invoke-static {v1}, Ljava/lang/Thread;->setDefaultUncaughtExceptionHandler(Ljava/lang/Thread$UncaughtExceptionHandler;)V"
+                        // "    new-instance v2, Lme/mamiiblt/instafel/utils/InstafelCrashHandler;",
+                        // "    invoke-direct {v2, " + veriableName + "}, Lme/mamiiblt/instafel/utils/InstafelCrashHandler;-><init>(Landroid/content/Context;)V",
+                        // "    invoke-static {v2}, Ljava/lang/Thread;->setDefaultUncaughtExceptionHandler(Ljava/lang/Thread$UncaughtExceptionHandler;)V"
                     };
 
                     if (fContent.get(i + 2).contains("Lme/mamiiblt/instafel")) {

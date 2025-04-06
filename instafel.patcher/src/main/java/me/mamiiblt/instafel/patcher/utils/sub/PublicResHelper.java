@@ -58,7 +58,9 @@ public class PublicResHelper {
             String line = lines.get(i);
             if (line.contains("ifl_")) {
                 String lName = line.split("static ")[1].split(":I = ")[0];
-                lines.set(i, ".field public static " + lName + ":I = " + ids.get(lName));
+                if (ids.get(lName) != null) {
+                    lines.set(i, ".field public static " + lName + ":I = " + ids.get(lName));
+                }
             }
         }
         FileUtils.writeLines(RFile, lines);
