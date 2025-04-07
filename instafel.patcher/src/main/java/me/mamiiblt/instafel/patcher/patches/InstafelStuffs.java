@@ -18,6 +18,7 @@ public class InstafelStuffs extends InstafelPatchGroup {
         return List.of(
             GetGenerationInfo.class, // get_generation_info
             CopyInstafelSources.class, // copy_instafel_src
+            ConfigureAppEnvironment.class, // configure_app_env
             AddInitInstafel.class, // add_init_instafel
             AddLongClickEvent.class, // add_long_click_event
             AddAppTrigger.class // add_app_trigger

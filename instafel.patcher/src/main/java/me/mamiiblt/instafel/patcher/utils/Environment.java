@@ -4,6 +4,9 @@ import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.Properties;
 
+import me.mamiiblt.instafel.patcher.source.PConfig;
+import me.mamiiblt.instafel.patcher.source.PEnvironment;
+
 public class Environment {
 
     public static String PROP_VERSION_STRING = null;
@@ -11,6 +14,8 @@ public class Environment {
     public static String PROP_PROJECT_TAG = null;   
     public static String USER_DIR = System.getProperty("user.dir"); 
     public static String PROJECT_DIR = null;
+    public static PEnvironment PEnvironment = null;
+    public static PConfig PConfig = null;
     public static String[] INSTAFEL_LOCALES = {"tr", "de", "el", "fr", "hi", "hu", "pt", "es"};
     public static String SPERATOR_STR = "---------------------------";
 

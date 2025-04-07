@@ -21,7 +21,7 @@ public class ListPatches implements Command {
             List<PatchInfo> patchInfos = PatchLoader.getPatchInfos();
             for (PatchInfo info : patchInfos) {
                 if (info.listable() != false) {
-                    System.out.println("    - " + getPatchInfoString(info)); 
+                    System.out.println("    " + getPatchInfoString(info)); 
                 }
             }
 

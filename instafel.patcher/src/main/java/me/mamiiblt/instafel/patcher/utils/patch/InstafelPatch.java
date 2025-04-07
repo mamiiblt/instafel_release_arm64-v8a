@@ -1,14 +1,10 @@
 package me.mamiiblt.instafel.patcher.utils.patch;
 
-import java.io.File;
 import java.util.List;
 
 import me.mamiiblt.instafel.patcher.smali.SmaliUtils;
-import me.mamiiblt.instafel.patcher.source.PConfig;
-import me.mamiiblt.instafel.patcher.source.PEnvironment;
 import me.mamiiblt.instafel.patcher.utils.Environment;
 import me.mamiiblt.instafel.patcher.utils.Log;
-import me.mamiiblt.instafel.patcher.utils.Utils;
 
 public abstract class InstafelPatch {
     public String name, author, description, shortname;
@@ -43,33 +39,7 @@ public abstract class InstafelPatch {
     public SmaliUtils getSmaliUtils() {
         return new SmaliUtils(Environment.PROJECT_DIR);
     }
-        
-    public PEnvironment getEnv() {
-        try {
-            return new PEnvironment(new File(
-                Utils.mergePaths(Environment.PROJECT_DIR, "env.properties")
-            ));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.severe("Error while loading environment file.");
-            System.exit(-1);
-            return null;
-        }
-    }
-
-    public PConfig getConfig() {
-        try {
-            return new PConfig(new File(
-                Utils.mergePaths(Environment.PROJECT_DIR, "config.properties")
-            ));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.severe("Error while loading configuration file.");
-            System.exit(-1);
-            return null;
-        }
-    }
-
+    
     public abstract List<InstafelTask> initializeTasks() throws Exception;
 
     public void loadTasks() throws Exception {

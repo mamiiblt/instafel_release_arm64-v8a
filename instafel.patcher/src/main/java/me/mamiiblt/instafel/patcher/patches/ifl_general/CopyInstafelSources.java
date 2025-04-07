@@ -37,8 +37,6 @@ import me.mamiiblt.instafel.patcher.utils.sub.PublicResHelper.LastResourceIDs;
 )
 public class CopyInstafelSources extends InstafelPatch {
 
-    private PConfig pConfig = getConfig();
-    private PEnvironment pEnvironment = getEnv();
     private SmaliUtils smaliUtils = getSmaliUtils();
     private IFLResData.Parser resDataParser;
     private String valuesFolderPath = Utils.mergePaths(Environment.PROJECT_DIR, "sources", "res", "values");
@@ -95,15 +93,13 @@ public class CopyInstafelSources extends InstafelPatch {
         }
         
     };
-
-    // it's an only defination class
   
     InstafelTask copySmaliAndResources = new InstafelTask("Copy smali / resources") {
         @Override
         public void execute() throws Exception {
             File smallDexFolder = smaliUtils.getSmallSizeSmaliFolder(smaliUtils.getSmaliFolders());
             File destFolder = new File(
-                Utils.mergePaths(Environment.PROJECT_DIR, "sources", "smali_classes5", "me", "mamiiblt"));
+                Utils.mergePaths(Environment.PROJECT_DIR, "sources", smallDexFolder.getName(), "me", "mamiiblt"));
 
             Utils.unzipFromResources(false, "/ifl_sources/ifl_sources.zip", destFolder.getAbsolutePath());
             Log.info("Copying instafel resources");
@@ -177,29 +173,6 @@ public class CopyInstafelSources extends InstafelPatch {
         public void execute() throws Exception {
             Resources<TString> igResources = ResourceParser.parseResString(getValueResourceFile("strings.xml"));
             mergeResources(igResources, resDataParser.resourcesStrings.get("strings"));
-            if (pConfig.getBoolean(PConfig.Keys.prod_mode, false)) {
-                for (TString res : igResources) {
-                    if (res.getName().startsWith("ifl_")) {
-                        switch (res.getName()) {
-                            case "ifl_ig_arch":
-                                res.setValue("arm64-v8a");
-                                break;
-                            case "ifl_ig_vercode":
-                                res.setValue(pEnvironment.getString(PEnvironment.Keys.INSTAGRAM_VERSION_CODE, res.getValue()));
-                                break;
-                            case "ifl_ig_version":
-                                res.setValue(pEnvironment.getString(PEnvironment.Keys.INSTAGRAM_VERSION, res.getValue()));
-                                break;
-                            case "ifl_version":
-                                res.setValue(pEnvironment.getString(PEnvironment.Keys.IFL_VERSION, res.getValue()));
-                                break;
-                            case "ifl_genid":
-                                res.setValue(pEnvironment.getString(PEnvironment.Keys.GENERATION_ID, res.getValue()));
-                                break;
-                        }
-                    }
-                }
-            }
             ResourceParser.buildXmlFile(igResources.getDocument(), igResources.getFile());
             Log.info("IFL String values customized for generation");
             success("App strings merged succesfully.");

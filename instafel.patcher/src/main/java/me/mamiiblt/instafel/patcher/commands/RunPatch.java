@@ -1,20 +1,20 @@
 package me.mamiiblt.instafel.patcher.commands;
 
+import java.io.File;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.antlr.grammar.v3.LeftRecursiveRuleWalker.ruleBlock_return;
-
 import me.mamiiblt.instafel.patcher.cmdhandler.Command;
+import me.mamiiblt.instafel.patcher.source.PConfig;
+import me.mamiiblt.instafel.patcher.source.PEnvironment;
 import me.mamiiblt.instafel.patcher.source.WorkingDir;
 import me.mamiiblt.instafel.patcher.utils.Environment;
 import me.mamiiblt.instafel.patcher.utils.Log;
+import me.mamiiblt.instafel.patcher.utils.Utils;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatch;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatchGroup;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelTask;
-import me.mamiiblt.instafel.patcher.utils.patch.PatchGroupInfo;
-import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
 import me.mamiiblt.instafel.patcher.utils.patch.PatchLoader;
 
 public class RunPatch implements Command {
@@ -24,6 +24,8 @@ public class RunPatch implements Command {
 
         String wdirFolder = args[0];
         Environment.PROJECT_DIR = WorkingDir.getExistsWorkingDir(wdirFolder);
+        Environment.PEnvironment = getEnv();
+        Environment.PConfig = getConfig();
 
         List<InstafelPatch> runnablePatches = new ArrayList<>();
         Log.info("Loading patches...");
@@ -94,5 +96,31 @@ public class RunPatch implements Command {
         }
         Log.info("");
         Log.info("All patches executed succesfully.");
+    }
+
+    public PEnvironment getEnv() {
+        try {
+            return new PEnvironment(new File(
+                Utils.mergePaths(Environment.PROJECT_DIR, "env.properties")
+            ));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.severe("Error while loading environment file.");
+            System.exit(-1);
+            return null;
+        }
+    }
+
+    public PConfig getConfig() {
+        try {
+            return new PConfig(new File(
+                Utils.mergePaths(Environment.PROJECT_DIR, "config.properties")
+            ));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.severe("Error while loading configuration file.");
+            System.exit(-1);
+            return null;
+        }
     }
 }

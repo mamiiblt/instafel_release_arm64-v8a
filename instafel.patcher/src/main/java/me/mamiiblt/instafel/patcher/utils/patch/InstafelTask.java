@@ -1,7 +1,5 @@
 package me.mamiiblt.instafel.patcher.utils.patch;
 
-import java.io.FileNotFoundException;
-
 import me.mamiiblt.instafel.patcher.utils.Environment;
 import me.mamiiblt.instafel.patcher.utils.Log;
 

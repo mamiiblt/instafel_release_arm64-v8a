@@ -18,6 +18,7 @@ public class PConfig {
         manager_token
     }
 
+    private static String UPDATE_STR = "Updated Config";
     File file; 
     PropertyManager propertyManager;
     Properties properties;
@@ -26,6 +27,10 @@ public class PConfig {
         this.file = envFile;
         this.propertyManager = new PropertyManager(file);
         this.properties = propertyManager.getProperties();
+    }
+
+    public void saveConfig() {
+        propertyManager.save(UPDATE_STR);
     }
 
     public String getString(Keys key, String defaultValue) {
@@ -60,11 +65,11 @@ public class PConfig {
     }
 
     public void createDefaultConfigFile() throws StreamReadException, DatabindException, IOException {
-        propertyManager.add(Keys.manifest_version.toString(), "1");
-        propertyManager.addString(Keys.source_dir.toString(), "/sources");
-        propertyManager.addBoolean(Keys.use_external_ifl_source.toString(), false);
-        propertyManager.addBoolean(Keys.prod_mode.toString(), false);
-        propertyManager.addString(Keys.manager_token.toString(), "not_needed");
+        propertyManager.add(Keys.manifest_version.toString(), "1", UPDATE_STR);
+        propertyManager.addString(Keys.source_dir.toString(), "/sources", UPDATE_STR);
+        propertyManager.addBoolean(Keys.use_external_ifl_source.toString(), false, UPDATE_STR);
+        propertyManager.addBoolean(Keys.prod_mode.toString(), false, UPDATE_STR);
+        propertyManager.addString(Keys.manager_token.toString(), "not_needed", UPDATE_STR);
         propertyManager.save("Update Config File");
     }
 }
