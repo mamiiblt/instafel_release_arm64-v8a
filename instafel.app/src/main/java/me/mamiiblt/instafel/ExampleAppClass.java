@@ -3,7 +3,6 @@ package me.mamiiblt.instafel;
 import android.app.Application;
 
 import me.mamiiblt.instafel.utils.InstafelCrashHandler;
-
 public class ExampleAppClass extends Application {
     @Override
     public void onCreate() {

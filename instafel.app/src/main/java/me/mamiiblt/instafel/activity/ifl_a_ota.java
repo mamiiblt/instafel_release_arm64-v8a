@@ -6,14 +6,12 @@ import static me.mamiiblt.instafel.utils.Localizator.updateIflLocale;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -26,11 +24,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Date;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 import me.mamiiblt.instafel.R;
+import me.mamiiblt.instafel.InstafelEnv;
 import me.mamiiblt.instafel.managers.FrequencyManager;
 import me.mamiiblt.instafel.managers.NotificationOtaManager;
 import me.mamiiblt.instafel.ota.CheckUpdates;
@@ -40,7 +37,6 @@ import me.mamiiblt.instafel.ui.TileLarge;
 import me.mamiiblt.instafel.ui.TileLargeSwitch;
 import me.mamiiblt.instafel.managers.PreferenceManager;
 import me.mamiiblt.instafel.utils.GeneralFn;
-import me.mamiiblt.instafel.utils.InitializeInstafel;
 import me.mamiiblt.instafel.utils.PreferenceKeys;
 import me.mamiiblt.instafel.utils.dialog.InstafelDialog;
 
@@ -106,19 +102,26 @@ public class ifl_a_ota extends AppCompatActivity {
         tileSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enableDisableOtaFeature(!switchView.isChecked());
-                preferenceManager.setPreferenceLong(PreferenceKeys.ifl_ota_last_check, 0);
-                tileCheck.setSubtitleText(LastCheck.get(ifl_a_ota.this, Locale.getDefault()));
-
+                if (InstafelEnv.PRODUCTION_MODE) {
+                    enableDisableOtaFeature(!switchView.isChecked());
+                    preferenceManager.setPreferenceLong(PreferenceKeys.ifl_ota_last_check, 0);
+                    tileCheck.setSubtitleText(LastCheck.get(ifl_a_ota.this, Locale.getDefault()));
+                } else {
+                    Toast.makeText(ifl_a_ota.this, "This is not an production build.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                enableDisableOtaFeature(isChecked);
-                preferenceManager.setPreferenceLong(PreferenceKeys.ifl_ota_last_check, 0);
-                tileCheck.setSubtitleText(LastCheck.get(ifl_a_ota.this, Locale.getDefault()));
+                if (InstafelEnv.PRODUCTION_MODE) {
+                    enableDisableOtaFeature(isChecked);
+                    preferenceManager.setPreferenceLong(PreferenceKeys.ifl_ota_last_check, 0);
+                    tileCheck.setSubtitleText(LastCheck.get(ifl_a_ota.this, Locale.getDefault()));
+                } else {
+                    Toast.makeText(ifl_a_ota.this, "This is not an production build.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

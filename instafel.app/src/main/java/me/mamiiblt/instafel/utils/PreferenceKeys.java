@@ -25,7 +25,6 @@ public class PreferenceKeys {
     public static String ifl_custom_ig_version = "22";
     public static String ifl_custom_ig_ver_code = "23";
     public static String ifl_custom_gen_id = "23";
-    public static String ifl_custom_arch = "24";
     public static String ifl_disable_backup_check_period = "25";
     public static String ifl_enable_remove_ads_feature = "26";
     public static String ifl_remove_ads = "27";

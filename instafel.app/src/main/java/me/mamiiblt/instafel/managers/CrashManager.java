@@ -45,11 +45,10 @@ public class CrashManager {
         try {
             JSONObject logObject = new JSONObject();
             JSONObject appData = new JSONObject();
-            appData.put("ifl_ver", IflEnvironment.getIflVersionFromCtx(ctx));
+            appData.put("ifl_ver", IflEnvironment.getIflVersion(ctx));
             appData.put("ig_ver", IflEnvironment.getIgVersion(ctx));
             appData.put("ig_ver_code", IflEnvironment.getIgVerCode(ctx));
             appData.put("ig_itype", IflEnvironment.getType(ctx));
-            appData.put("ig_arch", IflEnvironment.getArchFromCtx(ctx));
             logObject.put("appData", appData);
 
             JSONObject deviceData = new JSONObject();

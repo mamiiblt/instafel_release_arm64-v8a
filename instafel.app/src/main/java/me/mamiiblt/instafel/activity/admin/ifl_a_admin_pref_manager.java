@@ -52,7 +52,6 @@ public class ifl_a_admin_pref_manager extends AppCompatActivity {
         createPreferenceTitle(PreferenceKeys.ifl_custom_ig_version, "ifl_custom_ig_version", PreferenceTypes.STRING);
         createPreferenceTitle(PreferenceKeys.ifl_custom_ig_ver_code, "ifl_custom_ig_ver_code", PreferenceTypes.STRING);
         createPreferenceTitle(PreferenceKeys.ifl_custom_gen_id, "ifl_custom_gen_id", PreferenceTypes.STRING);
-        createPreferenceTitle(PreferenceKeys.ifl_custom_arch, "ifl_custom_arch", PreferenceTypes.STRING);
         createPreferenceTitle(PreferenceKeys.ifl_backup_last_check, "ifl_backup_last_check", PreferenceTypes.LONG);
         createPreferenceTitle(PreferenceKeys.ifl_enable_auto_update, "ifl_enable_auto_update", PreferenceTypes.BOOLEAN);
         createPreferenceTitle(PreferenceKeys.ifl_backup_update_value, "ifl_backup_update_value", PreferenceTypes.STRING);

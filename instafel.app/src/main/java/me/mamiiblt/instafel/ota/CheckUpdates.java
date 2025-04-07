@@ -1,7 +1,6 @@
 package me.mamiiblt.instafel.ota;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -9,6 +8,7 @@ import org.json.JSONObject;
 
 import me.mamiiblt.instafel.api.models.AutoUpdateInfo;
 import me.mamiiblt.instafel.api.tasks.BackupUpdateTask;
+import me.mamiiblt.instafel.InstafelEnv;
 import me.mamiiblt.instafel.managers.PreferenceManager;
 import me.mamiiblt.instafel.ota.tasks.ChangelogTask;
 import me.mamiiblt.instafel.ota.tasks.VersionTask;
@@ -41,72 +41,68 @@ public class CheckUpdates {
         if (!welcomeState) {
             showWelcomeDialog(activity);
         } else {
-            long oneDayMs = 24 * 60 * 60 * 1000;
-            long currentTimeStamp = System.currentTimeMillis();
+            if (InstafelEnv.PRODUCTION_MODE) {
+                long oneDayMs = 24 * 60 * 60 * 1000;
+                long currentTimeStamp = System.currentTimeMillis();
 
-            if (updateBackupState) {
-                long backupLastCheckStamp = preferenceManager.getPreferenceLong(PreferenceKeys.ifl_backup_last_check, 0);
-                long elapsedTime = currentTimeStamp - backupLastCheckStamp;
-                if (elapsedTime >= oneDayMs) {
-                    checkBackupUpdate(activity);
-                }
-            }
-
-            long lastSuccessUpdateTimestamp = preferenceManager.getPreferenceLong(PreferenceKeys.ifl_ota_last_success_install, 0);
-            if (lastSuccessUpdateTimestamp != 0) {
-                checkChangelog(activity, currentTimeStamp, lastSuccessUpdateTimestamp);
-            }
-
-            boolean updateState = preferenceManager.getPreferenceBoolean(PreferenceKeys.ifl_ota_setting, false);
-            int freqData = preferenceManager.getPreferenceInt(PreferenceKeys.ifl_ota_freq, FreqLabels.EVERY_OPEN);
-            long lastCheckStamp = preferenceManager.getPreferenceLong(PreferenceKeys.ifl_ota_last_check, 0);
-
-            if (updateState) {
-                long elapsedTime = currentTimeStamp - lastCheckStamp;
-
-                boolean requireCheck = false;
-                switch (freqData) {
-                    case 0:
-                        requireCheck = true;
-                        break;
-                    case 1:
-                        requireCheck = false;
-                        break;
-                    case 2:
-                        if (elapsedTime >= oneDayMs) {
-                            requireCheck = true;
-                        }
-                        break;
-                    case 3:
-                        if (elapsedTime >= oneDayMs * 3) {
-                            requireCheck = true;
-                        }
-                        break;
-                    case 4:
-                        if (elapsedTime >= oneDayMs * 5) {
-                            requireCheck = true;
-                        }
-                        break;
-                    case 5:
-                        if (elapsedTime >= oneDayMs * 7) {
-                            requireCheck = true;
-                        }
-                        break;
+                if (updateBackupState) {
+                    long backupLastCheckStamp = preferenceManager.getPreferenceLong(PreferenceKeys.ifl_backup_last_check, 0);
+                    long elapsedTime = currentTimeStamp - backupLastCheckStamp;
+                    if (elapsedTime >= oneDayMs) {
+                        checkBackupUpdate(activity);
+                    }
                 }
 
-                if (requireCheck) {
-                    check(activity, false);
+                long lastSuccessUpdateTimestamp = preferenceManager.getPreferenceLong(PreferenceKeys.ifl_ota_last_success_install, 0);
+                if (lastSuccessUpdateTimestamp != 0) {
+                    checkChangelog(activity, currentTimeStamp, lastSuccessUpdateTimestamp);
+                }
+
+                boolean updateState = preferenceManager.getPreferenceBoolean(PreferenceKeys.ifl_ota_setting, false);
+                int freqData = preferenceManager.getPreferenceInt(PreferenceKeys.ifl_ota_freq, FreqLabels.EVERY_OPEN);
+                long lastCheckStamp = preferenceManager.getPreferenceLong(PreferenceKeys.ifl_ota_last_check, 0);
+
+                if (updateState) {
+                    long elapsedTime = currentTimeStamp - lastCheckStamp;
+
+                    boolean requireCheck = false;
+                    switch (freqData) {
+                        case 0:
+                            requireCheck = true;
+                            break;
+                        case 1:
+                            requireCheck = false;
+                            break;
+                        case 2:
+                            if (elapsedTime >= oneDayMs) {
+                                requireCheck = true;
+                            }
+                            break;
+                        case 3:
+                            if (elapsedTime >= oneDayMs * 3) {
+                                requireCheck = true;
+                            }
+                            break;
+                        case 4:
+                            if (elapsedTime >= oneDayMs * 5) {
+                                requireCheck = true;
+                            }
+                            break;
+                        case 5:
+                            if (elapsedTime >= oneDayMs * 7) {
+                                requireCheck = true;
+                            }
+                            break;
+                    }
+
+                    if (requireCheck) {
+                        check(activity, false);
+                    }
                 }
             }
         }
     }
 
-    public static long getElapsedTime(Activity activity) {
-        PreferenceManager preferenceManager = new PreferenceManager(activity);
-        long lastCheckStamp = preferenceManager.getPreferenceLong(PreferenceKeys.ifl_ota_last_check, 0);
-        return System.currentTimeMillis() - lastCheckStamp;
-    }
-    
     public static void checkBackupUpdate(Activity activity) {
         String languageCode = Localizator.getIflLocale(activity);
         PreferenceManager preferenceManager = new PreferenceManager(activity);
@@ -134,12 +130,9 @@ public class CheckUpdates {
     
     public static void check(Activity activity, boolean checkType) {
         int ifl_version = IflEnvironment.getIflVersion(activity);
-        String ifl_arch = IflEnvironment.getArch(activity);
         String ifl_type = IflEnvironment.getType(activity);
 
-        new VersionTask(activity, ifl_type, ifl_version, checkType).execute("https://api.github.com/repos/mamiiblt/instafel_release_" +
-                ifl_arch +
-                "/releases/latest");
+        new VersionTask(activity, ifl_type, ifl_version, checkType).execute("https://api.github.com/repos/mamiiblt/instafel_release_arm64-v8a/releases/latest");
     }
 
     public static void showBackupUpdateDialog(Activity activity, String languageCode, String backupId) {

@@ -2,24 +2,13 @@ package me.mamiiblt.instafel.utils;
 
 import android.app.Activity;
 import android.app.Application;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.location.GnssMeasurementsEvent;
-import android.os.LocaleList;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Locale;
-
-import me.mamiiblt.instafel.R;
 import me.mamiiblt.instafel.activity.ifl_a_menu;
-import me.mamiiblt.instafel.environment.InstafelEnv;
+import me.mamiiblt.instafel.InstafelEnv;
 import me.mamiiblt.instafel.ota.CheckUpdates;
 
 public class InitializeInstafel {

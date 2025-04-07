@@ -7,10 +7,8 @@ import android.widget.Switch;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import me.mamiiblt.instafel.R;
-import me.mamiiblt.instafel.activity.crash_manager.ifl_a_crash_reports;
-import me.mamiiblt.instafel.activity.library.ifl_a_library_menu;
+import me.mamiiblt.instafel.InstafelEnv;
 import me.mamiiblt.instafel.managers.PreferenceManager;
-import me.mamiiblt.instafel.ui.TileLarge;
 import me.mamiiblt.instafel.ui.TileLargeSwitch;
 import me.mamiiblt.instafel.utils.GeneralFn;
 import me.mamiiblt.instafel.utils.Localizator;
@@ -48,14 +46,19 @@ public class ifl_a_misc extends AppCompatActivity {
 
         TileLargeSwitch tileRemoveAds = findViewById(R.id.ifl_tile_remove_ads_section);
         Switch tileRemoveAdsSwitch = tileRemoveAds.getSwitchView();
-        tileRemoveAdsSwitch.setChecked(true);
-        tileRemoveAdsSwitch.setEnabled(false);
-        tileRemoveAds.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(ifl_a_misc.this, ifl_a_misc.this.getString(R.string.ifl_a0_14), Toast.LENGTH_SHORT).show();
-            }
-        });
+        boolean removedAdsPatchApplied = InstafelEnv.isPatchApplied("remove_ads");
+        if (removedAdsPatchApplied) {
+            tileRemoveAdsSwitch.setChecked(true);
+            tileRemoveAdsSwitch.setEnabled(false);
+            tileRemoveAds.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(ifl_a_misc.this, ifl_a_misc.this.getString(R.string.ifl_a0_14), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            tileRemoveAds.setVisibility(View.GONE);
+        }
     }
 
     private void enableOrDisableAmoledTheme(boolean z) {

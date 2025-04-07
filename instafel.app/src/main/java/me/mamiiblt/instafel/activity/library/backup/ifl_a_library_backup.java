@@ -25,12 +25,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.mamiiblt.instafel.R;
-import me.mamiiblt.instafel.api.models.AutoUpdateInfo;
 import me.mamiiblt.instafel.api.models.BackupListItem;
 import me.mamiiblt.instafel.api.models.InstafelResponse;
 import me.mamiiblt.instafel.api.requests.ApiCallbackInterface;
-import me.mamiiblt.instafel.api.requests.ApiGet;
 import me.mamiiblt.instafel.api.requests.ApiGetString;
+import me.mamiiblt.instafel.InstafelEnv;
 import me.mamiiblt.instafel.managers.PreferenceManager;
 import me.mamiiblt.instafel.ui.PageContentArea;
 import me.mamiiblt.instafel.ui.TileLarge;
@@ -77,8 +76,12 @@ public class ifl_a_library_backup extends AppCompatActivity implements ApiCallba
         tileAutoUpdateSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (!isUserChangedStatus) {
-                    setAutoUpdateState(b);
+                if (InstafelEnv.PRODUCTION_MODE) {
+                    if (!isUserChangedStatus) {
+                        setAutoUpdateState(b);
+                    }
+                } else {
+                    Toast.makeText(ifl_a_library_backup.this, "This feauture isn't available on custom generations.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -86,9 +89,13 @@ public class ifl_a_library_backup extends AppCompatActivity implements ApiCallba
         tileAutoUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                isUserChangedStatus = true;
-                setAutoUpdateState(!tileAutoUpdateSwitch.isChecked());
-                isUserChangedStatus = false;
+                if (InstafelEnv.PRODUCTION_MODE) {
+                    isUserChangedStatus = true;
+                    setAutoUpdateState(!tileAutoUpdateSwitch.isChecked());
+                    isUserChangedStatus = false;
+                } else {
+                    Toast.makeText(ifl_a_library_backup.this, "This feauture isn't available on custom generations.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

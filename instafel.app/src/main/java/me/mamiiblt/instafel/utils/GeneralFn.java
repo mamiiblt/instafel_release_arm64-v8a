@@ -1,35 +1,26 @@
 package me.mamiiblt.instafel.utils;
 
 import android.app.Activity;
-import android.app.AppComponentFactory;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.Insets;
 import android.net.Uri;
-import android.os.Build;
 import android.util.Base64;
 import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewConfiguration;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.activity.ComponentActivity;
-import androidx.activity.EdgeToEdge;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
 import me.mamiiblt.instafel.R;
-import me.mamiiblt.instafel.environment.InstafelEnv;
+import me.mamiiblt.instafel.InstafelEnv;
 import me.mamiiblt.instafel.managers.PreferenceManager;
 
 public class GeneralFn {

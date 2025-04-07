@@ -39,8 +39,13 @@ public class ifl_a_about extends AppCompatActivity {
             }
         });
 
-        TileLarge tileInstallationType = findViewById(R.id.ifl_tile_installation_type);
-        tileInstallationType.setSubtitleText(IflEnvironment.getTypeString(this, Locale.getDefault()) + " (" + IflEnvironment.getArch(this)+")");
+        TileLarge tileBuildInfo = findViewById(R.id.ifl_tile_build_info);
+        tileBuildInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GeneralFn.startIntent(ifl_a_about.this, ifl_a_build_info.class);
+            }
+        });
 
         TileLarge tileContributors = findViewById(R.id.ifl_tile_contributors);
         tileContributors.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +64,7 @@ public class ifl_a_about extends AppCompatActivity {
         });
 
         TileLarge devTile = findViewById(R.id.ifl_tile_developer);
-        TileLarge telegramTile = findViewById(R.id.ifl_tile_telegram);
+        TileLarge sourceCode = findViewById(R.id.ifl_tile_source_code);
 
         devTile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,10 +73,10 @@ public class ifl_a_about extends AppCompatActivity {
             }
         });
 
-        telegramTile.setOnClickListener(new View.OnClickListener() {
+        sourceCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openUrlInWeb("https://" + telegramTile.getSubtitle());
+                openUrlInWeb("https://" + sourceCode.getSubtitle());
             }
         });
     }

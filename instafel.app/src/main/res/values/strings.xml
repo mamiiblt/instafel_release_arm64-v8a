@@ -13,14 +13,6 @@
     <string name="ifl_a0_15">Instafel Updater</string>
     <string name="ifl_a0_16">Use Instafel Updater for automatic updates with Root and Shizuku</string>
 
-    <string name="ifl_version" translatable="false">_version</string>
-    <string name="ifl_installation_type" translatable="false">_type</string>
-    <string name="ifl_ig_version" translatable="false">_igversion</string>
-    <string name="ifl_ig_vercode" translatable="false">_igvercode</string>
-    <string name="ifl_ig_channel" translatable="false">ALPHA</string>
-    <string name="ifl_ig_arch" translatable="false">_igarch</string>
-    <string name="ifl_genid" translatable="false">_iflgenid</string>
-
     <!-- me.mamiiblt.instafel.ifl_a_menu -->
     <string name="ifl_a0_02">Update Settings</string>
     <string name="ifl_a0_03">Language</string>
@@ -41,6 +33,12 @@
     <string name="ifl_a1_09">Generation ID</string>
     <string name="ifl_a1_10">Instagram Version</string>
     <string name="ifl_a1_11">Contributors to the translation of Instafel</string>
+    <string name="ifl_a1_12">Build Information</string>
+    <string name="ifl_a1_13">Patcher Commit</string>
+    <string name="ifl_a1_14">Applied Patches</string>
+    <string name="ifl_a1_15">See build info details</string>
+    <string name="ifl_a1_16">Website</string>
+    <string name="ifl_a1_17">Source Code</string>
 
 
     <!-- me.mamiiblt.instafel.ifl_a_about_ig -->

@@ -7,11 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Checkable;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import java.lang.reflect.GenericArrayType;
 
 import me.mamiiblt.instafel.R;
 import me.mamiiblt.instafel.activity.about.ifl_a_about;
@@ -20,9 +16,8 @@ import me.mamiiblt.instafel.activity.admin.ifl_a_admin_login;
 import me.mamiiblt.instafel.activity.crash_manager.ifl_a_crash_reports;
 import me.mamiiblt.instafel.activity.devmode.ifl_a_devmode;
 import me.mamiiblt.instafel.activity.library.ifl_a_library_menu;
+import me.mamiiblt.instafel.InstafelEnv;
 import me.mamiiblt.instafel.managers.PreferenceManager;
-import me.mamiiblt.instafel.ota.CheckUpdates;
-import me.mamiiblt.instafel.ota.IflEnvironment;
 import me.mamiiblt.instafel.ui.TileSocials;
 import me.mamiiblt.instafel.utils.GeneralFn;
 import me.mamiiblt.instafel.utils.InstafelAdminUser;
@@ -120,7 +115,11 @@ public class ifl_a_menu extends AppCompatActivity {
         tileSocials.getTileInfo().setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                openAdminDashboard();
+                if (InstafelEnv.PRODUCTION_MODE) {
+                    openAdminDashboard();
+                } else {
+                    Toast.makeText(ifl_a_menu.this, "Admin dasboard isn't available on custom generations.", Toast.LENGTH_SHORT).show();
+                }
                 return false;
             }
         });
@@ -150,7 +149,6 @@ public class ifl_a_menu extends AppCompatActivity {
     public void openAdminDashboard() {
         if (!InstafelAdminUser.isUserLogged(ifl_a_menu.this)) {
             GeneralFn.startIntent(ifl_a_menu.this, ifl_a_admin_login.class);
-
         } else {
             GeneralFn.startIntent(ifl_a_menu.this, ifl_a_admin_dashboard.class);
         }

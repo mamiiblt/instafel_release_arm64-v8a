@@ -2,23 +2,16 @@ package me.mamiiblt.instafel.utils;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
 
 import me.mamiiblt.instafel.R;
-import me.mamiiblt.instafel.environment.InstafelEnv;
+import me.mamiiblt.instafel.InstafelEnv;
 import me.mamiiblt.instafel.managers.PreferenceManager;
 import me.mamiiblt.instafel.ui.TileLarge;
 
