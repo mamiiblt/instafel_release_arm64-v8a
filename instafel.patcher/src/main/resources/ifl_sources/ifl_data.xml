@@ -1315,6 +1315,7 @@
             <public name="ifl_admin" type="drawable"/>
             <public name="ifl_amoled_theme" type="drawable"/>
             <public name="ifl_android" type="drawable"/>
+            <public name="ifl_applied_patches" type="drawable"/>
             <public name="ifl_approve_backup" type="drawable"/>
             <public name="ifl_arch" type="drawable"/>
             <public name="ifl_author" type="drawable"/>
@@ -1324,6 +1325,7 @@
             <public name="ifl_backup_export" type="drawable"/>
             <public name="ifl_backup_import" type="drawable"/>
             <public name="ifl_base" type="drawable"/>
+            <public name="ifl_build_info" type="drawable"/>
             <public name="ifl_button_background" type="drawable"/>
             <public name="ifl_button_primary_background" type="drawable"/>
             <public name="ifl_button_primary_background_dark" type="drawable"/>
@@ -1357,6 +1359,7 @@
             <public name="ifl_flag_pt" type="drawable"/>
             <public name="ifl_flag_tr" type="drawable"/>
             <public name="ifl_flag_us" type="drawable"/>
+            <public name="ifl_generation_id" type="drawable"/>
             <public name="ifl_genid" type="drawable"/>
             <public name="ifl_github" type="drawable"/>
             <public name="ifl_guide" type="drawable"/>
@@ -1377,6 +1380,7 @@
             <public name="ifl_ota_expand" type="drawable"/>
             <public name="ifl_ota_refresh" type="drawable"/>
             <public name="ifl_ota_refresh_2" type="drawable"/>
+            <public name="ifl_patcher_commit" type="drawable"/>
             <public name="ifl_progress_background_dark" type="drawable"/>
             <public name="ifl_progress_background_light" type="drawable"/>
             <public name="ifl_progress_circle_drawable" type="drawable"/>
@@ -1391,6 +1395,7 @@
             <public name="ifl_tick" type="drawable"/>
             <public name="ifl_translate" type="drawable"/>
             <public name="ifl_version" type="drawable"/>
+            <public name="ifl_website" type="drawable"/>
             <public name="ifl_about_title" type="id"/>
             <public name="ifl_backup_editText" type="id"/>
             <public name="ifl_backups_layout" type="id"/>
@@ -1442,6 +1447,7 @@
             <public name="ifl_tile_admin_update_approve_preview" type="id"/>
             <public name="ifl_tile_admin_update_update_backup" type="id"/>
             <public name="ifl_tile_admin_username" type="id"/>
+            <public name="ifl_tile_applied_patches" type="id"/>
             <public name="ifl_tile_backup_1" type="id"/>
             <public name="ifl_tile_backup_2" type="id"/>
             <public name="ifl_tile_backup_library" type="id"/>
@@ -1458,6 +1464,7 @@
             <public name="ifl_tile_backup_library_social_medium" type="id"/>
             <public name="ifl_tile_backup_library_social_x" type="id"/>
             <public name="ifl_tile_backup_library_version" type="id"/>
+            <public name="ifl_tile_build_info" type="id"/>
             <public name="ifl_tile_contributors" type="id"/>
             <public name="ifl_tile_crashlog_delete_logs" type="id"/>
             <public name="ifl_tile_crashviewer_aver" type="id"/>
@@ -1488,6 +1495,7 @@
             <public name="ifl_tile_export_backup_name" type="id"/>
             <public name="ifl_tile_export_backup_version" type="id"/>
             <public name="ifl_tile_flag_library" type="id"/>
+            <public name="ifl_tile_generation_id" type="id"/>
             <public name="ifl_tile_ifl_version" type="id"/>
             <public name="ifl_tile_ig_version" type="id"/>
             <public name="ifl_tile_import_full" type="id"/>
@@ -1523,11 +1531,12 @@
             <public name="ifl_tile_ota_enable_updates" type="id"/>
             <public name="ifl_tile_ota_freq" type="id"/>
             <public name="ifl_tile_ota_instafel_updater" type="id"/>
+            <public name="ifl_tile_patcher_commit" type="id"/>
             <public name="ifl_tile_remove_ads_section" type="id"/>
             <public name="ifl_tile_selectbackupfile" type="id"/>
             <public name="ifl_tile_setchangelog" type="id"/>
             <public name="ifl_tile_setversionname" type="id"/>
-            <public name="ifl_tile_telegram" type="id"/>
+            <public name="ifl_tile_source_code" type="id"/>
             <public name="ifl_tile_translators" type="id"/>
             <public name="ifl_tile_use_custom_mapping" type="id"/>
             <public name="ifl_tile_use_custom_override" type="id"/>
@@ -1558,6 +1567,7 @@
             <public name="ifl_at_admin_action_updatebackup" type="layout"/>
             <public name="ifl_at_admin_dashboard" type="layout"/>
             <public name="ifl_at_admin_login" type="layout"/>
+            <public name="ifl_at_build_info" type="layout"/>
             <public name="ifl_at_crash_reports" type="layout"/>
             <public name="ifl_at_crash_viewer" type="layout"/>
             <public name="ifl_at_devmode" type="layout"/>
@@ -1700,6 +1710,12 @@
             <public name="ifl_a1_09" type="string"/>
             <public name="ifl_a1_10" type="string"/>
             <public name="ifl_a1_11" type="string"/>
+            <public name="ifl_a1_12" type="string"/>
+            <public name="ifl_a1_13" type="string"/>
+            <public name="ifl_a1_14" type="string"/>
+            <public name="ifl_a1_15" type="string"/>
+            <public name="ifl_a1_16" type="string"/>
+            <public name="ifl_a1_17" type="string"/>
             <public name="ifl_a2_01" type="string"/>
             <public name="ifl_a2_02" type="string"/>
             <public name="ifl_a2_03" type="string"/>
@@ -1799,15 +1815,8 @@
             <public name="ifl_d3_02" type="string"/>
             <public name="ifl_d4_01" type="string"/>
             <public name="ifl_d4_02" type="string"/>
-            <public name="ifl_genid" type="string"/>
-            <public name="ifl_ig_arch" type="string"/>
-            <public name="ifl_ig_channel" type="string"/>
-            <public name="ifl_ig_vercode" type="string"/>
-            <public name="ifl_ig_version" type="string"/>
-            <public name="ifl_installation_type" type="string"/>
             <public name="ifl_t1_01" type="string"/>
             <public name="ifl_t1_03" type="string"/>
-            <public name="ifl_version" type="string"/>
             <public name="ifl_theme_amoled" type="style"/>
             <public name="ifl_theme_dark" type="style"/>
             <public name="ifl_theme_light" type="style"/>
@@ -1922,6 +1931,12 @@
             <string name="ifl_a1_09">Generation ID</string>
             <string name="ifl_a1_10">Instagram Version</string>
             <string name="ifl_a1_11">Contributors to the translation of Instafel</string>
+            <string name="ifl_a1_12">Build Information</string>
+            <string name="ifl_a1_13">Patcher Commit</string>
+            <string name="ifl_a1_14">Applied Patches</string>
+            <string name="ifl_a1_15">See build info details</string>
+            <string name="ifl_a1_16">Website</string>
+            <string name="ifl_a1_17">Source Code</string>
             <string name="ifl_a2_01">About Instagram</string>
             <string name="ifl_a2_02">Version</string>
             <string name="ifl_a2_03">Version Code</string>
@@ -2021,17 +2036,11 @@
             <string name="ifl_d3_02">Okay</string>
             <string name="ifl_d4_01">Welcome</string>
             <string name="ifl_d4_02">Welcome to Instafel, this mod has been developed to provide everyone with the latest features on Instagram alpha builds\\n\\nThe menu can be accessed by pressing and holding the hamburger button on the profile tab.</string>
-            <string name="ifl_genid">_iflgenid</string>
-            <string name="ifl_ig_arch">_igarch</string>
-            <string name="ifl_ig_channel">ALPHA</string>
-            <string name="ifl_ig_vercode">_igvercode</string>
-            <string name="ifl_ig_version">_igversion</string>
-            <string name="ifl_installation_type">_type</string>
             <string name="ifl_t1_01">An error occurred while opening the apk-installer.</string>
             <string name="ifl_t1_03">Instafel update failed.</string>
-            <string name="ifl_version">_version</string>
         </vcategory>
         <vcategory name="activities">
+            <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.about.ifl_a_build_info"/>
             <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.devmode.comparator.ifl_a_devmode_backup_comparator"/>
             <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.devmode.comparator.ifl_a_devmode_backup_comparator_menu"/>
             <activity android:exported="false" android:name="me.mamiiblt.instafel.activity.devmode.backup.ifl_a_export_backup"/>
@@ -2110,6 +2119,7 @@
             <item name="ifl_tile_admin_update_approve_preview" type="id"/>
             <item name="ifl_tile_admin_update_update_backup" type="id"/>
             <item name="ifl_tile_admin_username" type="id"/>
+            <item name="ifl_tile_applied_patches" type="id"/>
             <item name="ifl_tile_backup_1" type="id"/>
             <item name="ifl_tile_backup_2" type="id"/>
             <item name="ifl_tile_backup_library" type="id"/>
@@ -2126,6 +2136,7 @@
             <item name="ifl_tile_backup_library_social_medium" type="id"/>
             <item name="ifl_tile_backup_library_social_x" type="id"/>
             <item name="ifl_tile_backup_library_version" type="id"/>
+            <item name="ifl_tile_build_info" type="id"/>
             <item name="ifl_tile_contributors" type="id"/>
             <item name="ifl_tile_crashlog_delete_logs" type="id"/>
             <item name="ifl_tile_crashviewer_aver" type="id"/>
@@ -2156,6 +2167,7 @@
             <item name="ifl_tile_export_backup_name" type="id"/>
             <item name="ifl_tile_export_backup_version" type="id"/>
             <item name="ifl_tile_flag_library" type="id"/>
+            <item name="ifl_tile_generation_id" type="id"/>
             <item name="ifl_tile_ifl_version" type="id"/>
             <item name="ifl_tile_ig_version" type="id"/>
             <item name="ifl_tile_import_full" type="id"/>
@@ -2191,11 +2203,12 @@
             <item name="ifl_tile_ota_enable_updates" type="id"/>
             <item name="ifl_tile_ota_freq" type="id"/>
             <item name="ifl_tile_ota_instafel_updater" type="id"/>
+            <item name="ifl_tile_patcher_commit" type="id"/>
             <item name="ifl_tile_remove_ads_section" type="id"/>
             <item name="ifl_tile_selectbackupfile" type="id"/>
             <item name="ifl_tile_setchangelog" type="id"/>
             <item name="ifl_tile_setversionname" type="id"/>
-            <item name="ifl_tile_telegram" type="id"/>
+            <item name="ifl_tile_source_code" type="id"/>
             <item name="ifl_tile_translators" type="id"/>
             <item name="ifl_tile_use_custom_mapping" type="id"/>
             <item name="ifl_tile_use_custom_override" type="id"/>
