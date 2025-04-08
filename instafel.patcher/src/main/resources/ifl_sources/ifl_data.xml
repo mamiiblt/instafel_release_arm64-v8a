@@ -108,6 +108,11 @@
             <string name="ifl_a1_09">Oluşturulma Kimliği</string>
             <string name="ifl_a1_10">Instagram Sürümü</string>
             <string name="ifl_a1_11">Bu projenin çevirilmesinde katkı sağlayanlar</string>
+            <string name="ifl_a1_12">Yapı Bilgisi</string>
+            <string name="ifl_a1_13">Yamalayıcı Sürümü</string>
+            <string name="ifl_a1_14">Uygulanan Yamalar</string>
+            <string name="ifl_a1_15">Bu yapı ile ilgili bilgiler</string>
+            <string name="ifl_a1_17">Kaynak Kodu</string>
             <string name="ifl_a2_01">Instagram Hakkında</string>
             <string name="ifl_a2_02">Sürüm</string>
             <string name="ifl_a2_03">Sürüm Kodu</string>
@@ -316,6 +321,11 @@
             <string name="ifl_a1_09">Generation ID</string>
             <string name="ifl_a1_10">Instagram Version</string>
             <string name="ifl_a1_11">Mitwirkende an der Übersetzung von Instafel</string>
+            <string name="ifl_a1_12">Build-Informationen</string>
+            <string name="ifl_a1_13">Patcher-Version</string>
+            <string name="ifl_a1_14">Angewandte Patches</string>
+            <string name="ifl_a1_15">Build-Details anzeigen</string>
+            <string name="ifl_a1_17">Quellcode</string>
             <string name="ifl_a2_01">Über Instagram</string>
             <string name="ifl_a2_02">Version</string>
             <string name="ifl_a2_03">Version Code</string>
@@ -524,6 +534,11 @@
             <string name="ifl_a1_09">जनरेशन आईडी</string>
             <string name="ifl_a1_10">इंस्टाग्राम का वर्ज़न</string>
             <string name="ifl_a1_11">InstaFel के अनुवाद में योगदानकर्ता</string>
+            <string name="ifl_a1_12">बिल्ड जानकारी</string>
+            <string name="ifl_a1_13">पैचर संस्करण</string>
+            <string name="ifl_a1_14">लागू किए गए पैच</string>
+            <string name="ifl_a1_15">बिल्ड जानकारी विवरण देखें</string>
+            <string name="ifl_a1_17">सोर्स कोड</string>
             <string name="ifl_a2_01">Instagram के बारे में</string>
             <string name="ifl_a2_02">वर्ज़न</string>
             <string name="ifl_a2_03">वर्ज़न कोड</string>
@@ -732,6 +747,11 @@
             <string name="ifl_a1_09">ID de Geração</string>
             <string name="ifl_a1_10">Versão do Instagram</string>
             <string name="ifl_a1_11">Contribuidores para a tradução do Instafel</string>
+            <string name="ifl_a1_12">Informações da compilação</string>
+            <string name="ifl_a1_13">Versão do patcher</string>
+            <string name="ifl_a1_14">Patches aplicados</string>
+            <string name="ifl_a1_15">Ver detalhes da compilação</string>
+            <string name="ifl_a1_17">Código-fonte</string>
             <string name="ifl_a2_01">Sobre o Instagram</string>
             <string name="ifl_a2_02">Versão</string>
             <string name="ifl_a2_03">Código da Versão</string>
@@ -972,6 +992,11 @@
             <string name="ifl_a1_09">ID de Generación</string>
             <string name="ifl_a1_10">Versión de Instagram</string>
             <string name="ifl_a1_11">Contribuidores a la traducción de Instafel</string>
+            <string name="ifl_a1_12">Información de compilación</string>
+            <string name="ifl_a1_13">Versión del parcheador</string>
+            <string name="ifl_a1_14">Parches aplicados</string>
+            <string name="ifl_a1_15">Ver detalles de la compilación</string>
+            <string name="ifl_a1_17">Código fuente</string>
             <string name="ifl_a2_01">Sobre Instagram</string>
             <string name="ifl_a2_02">Versión</string>
             <string name="ifl_a2_03">Código de versión</string>
@@ -1180,6 +1205,11 @@
             <string name="ifl_a1_09">Generáció ID</string>
             <string name="ifl_a1_10">Instagram Verzió</string>
             <string name="ifl_a1_11">Az Instafel fordításához hozzájárultak</string>
+            <string name="ifl_a1_12">Build információ</string>
+            <string name="ifl_a1_13">Patcher Verzió</string>
+            <string name="ifl_a1_14">Alkalmazott javítások</string>
+            <string name="ifl_a1_15">Build részleteinek megtekintése</string>
+            <string name="ifl_a1_17">Forráskód</string>
             <string name="ifl_a2_01">Instagram-ról</string>
             <string name="ifl_a2_02">Verzió</string>
             <string name="ifl_a2_03">Verzió kódja</string>
@@ -1350,6 +1380,7 @@
             <public name="ifl_export_devfile" type="drawable"/>
             <public name="ifl_export_path" type="drawable"/>
             <public name="ifl_filename" type="drawable"/>
+            <public name="ifl_flag_az" type="drawable"/>
             <public name="ifl_flag_de" type="drawable"/>
             <public name="ifl_flag_el" type="drawable"/>
             <public name="ifl_flag_es" type="drawable"/>
@@ -1502,6 +1533,7 @@
             <public name="ifl_tile_import_merge" type="id"/>
             <public name="ifl_tile_import_old_backups" type="id"/>
             <public name="ifl_tile_installation_type" type="id"/>
+            <public name="ifl_tile_lang_azerbaijan" type="id"/>
             <public name="ifl_tile_lang_deutch" type="id"/>
             <public name="ifl_tile_lang_device" type="id"/>
             <public name="ifl_tile_lang_english" type="id"/>
@@ -1512,6 +1544,7 @@
             <public name="ifl_tile_lang_hungary" type="id"/>
             <public name="ifl_tile_lang_indian" type="id"/>
             <public name="ifl_tile_lang_john" type="id"/>
+            <public name="ifl_tile_lang_munir" type="id"/>
             <public name="ifl_tile_lang_portugal" type="id"/>
             <public name="ifl_tile_lang_spanish" type="id"/>
             <public name="ifl_tile_lang_turkish" type="id"/>
@@ -1714,7 +1747,6 @@
             <public name="ifl_a1_13" type="string"/>
             <public name="ifl_a1_14" type="string"/>
             <public name="ifl_a1_15" type="string"/>
-            <public name="ifl_a1_16" type="string"/>
             <public name="ifl_a1_17" type="string"/>
             <public name="ifl_a2_01" type="string"/>
             <public name="ifl_a2_02" type="string"/>
@@ -1932,10 +1964,9 @@
             <string name="ifl_a1_10">Instagram Version</string>
             <string name="ifl_a1_11">Contributors to the translation of Instafel</string>
             <string name="ifl_a1_12">Build Information</string>
-            <string name="ifl_a1_13">Patcher Commit</string>
+            <string name="ifl_a1_13">Patcher Version</string>
             <string name="ifl_a1_14">Applied Patches</string>
             <string name="ifl_a1_15">See build info details</string>
-            <string name="ifl_a1_16">Website</string>
             <string name="ifl_a1_17">Source Code</string>
             <string name="ifl_a2_01">About Instagram</string>
             <string name="ifl_a2_02">Version</string>
@@ -2174,6 +2205,7 @@
             <item name="ifl_tile_import_merge" type="id"/>
             <item name="ifl_tile_import_old_backups" type="id"/>
             <item name="ifl_tile_installation_type" type="id"/>
+            <item name="ifl_tile_lang_azerbaijan" type="id"/>
             <item name="ifl_tile_lang_deutch" type="id"/>
             <item name="ifl_tile_lang_device" type="id"/>
             <item name="ifl_tile_lang_english" type="id"/>
@@ -2184,6 +2216,7 @@
             <item name="ifl_tile_lang_hungary" type="id"/>
             <item name="ifl_tile_lang_indian" type="id"/>
             <item name="ifl_tile_lang_john" type="id"/>
+            <item name="ifl_tile_lang_munir" type="id"/>
             <item name="ifl_tile_lang_portugal" type="id"/>
             <item name="ifl_tile_lang_spanish" type="id"/>
             <item name="ifl_tile_lang_turkish" type="id"/>
@@ -2383,6 +2416,11 @@
             <string name="ifl_a1_09">ID Παραγωγής</string>
             <string name="ifl_a1_10">Έκδοση Instagram</string>
             <string name="ifl_a1_11">Συνεισφέροντες στη μετάφραση του Instafel</string>
+            <string name="ifl_a1_12">Πληροφορίες κατασκευής</string>
+            <string name="ifl_a1_13">Έκδοση Patcher</string>
+            <string name="ifl_a1_14">Εφαρμοσμένα patches</string>
+            <string name="ifl_a1_15">Δείτε λεπτομέρειες κατασκευής</string>
+            <string name="ifl_a1_17">Πηγαίος κώδικας</string>
             <string name="ifl_a2_01">Σχετικά με το Instafel</string>
             <string name="ifl_a2_02">Έκδοση</string>
             <string name="ifl_a2_03">Κωδικός έκδοσης</string>
@@ -2598,6 +2636,11 @@
             <string name="ifl_a1_09">ID de génération</string>
             <string name="ifl_a1_10">Version Instagram</string>
             <string name="ifl_a1_11">Contributeurs à la traduction d’Instafel</string>
+            <string name="ifl_a1_12">Informations de compilation</string>
+            <string name="ifl_a1_13">Version du correctif</string>
+            <string name="ifl_a1_14">Correctifs appliqués</string>
+            <string name="ifl_a1_15">Voir les détails de la compilation</string>
+            <string name="ifl_a1_17">Code source</string>
             <string name="ifl_a2_01">"À propos d'Instagram"</string>
             <string name="ifl_a2_02">Version</string>
             <string name="ifl_a2_03">Code de version</string>

@@ -58,7 +58,9 @@ public class ConfigureAppEnvironment extends InstafelPatch {
                 : "NOT_PROD_MODE");
             pairs.put("_igver_", Environment.PEnvironment.getString(PEnvironment.Keys.INSTAGRAM_VERSION, "empty"));
             pairs.put("_igvercode_", Environment.PEnvironment.getString(PEnvironment.Keys.INSTAGRAM_VERSION_CODE, "empty"));
-            pairs.put("_commit_", Environment.PROP_COMMIT_HASH + " (" + Environment.PROP_PROJECT_TAG + ")");
+            pairs.put("_pcommit_", Environment.PROP_COMMIT_HASH);
+            pairs.put("_ptag", Environment.PROP_PROJECT_TAG);
+            pairs.put("_pversion_", "v" + Environment.PROP_VERSION_STRING);
             pairs.put("_patches_", "aaaaa,bbbbb,ccccc,ddddd,eeeee,ffff,gggg,dddd,gggg,hhhh,jjjj");
 
             for (Map.Entry<String, String> prop : pairs.entrySet()) {
