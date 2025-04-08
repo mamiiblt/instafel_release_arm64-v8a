@@ -3,12 +3,16 @@
   -->
 
 <resources>
+    <string name="ifl_a1_12">Informações da compilação</string>
+    <string name="ifl_a1_13">Commit do patcher</string>
+    <string name="ifl_a1_14">Patches aplicados</string>
+    <string name="ifl_a1_15">Ver detalhes da compilação</string>
+    <string name="ifl_a1_17">Código-fonte</string>
     <string name="ifl_a0_01">Opções de backup</string>
     <string name="ifl_a11_45">Versão</string>
     <string name="ifl_a11_46">%1$s importado com sucesso com a bandeira %2$s</string>
     <string name="ifl_a11_47">Por favor, selecione um arquivo de backup válido</string>
     <string name="ifl_a11_48">Importar backups antigos (.json)</string>
-
     <string name="ifl_a0_08">Diversos</string>
     <string name="ifl_a0_09">Tema AMOLED</string>
     <string name="ifl_a0_10">Habilite o tema AMOLED para atividades, diálogos e outras partes do Instafel.</string>

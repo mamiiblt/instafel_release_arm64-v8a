@@ -58,6 +58,7 @@
     <string name="ifl_a1_04">Proje Hakkında</string>
     <string name="ifl_a1_05">Geliştirici</string>
     <string name="ifl_a1_09">Oluşturulma Kimliği</string>
+    <string name="ifl_a1_17">Kaynak Kodu</string>
     <string name="ifl_a2_01">Instagram Hakkında</string>
     <string name="ifl_a2_02">Sürüm</string>
     <string name="ifl_a2_03">Sürüm Kodu</string>
@@ -209,4 +210,8 @@
     <string name="ifl_a10_02">Çevirmenler</string>
     <string name="ifl_a1_11">Bu projenin çevirilmesinde katkı sağlayanlar</string>
     <string name="ifl_a11_28">Şimdi Başlat</string>
+    <string name="ifl_a1_12">Yapı Bilgisi</string>
+    <string name="ifl_a1_13">Yamalayıcı Commiti</string>
+    <string name="ifl_a1_14">Uygulanan Yamalar</string>
+    <string name="ifl_a1_15">Bu yapı ile ilgili bilgiler</string>
 </resources>

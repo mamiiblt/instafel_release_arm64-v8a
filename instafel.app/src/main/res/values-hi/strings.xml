@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="ifl_a1_12">बिल्ड जानकारी</string>
+    <string name="ifl_a1_13">पैचर कमिट</string>
+    <string name="ifl_a1_14">लागू किए गए पैच</string>
+    <string name="ifl_a1_15">बिल्ड जानकारी विवरण देखें</string>
+    <string name="ifl_a1_17">सोर्स कोड</string>
     <string name="ifl_a11_61">पुराने JSON बैकअप आयात करें</string>
     <string name="ifl_a11_62">बैकअप तुलना उपकरण</string>
     <string name="ifl_a11_63">बैकअप फ़ाइल को सभी फ़्लैग्स के साथ पूरी तरह से आयात करने के लिए उपयोग किया जाता है</string>

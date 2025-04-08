@@ -3,6 +3,11 @@
   -->
 
 <resources>
+    <string name="ifl_a1_12">Πληροφορίες κατασκευής</string>
+    <string name="ifl_a1_13">Δέσμευση επιδιόρθωσης</string>
+    <string name="ifl_a1_14">Εφαρμοσμένα patches</string>
+    <string name="ifl_a1_15">Δείτε λεπτομέρειες κατασκευής</string>
+    <string name="ifl_a1_17">Πηγαίος κώδικας</string>
     <string name="ifl_a0_01">Επιλογές Αντίγραφου Ασφαλείας</string>
     <string name="ifl_a11_45">Έκδοση</string>
     <string name="ifl_a11_46">%1$s εισήχθη με επιτυχία με τη σημαία %2$s</string>

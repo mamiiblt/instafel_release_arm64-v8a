@@ -26,7 +26,7 @@ import me.mamiiblt.instafel.utils.PreferenceKeys;
 
 public class ifl_a_language extends AppCompatActivity {
 
-    private TileLarge tileEnglish, tileTurkish, tileGreece, tileDeutch, tileFrench, tileHungary, tileHindi, tileSpanish, tilePortugal;
+    private TileLarge tileEnglish, tileTurkish, tileGreece, tileDeutch, tileFrench, tileHungary, tileHindi, tileSpanish, tilePortugal, tileAzerbaijan;
     private TileLargeSwitch tileDeviceNew;
     private Switch tileDeviceSwitch;
 
@@ -51,6 +51,7 @@ public class ifl_a_language extends AppCompatActivity {
         tileHindi = findViewById(R.id.ifl_tile_lang_hindi);
         tileSpanish = findViewById(R.id.ifl_tile_lang_spanish);
         tilePortugal = findViewById(R.id.ifl_tile_lang_portugal);
+        tileAzerbaijan = findViewById(R.id.ifl_tile_lang_azerbaijan);
 
         Locale langLocale = new Locale("en");
         String notSupportedText = Resources.getSystem().getConfiguration().locale.getDisplayLanguage(langLocale) + " (Not Supported)";
@@ -119,6 +120,9 @@ public class ifl_a_language extends AppCompatActivity {
             case "pt":
                 tilePortugal.setVisiblitySubIcon("visible");
                 break;
+            case "az":
+                tileAzerbaijan.setVisiblitySubIcon("visible");
+                break;
         }
 
         tileDeviceSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -135,83 +139,24 @@ public class ifl_a_language extends AppCompatActivity {
             }
         });
 
-        tileEnglish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Localizator.writeLangSh(ifl_a_language.this, "en");
-                Localizator.enableItem(ifl_a_language.this, 0);
-                recreate();
-            }
-        });
+        setLanguageClickListener(tileEnglish, "en",0);
+        setLanguageClickListener(tileTurkish, "tr", 1);
+        setLanguageClickListener(tileDeutch, "de", 2);
+        setLanguageClickListener(tileGreece,"el", 3);
+        setLanguageClickListener(tileFrench, "fr", 4);
+        setLanguageClickListener(tileHungary, "hu", 5);
+        setLanguageClickListener(tileHindi, "hi", 6);
+        setLanguageClickListener(tileSpanish, "es", 7);
+        setLanguageClickListener(tilePortugal, "pt", 8);
+        setLanguageClickListener(tileAzerbaijan, "az", 9);
+    }
 
-        tileTurkish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Localizator.writeLangSh(ifl_a_language.this, "tr");
-                Localizator.enableItem(ifl_a_language.this, 1);
-                recreate();
-            }
-        });
-
-        tileDeutch.setOnClickListener(new View.OnClickListener() {
+    private void setLanguageClickListener(TileLarge tileLanguage, String langCode, int id) {
+        tileLanguage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Localizator.writeLangSh(ifl_a_language.this, "de");
-                Localizator.enableItem(ifl_a_language.this, 2);
-                recreate();
-            }
-        });
-
-        tileGreece.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Localizator.writeLangSh(ifl_a_language.this, "el");
-                Localizator.enableItem(ifl_a_language.this, 3);
-                recreate();
-            }
-        });
-
-        tileFrench.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Localizator.writeLangSh(ifl_a_language.this, "fr");
-                Localizator.enableItem(ifl_a_language.this, 4);
-                recreate();
-            }
-        });
-
-        tileHungary.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Localizator.writeLangSh(ifl_a_language.this, "hu");
-                Localizator.enableItem(ifl_a_language.this, 5);
-                recreate();
-            }
-        });
-
-        tileHindi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Localizator.writeLangSh(ifl_a_language.this, "hi");
-                Localizator.enableItem(ifl_a_language.this, 6);
-                recreate();
-            }
-        });
-
-        tileSpanish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Localizator.writeLangSh(ifl_a_language.this, "es");
-                Localizator.enableItem(ifl_a_language.this, 7);
-                recreate();
-            }
-        });
-
-        tilePortugal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Localizator.writeLangSh(ifl_a_language.this, "pt");
-                Localizator.enableItem(ifl_a_language.this, 8);
+                Localizator.writeLangSh(ifl_a_language.this, langCode);
+                Localizator.enableItem(ifl_a_language.this, id);
                 recreate();
             }
         });

@@ -5,6 +5,11 @@
 <resources>
     ;Translated by Rüşan Gür
     <!-- sa -->>
+    <string name="ifl_a1_12">Build-Informationen</string>
+    <string name="ifl_a1_13">Patcher-Commit</string>
+    <string name="ifl_a1_14">Angewandte Patches</string>
+    <string name="ifl_a1_15">Build-Details anzeigen</string>
+    <string name="ifl_a1_17">Quellcode</string>
     <string name="ifl_a11_49">Bitte füllen Sie die erforderlichen Felder aus.</string>
     <string name="ifl_a11_50">Bitte geben Sie einen gültigen Versionsnamen ein</string>
     <string name="ifl_a11_51">Backup exportieren</string>

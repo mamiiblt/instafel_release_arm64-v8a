@@ -13,14 +13,6 @@
     <string name="ifl_a0_15">Instafel Yeniləyicisi</string>
     <string name="ifl_a0_16">Root və Shizuku ilə avtomatik yeniləmələr üçün Instafel Yeniləyicisindən istifadə edin.</string>
 
-    <string name="ifl_version" translatable="false">_versiya</string>
-    <string name="ifl_installation_type" translatable="false">_tip</string>
-    <string name="ifl_ig_version" translatable="false">_igversiya</string>
-    <string name="ifl_ig_vercode" translatable="false">_igverkod</string>
-    <string name="ifl_ig_channel" translatable="false">ALPHA</string>
-    <string name="ifl_ig_arch" translatable="false">_igmem</string>
-    <string name="ifl_genid" translatable="false">_iflgenid</string>
-
     <!-- Instafel Menu -->
     <string name="ifl_a0_02">Yeniləmə Parametrləri</string>
     <string name="ifl_a0_03">Dil</string>
@@ -45,7 +37,6 @@
     <string name="ifl_a1_13">Patcher Komiti</string>
     <string name="ifl_a1_14">Tətbiq Edilmiş Patch-lər</string>
     <string name="ifl_a1_15">Build məlumatlarının detalları</string>
-    <string name="ifl_a1_16">Websayt</string>
     <string name="ifl_a1_17">Mənbə Kodu</string>
 
 

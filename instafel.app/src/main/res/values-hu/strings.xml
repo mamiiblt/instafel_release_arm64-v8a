@@ -3,6 +3,11 @@
   -->
 
 <resources>
+    <string name="ifl_a1_12">Build információ</string>
+    <string name="ifl_a1_13">Patcher commit</string>
+    <string name="ifl_a1_14">Alkalmazott javítások</string>
+    <string name="ifl_a1_15">Build részleteinek megtekintése</string>
+    <string name="ifl_a1_17">Forráskód</string>
     <string name="ifl_a11_61">Régi JSON biztonsági mentések importálása</string>
     <string name="ifl_a11_62">Biztonsági mentés összehasonlító</string>
     <string name="ifl_a11_63">Egy biztonsági mentési fájl teljes importálására szolgál az összes zászlóval együtt</string>

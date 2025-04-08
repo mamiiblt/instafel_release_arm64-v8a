@@ -17,7 +17,7 @@ import me.mamiiblt.instafel.ui.TileLarge;
 
 public class Localizator {
 
-    public static String[] supportedLangs = {"en", "tr", "el", "de", "fr", "hu", "hi", "es", "pt"};
+    public static String[] supportedLangs = {"en", "tr", "el", "de", "fr", "hu", "hi", "es", "pt", "az"};
 
     public static void writeLangSh(Context context, String lang) {
         PreferenceManager preferenceManager = new PreferenceManager(context);
@@ -35,6 +35,7 @@ public class Localizator {
         items.add(activity.findViewById(R.id.ifl_tile_lang_hindi));
         items.add(activity.findViewById(R.id.ifl_tile_lang_spanish));
         items.add(activity.findViewById(R.id.ifl_tile_lang_portugal));
+        items.add(activity.findViewById(R.id.ifl_tile_lang_azerbaijan));
 
         for (int i = 0; i < items.size(); i++) {
             if (i == itemId) {

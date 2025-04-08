@@ -3,6 +3,11 @@
   -->
 
 <resources>
+    <string name="ifl_a1_12">Información de compilación</string>
+    <string name="ifl_a1_13">Commit del parcheador</string>
+    <string name="ifl_a1_14">Parches aplicados</string>
+    <string name="ifl_a1_15">Ver detalles de la compilación</string>
+    <string name="ifl_a1_17">Código fuente</string>
     <string name="ifl_a0_14">Habilitado por defecto, no se puede cambiar.</string>
     <string name="ifl_a0_15">Instafel Updater</string>
     <string name="ifl_a0_16">Usa Instafel Updater para actualizaciones automáticas con Root / Shizuku.</string>

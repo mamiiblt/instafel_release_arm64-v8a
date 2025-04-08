@@ -3,6 +3,11 @@
   -->
 
 <resources>
+    <string name="ifl_a1_12">Informations de compilation</string>
+    <string name="ifl_a1_13">Commit du correctif</string>
+    <string name="ifl_a1_14">Correctifs appliqués</string>
+    <string name="ifl_a1_15">Voir les détails de la compilation</string>
+    <string name="ifl_a1_17">Code source</string>
     <string name="ifl_a11_61">"Importer d'anciens backups JSON"</string>
     <string name="ifl_a11_62">Comparateur de sauvegarde</string>
     <string name="ifl_a11_63">Utilisé pour importer un fichier de sauvegarde complètement avec tous les drapeaux du fichier</string>

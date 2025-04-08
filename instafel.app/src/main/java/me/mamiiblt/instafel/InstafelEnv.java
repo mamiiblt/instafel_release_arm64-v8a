@@ -10,9 +10,10 @@ public class InstafelEnv {
     public static String GENERATION_ID = "_genid_"; // 01926031325
     public static String IG_VERSION = "_igver_"; // 371.0.0.0.23
     public static String IG_VERSION_CODE = "_igvercode_"; // 377506971
-    public static String PATCHER_COMMIT = "_commit_"; // 3ed4c6e
+    public static String PATCHER_COMMIT = "_pcommit_"; // 3ed4c6e
+    public static String PATCHER_VERSION = "_pversion_"; // 1.0.3
+    public static String PATCHER_TAG = "_ptag_"; // release or debug
     public static String APPLIED_PATCHES = "_patches_"; // aaaa,bbbbb (without space)
-
     public static boolean isPatchApplied(String patchName) {
         String[] patches = APPLIED_PATCHES.split(",");
         for (String patch : patches) {
