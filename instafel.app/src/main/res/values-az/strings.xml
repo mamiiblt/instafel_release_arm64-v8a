@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- sa -->
-    <string name="ifl_a5_10">İcazə Verilmədi</string>
-    <string name="ifl_a5_11">"Instafel"ın bildiriş icazəsi rədd edildi. Bu problem davam edərsə, tətbiq ayarlarından bildirişləri aktiv etməyi unutmayın.</string>
     <string name="ifl_a0_08">Müxtəlif</string>
     <string name="ifl_a0_09">Amoled Mövzusu</string>
     <string name="ifl_a0_10">Instafel fəaliyyətləri, dialoqlar və digər hissələr üçün amoled mövzusunu aktiv edin.</string>
-    <string name="ifl_a0_11">Reklamları Sil</string>
+    <string name="ifl_a0_11">Reklamları Kaldır</string>
     <string name="ifl_a0_12">Feeddə, reelslərdə və ya digər yerlərdə göstərilən reklamları silər.</string>
     <string name="ifl_a0_13">Dəyişiklikləri tətbiq etmək üçün tətbiqi yenidən başladın.</string>
     <string name="ifl_a0_14">Varsayılan olaraq aktivdir, dəyişdirilə bilməz.</string>
@@ -32,9 +30,9 @@
     <string name="ifl_a1_08">Klondan Çıxar</string>
     <string name="ifl_a1_09">Nəsil ID</string>
     <string name="ifl_a1_10">Instagram Versiyası</string>
-    <string name="ifl_a1_11">Instafel'in tərcüməsinə töhfə verənlər</string>
+    <string name="ifl_a1_11">"Instafel'in tərcüməsinə töhfə verənlər"</string>
     <string name="ifl_a1_12">Build Məlumatı</string>
-    <string name="ifl_a1_13">Patcher Komiti</string>
+    <string name="ifl_a1_13">Patcher Versiyası</string>
     <string name="ifl_a1_14">Tətbiq Edilmiş Patch-lər</string>
     <string name="ifl_a1_15">Build məlumatlarının detalları</string>
     <string name="ifl_a1_17">Mənbə Kodu</string>
@@ -70,7 +68,7 @@
     <string name="ifl_a4_19">Birlikdə Daxil etmək</string>
     <string name="ifl_a4_20">Analiz Nəticəsi</string>
     <string name="ifl_a4_21">Xüsusi Mapping Faylı istifadə et</string>
-    <string name="ifl_a4_22">Instagram'ın standart Mapping faylı əvəzinə xüsusi Mapping faylı ilə analiz etməyə imkan verir</string>
+    <string name="ifl_a4_22">"Instagram'ın standart Mapping faylı əvəzinə xüsusi Mapping faylı ilə analiz etməyə imkan verir"</string>
     <string name="ifl_a4_23">Uyğun Bayraqlar</string>
     <string name="ifl_a4_24">Uyğunsuz Bayraqlar</string>
     <string name="ifl_a4_25">Axtar</string>
@@ -96,7 +94,7 @@
     <string name="ifl_a5_01">Yeniləmələri Yoxla</string>
     <string name="ifl_a5_02">Son yoxlama: %1$s</string>
     <string name="ifl_a5_03">Yeniləmə Çıxarıldı</string>
-    <string name="ifl_a5_04">Ən son yeniləmələr yoxdur</string>
+    <string name="ifl_a5_04">"Ən son yeniləmələr yoxdur"</string>
     <string name="ifl_a5_05">Yeniləmə Arxivi</string>
     <string name="ifl_a5_06">Yeniləmə Qrafikası</string>
     <string name="ifl_a5_07">Həftəlik</string>
@@ -104,7 +102,6 @@
     <string name="ifl_a5_09">Yeniləmənin üzərinə vurun</string>
     <string name="ifl_a5_10">Hələ yeni bir yeniləmə yoxdur</string>
     <string name="ifl_a5_11">Yeniləmələr izlənir, amma hələ bir şey yoxdur</string>
-    <string name="ifl_a5_12">Çatdırılmaq üçün əlinizdəki faylları izləyin.</string>
 
     <!-- Frequency Settings -->
     <string name="ifl_a5_sub_freq_00">Hər açılışda təyin et.</string>

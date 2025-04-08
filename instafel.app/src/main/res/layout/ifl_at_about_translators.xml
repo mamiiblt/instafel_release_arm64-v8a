@@ -32,6 +32,18 @@
             app:ifl_attr_ui_titleText="John Xirouchakis" />
 
         <me.mamiiblt.instafel.ui.TileLarge
+            android:id="@+id/ifl_tile_lang_munir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ifl_attr_ui_iconResTint="false"
+            app:ifl_attr_ui_iconRes="@drawable/ifl_flag_az"
+            app:ifl_attr_ui_spaceBottom="visible"
+            app:ifl_attr_ui_enableSubIcon="visible"
+            app:ifl_attr_ui_subIconRes="@drawable/ifl_open_in_browser"
+            app:ifl_attr_ui_subtitleText="Azərbaycanca"
+            app:ifl_attr_ui_titleText="Munir Nasibzade" />
+
+        <me.mamiiblt.instafel.ui.TileLarge
             android:id="@+id/ifl_tile_lang_zan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

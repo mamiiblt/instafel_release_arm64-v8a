@@ -40,7 +40,7 @@ public class ifl_a_build_info extends AppCompatActivity {
             }
         });
 
-        tilePatcherCommit.setSubtitleText(InstafelEnv.PATCHER_COMMIT);
+        tilePatcherCommit.setSubtitleText(InstafelEnv.PATCHER_VERSION + " " + InstafelEnv.PATCHER_TAG + " (" + InstafelEnv.PATCHER_COMMIT + ")");
         tilePatcherCommit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -4,7 +4,7 @@
 
 <resources>
     <string name="ifl_a1_12">Informations de compilation</string>
-    <string name="ifl_a1_13">Commit du correctif</string>
+    <string name="ifl_a1_13">Version du correctif</string>
     <string name="ifl_a1_14">Correctifs appliqués</string>
     <string name="ifl_a1_15">Voir les détails de la compilation</string>
     <string name="ifl_a1_17">Code source</string>

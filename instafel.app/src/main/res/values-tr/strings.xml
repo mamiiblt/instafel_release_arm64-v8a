@@ -211,7 +211,7 @@
     <string name="ifl_a1_11">Bu projenin çevirilmesinde katkı sağlayanlar</string>
     <string name="ifl_a11_28">Şimdi Başlat</string>
     <string name="ifl_a1_12">Yapı Bilgisi</string>
-    <string name="ifl_a1_13">Yamalayıcı Commiti</string>
+    <string name="ifl_a1_13">Yamalayıcı Sürümü</string>
     <string name="ifl_a1_14">Uygulanan Yamalar</string>
     <string name="ifl_a1_15">Bu yapı ile ilgili bilgiler</string>
 </resources>

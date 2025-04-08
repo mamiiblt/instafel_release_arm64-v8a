@@ -4,7 +4,7 @@
 
 <resources>
     <string name="ifl_a1_12">Informações da compilação</string>
-    <string name="ifl_a1_13">Commit do patcher</string>
+    <string name="ifl_a1_13">Versão do patcher</string>
     <string name="ifl_a1_14">Patches aplicados</string>
     <string name="ifl_a1_15">Ver detalhes da compilação</string>
     <string name="ifl_a1_17">Código-fonte</string>

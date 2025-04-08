@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="ifl_a1_12">बिल्ड जानकारी</string>
-    <string name="ifl_a1_13">पैचर कमिट</string>
+    <string name="ifl_a1_13">पैचर संस्करण</string>
     <string name="ifl_a1_14">लागू किए गए पैच</string>
     <string name="ifl_a1_15">बिल्ड जानकारी विवरण देखें</string>
     <string name="ifl_a1_17">सोर्स कोड</string>

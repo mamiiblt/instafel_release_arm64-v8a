@@ -61,6 +61,12 @@ public class ifl_a_about_translators extends AppCompatActivity {
                 ifl_a_about_translators.this.openUrlInWeb("https://github.com/imsahilansarii");
             }
         });
+        findViewById(R.id.ifl_tile_lang_munir).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ifl_a_about_translators.this.openUrlInWeb("https://t.me/mnasibzadechannel");
+            }
+        });
     }
 
 

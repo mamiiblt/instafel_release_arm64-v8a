@@ -67,26 +67,10 @@ public class ifl_a_language extends AppCompatActivity {
 
         if (prefData.equals("def")) {
             tileDeviceSwitch.setChecked(true);
-            tileEnglish.setVisibility(View.GONE);
-            tileTurkish.setVisibility(View.GONE);
-            tileGreece.setVisibility(View.GONE);
-            tileDeutch.setVisibility(View.GONE);
-            tileFrench.setVisibility(View.GONE);
-            tileHungary.setVisibility(View.GONE);
-            tileHindi.setVisibility(View.GONE);
-            tileSpanish.setVisibility(View.GONE);
-            tilePortugal.setVisibility(View.GONE);
+            setVisibilities(View.GONE, tileEnglish, tileTurkish, tileGreece, tileDeutch, tileFrench, tileHungary, tileHindi, tileSpanish, tilePortugal, tileAzerbaijan);
         } else {
             tileDeviceSwitch.setChecked(false);
-            tileEnglish.setVisibility(View.VISIBLE);
-            tileTurkish.setVisibility(View.VISIBLE);
-            tileGreece.setVisibility(View.VISIBLE);
-            tileDeutch.setVisibility(View.VISIBLE);
-            tileFrench.setVisibility(View.VISIBLE);
-            tileHungary.setVisibility(View.VISIBLE);
-            tileHindi.setVisibility(View.VISIBLE);
-            tileSpanish.setVisibility(View.VISIBLE);
-            tilePortugal.setVisibility(View.VISIBLE);
+            setVisibilities(View.VISIBLE, tileEnglish, tileTurkish, tileGreece, tileDeutch, tileFrench, tileHungary, tileHindi, tileSpanish, tilePortugal, tileAzerbaijan);
         }
 
         switch (prefData) {
@@ -149,6 +133,12 @@ public class ifl_a_language extends AppCompatActivity {
         setLanguageClickListener(tileSpanish, "es", 7);
         setLanguageClickListener(tilePortugal, "pt", 8);
         setLanguageClickListener(tileAzerbaijan, "az", 9);
+    }
+
+    public void setVisibilities(int visibility, TileLarge... tiles) {
+        for (TileLarge tile : tiles) {
+            tile.setVisibility(visibility);
+        }
     }
 
     private void setLanguageClickListener(TileLarge tileLanguage, String langCode, int id) {
