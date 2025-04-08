@@ -14,10 +14,6 @@ val commitHash: String by rootProject.extra
 
 group = "me.mamiiblt.instafel"
 
-println("Build configuration info")
-println("")
-println("pname: ${project.name}")
-println("commit: $commitHash")
 /************************************************/
 
 repositories {

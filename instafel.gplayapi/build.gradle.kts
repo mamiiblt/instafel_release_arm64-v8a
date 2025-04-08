@@ -17,13 +17,6 @@ val commitHash: String by rootProject.extra
 group = "me.mamiiblt.instafel"
 version = "v$projectVersion-$commitHash-$projectTag"
 
-println("Build configuration info")
-println("")
-println("pname: ${project.name}")
-println("commit: $commitHash")
-println("version: $projectVersion")
-println("tag: $projectTag")
-println("formated: $version")
 /************************************************/
 
 repositories {
