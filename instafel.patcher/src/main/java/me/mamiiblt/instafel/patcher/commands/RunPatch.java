@@ -34,8 +34,12 @@ public class RunPatch implements Command {
             
             InstafelPatch patch = PatchLoader.findPatchByShortname(shortName);
             if (patch != null) {
-                Log.info("Patch, " + patch.name + " loaded");
-                runnablePatches.add(patch);
+                if (patch.runnable == true) {
+                    Log.info("Patch, " + patch.name + " loaded");
+                    runnablePatches.add(patch);
+                } else {
+                    Log.info("Patch " + patch.shortname + " is not runnable in single mode!");
+                }
             } 
 
             InstafelPatchGroup group = PatchLoader.findPatchGroupByShortname(shortName);
@@ -82,7 +86,7 @@ public class RunPatch implements Command {
             Log.info("Executing tasks...");
             for (InstafelTask task : patch.tasks){
                 Log.info("");
-                Log.info("Executing task " + task.stepName);
+                Log.info("Execute: " + task.stepName);
                 try {
                     task.execute();
                 } catch (Exception e) {
@@ -91,6 +95,8 @@ public class RunPatch implements Command {
                 }
             }
             Log.info("");
+            String patches = Environment.PEnvironment.getString(PEnvironment.Keys.APPLIED_PATCHES, "");
+            Environment.PEnvironment.setString(PEnvironment.Keys.APPLIED_PATCHES, patches.equals("") ? patches + patch.shortname : patches + "," + patch.shortname);
             Log.info("All tasks runned succesfully.");
             Log.info(Environment.SPERATOR_STR);
         }

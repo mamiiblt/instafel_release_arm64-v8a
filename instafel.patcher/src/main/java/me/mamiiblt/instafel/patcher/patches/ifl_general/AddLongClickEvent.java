@@ -19,7 +19,8 @@ import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
     shortname = "add_long_click_event",
     desc = "This patch must be applied for Instafel Menu",
     author = "mamiiblt",
-    listable = false
+    listable = false,
+    runnable = false
 )
 public class AddLongClickEvent extends InstafelPatch {
 

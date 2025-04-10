@@ -20,7 +20,8 @@ public class PEnvironment {
         INSTAGRAM_VERSION,
         INSTAGRAM_VERSION_CODE,
         GENID,
-        INSTAFEL_VERSION
+        INSTAFEL_VERSION,
+        APPLIED_PATCHES
     }
 
     private static String SAVE_STR = "Update Environment File";
@@ -67,6 +68,7 @@ public class PEnvironment {
 
     public void createDefaultEnvFile() throws StreamReadException, DatabindException, IOException {
         propertyManager.add(Keys.API_BASE.toString(), "api.mamiiblt.me/ifl", SAVE_STR);
+        propertyManager.add(Keys.APPLIED_PATCHES.toString(), "", SAVE_STR);
         setIgVerCodeAndVersion();
     }
 

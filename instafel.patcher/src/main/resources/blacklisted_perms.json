@@ -1,0 +1,13 @@
+[
+    "com.google.android",
+    "com.amazon.device",
+    "com.instagram.direct",
+    ".permission.RECEIVE_ADM_MESSAGE",
+    "android.permission",
+    "com.android",
+    "com.htc",
+    "com.huawei",
+    "com.sonymobile",
+    "com.sonyericsson",
+    "android.hardware"
+]

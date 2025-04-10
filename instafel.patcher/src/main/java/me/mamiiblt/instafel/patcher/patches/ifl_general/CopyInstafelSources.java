@@ -21,8 +21,6 @@ import org.xml.sax.SAXException;
 import me.mamiiblt.instafel.patcher.resources.*;
 import me.mamiiblt.instafel.patcher.resources.types.*;
 import me.mamiiblt.instafel.patcher.smali.SmaliUtils;
-import me.mamiiblt.instafel.patcher.source.PConfig;
-import me.mamiiblt.instafel.patcher.source.PEnvironment;
 import me.mamiiblt.instafel.patcher.utils.*;
 import me.mamiiblt.instafel.patcher.utils.patch.*;
 import me.mamiiblt.instafel.patcher.utils.sub.PublicResHelper;
@@ -33,7 +31,8 @@ import me.mamiiblt.instafel.patcher.utils.sub.PublicResHelper.LastResourceIDs;
     shortname = "copy_instafel_src",
     desc = "This patch needs to executed for use Instafel stuffs",
     author = "mamiiblt",
-    listable = false
+    listable = false,
+    runnable = false
 )
 public class CopyInstafelSources extends InstafelPatch {
 

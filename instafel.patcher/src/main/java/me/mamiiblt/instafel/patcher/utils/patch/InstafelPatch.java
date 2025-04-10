@@ -8,7 +8,7 @@ import me.mamiiblt.instafel.patcher.utils.Log;
 
 public abstract class InstafelPatch {
     public String name, author, description, shortname;
-    public boolean listable = true;
+    public boolean listable = true, runnable = true;
     public List<InstafelTask> tasks;
 
     public InstafelPatch() {
@@ -20,8 +20,9 @@ public abstract class InstafelPatch {
                 this.description = patchInfo.desc();
                 this.shortname = patchInfo.shortname();
                 this.listable = patchInfo.listable();
+                this.runnable = patchInfo.runnable();
             } else {
-                Log.severe("Please add PatchInfo for running patches normally.");
+                Log.severe("Please add PatchInfo for running patches");
                 System.exit(-1);
             }
     

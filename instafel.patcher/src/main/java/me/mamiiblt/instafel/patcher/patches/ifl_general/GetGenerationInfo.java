@@ -20,7 +20,8 @@ import okhttp3.Response;
     shortname = "get_generation_info",
     desc = "Grab IFL Version and Generation ID from API",
     author = "mamiiblt",
-    listable = false
+    listable = false,
+    runnable = false
 )
 public class GetGenerationInfo extends InstafelPatch {
 

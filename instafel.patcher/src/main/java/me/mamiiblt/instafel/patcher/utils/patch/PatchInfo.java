@@ -10,4 +10,5 @@ public @interface PatchInfo {
     String desc();
     String shortname();
     boolean listable();
+    boolean runnable();
 }

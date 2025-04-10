@@ -17,7 +17,8 @@ import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
     shortname = "unlock_developer_options",
     desc = "You can unlock developer options with applying this patch!",
     author = "mamiiblt",
-    listable = true
+    listable = true,
+    runnable = true
 )
 public class UnlockDeveloperOptions extends InstafelPatch {
 

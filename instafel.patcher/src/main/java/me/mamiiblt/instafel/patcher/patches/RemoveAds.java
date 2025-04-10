@@ -20,7 +20,8 @@ import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
     shortname = "remove_ads",
     desc = "Remove Ads in Instagram",
     author = "mamiiblt",
-    listable = true
+    listable = true,
+    runnable = true
 )
 public class RemoveAds extends InstafelPatch {
 

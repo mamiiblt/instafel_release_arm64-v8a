@@ -1,4 +1,4 @@
-package me.mamiiblt.instafel.patcher.patches.ifl_general;
+package me.mamiiblt.instafel.patcher.patches;
 
 import java.io.File;
 import java.util.HashMap;
@@ -17,12 +17,18 @@ import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatch;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelTask;
 import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
 
+/*
+ * This patch nees to be applied by APK Builder, so don't run
+ * manually for some reasons.
+ */
+
 @PatchInfo (
     name = "Configure App Environment",
     shortname = "configure_app_env",
     desc = "This patch must be applied for Instafel Menu",
     author = "mamiiblt",
-    listable = false
+    listable = false,
+    runnable = false
 )
 public class ConfigureAppEnvironment extends InstafelPatch {
 
@@ -61,7 +67,7 @@ public class ConfigureAppEnvironment extends InstafelPatch {
             pairs.put("_pcommit_", Environment.PROP_COMMIT_HASH);
             pairs.put("_ptag", Environment.PROP_PROJECT_TAG);
             pairs.put("_pversion_", "v" + Environment.PROP_VERSION_STRING);
-            pairs.put("_patches_", "aaaaa,bbbbb,ccccc,ddddd,eeeee,ffff,gggg,dddd,gggg,hhhh,jjjj");
+            pairs.put("_patches_", Environment.PEnvironment.getString(PEnvironment.Keys.APPLIED_PATCHES, "No any patch applied."));
 
             for (Map.Entry<String, String> prop : pairs.entrySet()) {
                 if (prop.getValue().equals("empty")) {

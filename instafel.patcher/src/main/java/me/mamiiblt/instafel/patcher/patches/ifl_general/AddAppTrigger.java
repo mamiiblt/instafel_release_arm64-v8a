@@ -19,7 +19,8 @@ import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
     shortname = "add_app_trigger",
     desc = "This patch must be applied for Instafel Stuffs",
     author = "mamiiblt",
-    listable = false
+    listable = false,
+    runnable = false
 )
 public class AddAppTrigger extends InstafelPatch {
 

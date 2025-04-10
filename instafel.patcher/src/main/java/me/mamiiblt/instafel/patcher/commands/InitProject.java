@@ -28,6 +28,12 @@ public class InitProject implements Command {
                     sourceManager.decompile(new ExtFile(
                         Utils.mergePaths(apkPath.getAbsolutePath())
                     ));
+
+                    File dwBin = new File(Utils.mergePaths(Environment.PROJECT_DIR, "assets", "drawables.bin"));
+                    if (dwBin.exists()) {
+                        dwBin.delete();
+                    }
+
                     sourceManager.createConfigAndEnvFile();
                     Log.info("Project succesfully created");
                 } else {
