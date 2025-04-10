@@ -35,15 +35,17 @@ public class SourceManager {
         Log.info("APK decompiled succesfully");
     }
 
-    public void build() throws AndrolibException, IOException {
+    public void build(String fname) throws AndrolibException, IOException {
         Log.info("Building APK");
         File buildDir = new File(Utils.mergePaths(Environment.PROJECT_DIR, "build"));
-        FileUtils.forceMkdir(buildDir);
+        if (!buildDir.exists()) {
+            FileUtils.forceMkdir(buildDir);
+        }
         ApkBuilder apkBuilder = new ApkBuilder(
             new ExtFile(
                 Utils.mergePaths(Environment.PROJECT_DIR, "sources")
             ), config);
-        apkBuilder.build(new File(Utils.mergePaths(buildDir.getAbsolutePath(), "ig_build.apk")));
+        apkBuilder.build(new File(Utils.mergePaths(buildDir.getAbsolutePath(), fname)));
         Log.info("APK builded succesfully");
     }
 

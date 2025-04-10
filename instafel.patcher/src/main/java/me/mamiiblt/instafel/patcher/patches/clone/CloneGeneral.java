@@ -14,7 +14,6 @@ import javax.xml.transform.TransformerException;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.FalseFileFilter;
-import org.apache.commons.io.filefilter.IOFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.json.JSONArray;
 import org.w3c.dom.Document;
@@ -86,15 +85,15 @@ public class CloneGeneral extends InstafelPatch {
                         copyAssetFromResources("/clone_assets/ifl_clone_background.png", new File(
                             fBackground.getAbsolutePath().replace("sources", "clone_ref")
                         ));
+                        Log.info("Background copied to clone_ref in " + dir.getName());
                     }
-                    Log.info("Background copied to clone_ref in " + dir.getName());
                     File fForeground = new File(Utils.mergePaths(dir.getAbsolutePath(), "ig_launcher_foreground.png"));
                     if (fForeground.exists()) {
                         copyAssetFromResources("/clone_assets/ifl_clone_foreground.png", new File(
                             fForeground.getAbsolutePath().replace("sources", "clone_ref")
                         ));
+                        Log.info("Foreground copied to clone_ref in " + dir.getName());
                     }
-                    Log.info("Foreground copied to clone_ref in " + dir.getName());
                 }
             }
             success("Icon images succesfully copied.");

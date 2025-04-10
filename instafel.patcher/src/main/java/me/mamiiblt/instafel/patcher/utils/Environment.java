@@ -1,5 +1,6 @@
 package me.mamiiblt.instafel.patcher.utils;
 
+import java.io.File;
 import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.Properties;
@@ -39,5 +40,31 @@ public class Environment {
         System.out.println("Instafel Patcher v" + PROP_VERSION_STRING);
         System.out.println("by mamiiblt");
         System.out.println("");
+    }
+
+    public static PEnvironment getEnv() {
+        try {
+            return new PEnvironment(new File(
+                Utils.mergePaths(Environment.PROJECT_DIR, "env.properties")
+            ));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.severe("Error while loading environment file.");
+            System.exit(-1);
+            return null;
+        }
+    }
+
+    public static PConfig getConfig() {
+        try {
+            return new PConfig(new File(
+                Utils.mergePaths(Environment.PROJECT_DIR, "config.properties")
+            ));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.severe("Error while loading configuration file.");
+            System.exit(-1);
+            return null;
+        }
     }
 }

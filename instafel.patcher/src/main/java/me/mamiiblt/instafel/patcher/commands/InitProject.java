@@ -29,7 +29,7 @@ public class InitProject implements Command {
                         Utils.mergePaths(apkPath.getAbsolutePath())
                     ));
 
-                    File dwBin = new File(Utils.mergePaths(Environment.PROJECT_DIR, "assets", "drawables.bin"));
+                    File dwBin = new File(Utils.mergePaths(Environment.PROJECT_DIR, "sources", "assets", "drawables.bin"));
                     if (dwBin.exists()) {
                         dwBin.delete();
                     }

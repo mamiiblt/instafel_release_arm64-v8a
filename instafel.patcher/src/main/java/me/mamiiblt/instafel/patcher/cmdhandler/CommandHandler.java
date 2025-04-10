@@ -9,7 +9,7 @@ import me.mamiiblt.instafel.patcher.commands.HelpCmd;
 import me.mamiiblt.instafel.patcher.commands.InitProject;
 import me.mamiiblt.instafel.patcher.commands.ListPatches;
 import me.mamiiblt.instafel.patcher.commands.RunPatch;
-import me.mamiiblt.instafel.patcher.commands.VersionCmd;
+import me.mamiiblt.instafel.patcher.commands.AboutCmd;
 import me.mamiiblt.instafel.patcher.utils.Environment;
 
 public class CommandHandler {
@@ -27,7 +27,7 @@ public class CommandHandler {
             System.out.println("Use `help` command for list all commands.");
         } else {
             String command = args[0];
-            if (!command.equals("version")) {
+            if (!command.equals("about")) {
                 Environment.printPatcherHeader();
             }
             String[] commandArgs = new String[args.length - 1];
@@ -51,7 +51,7 @@ public class CommandHandler {
         commands.put("list", new ListPatches());
         commands.put("cwith", new InitProject());
         commands.put("build", new BuildProject());
-        commands.put("version", new VersionCmd());
+        commands.put("about", new AboutCmd());
         commands.put("help", new HelpCmd());
     }
 }

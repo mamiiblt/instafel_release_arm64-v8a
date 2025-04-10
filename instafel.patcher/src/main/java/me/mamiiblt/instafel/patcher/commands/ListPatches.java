@@ -21,7 +21,7 @@ public class ListPatches implements Command {
             List<PatchInfo> patchInfos = PatchLoader.getPatchInfos();
             for (PatchInfo info : patchInfos) {
                 if (info.listable() != false) {
-                    System.out.println("    " + getPatchInfoString(info)); 
+                    System.out.println("    • " + getPatchInfoString(info)); 
                 }
             }
 
@@ -30,7 +30,7 @@ public class ListPatches implements Command {
             List<PatchGroupInfo> patchGroupInfos = PatchLoader.getPatchGroupInfos();
             for (PatchGroupInfo patchGroupInfo : patchGroupInfos) {
                 InstafelPatchGroup group = PatchLoader.findPatchGroupByShortname(patchGroupInfo.shortname());
-                System.out.println("    " + patchGroupInfo.name() + " (" + patchGroupInfo.shortname() + ") by " + patchGroupInfo.author());
+                System.out.println("    • " + patchGroupInfo.name() + " (" + patchGroupInfo.shortname() + ")");
 
                 group.loadPatches();
                 for (Class<? extends InstafelPatch> patch : group.patches) {
@@ -49,6 +49,6 @@ public class ListPatches implements Command {
     }
 
     private String getPatchInfoString(PatchInfo info) {
-        return info.name() + " (" + info.shortname() + ") by " + info.author();
+        return info.name() + " (" + info.shortname() + ")";
     }
 }
