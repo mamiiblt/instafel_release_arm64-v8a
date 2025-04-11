@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import me.mamiiblt.instafel.patcher.utils.Environment;
+import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.PropertyManager;
 import me.mamiiblt.instafel.patcher.utils.Utils;
 
@@ -24,25 +25,33 @@ public class PEnvironment {
         APPLIED_PATCHES
     }
 
-    private static String SAVE_STR = "Update Environment File";
-    File file; 
-    PropertyManager propertyManager;
+    public static String SAVE_STR = "Update Environment File";
+    public static File file; 
+    public static PropertyManager propertyManager;
 
-    public PEnvironment(File envFile) throws IOException {
-        this.file = envFile;
-        this.propertyManager = new PropertyManager(file);
+    public static void setupEnv() {
+        try {
+            file = new File(
+                Utils.mergePaths(Environment.PROJECT_DIR, "env.properties")
+            );
+            propertyManager = new PropertyManager(file);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.severe("Error while loading environment file.");
+            System.exit(-1);
+        }
     }
 
-    public void saveEnv() {
+    public static void saveProperties() {
         propertyManager.save(SAVE_STR);
     }
 
-    public String getString(Keys key, String defaultValue) {
+    public static String getString(Keys key, String defaultValue) {
         String value = propertyManager.getString(key.toString(), defaultValue);
         return value;
     }
 
-    public int getInteger(Keys key, int defaultValue) {
+    public static int getInteger(Keys key, int defaultValue) {
         try {
             return Integer.parseInt(propertyManager.getString(key.toString(), String.valueOf(defaultValue)));
         } catch (NumberFormatException e) {
@@ -50,36 +59,36 @@ public class PEnvironment {
         }
     }
 
-    public boolean getBoolean(Keys key, boolean defaultValue) {
+    public static boolean getBoolean(Keys key, boolean defaultValue) {
         return Boolean.parseBoolean(propertyManager.getString(key.toString(), String.valueOf(defaultValue)));
     }
 
-    public void setString(Keys key, String value) {
-        propertyManager.addString(key.toString(), value, SAVE_STR);
+    public static void setString(Keys key, String value) {
+        propertyManager.addString(key.toString(), value);
     }
 
-    public void setInteger(Keys key, int value) {
-        propertyManager.addInteger(key.toString(), value, SAVE_STR);
+    public static void setInteger(Keys key, int value) {
+        propertyManager.addInteger(key.toString(), value);
     }
 
-    public void setBoolean(Keys key, boolean value) {
-        propertyManager.addBoolean(key.toString(), value, SAVE_STR);
+    public static void setBoolean(Keys key, boolean value) {
+        propertyManager.addBoolean(key.toString(), value);
     }
 
-    public void createDefaultEnvFile() throws StreamReadException, DatabindException, IOException {
-        propertyManager.add(Keys.API_BASE.toString(), "api.mamiiblt.me/ifl", SAVE_STR);
-        propertyManager.add(Keys.APPLIED_PATCHES.toString(), "", SAVE_STR);
+    public static void createDefaultEnvFile() throws StreamReadException, DatabindException, IOException {
+        propertyManager.addString(Keys.API_BASE.toString(), "api.mamiiblt.me/ifl");
+        propertyManager.addString(Keys.APPLIED_PATCHES.toString(), "");
         setIgVerCodeAndVersion();
     }
 
-    private void setIgVerCodeAndVersion() throws StreamReadException, DatabindException, IOException {
+    private static void setIgVerCodeAndVersion() throws StreamReadException, DatabindException, IOException {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         
         JsonNode root = mapper.readTree(new File(
             Utils.mergePaths(Environment.PROJECT_DIR, "sources", "apktool.yml")
         )).get("versionInfo");
         
-        propertyManager.add(Keys.INSTAGRAM_VERSION.toString(), root.get("versionName").asText(), SAVE_STR);
-        propertyManager.add(Keys.INSTAGRAM_VERSION_CODE.toString(), root.get("versionCode").asText(), SAVE_STR);
+        propertyManager.addString(Keys.INSTAGRAM_VERSION.toString(), root.get("versionName").asText());
+        propertyManager.addString(Keys.INSTAGRAM_VERSION_CODE.toString(), root.get("versionCode").asText());
     }
 }

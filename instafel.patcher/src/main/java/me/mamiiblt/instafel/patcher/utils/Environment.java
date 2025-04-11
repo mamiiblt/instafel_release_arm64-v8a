@@ -15,8 +15,6 @@ public class Environment {
     public static String PROP_PROJECT_TAG = null;   
     public static String USER_DIR = System.getProperty("user.dir"); 
     public static String PROJECT_DIR = null;
-    public static PEnvironment PEnvironment = null;
-    public static PConfig PConfig = null;
     public static String[] INSTAFEL_LOCALES = {"tr", "de", "el", "fr", "hi", "hu", "pt", "es"};
     public static String SPERATOR_STR = "---------------------------";
 
@@ -40,31 +38,5 @@ public class Environment {
         System.out.println("Instafel Patcher v" + PROP_VERSION_STRING);
         System.out.println("by mamiiblt");
         System.out.println("");
-    }
-
-    public static PEnvironment getEnv() {
-        try {
-            return new PEnvironment(new File(
-                Utils.mergePaths(Environment.PROJECT_DIR, "env.properties")
-            ));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.severe("Error while loading environment file.");
-            System.exit(-1);
-            return null;
-        }
-    }
-
-    public static PConfig getConfig() {
-        try {
-            return new PConfig(new File(
-                Utils.mergePaths(Environment.PROJECT_DIR, "config.properties")
-            ));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.severe("Error while loading configuration file.");
-            System.exit(-1);
-            return null;
-        }
     }
 }

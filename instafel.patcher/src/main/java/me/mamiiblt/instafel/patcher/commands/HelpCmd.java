@@ -14,10 +14,10 @@ public class HelpCmd implements Command {
             "  info - Shows patch info details",
             "  init <apk file> - Creates an workdir with Instagram APK",
             "  run <dir> <patch name> - Run selected patch",
-            "  sign <dir> - Signs builded APKs in build folder.",
+            "  build <dir> - Bild selected workdir",
             "",
-            "For guide, visit this link,",
-            "https://instafel.mamiiblt.me/guide/patcher-usage"
+            "For guide about patcher, visit this link,",
+            "https://github.com/mamiiblt/instafel"
         };
 
         for (String line : lines) {

@@ -2,12 +2,14 @@ package me.mamiiblt.instafel.patcher.source;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Properties;
 
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 
+import me.mamiiblt.instafel.patcher.utils.Environment;
+import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.PropertyManager;
+import me.mamiiblt.instafel.patcher.utils.Utils;
 
 public class PConfig {
     public static enum Keys {
@@ -23,63 +25,60 @@ public class PConfig {
         keystore_keypass
     }
 
-    private static String UPDATE_STR = "Updated Config";
-    File file; 
-    PropertyManager propertyManager;
-    Properties properties;
+    public static String UPDATE_STR = "Updated Config";
+    public static File file; 
+    public static PropertyManager propertyManager;
 
-    public PConfig(File envFile) throws IOException {
-        this.file = envFile;
-        this.propertyManager = new PropertyManager(file);
-        this.properties = propertyManager.getProperties();
-    }
-
-    public void saveConfig() {
-        propertyManager.save(UPDATE_STR);
-    }
-
-    public String getString(Keys key, String defaultValue) {
-        return properties.getProperty(key.toString(), defaultValue);
-    }
-
-    public int getInteger(Keys key, int defaultValue) {
+    public static void setupConfig() {
         try {
-            return Integer.parseInt(properties.getProperty(key.toString(), String.valueOf(defaultValue)));
-        } catch (NumberFormatException e) {
-            return defaultValue;
+            file = new File(Utils.mergePaths(Environment.PROJECT_DIR, "config.properties"));
+            propertyManager = new PropertyManager(file);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.severe("Error while loading configuration file.");
+            System.exit(-1);
         }
     }
 
-    public boolean getBoolean(Keys key, boolean defaultValue) {
-        return Boolean.parseBoolean(properties.getProperty(key.toString(), String.valueOf(defaultValue)));
+    public static void saveProperties() {
+        propertyManager.save(UPDATE_STR);
     }
 
-    public void setString(Keys key, String value) {
-        properties.setProperty(key.toString(), value);
-        propertyManager.save("Update Config File");
+    public static String getString(Keys key, String defaultValue) {
+        return propertyManager.getString(key.toString(), defaultValue);
     }
 
-    public void setInteger(Keys key, int value) {
-        properties.setProperty(key.toString(), String.valueOf(value));
-        propertyManager.save("Update Config File");
+    public static int getInteger(Keys key, int defaultValue) {
+        return propertyManager.getInteger(key.toString(), defaultValue);
     }
 
-    public void setBoolean(Keys key, boolean value) {
-        properties.setProperty(key.toString(), String.valueOf(value));
-        propertyManager.save("Update Config File");
+    public static boolean getBoolean(Keys key, boolean defaultValue) {
+        return propertyManager.getBoolean(key.toString(), defaultValue);
     }
 
-    public void createDefaultConfigFile() throws StreamReadException, DatabindException, IOException {
-        propertyManager.add(Keys.manifest_version.toString(), "1", UPDATE_STR);
-        propertyManager.addString(Keys.source_dir.toString(), "/sources", UPDATE_STR);
-        propertyManager.addBoolean(Keys.use_external_ifl_source.toString(), false, UPDATE_STR);
-        propertyManager.addBoolean(Keys.prod_mode.toString(), false, UPDATE_STR);
-        propertyManager.addString(Keys.manager_token.toString(), "not_needed", UPDATE_STR);
-        propertyManager.addBoolean(Keys.use_debug_keystore.toString(), true, UPDATE_STR);
-        propertyManager.addString(Keys.keystore_alias.toString(), "", UPDATE_STR);
-        propertyManager.addString(Keys.keystore_file.toString(), "", UPDATE_STR);
-        propertyManager.addString(Keys.keystore_keypass.toString(), "", UPDATE_STR);
-        propertyManager.addString(Keys.keystore_pass.toString(), "", UPDATE_STR);
-        propertyManager.save("Update Config File");
+    public static void setString(Keys key, String value) {
+        propertyManager.addString(key.toString(), value);
+    }
+
+    public static void setInteger(Keys key, int value) {
+        propertyManager.addInteger(key.toString(), value);
+    }
+
+    public static void setBoolean(Keys key, boolean value) {
+        propertyManager.addBoolean(key.toString(), value);
+    }
+
+    public static void createDefaultConfigFile() throws StreamReadException, DatabindException, IOException {
+        propertyManager.addInteger(Keys.manifest_version.toString(), 1);
+        propertyManager.addString(Keys.source_dir.toString(), "/sources");
+        propertyManager.addBoolean(Keys.use_external_ifl_source.toString(), false);
+        propertyManager.addBoolean(Keys.prod_mode.toString(), false);
+        propertyManager.addString(Keys.manager_token.toString(), "not_needed");
+        propertyManager.addBoolean(Keys.use_debug_keystore.toString(), true);
+        propertyManager.addString(Keys.keystore_alias.toString(), "");
+        propertyManager.addString(Keys.keystore_file.toString(), "");
+        propertyManager.addString(Keys.keystore_keypass.toString(), "");
+        propertyManager.addString(Keys.keystore_pass.toString(), "");
+        saveProperties();
     }
 }

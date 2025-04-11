@@ -6,7 +6,6 @@ import org.json.JSONObject;
 
 import me.mamiiblt.instafel.patcher.source.PConfig;
 import me.mamiiblt.instafel.patcher.source.PEnvironment;
-import me.mamiiblt.instafel.patcher.utils.Environment;
 import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatch;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelTask;
@@ -31,8 +30,8 @@ public class GetGenerationInfo extends InstafelPatch {
 
     @Override
     public List<InstafelTask> initializeTasks() throws Exception {
-        this.API_BASE = Environment.PEnvironment.getString(PEnvironment.Keys.API_BASE, "api.mamiiblt.me/ifl");
-        this.isProdMode = Environment.PConfig.getBoolean(PConfig.Keys.prod_mode, isProdMode);
+        this.API_BASE = PEnvironment.getString(PEnvironment.Keys.API_BASE, "api.mamiiblt.me/ifl");
+        this.isProdMode = PConfig.getBoolean(PConfig.Keys.prod_mode, isProdMode);
         return List.of(
             getIflVersion,
             getGenerationID
@@ -46,7 +45,7 @@ public class GetGenerationInfo extends InstafelPatch {
             if (isProdMode) {
                 Request iflVersionRequest = new Request.Builder()
                     .url("https://" + API_BASE + "/manager_new/lastInstafelData")
-                    .addHeader("Authorization", Environment.PConfig.getString(PConfig.Keys.manager_token, "null"))
+                    .addHeader("Authorization", PConfig.getString(PConfig.Keys.manager_token, "null"))
                     .build();
                 Response res = httpClient.newCall(iflVersionRequest).execute();
 
@@ -56,7 +55,7 @@ public class GetGenerationInfo extends InstafelPatch {
 
                 JSONObject iflVRequestParsed = new JSONObject(res.body().string());
                 int IFL_VERSION = iflVRequestParsed.getInt("ifl_version");
-                Environment.PEnvironment.setInteger(PEnvironment.Keys.INSTAFEL_VERSION, (IFL_VERSION + 1));
+                PEnvironment.setInteger(PEnvironment.Keys.INSTAFEL_VERSION, (IFL_VERSION + 1));
                 Log.info("Instafel version for this generation is " + (IFL_VERSION + 1));
                 success("IFL version succesfully saved to env");
             } else {
@@ -72,7 +71,7 @@ public class GetGenerationInfo extends InstafelPatch {
             if (isProdMode) {
                 Request genIDRequest = new Request.Builder()
                 .url("https://" + API_BASE + "/manager_new/createGenerationId")
-                .addHeader("Authorization", Environment.PConfig.getString(PConfig.Keys.manager_token, "null"))
+                .addHeader("Authorization", PConfig.getString(PConfig.Keys.manager_token, "null"))
                 .build();
                 Response res = httpClient.newCall(genIDRequest).execute();
 
@@ -82,7 +81,7 @@ public class GetGenerationInfo extends InstafelPatch {
 
                 JSONObject genIdResParsed = new JSONObject(res.body().string());
                 String GEN_ID = genIdResParsed.getString("generation_id");
-                Environment.PEnvironment.setString(PEnvironment.Keys.GENID, GEN_ID);
+                PEnvironment.setString(PEnvironment.Keys.GENID, GEN_ID);
                 Log.info("Generation ID for this generation is " + GEN_ID);
                 success("Generation ID succesfully saved to env");
             } else {

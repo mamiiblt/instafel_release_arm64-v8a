@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.mamiiblt.instafel.patcher.cmdhandler.Command;
+import me.mamiiblt.instafel.patcher.source.PConfig;
 import me.mamiiblt.instafel.patcher.source.PEnvironment;
 import me.mamiiblt.instafel.patcher.source.WorkingDir;
 import me.mamiiblt.instafel.patcher.utils.Environment;
@@ -21,8 +22,8 @@ public class RunPatch implements Command {
 
         String wdirFolder = args[0];
         Environment.PROJECT_DIR = WorkingDir.getExistsWorkingDir(wdirFolder);
-        Environment.PEnvironment = Environment.getEnv();
-        Environment.PConfig = Environment.getConfig();
+        PEnvironment.setupEnv();
+        PConfig.setupConfig();
 
         List<InstafelPatch> runnablePatches = new ArrayList<>();
         Log.info("Loading patches...");
@@ -92,12 +93,14 @@ public class RunPatch implements Command {
                 }
             }
             Log.info("");
-            String patches = Environment.PEnvironment.getString(PEnvironment.Keys.APPLIED_PATCHES, "");
-            Environment.PEnvironment.setString(PEnvironment.Keys.APPLIED_PATCHES, patches.equals("") ? patches + patch.shortname : patches + "," + patch.shortname);
+            String patches = PEnvironment.getString(PEnvironment.Keys.APPLIED_PATCHES, "");
+            PEnvironment.setString(PEnvironment.Keys.APPLIED_PATCHES, patches.equals("") ? patches + patch.shortname : patches + "," + patch.shortname);
             Log.info("All tasks runned succesfully.");
             Log.info(Environment.SPERATOR_STR);
         }
         Log.info("");
         Log.info("All patches executed succesfully.");
+        PEnvironment.saveProperties();
+        PConfig.saveProperties();
     }
 }

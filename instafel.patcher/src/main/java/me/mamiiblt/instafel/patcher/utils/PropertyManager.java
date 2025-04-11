@@ -29,7 +29,6 @@ public class PropertyManager {
 
     public void add(String key, Object value, String comment) {
         properties.put(key, value);
-        save(comment);
     }
 
     public Properties getProperties() {
@@ -52,19 +51,16 @@ public class PropertyManager {
         return Boolean.parseBoolean(properties.getProperty(key, String.valueOf(defaultValue)));
     }
 
-    public void addString(String key, String value, String comment) {
+    public void addString(String key, String value) {
         properties.setProperty(key, value);
-        save(comment);
     }
 
-    public void addInteger(String key, int value, String comment) {
+    public void addInteger(String key, int value) {
         properties.setProperty(key, String.valueOf(value));
-        save(comment);
     }
 
-    public void addBoolean(String key, boolean value, String comment) {
+    public void addBoolean(String key, boolean value) {
         properties.setProperty(key, String.valueOf(value));
-        save(comment);
     }
 
     public void save(String comment) {

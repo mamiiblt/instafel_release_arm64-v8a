@@ -51,16 +51,12 @@ public class SourceManager {
 
     public void createConfigAndEnvFile() throws IOException {
         File pEnvFile = new File(Utils.mergePaths(Environment.PROJECT_DIR, "env.properties"));
-        PEnvironment pEnvironment;
         pEnvFile.createNewFile();
-        pEnvironment = new PEnvironment(pEnvFile);
-        pEnvironment.createDefaultEnvFile();
+        PEnvironment.createDefaultEnvFile();
 
         File pConfigFile = new File(Utils.mergePaths(Environment.PROJECT_DIR, "config.properties"));
-        PConfig pConfig;
         pConfigFile.createNewFile();
-        pConfig = new PConfig(pConfigFile);
-        pConfig.createDefaultConfigFile();
+        PConfig.createDefaultConfigFile();
     }
     
     public Config getConfig() {
