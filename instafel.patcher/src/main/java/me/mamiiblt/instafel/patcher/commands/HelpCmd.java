@@ -9,11 +9,12 @@ public class HelpCmd implements Command {
         String[] lines = {
             "usage:",
             "  help - Shows help command",
-            "  version - Shows patcher, baksmali version etc.",
+            "  about - Shows patcher, baksmali version etc.",
             "  list - Lists available patches",
             "  info - Shows patch info details",
-            "  cwith <apk file> - Creates an workdir with Instagram APK",
+            "  init <apk file> - Creates an workdir with Instagram APK",
             "  run <dir> <patch name> - Run selected patch",
+            "  sign <dir> - Signs builded APKs in build folder.",
             "",
             "For guide, visit this link,",
             "https://instafel.mamiiblt.me/guide/patcher-usage"

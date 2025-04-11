@@ -15,7 +15,12 @@ public class PConfig {
         source_dir,
         use_external_ifl_source,
         prod_mode,
-        manager_token
+        manager_token,
+        use_debug_keystore,
+        keystore_file,
+        keystore_pass,
+        keystore_alias,
+        keystore_keypass
     }
 
     private static String UPDATE_STR = "Updated Config";
@@ -70,6 +75,11 @@ public class PConfig {
         propertyManager.addBoolean(Keys.use_external_ifl_source.toString(), false, UPDATE_STR);
         propertyManager.addBoolean(Keys.prod_mode.toString(), false, UPDATE_STR);
         propertyManager.addString(Keys.manager_token.toString(), "not_needed", UPDATE_STR);
+        propertyManager.addBoolean(Keys.use_debug_keystore.toString(), true, UPDATE_STR);
+        propertyManager.addString(Keys.keystore_alias.toString(), "", UPDATE_STR);
+        propertyManager.addString(Keys.keystore_file.toString(), "", UPDATE_STR);
+        propertyManager.addString(Keys.keystore_keypass.toString(), "", UPDATE_STR);
+        propertyManager.addString(Keys.keystore_pass.toString(), "", UPDATE_STR);
         propertyManager.save("Update Config File");
     }
 }

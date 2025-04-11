@@ -9,6 +9,7 @@ import me.mamiiblt.instafel.patcher.commands.HelpCmd;
 import me.mamiiblt.instafel.patcher.commands.InitProject;
 import me.mamiiblt.instafel.patcher.commands.ListPatches;
 import me.mamiiblt.instafel.patcher.commands.RunPatch;
+import me.mamiiblt.instafel.patcher.commands.SignProject;
 import me.mamiiblt.instafel.patcher.commands.AboutCmd;
 import me.mamiiblt.instafel.patcher.utils.Environment;
 
@@ -49,8 +50,9 @@ public class CommandHandler {
         commands.put("csrc", new CreateIflSourceZip());
         commands.put("run", new RunPatch());
         commands.put("list", new ListPatches());
-        commands.put("cwith", new InitProject());
+        commands.put("init", new InitProject());
         commands.put("build", new BuildProject());
+        commands.put("sign", new SignProject());
         commands.put("about", new AboutCmd());
         commands.put("help", new HelpCmd());
     }
