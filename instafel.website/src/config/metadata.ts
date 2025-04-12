@@ -15,13 +15,10 @@ export const defaultMetadata: Metadata = {
   },
   description: SITE_CONFIG.description,
   keywords: [
-    "Next.js",
-    "React",
-    "JavaScript",
-    "TypeScript",
-    "Web Development",
-    "Blog",
-    "Portfolio",
+    "Instafel",
+    "Instagram Mod",
+    "Instagram",
+    "Alpha",
   ],
   authors: [
     {

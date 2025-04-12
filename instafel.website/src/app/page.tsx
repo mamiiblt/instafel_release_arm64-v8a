@@ -58,7 +58,7 @@ export default function Home() {
                   ease: "easeOut",
                 }}
               > 
-                  <div className="grid grid-cols-2 grid-rows-[auto_1fr] mb-6 gap-2">
+                  <div className="grid grid-cols-2 grid-rows-1 mb-2 gap-2">
   <Button
     asChild
     size={"lg"}
@@ -81,26 +81,39 @@ export default function Home() {
       Read Guide
     </Link>
   </Button>
+</div>
 
-  <Button
+
+<motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: 0.9,
+                  duration: 0.8,
+                  ease: "easeOut",
+                }}
+              > 
+              <Button
     asChild
     size="lg"
     variant={"gradient"}
-    className="flex justify-center items-center col-span-2"
+    className="flex justify-center items-center col-span-1 mb-11"
   >
     <Link href="https://t.me/instafel">
       <Telegram className="flex-shrink-0 w-4 h-4 mr-1" />
       Join Community
     </Link>
   </Button>
-</div>
               </motion.div>
+
+              </motion.div>
+
 
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
-                  delay: 0.9,
+                  delay: 0.13,
                   duration: 0.8,
                   ease: "easeOut",
                 }}
