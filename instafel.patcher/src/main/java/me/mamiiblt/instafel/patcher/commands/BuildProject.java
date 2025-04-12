@@ -205,31 +205,33 @@ public class BuildProject implements Command {
     private void replaceSourceFiles(boolean type) throws IOException {
         File originalTempDir = new File(Utils.mergePaths(Environment.PROJECT_DIR, "orig_temp"));
         FileUtils.forceMkdir(originalTempDir);
-            Collection<File> filesAndDirs = FileUtils.listFilesAndDirs(
+        Collection<File> filesAndDirs = FileUtils.listFilesAndDirs(
             cloneRefFolder,
             TrueFileFilter.TRUE,
             TrueFileFilter.TRUE
         );
 
         if (type) {
-            for (File file : filesAndDirs) {
-                if (!file.isDirectory()) {
-                    File origFile = new File(file.getAbsolutePath().replace("clone_ref", "sources"));
-                    FileUtils.moveFile(origFile, new File(origFile.getAbsolutePath().replace("sources", "orig_temp")));
-                    FileUtils.moveFile(file, origFile);
+            for (File cloneFile : filesAndDirs) {
+                if (!cloneFile.isDirectory()) {
+                    File sourceFile = new File(cloneFile.getAbsolutePath().replace("clone_ref", "sources"));
+                    File tempOrigFile = new File(cloneFile.getAbsolutePath().replace("clone_ref", "orig_temp"));
+                    FileUtils.copyFile(sourceFile, tempOrigFile);
+                    FileUtils.moveFile(cloneFile, sourceFile);
                 }
             }
         } else {
-            for (File file : filesAndDirs) {
-                if (!file.isDirectory()) {
-                    File cloneFile = new File(file.getAbsolutePath().replace("clone_ref", "sources"));
-                    cloneFile.delete();
-                    FileUtils.moveFile(new File(file.getAbsolutePath().replace("sources", "orig_temp")), cloneFile);
+            for (File cloneFile : filesAndDirs) {
+                if (!cloneFile.isDirectory()) {
+                    File originalFileFromTemp = new File(cloneFile.getAbsolutePath().replace("clone_ref", "orig_temp"));
+                    File originalFile = new File(cloneFile.getAbsolutePath().replace("clone_ref", "sources"));
+                    FileUtils.delete(cloneFile);
+                    FileUtils.copyFile(originalFileFromTemp, originalFile);
                 }
             }
         }
 
-        FileUtils.deleteDirectory(originalTempDir);
+        // FileUtils.deleteDirectory(originalTempDir);
     }
 
     private void updateInstafelEnv() throws IOException {

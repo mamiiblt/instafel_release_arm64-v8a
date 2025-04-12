@@ -5,6 +5,8 @@ import java.nio.file.Paths;
 
 import brut.directory.ExtFile;
 import me.mamiiblt.instafel.patcher.cmdhandler.Command;
+import me.mamiiblt.instafel.patcher.source.PConfig;
+import me.mamiiblt.instafel.patcher.source.PEnvironment;
 import me.mamiiblt.instafel.patcher.source.SourceManager;
 import me.mamiiblt.instafel.patcher.source.SourceUtils;
 import me.mamiiblt.instafel.patcher.source.WorkingDir;

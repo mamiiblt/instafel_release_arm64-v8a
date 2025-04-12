@@ -142,18 +142,6 @@ public class CloneGeneral extends InstafelPatch {
             }
             
             if (success) {
-                /*File cloneRefStringFile = new File(Utils.mergePaths(cloneRefFolder.getAbsolutePath(), 
-                    appStrings.getFile().getAbsolutePath().replace("sources", "clone_ref")));
-
-                FileUtils.forceMkdir(new File(
-                    Utils.mergePaths(cloneRefFolder.getAbsolutePath(), "res", "values")
-                ));
-                if (!cloneRefStringFile.exists()) {
-                    cloneRefStringFile.createNewFile();
-                }*/
-
-                //ResourceParser.buildXmlFile(appStrings.getDocument(), cloneRefStringFile);
-                
                 File cStringFile = new File(appStrings.getFile().getAbsolutePath().replace("sources", "clone_ref"));
                 FileUtils.copyFile(appStrings.getFile(), cStringFile);
                 ResourceParser.buildXmlFile(appStrings.getDocument(), cStringFile);
@@ -173,24 +161,27 @@ public class CloneGeneral extends InstafelPatch {
             permissions.addAll(ResourceParser.getElementsFromResFile(manifest, "permission"));
             permissions.addAll(ResourceParser.getElementsFromResFile(manifest, "uses-permission"));
 
-            for (Element perm : permissions) {
-                boolean ignoredPerm = false;
-                for (int i = 0; i < blacklistedPermissions.length(); i++) {
-                    String bPerm = blacklistedPermissions.getString(i);
-                    if (perm.getAttribute(ANDROID_NAME).contains(bPerm)) {
-                        ignoredPerm = true;
+            Iterator<Element> iterator = permissions.iterator();
+            while (iterator.hasNext()) {
+                Element perm = iterator.next();
+                for (int a = 0; a < blacklistedPermissions.length(); a++) {
+                    if (perm.getAttribute(ANDROID_NAME).startsWith(blacklistedPermissions.getString(a))) {
+                        iterator.remove();
+                        break;
                     }
                 }
+            }
 
-                if (ignoredPerm == false) {
-                    String value = perm.getAttribute(ANDROID_NAME);
-                    if (value.contains("com.instagram.android")) {
-                        String newValue = value.replace("com.instagram.android", NEW_PACKAGE_NAME);
-                        perm.setAttribute(ANDROID_NAME, newValue);
-                        Log.info("Permission updated, " + newValue);
-                    }                    
+            for (Element perm : permissions) {
+                String name = perm.getAttribute(ANDROID_NAME);
+
+                if (name.contains("com.instagram.android")) {
+                    name = name.replace("com.instagram.android", NEW_PACKAGE_NAME);
+                    perm.setAttribute(ANDROID_NAME, name);
+                    Log.info("Updated " + perm.getTagName() + " " + name);
                 }
             }
+
             updateRefManifest(manifest);
             success("Permissions succesfully updated");
         }
