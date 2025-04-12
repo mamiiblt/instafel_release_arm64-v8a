@@ -1,0 +1,47 @@
+name: Build & Deploy Website
+
+on:
+  push:
+    branches:
+      - main 
+    paths:
+      - 'instafel.website/**'
+      - 'config/**'
+      - 'settings.gradle.kts'
+      - '.gitignore'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest 
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'adoptopenjdk'
+
+      - name: Install deps
+        run: ./gradlew :instafel.website:install
+
+      - name: Build project
+        run: ./gradlew :instafel.website:build
+
+      - name: Archive build artifacts
+        run: |
+          mkdir output
+          cp -r build/libs/* output/
+
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel_token: ${{ secrets.VERCEL_API_TOKEN }}
+          vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel_org_id: ${{ secrets.VERCEL_ORG_ID }}
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_API_TOKEN }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
