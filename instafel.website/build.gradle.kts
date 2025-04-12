@@ -60,5 +60,5 @@ tasks.register("clear-cache") {
     )
 
     delete(filesToDelete)
-    println("Cache succesfully deleted")
+    println("Cache succesfully deleted.")
 }
