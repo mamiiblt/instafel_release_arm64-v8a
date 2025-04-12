@@ -40,7 +40,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/mamiiblt/instafel_release_arm64-v8a")
+            url = uri("https://maven.pkg.github.com/mamiiblt/instafel")
             credentials {
                 username = System.getenv("GH_USERNAME")
                 password = System.getenv("GH_TOKEN")
@@ -51,7 +51,7 @@ publishing {
         register<MavenPublication>("gpr") {
             groupId = "me.mamiiblt.instafel"
             artifactId = "patcher"
-            version = "$projectVersion"
+            version = "v$projectVersion"
             artifact(file("${project.projectDir}/output/ifl-patcher-v$projectVersion-$commitHash-$projectTag.jar"))
             
             pom {
