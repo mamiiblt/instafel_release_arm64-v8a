@@ -9,7 +9,6 @@ build
 .idea
 .vscode
 .vercel
-/instafel.website/package-lock.json
 
 # Ingore Config
 
