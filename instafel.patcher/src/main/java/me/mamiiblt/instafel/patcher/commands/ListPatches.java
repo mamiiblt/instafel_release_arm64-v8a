@@ -2,11 +2,8 @@ package me.mamiiblt.instafel.patcher.commands;
 
 import java.util.List;
 
-import com.android.tools.smali.smali.smaliParser.literal_return;
-
-import me.mamiiblt.instafel.patcher.cmdhandler.Command;
 import me.mamiiblt.instafel.patcher.utils.patch.PatchLoader;
-import me.mamiiblt.instafel.patcher.utils.Log;
+import me.mamiiblt.instafel.patcher.utils.cmdhandler.Command;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatch;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatchGroup;
 import me.mamiiblt.instafel.patcher.utils.patch.PatchGroupInfo;

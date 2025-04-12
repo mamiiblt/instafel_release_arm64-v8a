@@ -2,9 +2,9 @@ package me.mamiiblt.instafel.patcher.utils.patch;
 
 import java.util.List;
 
-import me.mamiiblt.instafel.patcher.smali.SmaliUtils;
 import me.mamiiblt.instafel.patcher.utils.Environment;
 import me.mamiiblt.instafel.patcher.utils.Log;
+import me.mamiiblt.instafel.patcher.utils.SmaliUtils;
 
 public abstract class InstafelPatch {
     public String name, author, description, shortname;

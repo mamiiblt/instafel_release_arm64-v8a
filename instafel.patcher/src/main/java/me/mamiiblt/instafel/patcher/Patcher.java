@@ -1,8 +1,8 @@
 package me.mamiiblt.instafel.patcher;
 
-import me.mamiiblt.instafel.patcher.cmdhandler.CommandHandler;
 import me.mamiiblt.instafel.patcher.utils.Environment;
 import me.mamiiblt.instafel.patcher.utils.Log;
+import me.mamiiblt.instafel.patcher.utils.cmdhandler.CommandHandler;
 
 public class Patcher {
     public static void main(String[] args)  {

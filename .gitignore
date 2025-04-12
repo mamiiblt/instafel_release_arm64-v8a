@@ -27,6 +27,7 @@ build
 /instafel.patcher/output
 /instafel.patcher/apktool.jar
 /instafel.patcher/bin
+/instafel.patcher/src/main/resources/patcher.properties
 
 # Instafel GPlayAPI
 

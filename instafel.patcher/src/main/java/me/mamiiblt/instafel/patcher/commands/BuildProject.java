@@ -16,8 +16,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import brut.androlib.exceptions.AndrolibException;
-import me.mamiiblt.instafel.patcher.cmdhandler.Command;
-import me.mamiiblt.instafel.patcher.smali.SmaliUtils;
 import me.mamiiblt.instafel.patcher.source.APKSigner;
 import me.mamiiblt.instafel.patcher.source.PConfig;
 import me.mamiiblt.instafel.patcher.source.PEnvironment;
@@ -26,7 +24,9 @@ import me.mamiiblt.instafel.patcher.source.SourceUtils;
 import me.mamiiblt.instafel.patcher.source.WorkingDir;
 import me.mamiiblt.instafel.patcher.utils.Environment;
 import me.mamiiblt.instafel.patcher.utils.Log;
+import me.mamiiblt.instafel.patcher.utils.SmaliUtils;
 import me.mamiiblt.instafel.patcher.utils.Utils;
+import me.mamiiblt.instafel.patcher.utils.cmdhandler.Command;
 
 public class BuildProject implements Command {
 

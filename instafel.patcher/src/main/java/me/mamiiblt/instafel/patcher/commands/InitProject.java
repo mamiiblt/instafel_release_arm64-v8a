@@ -4,7 +4,6 @@ import java.io.File;
 import java.nio.file.Paths;
 
 import brut.directory.ExtFile;
-import me.mamiiblt.instafel.patcher.cmdhandler.Command;
 import me.mamiiblt.instafel.patcher.source.PConfig;
 import me.mamiiblt.instafel.patcher.source.PEnvironment;
 import me.mamiiblt.instafel.patcher.source.SourceManager;
@@ -13,6 +12,7 @@ import me.mamiiblt.instafel.patcher.source.WorkingDir;
 import me.mamiiblt.instafel.patcher.utils.Environment;
 import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.Utils;
+import me.mamiiblt.instafel.patcher.utils.cmdhandler.Command;
 
 public class InitProject implements Command {
 

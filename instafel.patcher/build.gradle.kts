@@ -2,6 +2,7 @@ plugins {
     java
     application
     id("com.gradleup.shadow") version "8.3.6"
+    id("maven-publish")
 }
 
 /************************************************/
@@ -26,16 +27,61 @@ repositories {
 }
 
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
     implementation("org.json:json:20240303")
     implementation("commons-io:commons-io:2.18.0")
-    implementation("com.android.tools.smali:smali:3.0.9")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("org.apktool:apktool-lib:2.11.1")
     implementation("io.github.classgraph:classgraph:4.8.179")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.18.3")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.18.3")
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/mamiiblt/instafel_release_arm64-v8a")
+            credentials {
+                username = System.getenv("GH_USERNAME")
+                password = System.getenv("GH_TOKEN")
+            }
+        }
+    }
+    publications {
+        register<MavenPublication>("gpr") {
+            groupId = "me.mamiiblt.instafel"
+            artifactId = "patcher"
+            version = "v$projectVersion"
+            artifact(file("${project.projectDir}/output/ifl-patcher-v$projectVersion-$commitHash-$projectTag.jar"))
+            
+            pom {
+                name.set("Insafel Patcher")
+                description.set("Patch Instagram alpha APKs fastly!")
+                url.set("https://github.com/mamiiblt/instafel")
+
+                licenses {
+                    license {
+                        name.set("MIT License")
+                        url.set("https://opensource.org/licenses/MIT")
+                    }
+                }
+
+                developers {
+                    developer {
+                        id.set("mamiiblt")
+                        name.set("Muhammed Ali")
+                        email.set("mami@mamiiblt.me")
+                    }
+                }
+
+                scm {
+                    connection.set("scm:git:git://github.com/mamiiblt/instafel.git")
+                    developerConnection.set("scm:git:ssh://github.com/mamiiblt/instafel.git")
+                    url.set("https://github.com/mamiiblt/instafel")
+                }
+            }
+        }
+    }
 }
 
 application {
@@ -52,7 +98,6 @@ tasks.register("clear-cache") {
     val filesToDelete = listOf(
         file("${project.projectDir}/bin"),
         file("${project.projectDir}/build"),
-        // file("${project.projectDir}/output"),
     )
 
     delete(filesToDelete)

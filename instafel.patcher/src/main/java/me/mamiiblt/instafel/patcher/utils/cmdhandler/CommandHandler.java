@@ -1,4 +1,4 @@
-package me.mamiiblt.instafel.patcher.cmdhandler;
+package me.mamiiblt.instafel.patcher.utils.cmdhandler;
 
 import java.util.HashMap;
 import java.util.Map;

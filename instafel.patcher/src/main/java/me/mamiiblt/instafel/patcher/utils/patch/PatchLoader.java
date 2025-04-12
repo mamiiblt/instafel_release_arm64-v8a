@@ -28,9 +28,14 @@ public class PatchLoader {
                 if (!Modifier.isAbstract(clazz.getModifiers()) && clazz.isAnnotationPresent(PatchGroupInfo.class)) {
                     PatchGroupInfo info = clazz.getAnnotation(PatchGroupInfo.class);
                     
-                    if (info.shortname().equals(shortName)) {
+                    if (shortName.equals("all")) {
                         Constructor<?> constructor = clazz.getDeclaredConstructor();
                         return (InstafelPatchGroup) constructor.newInstance();
+                    } else {
+                        if (info.shortname().equals(shortName)) {
+                            Constructor<?> constructor = clazz.getDeclaredConstructor();
+                            return (InstafelPatchGroup) constructor.newInstance();
+                        }
                     }
                 }
             }
@@ -53,9 +58,14 @@ public class PatchLoader {
                 if (!Modifier.isAbstract(clazz.getModifiers()) && clazz.isAnnotationPresent(PatchInfo.class)) {
                     PatchInfo info = clazz.getAnnotation(PatchInfo.class);
                     
-                    if (info.shortname().equals(shortPatchName)) {
+                    if (shortPatchName.equals("all")) {
                         Constructor<?> constructor = clazz.getDeclaredConstructor();
                         return (InstafelPatch) constructor.newInstance();
+                    } else {
+                        if (info.shortname().equals(shortPatchName)) {
+                            Constructor<?> constructor = clazz.getDeclaredConstructor();
+                            return (InstafelPatch) constructor.newInstance();
+                        }
                     }
                 }
             }

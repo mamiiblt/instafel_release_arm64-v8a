@@ -4,18 +4,20 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.mamiiblt.instafel.patcher.cmdhandler.Command;
 import me.mamiiblt.instafel.patcher.source.PConfig;
 import me.mamiiblt.instafel.patcher.source.PEnvironment;
 import me.mamiiblt.instafel.patcher.source.WorkingDir;
 import me.mamiiblt.instafel.patcher.utils.Environment;
 import me.mamiiblt.instafel.patcher.utils.Log;
+import me.mamiiblt.instafel.patcher.utils.cmdhandler.Command;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatch;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatchGroup;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelTask;
 import me.mamiiblt.instafel.patcher.utils.patch.PatchLoader;
 
 public class RunPatch implements Command {
+
+    private boolean runAll = false;
 
     @Override
     public void execute(String[] args) {
@@ -28,15 +30,26 @@ public class RunPatch implements Command {
         List<InstafelPatch> runnablePatches = new ArrayList<>();
         Log.info("Loading patches...");
         for (int i = 1; i < args.length; i++) {
-            String shortName = args[i];
+            boolean findResult = false;
+            String shortName = "";
+            if (args[1].equals("all")) {
+                runAll = true;
+                shortName = "all";
+                Log.info("Loading all patches...");
+            } else {
+                shortName = args[i];
+            }
             
             InstafelPatch patch = PatchLoader.findPatchByShortname(shortName);
             if (patch != null) {
                 if (patch.runnable == true) {
                     Log.info("Patch, " + patch.name + " loaded");
                     runnablePatches.add(patch);
+                    findResult = true;
                 } else {
-                    Log.info("Patch " + patch.shortname + " is not runnable in single mode!");
+                    if (runAll == false) {
+                        Log.info("Patch " + patch.shortname + " is not runnable in single mode!");
+                    }
                 }
             } 
 
@@ -50,11 +63,15 @@ public class RunPatch implements Command {
                         Log.info("Patch, " + gnPatch.name + " loaded from " + group.name);
                         runnablePatches.add(gnPatch);
                     }
+                    findResult = true;
                 } catch (Exception e) {
                     e.printStackTrace();
                     Log.severe("Error while loading patches in group " + group.name);
                 }
-                
+            }
+
+            if (findResult == false) {
+                Log.info("Patch " + shortName + " is not found in patches.");
             }
         }
 

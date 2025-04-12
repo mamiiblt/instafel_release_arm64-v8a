@@ -1,4 +1,4 @@
-package me.mamiiblt.instafel.patcher.smali;
+package me.mamiiblt.instafel.patcher.utils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -17,8 +17,6 @@ import java.util.Optional;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 
-import me.mamiiblt.instafel.patcher.utils.Log;
-import me.mamiiblt.instafel.patcher.utils.Utils;
 import me.mamiiblt.instafel.patcher.utils.models.LineData;
 
 public class SmaliUtils {

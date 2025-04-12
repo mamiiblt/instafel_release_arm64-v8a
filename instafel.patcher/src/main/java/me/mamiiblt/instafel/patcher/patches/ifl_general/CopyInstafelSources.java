@@ -20,7 +20,6 @@ import org.xml.sax.SAXException;
 
 import me.mamiiblt.instafel.patcher.resources.*;
 import me.mamiiblt.instafel.patcher.resources.types.*;
-import me.mamiiblt.instafel.patcher.smali.SmaliUtils;
 import me.mamiiblt.instafel.patcher.utils.*;
 import me.mamiiblt.instafel.patcher.utils.patch.*;
 import me.mamiiblt.instafel.patcher.utils.sub.PublicResHelper;

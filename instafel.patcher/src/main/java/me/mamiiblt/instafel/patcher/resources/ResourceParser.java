@@ -16,7 +16,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.antlr.grammar.v3.ANTLRParser.ruleScopeSpec_return;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 

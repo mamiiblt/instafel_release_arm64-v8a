@@ -14,12 +14,12 @@ import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 import brut.directory.ExtFile;
-import me.mamiiblt.instafel.patcher.cmdhandler.Command;
 import me.mamiiblt.instafel.patcher.resources.*;
 import me.mamiiblt.instafel.patcher.resources.types.*;
 import me.mamiiblt.instafel.patcher.source.*;
 import me.mamiiblt.instafel.patcher.source.isource.*;
 import me.mamiiblt.instafel.patcher.utils.*;
+import me.mamiiblt.instafel.patcher.utils.cmdhandler.Command;
 
 public class CreateIflSourceZip implements Command {
 

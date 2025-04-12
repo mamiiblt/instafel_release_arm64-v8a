@@ -1,6 +1,6 @@
 package me.mamiiblt.instafel.patcher.commands;
 
-import me.mamiiblt.instafel.patcher.cmdhandler.Command;
+import me.mamiiblt.instafel.patcher.utils.cmdhandler.Command;
 
 public class HelpCmd implements Command {
 
@@ -8,15 +8,14 @@ public class HelpCmd implements Command {
     public void execute(String[] args) {
         String[] lines = {
             "usage:",
-            "  help - Shows help command",
-            "  about - Shows patcher, baksmali version etc.",
-            "  list - Lists available patches",
-            "  info - Shows patch info details",
-            "  init <apk file> - Creates an workdir with Instagram APK",
-            "  run <dir> <patch name> - Run selected patch",
-            "  build <dir> - Bild selected workdir",
+            "  help                      Shows the list of available commands",
+            "  about                     Displays patcher info (version, apktool, etc.)",
+            "  list                      Lists all available patches",
+            "  init <apk file>           Initializes a working directory with the Instagram APK",
+            "  run <wdir> <patch name>   Applies the specified patch to the working directory",
+            "  build <wdir>              Builds the modified APK from the working directory",
             "",
-            "For guide about patcher, visit this link,",
+            "For a complete guide on using the patcher, visit:",
             "https://github.com/mamiiblt/instafel"
         };
 

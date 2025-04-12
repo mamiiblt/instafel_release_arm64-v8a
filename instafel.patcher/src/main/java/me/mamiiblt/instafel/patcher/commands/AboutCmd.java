@@ -1,8 +1,8 @@
 package me.mamiiblt.instafel.patcher.commands;
 
 import brut.androlib.ApktoolProperties;
-import me.mamiiblt.instafel.patcher.cmdhandler.Command;
 import me.mamiiblt.instafel.patcher.utils.Environment;
+import me.mamiiblt.instafel.patcher.utils.cmdhandler.Command;
 
 public class AboutCmd implements Command {
 

@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
-import me.mamiiblt.instafel.patcher.smali.SmaliUtils;
 import me.mamiiblt.instafel.patcher.utils.Log;
+import me.mamiiblt.instafel.patcher.utils.SmaliUtils;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatch;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelTask;
 import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
