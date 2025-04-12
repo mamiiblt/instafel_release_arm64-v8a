@@ -41,17 +41,16 @@ function DownloadIflContent() {
 
   const searchParams = useSearchParams();
   const version = searchParams.get("version");
-  const arch = searchParams.get("arch");
 
   const [data, setData] = useState(null);
+
   useEffect(() => {
     const fetchData = async () => {
-      var requestUrl =
-        "https://api.github.com/repos/mamiiblt/instafel_release_";
-      if (arch == "arm64") {
-        requestUrl = requestUrl + "arm64-v8a/releases/tags/" + version;
+      var requestUrl = "";
+      if (version == "latest") {
+        requestUrl = "https://api.github.com/repos/mamiiblt/instafel/releases/latest";
       } else {
-        requestUrl = requestUrl + "armeabi-v7a/releases/tags/" + version;
+        requestUrl = "https://api.github.com/repos/mamiiblt/instafel/releases/tags/" + version;
       }
       const res = await fetch(requestUrl);
       const result = await res.json();
@@ -169,7 +168,7 @@ function DownloadIflContent() {
                 }}
                 className="mb-2 text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl"
               >
-                Instafel <br />
+                Download <br />
               </motion.h1>
               <motion.h1
                 initial={{ opacity: 0, y: 50 }}
@@ -180,7 +179,7 @@ function DownloadIflContent() {
                 }}
                 className="mb-2 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl"
               >
-                v{data ? data.app.ifl_version : "..."}
+                Instafel v{data ? data.app.ifl_version : "..."}
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 30 }}

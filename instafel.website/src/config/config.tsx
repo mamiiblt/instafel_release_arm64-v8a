@@ -92,16 +92,8 @@ export const SITE_CONFIG = {
   ],
   navItems: [
     {
-      title: "Guide",
-      href: "/guides",
-    },
-    {
       title: "Backup Library",
       href: "/library_backup",
-    },
-    {
-      title: "Flag Library",
-      href: "/library_flag",
     },
     {
       title: "Updater",

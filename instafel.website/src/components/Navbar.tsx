@@ -100,7 +100,7 @@ export default function Navbar() {
                     );
                   }
 
-                  if (link.title === "Flag Library") {
+                  /*if (link.title === "Flag Library") {
                     return (
                       <motion.div
                         key={link.href}
@@ -116,7 +116,7 @@ export default function Navbar() {
                         />
                       </motion.div>
                     );
-                  }
+                  }*/
 
                   if (link.title !== "Telegram") {
                     return (

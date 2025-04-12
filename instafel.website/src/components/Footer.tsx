@@ -104,11 +104,11 @@ export default function Footer() {
                     </li>
                     <li>
                       <a
-                        href="/library_flag"
+                        href="https://github.com/mamiiblt"
                         className="text-muted-foreground hover:text-foreground flex items-center gap-2 transition-colors group"
                       >
-                        <LucideFlag className="w-4 h-4 transition-colors" />
-                        Flag Library
+                        <GithubIcon className="w-4 h-4 transition-colors" />
+                        Source Code
                       </a>
                     </li>
                     <li>

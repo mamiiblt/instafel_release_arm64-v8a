@@ -58,7 +58,7 @@ export default function Home() {
                   ease: "easeOut",
                 }}
               > 
-                  <div className="grid grid-cols-2 grid-rows-[auto_1fr] h-screen gap-2">
+                  <div className="grid grid-cols-2 grid-rows-[auto_1fr] mb-6 gap-2">
   <Button
     asChild
     size={"lg"}
