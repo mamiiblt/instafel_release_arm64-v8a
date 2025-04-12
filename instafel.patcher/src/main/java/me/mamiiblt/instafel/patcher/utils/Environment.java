@@ -1,12 +1,7 @@
 package me.mamiiblt.instafel.patcher.utils;
 
-import java.io.File;
 import java.io.InputStream;
-import java.nio.file.Paths;
 import java.util.Properties;
-
-import me.mamiiblt.instafel.patcher.source.PConfig;
-import me.mamiiblt.instafel.patcher.source.PEnvironment;
 
 public class Environment {
 

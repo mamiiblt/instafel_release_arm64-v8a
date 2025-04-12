@@ -51,7 +51,7 @@ publishing {
         register<MavenPublication>("gpr") {
             groupId = "me.mamiiblt.instafel"
             artifactId = "patcher"
-            version = "v$projectVersion"
+            version = "$projectVersion"
             artifact(file("${project.projectDir}/output/ifl-patcher-v$projectVersion-$commitHash-$projectTag.jar"))
             
             pom {
