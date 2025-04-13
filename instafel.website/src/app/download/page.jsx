@@ -48,9 +48,12 @@ function DownloadIflContent() {
     const fetchData = async () => {
       var requestUrl = "";
       if (version == "latest") {
-        requestUrl = "https://api.github.com/repos/mamiiblt/instafel/releases/latest";
+        requestUrl =
+          "https://api.github.com/repos/mamiiblt/instafel/releases/latest";
       } else {
-        requestUrl = "https://api.github.com/repos/mamiiblt/instafel/releases/tags/" + version;
+        requestUrl =
+          "https://api.github.com/repos/mamiiblt/instafel/releases/tags/" +
+          version;
       }
       const res = await fetch(requestUrl);
       const result = await res.json();

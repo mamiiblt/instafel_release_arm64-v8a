@@ -1,12 +1,9 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import Link from "next/link";
-import { Book, IflLibraryBackup } from "@/components/Icons";
-import { getAllPostsSync, getInstafelBackups } from "@/lib/blog";
+import { IflLibraryBackup } from "@/components/Icons";
 import { useEffect, useState } from "react";
 import { LoadingBar } from "@/components/ifl";
-import { Separator } from "@radix-ui/react-dropdown-menu";
 import Footer from "@/components/Footer";
 
 interface Backup {

@@ -1,20 +1,9 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  Book,
-  IflDownload,
-  IflGuide,
-  IflLibrary,
-  IflLibraryBackup,
-} from "@/components/Icons";
+import { IflDownload, IflLibrary } from "@/components/Icons";
 import { Suspense, useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";

@@ -1,8 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { LoadingBar } from "@/components/ifl";
+import { useState } from "react";
 import Footer from "@/components/Footer";
 import { useRouter } from "next/navigation";
 import {
@@ -335,12 +334,18 @@ export default function LibraryBackupPage() {
         </div>
       ) : (
         <div>
-                  <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-gray-50 to-gray-100 p-4">
-        <main className="flex w-full max-w-5xl flex-1 flex-col items-center justify-center text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl md:text-7xl">Comming soon...</h1>
-          <p className="mt-6 text-lg text-gray-600">This part is still not finished, so we have to wait...</p>
-        </main>
-      </div><Footer/></div>
+          <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-gray-50 to-gray-100 p-4">
+            <main className="flex w-full max-w-5xl flex-1 flex-col items-center justify-center text-center">
+              <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl md:text-7xl">
+                Comming soon...
+              </h1>
+              <p className="mt-6 text-lg text-gray-600">
+                This part is still not finished, so we have to wait...
+              </p>
+            </main>
+          </div>
+          <Footer />
+        </div>
       )}
     </AnimatePresence>
   );

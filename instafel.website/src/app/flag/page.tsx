@@ -1,46 +1,28 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import React, { Suspense, useEffect, useState } from "react";
 import { LoadingBar } from "@/components/ifl";
 import Footer from "@/components/Footer";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   AlertTriangle,
-  ArrowRight,
   Calendar,
   Check,
   CirclePlus,
-  Clock,
   Copy,
-  Delete,
-  Download,
   FileCog2Icon,
-  FileText,
   Flag,
-  GitPullRequestCreateArrow,
-  IdCard,
   Info,
   Plus,
-  Search,
   Shapes,
-  ShoppingCart,
   Tag,
-  TagIcon,
-  ToggleLeft,
   Trash,
   User,
-  X,
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FlagLibrartCarousel } from "@/components/carousel";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";

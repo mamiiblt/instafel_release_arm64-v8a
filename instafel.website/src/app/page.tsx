@@ -57,57 +57,50 @@ export default function Home() {
                   duration: 0.8,
                   ease: "easeOut",
                 }}
-              > 
-                  <div className="grid grid-cols-2 grid-rows-1 mb-2 gap-2">
-  <Button
-    asChild
-    size={"lg"}
-    variant={"default"}
-    className="flex justify-center items-center"
-  >
-    <Link href="/download?version=latest">
-      <IflDownload className="flex-shrink-0 w-5 h-5 mr-1" />
-      Download
-    </Link>
-  </Button>
+              >
+                <div className="grid grid-cols-2 grid-rows-1 mb-2 gap-2">
+                  <Button
+                    asChild
+                    size={"lg"}
+                    variant={"default"}
+                    className="flex justify-center items-center"
+                  >
+                    <Link href="/download?version=latest">
+                      <IflDownload className="flex-shrink-0 w-5 h-5 mr-1" />
+                      Download
+                    </Link>
+                  </Button>
 
-  <Button
-    asChild
-    size={"lg"}
-    variant={"outline-gradient"}
-  >
-    <Link href="/guides">
-      <Book className="flex-shrink-0 w-4 h-4 mr-1" />
-      Read Guide
-    </Link>
-  </Button>
-</div>
+                  <Button asChild size={"lg"} variant={"outline-gradient"}>
+                    <Link href="/guides">
+                      <Book className="flex-shrink-0 w-4 h-4 mr-1" />
+                      Read Guide
+                    </Link>
+                  </Button>
+                </div>
 
-
-<motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  delay: 0.9,
-                  duration: 0.8,
-                  ease: "easeOut",
-                }}
-              > 
-              <Button
-    asChild
-    size="lg"
-    variant={"gradient"}
-    className="flex justify-center items-center col-span-1 mb-11"
-  >
-    <Link href="https://t.me/instafel">
-      <Telegram className="flex-shrink-0 w-4 h-4 mr-1" />
-      Join Community
-    </Link>
-  </Button>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    delay: 0.9,
+                    duration: 0.8,
+                    ease: "easeOut",
+                  }}
+                >
+                  <Button
+                    asChild
+                    size="lg"
+                    variant={"gradient"}
+                    className="flex justify-center items-center col-span-1 mb-11"
+                  >
+                    <Link href="https://t.me/instafel">
+                      <Telegram className="flex-shrink-0 w-4 h-4 mr-1" />
+                      Join Community
+                    </Link>
+                  </Button>
+                </motion.div>
               </motion.div>
-
-              </motion.div>
-
 
               <motion.div
                 initial={{ opacity: 0, y: 30 }}

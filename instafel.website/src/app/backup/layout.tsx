@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import { SITE_CONFIG } from "@/config/config";
 import { defaultMetadata } from "@/config/metadata";
 
 export const metadata: Metadata = {

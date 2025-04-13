@@ -4,19 +4,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import {
-  ArrowDownToLine,
   AudioLines,
-  Cat,
   CheckCircle,
-  Clock,
   Download,
   GitBranch,
-  GitGraph,
-  HelpCircle,
   PawPrint,
-  Shield,
-  VolumeX,
-  Zap,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";

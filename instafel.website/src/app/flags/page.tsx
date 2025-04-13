@@ -2,21 +2,10 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import React, { Suspense, useEffect, useState } from "react";
-import { LoadingBar, LoadingBarNotCenter } from "@/components/ifl";
+import { LoadingBar } from "@/components/ifl";
 import Footer from "@/components/Footer";
 import { useRouter, useSearchParams } from "next/navigation";
-import {
-  ArrowRight,
-  Calendar,
-  Delete,
-  Flag,
-  IdCard,
-  Search,
-  TagIcon,
-  Trash,
-  User,
-  X,
-} from "lucide-react";
+import { Flag, Search, Trash, User, X } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
