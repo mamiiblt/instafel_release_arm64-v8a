@@ -4,20 +4,20 @@
 
 ## Projects
 
-- **[Instafel Patcher](https://github.com/mamiiblt/instafel)**  
+- **[Instafel Patcher](https://github.com/mamiiblt/instafel/tree/main/instafel.patcher)**  
   Injects the modified Instafel sources into the Instagram APK, making it functional with additional features.
 
-- **Instafel App**  
+- **[Instafel App](https://github.com/mamiiblt/instafel/tree/main/instafel.app)**  
   This project includes Instafel menu, activities, dialogs and many other components.
 
-- **Instafel Updater**  
+- **[Instafel Updater](https://github.com/mamiiblt/instafel/tree/main/instafel.updater)**  
   Keeps Instafel application's up-to-date with checking & installing latest release from OTA.
 
-- **Instafel GPlayAPI**  
+- **[Instafel GPlayAPI](https://github.com/mamiiblt/instafel/tree/main/instafel.gplayapi)**  
   Retrieves Alpha APKs directly from the Google Play Store for patching.
 
-- **Instafel Website**  
-  Provides documentation, library and more things for Instafel users.
+- **[Instafel Website](https://github.com/mamiiblt/instafel/tree/main/instafel.website)**  
+  Provides guide, library and more things for Instafel users.
 
 ---
 
