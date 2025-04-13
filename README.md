@@ -19,18 +19,12 @@
 - **[Instafel Website](https://github.com/mamiiblt/instafel/tree/main/instafel.website)**  
   Provides guide, library and more things for Instafel users.
 
----
-
 ## Links
 
 - [Website](https://instafel.mamiiblt.me)  
 - [Telegram Group](https://t.me/instafel)
 - [Backup Library](https://instafel.mamiiblt.me/library_backup)
 
----
-
 ## Disclaimer
 
-This project is in **no way affiliated with Meta or Instagram**.  
-It is provided for educational purposes only, and may **not be used for commercial or personal gain**.  
-Use it at your own risk.
+This project is in **no way affiliated with Meta or Instagram** and may **not be used for commercial or personal gain**.  
