@@ -39,8 +39,8 @@ export const SITE_CONFIG = {
   ],
   navItems: [
     {
-      title: "Guides",
-      href: "/guides"
+      title: "Guide",
+      href: "/guides",
     },
     {
       title: "Backup Library",
@@ -51,8 +51,8 @@ export const SITE_CONFIG = {
       href: "/about_updater",
     },
     {
-      title: "Telegram",
-      href: "https://t.me/instafel",
+      title: "Source Code",
+      href: "https://github.com/mamiiblt/instafel",
     },
     {
       title: "Download",

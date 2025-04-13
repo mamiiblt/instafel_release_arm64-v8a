@@ -169,7 +169,7 @@ function DownloadIflContent() {
                   duration: 0.8,
                   ease: "easeInOut",
                 }}
-                className="mb-2 text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl"
+                className="mb-2 text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl"
               >
                 Download <br />
               </motion.h1>
@@ -180,7 +180,7 @@ function DownloadIflContent() {
                   duration: 0.8,
                   ease: "easeInOut",
                 }}
-                className="mb-2 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl"
+                className="mb-2 text-3xl font-regular tracking-tight sm:text-4xl md:text-5xl"
               >
                 Instafel v{data ? data.app.ifl_version : "..."}
               </motion.h1>
@@ -254,10 +254,10 @@ function DownloadIflContent() {
                     className="mt-0 animate-fade-in space-y-8"
                   >
                     <Card>
-                      <CardContent className="p-4">
+                      <CardContent className="p-6">
                         <h2 className="mb-4 flex items-center gap-2 text-2xl font-bold">
                           <Shapes className="h-5 w-5 text-primary" />
-                          Variant Differences
+                          Variant Infos
                         </h2>
                         <div className="mb-8 flex justify-center">
                           <TabsList className="grid w-full max-w-md grid-cols-3">
@@ -283,22 +283,12 @@ function DownloadIflContent() {
                                 </div>
                               </div>
 
-                              <div className="grid gap-3 mt-2">
-                                <div className="flex items-center gap-3">
-                                  <ArrowRight className="h-5 w-5 text-primary" />
-                                  <span>IG need to be deleted to install</span>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                  <ArrowRight className="h-5 w-5 text-primary" />
-                                  <span>
-                                    {" "}
-                                    Installed instead of regular Instagram
-                                  </span>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                  <ArrowRight className="h-5 w-5 text-primary" />
-                                  <span>More stable than Clone variant</span>
-                                </div>
+                              <div className="grid gap-6 mt-2">
+                                <span>
+                                  In order to install this variant, the original
+                                  Instagram app must be uninstalled, as it will
+                                  replace the standard Instagram application.
+                                </span>
                               </div>
                               <Button
                                 className="mt-6 w-full"
@@ -325,24 +315,15 @@ function DownloadIflContent() {
                                 </div>
                               </div>
 
-                              <div className="grid gap-3 mt-2">
-                                <div className="flex items-center gap-3">
-                                  <ArrowRight className="h-5 w-5 text-primary" />
-                                  <span>
-                                    IG does not need to be deleted to install
-                                  </span>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                  <ArrowRight className="h-5 w-5 text-primary" />
-                                  <span> Installed as different app </span>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                  <ArrowRight className="h-5 w-5 text-primary" />
-                                  <span>
-                                    Sometimes minor bugs may occur, but it is
-                                    stable.
-                                  </span>
-                                </div>
+                              <div className="grid gap-6 mt-2">
+                                <span>
+                                  In order to install this clone variant, you
+                                  can keep the original Instagram app installed,
+                                  as this version works alongside the standard
+                                  Instagram application. Compared to the unclone
+                                  version, this variant may have some stability
+                                  issues.
+                                </span>
                               </div>
                               <Button
                                 className="mt-6 w-full"

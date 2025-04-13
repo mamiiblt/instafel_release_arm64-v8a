@@ -118,7 +118,7 @@ export default function Navbar() {
                     );
                   }*/
 
-                  if (link.title !== "Telegram") {
+                  if (link.title !== "Source Code") {
                     return (
                       <motion.div
                         key={link.href}
@@ -236,7 +236,7 @@ export default function Navbar() {
                           <span>{link.title}</span>
                         </Link>
                       )}
-                      {link.title === "Telegram" && (
+                      {link.title === "Source Code" && (
                         <Link
                           href={link.href}
                           onClick={() => setOpen(false)}
@@ -247,7 +247,7 @@ export default function Navbar() {
                               : "text-foreground"
                           }`}
                         >
-                          <Send />
+                          <Github />
                           <span>{link.title}</span>
                         </Link>
                       )}

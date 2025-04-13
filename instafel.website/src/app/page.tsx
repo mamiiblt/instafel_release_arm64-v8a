@@ -46,7 +46,7 @@ export default function Home() {
                 }}
                 className="text-muted-foreground  mb-6 text-xl max-w-xl"
               >
-                You can try out latest Alpha builds as quickly as possible with
+                You can try out latest alpha builds as quickly as possible with
                 Instafel
               </motion.p>
               <motion.div
@@ -156,11 +156,6 @@ export default function Home() {
                     title: "Libraries",
                     desc: "You can find useful flags, backups in Instafel Library!",
                   },
-                  {
-                    icon: <IflFeature_32BitSupport />,
-                    title: "32-bit Support",
-                    desc: "Instafel always offer support for nearly obsolete 32-bit devices!",
-                  },
                 ].map((feature, idx) => (
                   <motion.div
                     key={idx}
@@ -197,7 +192,7 @@ export default function Home() {
                   <p className="text mb-6 text-center md:text-left">
                     Join our Telegram group to stay up-to-date with the latest
                     Instafel updates and news. Share your feedback, suggestions
-                    and everything with the community.
+                    and learn everything with the community.
                   </p>
                   <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
                     <a
@@ -228,7 +223,7 @@ export default function Home() {
                     </div>
                     <div className="bg-gray-100 rounded-lg p-3 mb-3">
                       <p className="text-gray-800 text-sm">
-                        🎉 Flag library is available now!
+                        🎉 New patcher is available now!
                       </p>
                       <p className="text-gray-500 text-xs mt-2">
                         Today 02:25 AM

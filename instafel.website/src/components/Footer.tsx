@@ -103,7 +103,7 @@ export default function Footer() {
                     </li>
                     <li>
                       <a
-                        href="https://github.com/mamiiblt"
+                        href="https://github.com/mamiiblt/instafel"
                         className="text-muted-foreground hover:text-foreground flex items-center gap-2 transition-colors group"
                       >
                         <GithubIcon className="w-4 h-4 transition-colors" />
