@@ -330,10 +330,17 @@ public class BuildProject implements Command {
         if (isCloneGenerated) {
             fNames.put("clone", APK_C.getName());
         }
-        
+
+        JSONObject hash = new JSONObject();
+        hash.put("unclone", Utils.getFileMD5(APK_UC));
+        if (isCloneGenerated) {
+            hash.put("clone", Utils.getFileMD5(APK_C));
+        }
+
         buildInfo.put("patcher", patcherInfo);
         buildInfo.put("info", genData);
         buildInfo.put("fnames", fNames);
+        buildInfo.put("hash", hash);
 
         File bInfoFile = new File(Utils.mergePaths(buildFolder.getAbsolutePath(), "build_info.json"));
         

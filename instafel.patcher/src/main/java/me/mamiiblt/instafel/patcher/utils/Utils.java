@@ -2,6 +2,7 @@ package me.mamiiblt.instafel.patcher.utils;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,6 +10,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.MessageDigest;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -89,6 +91,30 @@ public class Utils {
                 }
                 zipIn.closeEntry();
             }
+        }
+    }
+
+    public static String getFileMD5(File file) {
+        try (InputStream fis = new FileInputStream(file)) {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+
+            byte[] buffer = new byte[8192];
+            int bytesRead;
+            while ((bytesRead = fis.read(buffer)) != -1) {
+                md.update(buffer, 0, bytesRead);
+            }
+
+            byte[] digest = md.digest();
+            StringBuilder sb = new StringBuilder();
+            for (byte b : digest) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.info("Error while creating MD5 hash for " + file.getName());
+            return null;
         }
     }
 

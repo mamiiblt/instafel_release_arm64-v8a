@@ -22,7 +22,8 @@ public class PConfig {
         keystore_file,
         keystore_pass,
         keystore_alias,
-        keystore_keypass
+        keystore_keypass,
+        github_pat
     }
 
     public static String UPDATE_STR = "Updated Config";
@@ -79,6 +80,7 @@ public class PConfig {
         propertyManager.addString(Keys.keystore_file.toString(), "");
         propertyManager.addString(Keys.keystore_keypass.toString(), "");
         propertyManager.addString(Keys.keystore_pass.toString(), "");
+        propertyManager.addString(Keys.github_pat.toString(), "null");
         saveProperties();
     }
 }
