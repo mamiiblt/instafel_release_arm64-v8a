@@ -175,7 +175,6 @@ public class BuildProject implements Command {
                 "--ksKeyPass", KS_KEY_PASS
             ));            
         }
-        params.add("--skipZipAlign");
         params.add("--overwrite");
         Log.info("Signing apks...");
         int exitCode = APKSigner.execSigner(params, APK_SIGNER_JAR);

@@ -17,7 +17,7 @@ import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
     desc = "This patch must be applied for Instafel Menu",
     author = "mamiiblt",
     listable = false,
-    runnable = false
+    runnable = true
 )
 public class AddInitInstafel extends InstafelPatch {
 
@@ -40,22 +40,33 @@ public class AddInitInstafel extends InstafelPatch {
                 failure("InstagramAppShell file can't be found / selected.");
             } else {
                 appShellFile = appShellResult.get(0);
-                Log.info("InstagramAppShell file is " + appShellFile.getPath());
             }
             
             List<String> fContent = smaliUtils.getSmaliFileContent(appShellFile.getAbsolutePath());
 
+            int onCreateMethodLine = 0;
             boolean lock = false;
             for (int i = 0; i < fContent.size(); i++) {
                 String line = fContent.get(i);
+
+                if (line.contains("onCreate()V") && line.contains(".method")) {
+                    onCreateMethodLine = i;
+                }
+                
                 if (line.contains("Landroid/app/Application;->onCreate()V")) {
-                    String veriableName = line.split("\\}")[0].split("\\{")[1];
-                    
+                    if (onCreateMethodLine == 0) {
+                        Log.severe("onCreateMethod cannot found before caller.");
+                    }
+
+                    String onCreateVeriableName = line.split("\\}")[0].split("\\{")[1];
+                    int unusedRegister = smaliUtils.getUnusedRegistersOfMethod(fContent, onCreateMethodLine, i);
+                    Log.info("Unused register is v" + unusedRegister + " before line " + i + " in onCreate method");
+
                     String[] content = {
-                        "    invoke-static {" + veriableName + "}, Lme/mamiiblt/instafel/utils/InitializeInstafel;->setContext(Landroid/app/Application;)V",
-                        "    new-instance v2, Lme/mamiiblt/instafel/utils/InstafelCrashHandler;",
-                        "    invoke-direct {v2, " + veriableName + "}, Lme/mamiiblt/instafel/utils/InstafelCrashHandler;-><init>(Landroid/content/Context;)V",
-                        "    invoke-static {v2}, Ljava/lang/Thread;->setDefaultUncaughtExceptionHandler(Ljava/lang/Thread$UncaughtExceptionHandler;)V"
+                        "    invoke-static {" + onCreateVeriableName + "}, Lme/mamiiblt/instafel/utils/InitializeInstafel;->setContext(Landroid/app/Application;)V",
+                        "    new-instance v" + unusedRegister + ", Lme/mamiiblt/instafel/utils/InstafelCrashHandler;",
+                        "    invoke-direct {v" + unusedRegister + ", " + onCreateVeriableName + "}, Lme/mamiiblt/instafel/utils/InstafelCrashHandler;-><init>(Landroid/content/Context;)V",
+                        "    invoke-static {v" + unusedRegister + "}, Ljava/lang/Thread;->setDefaultUncaughtExceptionHandler(Ljava/lang/Thread$UncaughtExceptionHandler;)V"
                     };
 
                     if (fContent.get(i + 2).contains("Lme/mamiiblt/instafel")) {

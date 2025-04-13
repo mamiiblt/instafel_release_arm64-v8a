@@ -9,8 +9,14 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
@@ -25,6 +31,32 @@ public class SmaliUtils {
     public SmaliUtils(String projectDir) {
         this.projectDir = projectDir;
         this.smaliFolders = getSmaliFolders();
+    }
+
+    public int getUnusedRegistersOfMethod(List<String> fContent, int methodStart, int lineEnd) {
+        List<Integer> registers = new ArrayList<>();
+
+        Pattern pattern = Pattern.compile("\\bv(\\d+)\\b");
+        for (int i = methodStart; i <= lineEnd; i++) {
+            Matcher matcher = pattern.matcher(fContent.get(i));
+
+            while(matcher.find()) {
+                registers.add(Integer.parseInt(matcher.group(1)));
+            }
+        }
+
+        Set<Integer> uniqueSet = new HashSet<>(registers);
+
+        List<Integer> sortedRegisters = new ArrayList<>(uniqueSet);
+        Collections.sort(sortedRegisters);
+
+        for (int i = 0; i <= Collections.max(sortedRegisters) + 1; i++) {
+            if (!sortedRegisters.contains(i)) {
+                return i;
+            }
+        }
+
+        return sortedRegisters.get(sortedRegisters.size() - 1) + 1;
     }
 
     public List<File> getSmaliFilesByName(String fileNamePart) {
