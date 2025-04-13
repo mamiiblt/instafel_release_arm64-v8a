@@ -216,7 +216,7 @@ public class BuildProject implements Command {
                 if (!cloneFile.isDirectory()) {
                     File sourceFile = new File(cloneFile.getAbsolutePath().replace("clone_ref", "sources"));
                     File tempOrigFile = new File(cloneFile.getAbsolutePath().replace("clone_ref", "orig_temp"));
-                    FileUtils.copyFile(sourceFile, tempOrigFile);
+                    FileUtils.moveFile(sourceFile, tempOrigFile);
                     FileUtils.moveFile(cloneFile, sourceFile);
                 }
             }
@@ -225,8 +225,8 @@ public class BuildProject implements Command {
                 if (!cloneFile.isDirectory()) {
                     File originalFileFromTemp = new File(cloneFile.getAbsolutePath().replace("clone_ref", "orig_temp"));
                     File originalFile = new File(cloneFile.getAbsolutePath().replace("clone_ref", "sources"));
-                    FileUtils.delete(cloneFile);
-                    FileUtils.copyFile(originalFileFromTemp, originalFile);
+                    FileUtils.delete(originalFile);
+                    FileUtils.moveFile(originalFileFromTemp, originalFile);
                 }
             }
         }
@@ -266,7 +266,7 @@ public class BuildProject implements Command {
             pairs.put("_patches_", apatches.trim());
 
             for (Map.Entry<String, String> prop : pairs.entrySet()) {
-                if (prop.getValue().equals(null)) {
+                if (prop.getValue() == null) {
                     Log.severe("Prop " + prop.getKey() + " is empty.");
                 }
             }

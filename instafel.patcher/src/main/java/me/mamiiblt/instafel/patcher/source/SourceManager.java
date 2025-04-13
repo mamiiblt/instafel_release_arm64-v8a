@@ -54,11 +54,13 @@ public class SourceManager {
         pEnvFile.createNewFile();
         PEnvironment.setupEnv();
         PEnvironment.createDefaultEnvFile();
+        PEnvironment.saveProperties();
 
         File pConfigFile = new File(Utils.mergePaths(Environment.PROJECT_DIR, "config.properties"));
         pConfigFile.createNewFile();
         PConfig.setupConfig();
         PConfig.createDefaultConfigFile();
+        PConfig.saveProperties();
     }
     
     public Config getConfig() {
