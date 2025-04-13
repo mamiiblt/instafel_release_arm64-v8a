@@ -3,7 +3,6 @@ import React from "react";
 import * as Icons from "@/components/Icons";
 import Link from "next/link";
 import { SITE_CONFIG } from "@/config/config";
-import CustomSocialLinks from "./CustomSocialLinks";
 import { FooterLoading } from "./loading";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
