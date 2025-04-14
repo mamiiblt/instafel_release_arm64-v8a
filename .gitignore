@@ -34,6 +34,7 @@ build
 /instafel.gplayapi/build
 /instafel.gplayapi/.gradle
 /instafel.gplayapi/bin
+/instafel.gplayapi/src/main/resources/gplayapi.properties
 
 # Instafel Updater
 

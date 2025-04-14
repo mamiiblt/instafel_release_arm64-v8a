@@ -8,10 +8,9 @@ public class AppInfo {
     JSONObject infoObject;
     App app;
 
-    public AppInfo(String arch, App app) {
+    public AppInfo(App app) {
         this.app = app;
         infoObject = new JSONObject();
-        infoObject.put("arch", arch);
         infoObject.put("id", app.getId());
         infoObject.put("ver_name", app.getVersionName());
         infoObject.put("ver_code", app.getVersionCode());
@@ -25,10 +24,6 @@ public class AppInfo {
 
     public App getApp() {
         return app;
-    }
-
-    public String getArch() {
-        return infoObject.getString("arch");
     }
 
     public int getId() {

@@ -13,24 +13,16 @@ import java.util.List;
 
 public class InstafelGplayapiInstance {
 
-    String arch;
     String packageName;
     AuthData authData;
 
-    public InstafelGplayapiInstance(String arch, String packageName) throws Exception {
-        this.arch = arch;
+    public InstafelGplayapiInstance(String packageName) throws Exception {
         this.packageName = packageName;
-        if (arch.equals("arm64")) {
-            this.authData = General.authenticateUser(Env.email, Env.aas_token, Env.devicePropertiesArm64);
-        } else if (arch.equals("arm32")) {
-            this.authData = General.authenticateUser(Env.email, Env.aas_token, Env.devicePropertiesArm64);
-        } else {
-            throw new Exception();
-        }
+        this.authData = General.authenticateUser(Env.email, Env.aas_token, Env.deviceProperties);
     }
 
     public AppInfo getIgApk() throws Exception {
-        AppInfo appInfo = new AppInfo(arch, new AppDetailsHelper(authData).getAppByPackageName(packageName));
+        AppInfo appInfo = new AppInfo(new AppDetailsHelper(authData).getAppByPackageName(packageName));
         List<File> files = new PurchaseHelper(authData).purchase(appInfo.getApp().getPackageName(), appInfo.getApp().getVersionCode(), appInfo.getApp().getOfferType());
         for (File file : files) {
             if (file.getName().equals("com.instagram.android.apk")) {

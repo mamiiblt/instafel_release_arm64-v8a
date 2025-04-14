@@ -1,13 +1,14 @@
 package me.mamiiblt.instafel.gplayapi;
 
 import me.mamiiblt.instafel.gplayapi.utils.AppInfo;
+import me.mamiiblt.instafel.gplayapi.utils.General;
 import me.mamiiblt.instafel.gplayapi.utils.Log;
 import okhttp3.*;
 import org.json.JSONObject;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.Authenticator;
 import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.Timer;
@@ -15,19 +16,20 @@ import java.util.TimerTask;
 
 public class Env {
     public static String email, aas_token, github_releases_link, github_pat, telegram_api_key;
-    public static Properties devicePropertiesArm64, devicePropertiesArm32;
+    public static Properties deviceProperties;
     public static OkHttpClient client;
 
     public static void updateEnvironment() {
         Properties prop = new Properties();
         client = new OkHttpClient();
         try {
-            InputStream input = Main.class.getClassLoader().getResourceAsStream("gplayapi.properties");
-            if (input == null) {
-                Log.println("E", "Please configure gplayapi.properties file in resources and build jar.");
+            java.io.File configFile = new java.io.File(General.mergePaths(System.getProperty("user.dir"), "config.properties"));
+            if (!configFile.exists()) {
+                Log.println("E", "Please configure config.properties file in JAR's directory");
                 System.exit(-1);
             }
 
+            FileInputStream input = new FileInputStream(configFile);
             prop.load(input);
 
             String email_p = prop.getProperty("email", null);
@@ -54,22 +56,19 @@ public class Env {
         }
     }
 
-    public static void updateDeviceProp(String propNameArm64, String propNameArm32) {
+    public static void updateDeviceProp(String propName) {
         try {
-            InputStream input64 = Main.class.getClassLoader().getResourceAsStream(Paths.get("device_props", propNameArm64).toString());
-            InputStream input32 = Main.class.getClassLoader().getResourceAsStream(Paths.get("device_props", propNameArm32).toString());
-            if (input64 == null || input32 == null) {
+            InputStream input = Main.class.getClassLoader().getResourceAsStream(Paths.get("device_props", propName).toString());
+            if (input == null) {
                 Log.println("E", "Please write a valid property name");
                 System.exit(-1);
             }
 
-            devicePropertiesArm64 = new Properties();
-            devicePropertiesArm64.load(input64);
-            devicePropertiesArm32 = new Properties();
-            devicePropertiesArm32.load(input32);
+            deviceProperties = new Properties();
+            deviceProperties.load(input);
+    
 
-            Log.println("I", "Device " + devicePropertiesArm64.getProperty("UserReadableName") + " is set to Arm64");
-            Log.println("I", "Device " + devicePropertiesArm32.getProperty("UserReadableName") + " is set to Arm32");
+            Log.println("I", "Device " + deviceProperties.getProperty("UserReadableName") + " is set for check API.");
         } catch (Exception e) {
             e.printStackTrace();
             Log.println("E", "Error while updating device properties");
@@ -89,28 +88,21 @@ public class Env {
                 try {
                     checkTime[0]++;
                     Log.println("I", checkTime[0] + " check started.");
-                    InstafelGplayapiInstance instanceArm64 = new InstafelGplayapiInstance("arm64", "com.instagram.android");
-                    InstafelGplayapiInstance instanceArm32 = new InstafelGplayapiInstance("arm32", "com.instagram.android");
+                    InstafelGplayapiInstance instance = new InstafelGplayapiInstance("com.instagram.android");
 
-                    AppInfo appInfo64 = instanceArm64.getIgApk();
-                    AppInfo appInfo32 = instanceArm32.getIgApk();
+                    AppInfo appInfo = instance.getIgApk();
 
-                    Log.println("I", "appInfoArm64: " + appInfo64.getRawJson());
-                    Log.println("I", "appInfoArm32: " + appInfo32.getRawJson());
-
-                    if (appInfo64.getVer_name().equals(appInfo32.getVer_name())) {
-                        if (appInfo64.getVer_name().contains(".0.0.0.")) { // alpha version names always has this regex
-                            if (!lastCheckedVersion[0].equals(appInfo64.getVer_name())) {
-                                lastCheckedVersion[0] = appInfo64.getVer_name();
-                                String latestIflVersion = getLatestInstafelVersion(); // get latest instafel version
-                                if (latestIflVersion != null && latestIflVersion.equals(appInfo64.getVer_name())) { // this version released or not
-                                    triggerUpdate(appInfo64, appInfo32); // trigger the generator
-                                }
+                    if (appInfo.getVer_name().contains(".0.0.0.")) { // alpha version names always has this regex
+                        if (!lastCheckedVersion[0].equals(appInfo.getVer_name())) {
+                            lastCheckedVersion[0] = appInfo.getVer_name();
+                            String latestIflVersion = getLatestInstafelVersion(); // get latest instafel version
+                            if (latestIflVersion != null && latestIflVersion.equals(appInfo.getVer_name())) { // this version released or not
+                                triggerUpdate(appInfo); // trigger the generator
                             }
                         }
-                    } else {
-                        Log.println("E", "IG Versions are not same");
                     }
+
+                    triggerUpdate(appInfo); // remove then
                 } catch (Exception e) {
                     e.printStackTrace();
                     Log.println("E", "Error while checking ig updates.");
@@ -123,16 +115,18 @@ public class Env {
     }
 
 
-    private static void triggerUpdate(AppInfo appInfo64, AppInfo appInfo32) throws Exception {
+    @SuppressWarnings("deprecation")
+    private static void triggerUpdate(AppInfo appInfo) throws Exception {
         JSONObject workflowData = new JSONObject();
-        workflowData.put("event_type", "build_multi");
+        workflowData.put("event_type", "generate_instafel");
         workflowData.put("client_payload", new JSONObject()
-                .put("apk_url_64", appInfo64.getApkUrl())
-                .put("apk_url_32", appInfo32.getApkUrl())
+                .put("apk_url", appInfo.getApkUrl())
         );
 
+        Log.println("I", "Calling patcher for new version: " + appInfo.getVer_name());
+
         Request request = new Request.Builder()
-                .url("https://api.github.com/repos/mami-server-2/instafel_generator/dispatches")
+                .url("https://api.github.com/repos/mamiiblt/instafel_patch_runner/dispatches")
                 .post(RequestBody.create(MediaType.parse("application/json"), workflowData.toString()))
                 .addHeader("Authorization", "Bearer " + github_pat)
                 .addHeader("Accept", "application/vnd.github+json")
@@ -140,9 +134,9 @@ public class Env {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            if (!response.isSuccessful()) throw new Exception("Error while triggering patcher for version " + appInfo64.getVer_name() + " (" + response.code() + ")");
+            if (!response.isSuccessful()) throw new Exception("Error while triggering patcher for version " + appInfo.getVer_name() + " (" + response.code() + ")");
 
-            Log.println("I", "Generator succesfully triggered for " + appInfo64.getVer_name() + " (status: " + response.code() + ")");
+            Log.println("I", "Generator succesfully triggered for " + appInfo.getVer_name() + " (status: " + response.code() + ")");
         }
     }
 
@@ -165,7 +159,8 @@ public class Env {
                     String[] verNameLines = line.split("\\|");
                     for (String part : verNameLines) {
                         if (!part.isEmpty() && isNumeric(part)) {
-                            return part;
+                            Log.println("I", "Latest Instafel version is " + part.trim());
+                            return part.trim();
                         }
                     }
                 }

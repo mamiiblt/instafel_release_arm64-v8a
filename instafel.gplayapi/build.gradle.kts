@@ -40,7 +40,6 @@ tasks.register("clear-cache") {
     val filesToDelete = listOf(
         file("${project.projectDir}/bin"),
         file("${project.projectDir}/build"),
-        file("${project.projectDir}/output"),
     )
 
     delete(filesToDelete)
