@@ -259,7 +259,7 @@ public class BuildProject implements Command {
             String apatches = "";
             for (String patch : appliedPatches) {
                 if (!patch.contains("clone")) {
-                    apatches = apatches + "," + patch;
+                    apatches = apatches.equals("") ? apatches + patch : apatches + "," + patch;
                 }
             }
             pairs.put("_patches_", apatches.trim());
