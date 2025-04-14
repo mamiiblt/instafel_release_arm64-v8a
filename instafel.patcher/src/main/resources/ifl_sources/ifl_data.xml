@@ -1515,6 +1515,7 @@
             <public name="ifl_tile_ct11" type="id"/>
             <public name="ifl_tile_ct12" type="id"/>
             <public name="ifl_tile_ct13" type="id"/>
+            <public name="ifl_tile_ct14" type="id"/>
             <public name="ifl_tile_developer" type="id"/>
             <public name="ifl_tile_exp_analyzer" type="id"/>
             <public name="ifl_tile_exp_comperator" type="id"/>
@@ -2187,6 +2188,7 @@
             <item name="ifl_tile_ct11" type="id"/>
             <item name="ifl_tile_ct12" type="id"/>
             <item name="ifl_tile_ct13" type="id"/>
+            <item name="ifl_tile_ct14" type="id"/>
             <item name="ifl_tile_developer" type="id"/>
             <item name="ifl_tile_exp_analyzer" type="id"/>
             <item name="ifl_tile_exp_comperator" type="id"/>
