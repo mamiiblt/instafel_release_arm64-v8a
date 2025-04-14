@@ -101,8 +101,6 @@ public class Env {
                             }
                         }
                     }
-
-                    triggerUpdate(appInfo); // remove then
                 } catch (Exception e) {
                     e.printStackTrace();
                     Log.println("E", "Error while checking ig updates.");
