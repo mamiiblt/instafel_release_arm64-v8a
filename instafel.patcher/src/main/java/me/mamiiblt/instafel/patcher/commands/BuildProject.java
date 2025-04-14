@@ -304,44 +304,56 @@ public class BuildProject implements Command {
     private void generateBuildInfo() {
         this.buildInfo = new JSONObject();
         buildInfo.put("manifest_version", 1);
-        buildInfo.put("clone_generated", isCloneGenerated);
-        buildInfo.put("build_ts", BUILD_TS);
-
+        if (isProductionMode == false) {
+            buildInfo.put("clone_generated", isCloneGenerated);
+        }
         JSONObject patcherInfo = new JSONObject();
-        patcherInfo.put("patcher_version", Environment.PROP_VERSION_STRING);
+        patcherInfo.put("version", Environment.PROP_VERSION_STRING);
         patcherInfo.put("commit", Environment.PROP_COMMIT_HASH + "/" + Environment.PROP_PROJECT_TAG);
         JSONArray appliedP = new JSONArray();
         for (String applied : appliedPatches) {
             appliedP.put(applied);
         }
         patcherInfo.put("applied_patches", appliedP);
-        
-        JSONObject genData = new JSONObject();
-        buildInfo.put("production_mode", isProductionMode);
-        genData.put("ig_version", IG_VERSION);
-        genData.put("ig_ver_code", IG_VER_CODE);
+        buildInfo.put("patcher", patcherInfo);
+
+        JSONObject patcherData = new JSONObject();
+        patcherData.put("build_date", BUILD_TS);
+        JSONObject ifl = new JSONObject();
+        ifl.put("version", Integer.parseInt(IFL_VERSION));
+        ifl.put("gen_id", GENERATION_ID);
+        JSONObject ig = new JSONObject();
+        ig.put("version", IG_VERSION);
+        ig.put("ver_code", IG_VER_CODE);
+        patcherData.put("ifl", ifl);
+        patcherData.put("ig", ig);
+        buildInfo.put("patcher_data", patcherData);
+
         if (isProductionMode) {
-            genData.put("ifl_version", IFL_VERSION);
-            genData.put("generation_id", GENERATION_ID);
+            JSONObject links = new JSONObject();
+            links.put("unclone", "https://github.com/mamiiblt/instafel/releases/download/v" + IFL_VERSION + "/" + APK_UC.getName());
+            if (isCloneGenerated) {
+                links.put("clone", "https://github.com/mamiiblt/instafel/releases/download/v" + IFL_VERSION + "/" + APK_C.getName());
+            }
+            buildInfo.put("links", links);
         }
 
-        JSONObject fNames = new JSONObject();
-        fNames.put("unclone", APK_UC.getName());
+        JSONObject fnames = new JSONObject();
+        fnames.put("unclone", APK_UC.getName());
         if (isCloneGenerated) {
-            fNames.put("clone", APK_C.getName());
+            fnames.put("clone", APK_C.getName());
         }
+        buildInfo.put("fnames", fnames);
 
         JSONObject hash = new JSONObject();
         hash.put("unclone", Utils.getFileMD5(APK_UC));
         if (isCloneGenerated) {
             hash.put("clone", Utils.getFileMD5(APK_C));
         }
-
-        buildInfo.put("patcher", patcherInfo);
-        buildInfo.put("info", genData);
-        buildInfo.put("fnames", fNames);
         buildInfo.put("hash", hash);
 
+
+        
         File bInfoFile = new File(Utils.mergePaths(buildFolder.getAbsolutePath(), "build_info.json"));
         
         try (FileWriter file = new FileWriter(bInfoFile)) {

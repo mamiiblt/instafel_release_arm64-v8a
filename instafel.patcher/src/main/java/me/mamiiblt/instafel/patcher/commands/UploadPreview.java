@@ -1,14 +1,11 @@
 package me.mamiiblt.instafel.patcher.commands;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import org.json.JSONObject;
-
-import com.fasterxml.jackson.core.JsonParser;
 
 import me.mamiiblt.instafel.patcher.source.PConfig;
 import me.mamiiblt.instafel.patcher.source.PEnvironment;
@@ -18,7 +15,6 @@ import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.Utils;
 import me.mamiiblt.instafel.patcher.utils.cmdhandler.Command;
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
