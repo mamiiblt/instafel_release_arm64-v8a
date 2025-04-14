@@ -1,42 +1,42 @@
 {
-    "instafel.gplayapi": {
-        "version": "1.5",
-        "tag": "custom"
+  "instafel.gplayapi": {
+    "version": "1.5",
+    "tag": "custom"
+  },
+  "instafel.patcher": {
+    "version": "1.0.6",
+    "tag": "release"
+  },
+  "instafel.website": {
+    "version": null,
+    "tag": "custom"
+  },
+  "instafel.updater": {
+    "version": "1.0.7",
+    "androidConfig": {
+      "versionCode": 1,
+      "keystore": {
+        "ksPath": "/config/keystores/instafel-updater.jks",
+        "ksKeyPass": "value",
+        "ksAlias": "value",
+        "ksPass": "value"
+      }
     },
-    "instafel.patcher": {
-        "version": "1.0",
-        "tag": "mamitest"
-    },
-    "instafel.website": {
-        "version": null,
-        "tag": "custom"
-    },
-    "instafel.updater": {
-        "version": "1.0.7",
-        "androidConfig": {
-            "versionCode": 1,
-            "keystore": {
-                "ksPath": "/config/keystores/instafel-updater.jks",
-                "ksKeyPass": "value",
-                "ksAlias": "value",
-                "ksPass": "value"
-            }
-        },
-        "dependencyConfig": {
-          "shizuku_version": "13.1.5",
-          "android_work_version": "2.9.1",
-          "okhttp_version": "4.9.0",
-          "materialyoupreferences_version": "0.2.5"      
-        } 
-    },
-    "instafel.app": {
-        "androidConfig": {
-            "keystore": {
-                "ksPath": "/config/keystores/instafel-app.jks",
-                "ksKeyPass": "value",
-                "ksAlias": "value",
-                "ksPass": "value"
-            }
-        }
+    "dependencyConfig": {
+      "shizuku_version": "13.1.5",
+      "android_work_version": "2.9.1",
+      "okhttp_version": "4.9.0",
+      "materialyoupreferences_version": "0.2.5"
     }
+  },
+  "instafel.app": {
+    "androidConfig": {
+      "keystore": {
+        "ksPath": "/config/keystores/instafel-app.jks",
+        "ksKeyPass": "value",
+        "ksAlias": "value",
+        "ksPass": "value"
+      }
+    }
+  }
 }
