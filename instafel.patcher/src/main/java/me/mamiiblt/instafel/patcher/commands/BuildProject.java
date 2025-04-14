@@ -357,7 +357,7 @@ public class BuildProject implements Command {
         File bInfoFile = new File(Utils.mergePaths(buildFolder.getAbsolutePath(), "build_info.json"));
         
         try (FileWriter file = new FileWriter(bInfoFile)) {
-            file.write(buildInfo.toString(2));
+            file.write(buildInfo.toString());
             Log.info("Build information file saved.");
         } catch (IOException e) {
             e.printStackTrace();
