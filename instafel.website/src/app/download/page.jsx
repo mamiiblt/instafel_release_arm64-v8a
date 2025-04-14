@@ -62,7 +62,6 @@ function DownloadIflContent() {
         build_date: null,
         gen_id: null,
         app: {
-          arch: null,
           ifl_version: null,
           version_name: null,
           version_code: null,
@@ -74,6 +73,10 @@ function DownloadIflContent() {
         download_urls: {
           unclone: null,
           clone: null,
+        },
+        patcher: {
+          version: null,
+          commit: null,
         },
         changelogs: null,
       };
@@ -104,9 +107,6 @@ function DownloadIflContent() {
                   case "gen_id":
                     values.gen_id = nextValue;
                     break;
-                  case "app.arch":
-                    values.app.arch = nextValue;
-                    break;
                   case "app.ifl_version":
                     values.app.ifl_version = nextValue;
                     break;
@@ -121,6 +121,12 @@ function DownloadIflContent() {
                     break;
                   case "hash.c":
                     values.hash.c = nextValue;
+                    break;
+                  case "patcher.version":
+                    values.patcher.version = nextValue;
+                    break;
+                  case "patcher.commit":
+                    values.patcher.commit = nextValue;
                     break;
                 }
               }
@@ -371,14 +377,6 @@ function DownloadIflContent() {
                             <TableBody>
                               <TableRow>
                                 <TableCell className="font-medium">
-                                  Architecture
-                                </TableCell>
-                                <TableCell>
-                                  {data ? data.app.arch : "..."}
-                                </TableCell>
-                              </TableRow>
-                              <TableRow>
-                                <TableCell className="font-medium">
                                   Build Date
                                 </TableCell>
                                 <TableCell>
@@ -421,10 +419,21 @@ function DownloadIflContent() {
                               </TableRow>
                               <TableRow>
                                 <TableCell className="font-medium">
+                                  Patcher Version
+                                </TableCell>
+                                <TableCell>
+                                  v
+                                  {data && data.patcher
+                                    ? `v${data.patcher.version} (${data.patcher.commit})`
+                                    : "Uses old patcher"}
+                                </TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell className="font-medium">
                                   Generation ID
                                 </TableCell>
                                 <TableCell>
-                                  {data ? data.gen_id.split("-")[0] : "..."}
+                                  {data ? data.gen_id : "..."}
                                 </TableCell>
                               </TableRow>
                               <TableRow>
