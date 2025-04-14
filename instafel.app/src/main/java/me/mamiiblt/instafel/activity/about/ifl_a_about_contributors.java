@@ -20,6 +20,13 @@ public class ifl_a_about_contributors extends AppCompatActivity {
         updateIflLocale(this, false);
         setContentView(R.layout.ifl_at_about_contributors);
 
+        findViewById(R.id.ifl_tile_ct14).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ifl_a_about_contributors.this.openUrlInWeb("https://t.me/amazingscripts");
+            }
+        });
+        
         findViewById(R.id.ifl_tile_ct01).setOnClickListener(new View.OnClickListener() { 
             @Override
             public void onClick(View view) {

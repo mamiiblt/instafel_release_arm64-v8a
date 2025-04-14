@@ -37,7 +37,6 @@ public class Crashlog {
            newAppData.put("ig_ver", appData.getIg_ver());
            newAppData.put("ig_ver_code", appData.getIg_ver_code());
            newAppData.put("ig_itype", appData.getIg_itype());
-           newAppData.put("ig_arch", appData.getIg_arch());
            logObject.put("appData", newAppData);
 
            JSONObject newDeviceData = new JSONObject();

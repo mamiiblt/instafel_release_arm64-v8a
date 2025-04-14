@@ -54,8 +54,7 @@ public class ifl_a_crash_viewer extends AppCompatActivity {
                             crashObject.getJSONObject("appData").get("ifl_ver"),
                             crashObject.getJSONObject("appData").get("ig_ver"),
                             crashObject.getJSONObject("appData").get("ig_ver_code"),
-                            crashObject.getJSONObject("appData").get("ig_itype"),
-                            crashObject.getJSONObject("appData").get("ig_arch")
+                            crashObject.getJSONObject("appData").get("ig_itype")
                     ),
                     new DeviceData(
                             crashObject.getJSONObject("deviceData").get("aver"),
@@ -148,8 +147,6 @@ public class ifl_a_crash_viewer extends AppCompatActivity {
         _stringContent = addValue(_stringContent, "IG_VER",  crashlog.getAppData().getIg_ver().toString());
         _stringContent = addValue(_stringContent, "IG_VER_CODE",  crashlog.getAppData().getIg_ver_code().toString());
         _stringContent = addValue(_stringContent, "TYPE",  crashlog.getAppData().getIg_itype().toString());
-        _stringContent = addValue(_stringContent, "ARCH",  crashlog.getAppData().getIg_arch().toString());
-
 
         _stringContent = _stringContent + "\n";
         _stringContent = _stringContent + "# DEVICE\n";

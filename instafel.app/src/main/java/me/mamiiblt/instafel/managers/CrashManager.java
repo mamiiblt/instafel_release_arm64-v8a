@@ -68,7 +68,6 @@ public class CrashManager {
             crashData.put("class", throwableClass != null ? throwableClass : JSONObject.NULL);
             logObject.put("crashData", crashData);
 
-
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
             logObject.put("date", sdf.format(new Date()));
 

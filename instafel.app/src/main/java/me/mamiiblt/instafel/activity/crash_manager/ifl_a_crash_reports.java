@@ -63,8 +63,7 @@ public class ifl_a_crash_reports extends AppCompatActivity {
                                     crashObject.getJSONObject("appData").get("ifl_ver"),
                                     crashObject.getJSONObject("appData").get("ig_ver"),
                                     crashObject.getJSONObject("appData").get("ig_ver_code"),
-                                    crashObject.getJSONObject("appData").get("ig_itype"),
-                                    crashObject.getJSONObject("appData").get("ig_arch")
+                                    crashObject.getJSONObject("appData").get("ig_itype")
                             ),
                             new DeviceData(
                                     crashObject.getJSONObject("deviceData").get("aver"),

@@ -132,7 +132,7 @@ public class CheckUpdates {
         int ifl_version = IflEnvironment.getIflVersion(activity);
         String ifl_type = IflEnvironment.getType(activity);
 
-        new VersionTask(activity, ifl_type, ifl_version, checkType).execute("https://api.github.com/repos/mamiiblt/instafel_release_arm64-v8a/releases/latest");
+        new VersionTask(activity, ifl_type, ifl_version, checkType).execute("https://api.github.com/repos/mamiiblt/instafel/releases/latest");
     }
 
     public static void showBackupUpdateDialog(Activity activity, String languageCode, String backupId) {
