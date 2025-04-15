@@ -36,7 +36,7 @@ public class ifl_a_build_info extends AppCompatActivity {
         tileGenerationId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openUrlInWeb("https://instafel.mamiiblt.me/download_instafel?version=v" + InstafelEnv.IFL_VERSION);
+                openUrlInWeb("https://instafel.mamiiblt.me/download?version=v" + InstafelEnv.IFL_VERSION);
             }
         });
 

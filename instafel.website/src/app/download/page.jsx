@@ -398,7 +398,7 @@ function DownloadIflContent() {
                                   IFL Version
                                 </TableCell>
                                 <TableCell>
-                                  v{data ? data.app.ifl_version : "..."}
+                                  Release v{data ? data.app.ifl_version : "..."}
                                 </TableCell>
                               </TableRow>
                               <TableRow>
@@ -422,8 +422,7 @@ function DownloadIflContent() {
                                   Patcher Version
                                 </TableCell>
                                 <TableCell>
-                                  v
-                                  {data && data.patcher
+                                  {data.patcher.version != null
                                     ? `v${data.patcher.version} (${data.patcher.commit})`
                                     : "Uses old patcher"}
                                 </TableCell>

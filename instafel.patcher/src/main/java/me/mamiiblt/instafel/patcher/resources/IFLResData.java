@@ -46,10 +46,10 @@ public class IFLResData {
             Document document = ResourceParser.parseResourceDocument(inputFile);
             activities = ResourceParser.getElementsFromResFile(document, "activity");
             providers = ResourceParser.getElementsFromResFile(document, "provider");
-            parseStringRes(null);
+            parseStringRes();
         }
 
-        private void parseStringRes(String langCode) throws ParserConfigurationException, IOException, SAXException {
+        private void parseStringRes() throws ParserConfigurationException, IOException, SAXException {
             Document document = ResourceParser.parseResourceDocument(inputFile);
             List<Element> categories = ResourceParser.getElementsFromResFile(document, "vcategory");
             categories.removeIf(item -> !item.getAttribute("name").contains("strings"));
