@@ -12,10 +12,10 @@ import me.mamiiblt.instafel.patcher.utils.Utils;
 import me.mamiiblt.instafel.patcher.utils.models.LineData;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatch;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelTask;
-import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
+import me.mamiiblt.instafel.patcher.utils.patch.PInfos;
 
 // Thanks to ReVanced developers for made this patch possible!
-@PatchInfo (
+@PInfos.PatchInfo (
     name = "Remove Ads",
     shortname = "remove_ads",
     desc = "Remove Ads in Instagram",

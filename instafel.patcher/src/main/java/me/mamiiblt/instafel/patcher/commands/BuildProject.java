@@ -17,12 +17,10 @@ import org.json.JSONObject;
 
 import brut.androlib.exceptions.AndrolibException;
 import me.mamiiblt.instafel.patcher.source.APKSigner;
-import me.mamiiblt.instafel.patcher.source.PConfig;
-import me.mamiiblt.instafel.patcher.source.PEnvironment;
 import me.mamiiblt.instafel.patcher.source.SourceManager;
 import me.mamiiblt.instafel.patcher.source.SourceUtils;
 import me.mamiiblt.instafel.patcher.source.WorkingDir;
-import me.mamiiblt.instafel.patcher.utils.Environment;
+import me.mamiiblt.instafel.patcher.utils.Env;
 import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.SmaliUtils;
 import me.mamiiblt.instafel.patcher.utils.Utils;
@@ -54,9 +52,9 @@ public class BuildProject implements Command {
     public void execute(String[] args) {
         try {
             if (args.length != 0) {
-                Environment.PROJECT_DIR = WorkingDir.getExistsWorkingDir(args[0]);
-                PConfig.setupConfig();
-                PEnvironment.setupEnv();
+                Env.PROJECT_DIR = WorkingDir.getExistsWorkingDir(args[0]);
+                Env.Config.setupConfig();;
+                Env.Project.setupEnv();
 
                 Log.info("Building project...");
                 configureEnvironment();
@@ -67,8 +65,8 @@ public class BuildProject implements Command {
                 generateBuildInfo();
                 Log.info("Project succesfully builded into /build folder");
 
-                PConfig.saveProperties();
-                PEnvironment.saveProperties();
+                Env.Config.saveProperties();
+                Env.Project.saveProperties();
             } else {
                 Log.info("Wrong commage usage type, use like that;");
                 Log.info("java -jar patcher.jar build instagram");
@@ -83,22 +81,22 @@ public class BuildProject implements Command {
     private void configureEnvironment() throws IOException {
         Log.info("Initializing build environment...");
         this.BUILD_TS = String.valueOf(System.currentTimeMillis());
-        this.APK_SIGNER_JAR = new File(Utils.mergePaths(Environment.PROJECT_DIR,"build", "signer.jar"));
-        this.DEBUG_KEYSTORE = new File(Utils.mergePaths(Environment.PROJECT_DIR, "build", "debug.keystore"));
-        this.smaliUtils = new SmaliUtils(Environment.PROJECT_DIR);
-        this.buildFolder = new File(Utils.mergePaths(Environment.PROJECT_DIR, "build"));
+        this.APK_SIGNER_JAR = new File(Utils.mergePaths(Env.PROJECT_DIR,"build", "signer.jar"));
+        this.DEBUG_KEYSTORE = new File(Utils.mergePaths(Env.PROJECT_DIR, "build", "debug.keystore"));
+        this.smaliUtils = new SmaliUtils(Env.PROJECT_DIR);
+        this.buildFolder = new File(Utils.mergePaths(Env.PROJECT_DIR, "build"));
         if (buildFolder.exists()) {
             FileUtils.deleteDirectory(buildFolder);
             Log.info("Old build directory deleted.");
         }
-        this.useDebugKeystore = PConfig.getBoolean(PConfig.Keys.use_debug_keystore, false);
+        this.useDebugKeystore = Env.Config.getBoolean(Env.Config.Keys.use_debug_keystore, false);
         if (useDebugKeystore == false) {
-            this.KS_FILE = new File(Utils.mergePaths(Environment.PROJECT_DIR, PConfig.getString(PConfig.Keys.keystore_file, "")));
-            this.KS_PASS = PConfig.getString(PConfig.Keys.keystore_pass, null);
-            this.KS_ALIAS = PConfig.getString(PConfig.Keys.keystore_alias, null);
-            this.KS_KEY_PASS = PConfig.getString(PConfig.Keys.keystore_keypass, null);
+            this.KS_FILE = new File(Utils.mergePaths(Env.PROJECT_DIR, Env.Config.getString(Env.Config.Keys.keystore_file, "")));
+            this.KS_PASS = Env.Config.getString(Env.Config.Keys.keystore_pass, null);
+            this.KS_ALIAS = Env.Config.getString(Env.Config.Keys.keystore_alias, null);
+            this.KS_KEY_PASS = Env.Config.getString(Env.Config.Keys.keystore_keypass, null);
         
-            if (KS_FILE.getAbsolutePath() == Utils.mergePaths(Environment.PROJECT_DIR) || KS_PASS == null || KS_ALIAS == null || KS_KEY_PASS == null) {
+            if (KS_FILE.getAbsolutePath() == Utils.mergePaths(Env.PROJECT_DIR) || KS_PASS == null || KS_ALIAS == null || KS_KEY_PASS == null) {
                 Log.severe("Please set keystore configurations normally from config.properties file");
             }
 
@@ -107,18 +105,18 @@ public class BuildProject implements Command {
             }
         }
 
-        this.cloneRefFolder = new File(Environment.PROJECT_DIR, "clone_ref");
+        this.cloneRefFolder = new File(Env.PROJECT_DIR, "clone_ref");
         this.isCloneGenerated = cloneRefFolder.exists();
-        this.isProductionMode = PConfig.getBoolean(PConfig.Keys.prod_mode, false);
-        String[] appliedPatches = PEnvironment.getString(PEnvironment.Keys.APPLIED_PATCHES, "").split(",");
+        this.isProductionMode = Env.Config.getBoolean(Env.Config.Keys.prod_mode, false);
+        String[] appliedPatches = Env.Project.getString(Env.Project.Keys.APPLIED_PATCHES, "").split(",");
         for (String patch : appliedPatches) {
             this.appliedPatches.add(patch);
         }
-        this.IG_VERSION = PEnvironment.getString(PEnvironment.Keys.INSTAGRAM_VERSION, null);
-        this.IG_VER_CODE = PEnvironment.getString(PEnvironment.Keys.INSTAGRAM_VERSION_CODE, null);
+        this.IG_VERSION = Env.Project.getString(Env.Project.Keys.INSTAGRAM_VERSION, null);
+        this.IG_VER_CODE = Env.Project.getString(Env.Project.Keys.INSTAGRAM_VERSION_CODE, null);
         if (isProductionMode) {
-            this.IFL_VERSION = PEnvironment.getString(PEnvironment.Keys.INSTAFEL_VERSION, null);
-            this.GENERATION_ID = PEnvironment.getString(PEnvironment.Keys.GENID, null); 
+            this.IFL_VERSION = Env.Project.getString(Env.Project.Keys.INSTAFEL_VERSION, null);
+            this.GENERATION_ID = Env.Project.getString(Env.Project.Keys.GENID, null); 
                 
             if (IFL_VERSION == null && GENERATION_ID == null) {
                 Log.severe("Environment file is not compatible for building..");
@@ -202,7 +200,7 @@ public class BuildProject implements Command {
     }
 
     private void replaceSourceFiles(boolean type) throws IOException {
-        File originalTempDir = new File(Utils.mergePaths(Environment.PROJECT_DIR, "orig_temp"));
+        File originalTempDir = new File(Utils.mergePaths(Env.PROJECT_DIR, "orig_temp"));
         FileUtils.forceMkdir(originalTempDir);
         Collection<File> filesAndDirs = FileUtils.listFilesAndDirs(
             cloneRefFolder,
@@ -238,8 +236,8 @@ public class BuildProject implements Command {
             Log.info("Updating Instafel app environment...");
             File smallDexFolder = smaliUtils.getSmallSizeSmaliFolder(smaliUtils.getSmaliFolders());
             File envFile = new File(
-                Utils.mergePaths(Environment.PROJECT_DIR, "sources", smallDexFolder.getName(), "me", "mamiiblt", "instafel", "InstafelEnv.smali"));
-            File origEnvFile = new File(Utils.mergePaths(Environment.PROJECT_DIR, "sources", "InstafelEnv_orig.smali"));
+                Utils.mergePaths(Env.PROJECT_DIR, "sources", smallDexFolder.getName(), "me", "mamiiblt", "instafel", "InstafelEnv.smali"));
+            File origEnvFile = new File(Utils.mergePaths(Env.PROJECT_DIR, "sources", "InstafelEnv_orig.smali"));
 
             if (origEnvFile.exists()) {
                 FileUtils.copyFile(origEnvFile, envFile);
@@ -253,9 +251,9 @@ public class BuildProject implements Command {
             pairs.put("_genid_", isProductionMode ? GENERATION_ID : "NOT_PROD_MODE");
             pairs.put("_igver_", IG_VERSION);
             pairs.put("_igvercode_", IG_VER_CODE);
-            pairs.put("_pcommit_", Environment.PROP_COMMIT_HASH);
-            pairs.put("_ptag", Environment.PROP_PROJECT_TAG);
-            pairs.put("_pversion_", "v" + Environment.PROP_VERSION_STRING);
+            pairs.put("_pcommit_", Env.PROP_COMMIT_HASH);
+            pairs.put("_ptag", Env.PROP_PROJECT_TAG);
+            pairs.put("_pversion_", "v" + Env.PROP_VERSION_STRING);
             String apatches = "";
             for (String patch : appliedPatches) {
                 if (!patch.contains("clone")) {
@@ -293,11 +291,11 @@ public class BuildProject implements Command {
 
     private void setOutputAPKFiles() {
         if (!isProductionMode) {
-            this.APK_UC = new File(Utils.mergePaths(Environment.PROJECT_DIR, "build", "unclone.apk"));
-            this.APK_C = new File(Utils.mergePaths(Environment.PROJECT_DIR, "build", "clone.apk"));
+            this.APK_UC = new File(Utils.mergePaths(Env.PROJECT_DIR, "build", "unclone.apk"));
+            this.APK_C = new File(Utils.mergePaths(Env.PROJECT_DIR, "build", "clone.apk"));
         } else {
-            this.APK_UC = new File(Utils.mergePaths(Environment.PROJECT_DIR, "build", "instafel_uc_v" + IFL_VERSION + "_" + IG_VERSION + ".apk"));
-            this.APK_C = new File(Utils.mergePaths(Environment.PROJECT_DIR, "build", "instafel_c_v" + IFL_VERSION + "_" + IG_VERSION + ".apk"));
+            this.APK_UC = new File(Utils.mergePaths(Env.PROJECT_DIR, "build", "instafel_uc_v" + IFL_VERSION + "_" + IG_VERSION + ".apk"));
+            this.APK_C = new File(Utils.mergePaths(Env.PROJECT_DIR, "build", "instafel_c_v" + IFL_VERSION + "_" + IG_VERSION + ".apk"));
         }
     }
 
@@ -308,8 +306,8 @@ public class BuildProject implements Command {
             buildInfo.put("clone_generated", isCloneGenerated);
         }
         JSONObject patcherInfo = new JSONObject();
-        patcherInfo.put("version", Environment.PROP_VERSION_STRING);
-        patcherInfo.put("commit", Environment.PROP_COMMIT_HASH + "/" + Environment.PROP_PROJECT_TAG);
+        patcherInfo.put("version", Env.PROP_VERSION_STRING);
+        patcherInfo.put("commit", Env.PROP_COMMIT_HASH + "/" + Env.PROP_PROJECT_TAG);
         JSONArray appliedP = new JSONArray();
         for (String applied : appliedPatches) {
             appliedP.put(applied);

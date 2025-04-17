@@ -1,6 +1,6 @@
 package me.mamiiblt.instafel.patcher.utils.patch;
 
-import me.mamiiblt.instafel.patcher.utils.Environment;
+import me.mamiiblt.instafel.patcher.utils.Env;
 import me.mamiiblt.instafel.patcher.utils.Log;
 
 public abstract class InstafelTask {
@@ -31,7 +31,7 @@ public abstract class InstafelTask {
             Log.info("SUCCESS: " + finishString);
         } else if (taskStatus == 2) {
             Log.info("FAILURE: " + finishString);
-            Log.info(Environment.SPERATOR_STR);
+            Log.info(Env.SPERATOR_STR);
             System.exit(-1);
         }
     }

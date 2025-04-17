@@ -61,7 +61,7 @@ public class Log {
     public static void info(String msg) {
         if (msg.isEmpty()) {    
             System.out.println("");
-        } else if (msg.equals(Environment.SPERATOR_STR)) {
+        } else if (msg.equals(Env.SPERATOR_STR)) {
             System.out.println(msg);
         } else {
             LOGGER.info(msg);

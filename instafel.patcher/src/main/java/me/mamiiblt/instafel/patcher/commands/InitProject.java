@@ -7,7 +7,7 @@ import brut.directory.ExtFile;
 import me.mamiiblt.instafel.patcher.source.SourceManager;
 import me.mamiiblt.instafel.patcher.source.SourceUtils;
 import me.mamiiblt.instafel.patcher.source.WorkingDir;
-import me.mamiiblt.instafel.patcher.utils.Environment;
+import me.mamiiblt.instafel.patcher.utils.Env;
 import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.Utils;
 import me.mamiiblt.instafel.patcher.utils.cmdhandler.Command;
@@ -20,8 +20,8 @@ public class InitProject implements Command {
             if (args.length != 0) {
                 String fileArgument = args[0];
                 if (fileArgument.contains(".apk") || fileArgument.contains(".zip")) {
-                    File apkPath = new File(Paths.get(Environment.USER_DIR, fileArgument).toString());
-                    Environment.PROJECT_DIR = WorkingDir.createWorkingDir(apkPath.getName()); 
+                    File apkPath = new File(Paths.get(Env.USER_DIR, fileArgument).toString());
+                    Env.PROJECT_DIR = WorkingDir.createWorkingDir(apkPath.getName()); 
                     SourceManager sourceManager = new SourceManager();
                     sourceManager.setConfig(SourceUtils.getDefaultIflConfigDecoder(sourceManager.getConfig()));
                     sourceManager.getConfig().setFrameworkDirectory(SourceUtils.getDefaultFrameworkDirectory());
@@ -29,7 +29,7 @@ public class InitProject implements Command {
                         Utils.mergePaths(apkPath.getAbsolutePath())
                     ));
 
-                    File dwBin = new File(Utils.mergePaths(Environment.PROJECT_DIR, "sources", "assets", "drawables.bin"));
+                    File dwBin = new File(Utils.mergePaths(Env.PROJECT_DIR, "sources", "assets", "drawables.bin"));
                     if (dwBin.exists()) {
                         dwBin.delete();
                     }

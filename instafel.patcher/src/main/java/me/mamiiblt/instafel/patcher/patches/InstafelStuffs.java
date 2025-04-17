@@ -5,7 +5,7 @@ import java.util.List;
 import me.mamiiblt.instafel.patcher.patches.ifl_general.*;
 import me.mamiiblt.instafel.patcher.utils.patch.*;
 
-@PatchGroupInfo(
+@PInfos.PatchGroupInfo(
     name = "Instafel Stuffs",
     shortname = "instafel",
     desc = "You can add Instafel stuffs with this patches.",

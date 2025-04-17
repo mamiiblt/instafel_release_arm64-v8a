@@ -6,8 +6,8 @@ import me.mamiiblt.instafel.patcher.utils.patch.PatchLoader;
 import me.mamiiblt.instafel.patcher.utils.cmdhandler.Command;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatch;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatchGroup;
-import me.mamiiblt.instafel.patcher.utils.patch.PatchGroupInfo;
-import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
+import me.mamiiblt.instafel.patcher.utils.patch.PInfos;
+import me.mamiiblt.instafel.patcher.utils.patch.PInfos.PatchInfo;
 
 public class ListPatches implements Command {
     @Override
@@ -15,8 +15,8 @@ public class ListPatches implements Command {
         
         try {
             System.out.println("Patches: ");
-            List<PatchInfo> patchInfos = PatchLoader.getPatchInfos();
-            for (PatchInfo info : patchInfos) {
+            List<PInfos.PatchInfo> patchInfos = PatchLoader.getPatchInfos();
+            for (PInfos.PatchInfo info : patchInfos) {
                 if (info.listable() != false) {
                     System.out.println("    • " + getPatchInfoString(info)); 
                 }
@@ -24,14 +24,14 @@ public class ListPatches implements Command {
 
             System.out.println("");
             System.out.println("Patch Groups:");
-            List<PatchGroupInfo> patchGroupInfos = PatchLoader.getPatchGroupInfos();
-            for (PatchGroupInfo patchGroupInfo : patchGroupInfos) {
+            List<PInfos.PatchGroupInfo> patchGroupInfos = PatchLoader.getPatchGroupInfos();
+            for (PInfos.PatchGroupInfo patchGroupInfo : patchGroupInfos) {
                 InstafelPatchGroup group = PatchLoader.findPatchGroupByShortname(patchGroupInfo.shortname());
                 System.out.println("    • " + patchGroupInfo.name() + " (" + patchGroupInfo.shortname() + ")");
 
                 group.loadPatches();
                 for (Class<? extends InstafelPatch> patch : group.patches) {
-                    PatchInfo info = patch.getAnnotation(PatchInfo.class);
+                    PInfos.PatchInfo info = patch.getAnnotation(PInfos.PatchInfo.class);
                     System.out.println("        - " + getPatchInfoString(info));
                     
                 }
@@ -45,7 +45,7 @@ public class ListPatches implements Command {
         }     
     }
 
-    private String getPatchInfoString(PatchInfo info) {
+    private String getPatchInfoString(PInfos.PatchInfo info) {
         return info.name() + " (" + info.shortname() + ")";
     }
 }

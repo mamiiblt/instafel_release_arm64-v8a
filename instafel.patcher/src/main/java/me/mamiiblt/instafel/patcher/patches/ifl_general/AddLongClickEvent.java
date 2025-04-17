@@ -12,9 +12,9 @@ import me.mamiiblt.instafel.patcher.utils.Utils;
 import me.mamiiblt.instafel.patcher.utils.models.LineData;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatch;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelTask;
-import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
+import me.mamiiblt.instafel.patcher.utils.patch.PInfos;
 
-@PatchInfo (
+@PInfos.PatchInfo (
     name = "Add Long Click Event",
     shortname = "add_long_click_event",
     desc = "This patch must be applied for Instafel Menu",

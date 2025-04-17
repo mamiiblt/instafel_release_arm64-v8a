@@ -4,10 +4,8 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.mamiiblt.instafel.patcher.source.PConfig;
-import me.mamiiblt.instafel.patcher.source.PEnvironment;
 import me.mamiiblt.instafel.patcher.source.WorkingDir;
-import me.mamiiblt.instafel.patcher.utils.Environment;
+import me.mamiiblt.instafel.patcher.utils.Env;
 import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.cmdhandler.Command;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatch;
@@ -23,9 +21,9 @@ public class RunPatch implements Command {
     public void execute(String[] args) {
 
         String wdirFolder = args[0];
-        Environment.PROJECT_DIR = WorkingDir.getExistsWorkingDir(wdirFolder);
-        PEnvironment.setupEnv();
-        PConfig.setupConfig();
+        Env.PROJECT_DIR = WorkingDir.getExistsWorkingDir(wdirFolder);
+        Env.Project.setupEnv();
+        Env.Config.setupConfig();
 
         List<InstafelPatch> runnablePatches = new ArrayList<>();
         Log.info("Loading patches...");
@@ -85,7 +83,7 @@ public class RunPatch implements Command {
         Log.info("Executing patches...");
         for (InstafelPatch patch : runnablePatches) {
             Log.info("");
-            Log.info(Environment.SPERATOR_STR);
+            Log.info(Env.SPERATOR_STR);
             System.out.println(patch.name);
             System.out.println("by @" + patch.author);
             System.out.println(patch.description);
@@ -110,14 +108,14 @@ public class RunPatch implements Command {
                 }
             }
             Log.info("");
-            String patches = PEnvironment.getString(PEnvironment.Keys.APPLIED_PATCHES, "");
-            PEnvironment.setString(PEnvironment.Keys.APPLIED_PATCHES, patches.equals("") ? patches + patch.shortname : patches + "," + patch.shortname);
+            String patches = Env.Project.getString(Env.Project.Keys.APPLIED_PATCHES, "");
+            Env.Project.setString(Env.Project.Keys.APPLIED_PATCHES, patches.equals("") ? patches + patch.shortname : patches + "," + patch.shortname);
             Log.info("All tasks runned succesfully.");
-            Log.info(Environment.SPERATOR_STR);
+            Log.info(Env.SPERATOR_STR);
         }
         Log.info("");
         Log.info("All patches executed succesfully.");
-        PEnvironment.saveProperties();
-        PConfig.saveProperties();
+        Env.Project.saveProperties();
+        Env.Config.saveProperties();
     }
 }

@@ -22,15 +22,15 @@ import org.w3c.dom.Element;
 import me.mamiiblt.instafel.patcher.resources.ResourceParser;
 import me.mamiiblt.instafel.patcher.resources.Resources;
 import me.mamiiblt.instafel.patcher.resources.types.TString;
-import me.mamiiblt.instafel.patcher.utils.Environment;
+import me.mamiiblt.instafel.patcher.utils.Env;
 import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.SmaliUtils;
 import me.mamiiblt.instafel.patcher.utils.Utils;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatch;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelTask;
-import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
+import me.mamiiblt.instafel.patcher.utils.patch.PInfos;
 
-@PatchInfo (
+@PInfos.PatchInfo (
     name = "Clone General",
     shortname = "clone_general",
     desc = "It makes app compatible for clone generation.",
@@ -54,7 +54,7 @@ public class CloneGeneral extends InstafelPatch {
 
     @Override
     public List<InstafelTask> initializeTasks() throws Exception {
-        this.cloneRefFolder = new File(Utils.mergePaths(Environment.PROJECT_DIR, "clone_ref"));
+        this.cloneRefFolder = new File(Utils.mergePaths(Env.PROJECT_DIR, "clone_ref"));
         this.blacklistedPermissions = new JSONArray(slurp(CloneGeneral.class.getResourceAsStream("/blacklisted_perms.json")));
         
         return List.of(
@@ -70,7 +70,7 @@ public class CloneGeneral extends InstafelPatch {
 
         @Override
         public void execute() throws Exception {
-            File valuesFolder = new File(Utils.mergePaths(Environment.PROJECT_DIR, "sources", "res"));
+            File valuesFolder = new File(Utils.mergePaths(Env.PROJECT_DIR, "sources", "res"));
 
             Collection<File> allDirs = FileUtils.listFilesAndDirs(
                 valuesFolder,
@@ -113,7 +113,7 @@ public class CloneGeneral extends InstafelPatch {
             FileUtils.forceMkdir(cloneRefFolder);
 
             manifest = (Document) ResourceParser.parseResourceDocument(new File(Utils.mergePaths(
-                Environment.PROJECT_DIR, "sources", "AndroidManifest.xml")));
+                Env.PROJECT_DIR, "sources", "AndroidManifest.xml")));
             manifestTag = manifest.getDocumentElement();
             manifestTag.setAttribute("package", "com.instafel.android");
             updateRefManifest(manifest);
@@ -129,7 +129,7 @@ public class CloneGeneral extends InstafelPatch {
             String appLabelResource = appTag.getAttribute("android:label").replace("@string/", "");
         
             File stringsFile = new File(Utils.mergePaths(
-                Environment.PROJECT_DIR, "sources", "res", "values", "strings.xml"));
+                Env.PROJECT_DIR, "sources", "res", "values", "strings.xml"));
             Resources<TString> appStrings = ResourceParser.parseResString(stringsFile);
             
             boolean success = false;

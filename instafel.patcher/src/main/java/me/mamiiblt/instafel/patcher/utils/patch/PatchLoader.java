@@ -10,6 +10,8 @@ import java.util.Set;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfo;
 import io.github.classgraph.ScanResult;
+import me.mamiiblt.instafel.patcher.utils.patch.PInfos.PatchGroupInfo;
+import me.mamiiblt.instafel.patcher.utils.patch.PInfos.PatchInfo;
 
 public class PatchLoader {
 
@@ -25,8 +27,8 @@ public class PatchLoader {
             for (ClassInfo classInfo : scanResult.getSubclasses(InstafelPatchGroup.class.getName())) {
                 Class<?> clazz = Class.forName(classInfo.getName());
 
-                if (!Modifier.isAbstract(clazz.getModifiers()) && clazz.isAnnotationPresent(PatchGroupInfo.class)) {
-                    PatchGroupInfo info = clazz.getAnnotation(PatchGroupInfo.class);
+                if (!Modifier.isAbstract(clazz.getModifiers()) && clazz.isAnnotationPresent(PInfos.PatchGroupInfo.class)) {
+                    PInfos.PatchGroupInfo info = clazz.getAnnotation(PInfos.PatchGroupInfo.class);
                     
                     if (shortName.equals("all")) {
                         Constructor<?> constructor = clazz.getDeclaredConstructor();

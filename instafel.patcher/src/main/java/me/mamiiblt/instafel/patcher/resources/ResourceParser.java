@@ -25,7 +25,7 @@ import me.mamiiblt.instafel.patcher.resources.types.TId;
 import me.mamiiblt.instafel.patcher.resources.types.TPublic;
 import me.mamiiblt.instafel.patcher.resources.types.TString;
 import me.mamiiblt.instafel.patcher.resources.types.TStyle;
-import me.mamiiblt.instafel.patcher.utils.Environment;
+import me.mamiiblt.instafel.patcher.utils.Env;
 import me.mamiiblt.instafel.patcher.utils.Log;
 
 public class ResourceParser {
@@ -44,7 +44,7 @@ public class ResourceParser {
     }
 
     public static Resources<TString> parseResString(File file) throws ParserConfigurationException, IOException, SAXException {
-        for (String locale : Environment.INSTAFEL_LOCALES) {
+        for (String locale : Env.INSTAFEL_LOCALES) {
             if (file.getAbsolutePath().contains("values-" + locale)) {
                 return parseResource(file, "string", TString::new, "strings-" + locale);
             }

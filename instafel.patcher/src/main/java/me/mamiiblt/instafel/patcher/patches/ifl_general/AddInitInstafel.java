@@ -9,9 +9,9 @@ import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.SmaliUtils;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatch;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelTask;
-import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
+import me.mamiiblt.instafel.patcher.utils.patch.PInfos;
 
-@PatchInfo (
+@PInfos.PatchInfo (
     name = "Add Initialize Instafel",
     shortname = "add_init_instafel",
     desc = "This patch must be applied for Instafel Menu",

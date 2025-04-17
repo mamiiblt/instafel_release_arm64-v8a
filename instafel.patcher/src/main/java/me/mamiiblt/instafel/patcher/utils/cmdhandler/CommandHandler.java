@@ -11,7 +11,7 @@ import me.mamiiblt.instafel.patcher.commands.ListPatches;
 import me.mamiiblt.instafel.patcher.commands.RunPatch;
 import me.mamiiblt.instafel.patcher.commands.UploadPreview;
 import me.mamiiblt.instafel.patcher.commands.AboutCmd;
-import me.mamiiblt.instafel.patcher.utils.Environment;
+import me.mamiiblt.instafel.patcher.utils.Env;
 
 public class CommandHandler {
     
@@ -24,12 +24,12 @@ public class CommandHandler {
 
     private void setupHandler(String[] args) {
         if (args.length == 0) {
-            Environment.printPatcherHeader();
+            Env.printPatcherHeader();
             System.out.println("Use `help` command for list all commands.");
         } else {
             String command = args[0];
             if (!command.equals("about")) {
-                Environment.printPatcherHeader();
+                Env.printPatcherHeader();
             }
             String[] commandArgs = new String[args.length - 1];
             System.arraycopy(args, 1, commandArgs, 0, args.length - 1);

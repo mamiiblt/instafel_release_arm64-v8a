@@ -10,9 +10,9 @@ import me.mamiiblt.instafel.patcher.utils.SmaliUtils;
 import me.mamiiblt.instafel.patcher.utils.models.LineData;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatch;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelTask;
-import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
+import me.mamiiblt.instafel.patcher.utils.patch.PInfos;
 
-@PatchInfo(
+@PInfos.PatchInfo(
     name = "Unlock Developer Options",
     shortname = "unlock_developer_options",
     desc = "You can unlock developer options with applying this patch!",

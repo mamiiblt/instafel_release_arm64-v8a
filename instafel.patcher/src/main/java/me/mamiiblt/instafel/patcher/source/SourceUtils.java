@@ -1,10 +1,16 @@
 package me.mamiiblt.instafel.patcher.source;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.apache.commons.io.FileUtils;
+
 import brut.androlib.Config;
+import me.mamiiblt.instafel.patcher.utils.Env;
+import me.mamiiblt.instafel.patcher.utils.Log;
+import me.mamiiblt.instafel.patcher.utils.Utils;
 import me.mamiiblt.instafel.patcher.utils.Utils.OSDedector;
 
 public class SourceUtils {
@@ -44,5 +50,18 @@ public class SourceUtils {
             }
         }
         return path.toString(); 
+    }
+
+    public static String createTempSourceDir(String igApkFileName) throws IOException {
+        String folderName = igApkFileName.replace(".apk", "") + "_temp";
+        File dirPath = new File(Utils.mergePaths(Env.USER_DIR, folderName));
+        if (dirPath.exists()) {
+            System.exit(-1);
+            return null;
+        } else {
+            FileUtils.forceMkdir(dirPath);
+            Log.info("Temp folder for parsing source succesfully created.");
+            return dirPath.getAbsolutePath();
+        }
     }
 }

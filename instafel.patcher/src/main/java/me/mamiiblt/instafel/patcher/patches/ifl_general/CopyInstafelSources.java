@@ -25,7 +25,7 @@ import me.mamiiblt.instafel.patcher.utils.patch.*;
 import me.mamiiblt.instafel.patcher.utils.sub.PublicResHelper;
 import me.mamiiblt.instafel.patcher.utils.sub.PublicResHelper.LastResourceIDs;
 
-@PatchInfo (
+@PInfos.PatchInfo (
     name = "Copy Instafel Sources",
     shortname = "copy_instafel_src",
     desc = "This patch needs to executed for use Instafel stuffs",
@@ -37,7 +37,7 @@ public class CopyInstafelSources extends InstafelPatch {
 
     private SmaliUtils smaliUtils = getSmaliUtils();
     private IFLResData.Parser resDataParser;
-    private String valuesFolderPath = Utils.mergePaths(Environment.PROJECT_DIR, "sources", "res", "values");
+    private String valuesFolderPath = Utils.mergePaths(Env.PROJECT_DIR, "sources", "res", "values");
 
     @Override
     public List<InstafelTask> initializeTasks() throws ParserConfigurationException, IOException, SAXException {
@@ -97,11 +97,11 @@ public class CopyInstafelSources extends InstafelPatch {
         public void execute() throws Exception {
             File smallDexFolder = smaliUtils.getSmallSizeSmaliFolder(smaliUtils.getSmaliFolders());
             File destFolder = new File(
-                Utils.mergePaths(Environment.PROJECT_DIR, "sources", smallDexFolder.getName(), "me", "mamiiblt"));
+                Utils.mergePaths(Env.PROJECT_DIR, "sources", smallDexFolder.getName(), "me", "mamiiblt"));
 
             Utils.unzipFromResources(false, "/ifl_sources/ifl_sources.zip", destFolder.getAbsolutePath());
             Log.info("Copying instafel resources");
-            File igResourcesFolder = new File(Utils.mergePaths(Environment.PROJECT_DIR, "sources", "res"));
+            File igResourcesFolder = new File(Utils.mergePaths(Env.PROJECT_DIR, "sources", "res"));
             Utils.unzipFromResources(false, "/ifl_sources/ifl_resources.zip", igResourcesFolder.getAbsolutePath());
             success("Instafel resources copied");
         }
@@ -111,7 +111,7 @@ public class CopyInstafelSources extends InstafelPatch {
 
         @Override
         public void execute() throws Exception {
-            File manifestFile = new File(Utils.mergePaths(Environment.PROJECT_DIR, "sources", "AndroidManifest.xml"));
+            File manifestFile = new File(Utils.mergePaths(Env.PROJECT_DIR, "sources", "AndroidManifest.xml"));
             Document manifestDoc = ResourceParser.parseResourceDocument(manifestFile);
             Node applicationElement = ResourceParser.getNodesFromResFile(manifestDoc, "application").item(0);
             Node manifestElement = manifestDoc.getDocumentElement();
@@ -154,7 +154,7 @@ public class CopyInstafelSources extends InstafelPatch {
 
             // merge localized strings
             Map<String, Resources<TString>> strings = resDataParser.resourcesStrings;
-            for (String locale : Environment.INSTAFEL_LOCALES) {
+            for (String locale : Env.INSTAFEL_LOCALES) {
                 String param = "-" + locale;
                 mergeResources(ResourceParser.parseResString(new File(
                     Utils.mergePaths(valuesFolderPath + param, "strings.xml"))
@@ -192,7 +192,7 @@ public class CopyInstafelSources extends InstafelPatch {
     }
 
     private void preapereResData() throws IOException, ParserConfigurationException, SAXException {
-        File resDataPath = new File(Utils.mergePaths(Environment.PROJECT_DIR, "ifl_data_temp.xml"));
+        File resDataPath = new File(Utils.mergePaths(Env.PROJECT_DIR, "ifl_data_temp.xml"));
         Utils.copyResourceToFile("/ifl_sources/ifl_data.xml", resDataPath);
         resDataParser = new IFLResData.Parser(resDataPath);
     }

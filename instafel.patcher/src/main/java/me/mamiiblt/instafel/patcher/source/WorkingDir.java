@@ -2,7 +2,7 @@ package me.mamiiblt.instafel.patcher.source;
 
 import org.apache.commons.io.FileUtils;
 
-import me.mamiiblt.instafel.patcher.utils.Environment;
+import me.mamiiblt.instafel.patcher.utils.Env;
 import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.Utils;
 
@@ -13,7 +13,7 @@ public class WorkingDir {
 
     public static String createWorkingDir(String igApkFileName) throws IOException {
         String folderName = igApkFileName.replace(".apk", "");
-        File dirPath = new File(Utils.mergePaths(Environment.USER_DIR, folderName));
+        File dirPath = new File(Utils.mergePaths(Env.USER_DIR, folderName));
         if (dirPath.exists()) {
             Log.severe("Working directory for this apk is already exists, delete it or continue from the project.");
             System.exit(-1);
@@ -26,7 +26,7 @@ public class WorkingDir {
     }
 
     public static String getExistsWorkingDir(String folderName) {
-        File dirPath = new File(Utils.mergePaths(Environment.USER_DIR, folderName));
+        File dirPath = new File(Utils.mergePaths(Env.USER_DIR, folderName));
         if (dirPath.isDirectory()) {
             if (dirPath.exists()) {
                 return dirPath.getAbsolutePath();

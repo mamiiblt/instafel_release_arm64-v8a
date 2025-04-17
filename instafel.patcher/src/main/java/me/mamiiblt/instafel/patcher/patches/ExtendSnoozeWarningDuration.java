@@ -12,9 +12,9 @@ import me.mamiiblt.instafel.patcher.utils.Utils;
 import me.mamiiblt.instafel.patcher.utils.models.LineData;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatch;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelTask;
-import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
+import me.mamiiblt.instafel.patcher.utils.patch.PInfos;
 
-@PatchInfo (
+@PInfos.PatchInfo (
     name = "Extend Snooze Warning Duration",
     shortname = "ext_snooze_warning_dur",
     desc = "You can extend snooze activity duration with this patch",

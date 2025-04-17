@@ -1,6 +1,6 @@
 package me.mamiiblt.instafel.patcher;
 
-import me.mamiiblt.instafel.patcher.utils.Environment;
+import me.mamiiblt.instafel.patcher.utils.Env;
 import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.cmdhandler.CommandHandler;
 
@@ -12,7 +12,7 @@ public class Patcher {
         System.setProperty("jdk.util.zip.disableZip64ExtraFieldValidation", "true");
 
         Log.setupLogger();
-        Environment.readPatcherProps();
+        Env.readPatcherProps();
         new CommandHandler(args);
     }
 }

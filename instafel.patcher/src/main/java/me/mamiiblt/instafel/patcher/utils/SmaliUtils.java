@@ -10,9 +10,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -31,6 +33,20 @@ public class SmaliUtils {
     public SmaliUtils(String projectDir) {
         this.projectDir = projectDir;
         this.smaliFolders = getSmaliFolders();
+    }
+
+    public Map<Integer, String> getMethodContent (List<String> fContent, int methodStart) {
+        Map<Integer, String> result = new HashMap<>();
+
+        for (int i = methodStart; i < fContent.size(); i++) {
+            String line = fContent.get(i);
+            result.put(i, line);
+            if (line.contains(".end method")) {
+                break;
+            }
+        }
+
+        return result;
     }
 
     public int getUnusedRegistersOfMethod(List<String> fContent, int methodStart, int lineEnd) {

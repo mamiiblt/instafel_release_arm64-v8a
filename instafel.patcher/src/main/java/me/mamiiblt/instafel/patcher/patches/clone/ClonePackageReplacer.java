@@ -11,9 +11,9 @@ import me.mamiiblt.instafel.patcher.utils.SmaliUtils;
 import me.mamiiblt.instafel.patcher.utils.Utils;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatch;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelTask;
-import me.mamiiblt.instafel.patcher.utils.patch.PatchInfo;
+import me.mamiiblt.instafel.patcher.utils.patch.PInfos;
 
-@PatchInfo (
+@PInfos.PatchInfo (
     name = "Replace Instagram Strings",
     shortname = "clone_replace_strs",
     desc = "It makes app compatible for clone generation.",

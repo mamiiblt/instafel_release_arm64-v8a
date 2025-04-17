@@ -6,9 +6,9 @@ import me.mamiiblt.instafel.patcher.patches.clone.CloneGeneral;
 import me.mamiiblt.instafel.patcher.patches.clone.ClonePackageReplacer;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatch;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatchGroup;
-import me.mamiiblt.instafel.patcher.utils.patch.PatchGroupInfo;
+import me.mamiiblt.instafel.patcher.utils.patch.PInfos;
 
-@PatchGroupInfo (
+@PInfos.PatchGroupInfo (
     name = "Clone Patches",
     shortname = "clone",
     desc = "These patchs needs to be applied for generate clone in build.",

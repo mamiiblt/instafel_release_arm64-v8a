@@ -10,7 +10,7 @@ public abstract class InstafelPatchGroup {
 
     public InstafelPatchGroup() {
         try {
-            PatchGroupInfo patchInfo = this.getClass().getAnnotation(PatchGroupInfo.class);
+            PInfos.PatchGroupInfo patchInfo = this.getClass().getAnnotation(PInfos.PatchGroupInfo.class);
             if (patchInfo != null) {
                 this.name = patchInfo.name();
                 this.author = patchInfo.author();

@@ -2,9 +2,10 @@ package me.mamiiblt.instafel.patcher.utils.patch;
 
 import java.util.List;
 
-import me.mamiiblt.instafel.patcher.utils.Environment;
+import me.mamiiblt.instafel.patcher.utils.Env;
 import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.SmaliUtils;
+import me.mamiiblt.instafel.patcher.utils.patch.PInfos.PatchInfo;
 
 public abstract class InstafelPatch {
     public String name, author, description, shortname;
@@ -13,7 +14,7 @@ public abstract class InstafelPatch {
 
     public InstafelPatch() {
         try {
-            PatchInfo patchInfo = this.getClass().getAnnotation(PatchInfo.class);
+            PInfos.PatchInfo patchInfo = this.getClass().getAnnotation(PInfos.PatchInfo.class);
             if (patchInfo != null) {
                 this.name = patchInfo.name();
                 this.author = patchInfo.author();
@@ -38,7 +39,7 @@ public abstract class InstafelPatch {
     }
 
     public SmaliUtils getSmaliUtils() {
-        return new SmaliUtils(Environment.PROJECT_DIR);
+        return new SmaliUtils(Env.PROJECT_DIR);
     }
     
     public abstract List<InstafelTask> initializeTasks() throws Exception;

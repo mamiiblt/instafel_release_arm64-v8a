@@ -18,7 +18,7 @@ import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
 import me.mamiiblt.instafel.patcher.resources.types.*;
-import me.mamiiblt.instafel.patcher.utils.Environment;
+import me.mamiiblt.instafel.patcher.utils.Env;
 
 public class IFLResData {
 
@@ -103,7 +103,7 @@ public class IFLResData {
             createCategory("attrs");
             createCategory("colors");
             createCategory("strings");
-            for (String langCode : Environment.INSTAFEL_LOCALES) {
+            for (String langCode : Env.INSTAFEL_LOCALES) {
                 createCategory("strings-" + langCode);
             }
         }

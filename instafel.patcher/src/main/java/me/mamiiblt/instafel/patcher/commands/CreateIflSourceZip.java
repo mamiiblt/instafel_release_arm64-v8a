@@ -17,7 +17,6 @@ import brut.directory.ExtFile;
 import me.mamiiblt.instafel.patcher.resources.*;
 import me.mamiiblt.instafel.patcher.resources.types.*;
 import me.mamiiblt.instafel.patcher.source.*;
-import me.mamiiblt.instafel.patcher.source.isource.*;
 import me.mamiiblt.instafel.patcher.utils.*;
 import me.mamiiblt.instafel.patcher.utils.cmdhandler.Command;
 
@@ -32,15 +31,15 @@ public class CreateIflSourceZip implements Command {
             if (args.length != 0) {
                 String fileArgument = args[0];
                 if (fileArgument.contains(".apk")) {
-                    File apkPath = new File(Paths.get(Environment.USER_DIR, fileArgument).toString());
+                    File apkPath = new File(Paths.get(Env.USER_DIR, fileArgument).toString());
                     File outputFolder = new File(Utils.mergePaths(
-                        Environment.USER_DIR, apkPath.getName().replace(".apk", "") + "_temp"));
+                        Env.USER_DIR, apkPath.getName().replace(".apk", "") + "_temp"));
 
                     if (outputFolder.exists()) {
-                        Environment.PROJECT_DIR = outputFolder.getAbsolutePath();
+                        Env.PROJECT_DIR = outputFolder.getAbsolutePath();
                         Log.info("Output folder is exist");
                     } else {
-                        Environment.PROJECT_DIR = IflSourceCreator.createTempSourceDir(apkPath.getName());
+                        Env.PROJECT_DIR = SourceUtils.createTempSourceDir(apkPath.getName());
                         SourceManager sourceManager = new SourceManager();
                         sourceManager.setConfig(SourceUtils.getDefaultIflConfigDecoder(sourceManager.getConfig()));
                         sourceManager.getConfig().setFrameworkDirectory(SourceUtils.getDefaultFrameworkDirectory());
@@ -50,7 +49,7 @@ public class CreateIflSourceZip implements Command {
                         Log.info("Base APK succesfully decompiled.");
                     }
 
-                    baseValuesDir = new File(Utils.mergePaths(Environment.PROJECT_DIR, "sources", "res", "values"));
+                    baseValuesDir = new File(Utils.mergePaths(Env.PROJECT_DIR, "sources", "res", "values"));
                     
                     copyInstafelSmaliSources();
                     copyRawSources();
@@ -67,15 +66,15 @@ public class CreateIflSourceZip implements Command {
 
     private void copyInstafelSmaliSources() throws IOException {
         Log.info("Copying Instafel smali sources");
-        File sourceFolder = new File(Utils.mergePaths(Environment.PROJECT_DIR, "sources", "smali", "me", "mamiiblt", "instafel")); // select me.mamiiblt.instafel package
-        File destFolder = new File(Utils.mergePaths(Environment.PROJECT_DIR, "smali_sources"));
+        File sourceFolder = new File(Utils.mergePaths(Env.PROJECT_DIR, "sources", "smali", "me", "mamiiblt", "instafel")); // select me.mamiiblt.instafel package
+        File destFolder = new File(Utils.mergePaths(Env.PROJECT_DIR, "smali_sources"));
         FileUtils.copyDirectoryToDirectory(sourceFolder, destFolder);
         Log.info("Smali sources succesfully copied");
     }
 
     private void copyRawSources() throws IOException, ParserConfigurationException, SAXException {
         Log.info("Copying Instafel resources into /res folder");
-        File resFolder = new File(Utils.mergePaths(Environment.PROJECT_DIR, "sources", "res"));
+        File resFolder = new File(Utils.mergePaths(Env.PROJECT_DIR, "sources", "res"));
         if (!resFolder.exists()) {
             FileUtils.forceMkdir(resFolder);
         }
@@ -85,26 +84,26 @@ public class CreateIflSourceZip implements Command {
         copyRawResource("xml", resFolder);
         parseResources();
         Utils.zipDirectory(
-            Paths.get(Utils.mergePaths(Environment.PROJECT_DIR, "smali_sources")),
-            Paths.get(Utils.mergePaths(Environment.PROJECT_DIR, "ifl_sources.zip"))
+            Paths.get(Utils.mergePaths(Env.PROJECT_DIR, "smali_sources")),
+            Paths.get(Utils.mergePaths(Env.PROJECT_DIR, "ifl_sources.zip"))
         );
         Utils.zipDirectory(
-            Paths.get(Utils.mergePaths(Environment.PROJECT_DIR, "res")),
-            Paths.get(Utils.mergePaths(Environment.PROJECT_DIR, "ifl_resources.zip"))
+            Paths.get(Utils.mergePaths(Env.PROJECT_DIR, "res")),
+            Paths.get(Utils.mergePaths(Env.PROJECT_DIR, "ifl_resources.zip"))
         );
-        Utils.deleteDirectory(Utils.mergePaths(Environment.PROJECT_DIR, "sources"));
-        Utils.deleteDirectory(Utils.mergePaths(Environment.PROJECT_DIR, "smali_sources"));
-        Utils.deleteDirectory(Utils.mergePaths(Environment.PROJECT_DIR, "res"));
+        Utils.deleteDirectory(Utils.mergePaths(Env.PROJECT_DIR, "sources"));
+        Utils.deleteDirectory(Utils.mergePaths(Env.PROJECT_DIR, "smali_sources"));
+        Utils.deleteDirectory(Utils.mergePaths(Env.PROJECT_DIR, "res"));
         Log.info("Assets are ready!");
     }
 
     private void parseResources() {
         try {
             resDataBuilder = new IFLResData.Builder(new File(Utils.mergePaths(
-                Environment.PROJECT_DIR, "ifl_data.xml")));
+                Env.PROJECT_DIR, "ifl_data.xml")));
 
             getAndAddInstafelString("");
-            for (String locale : Environment.INSTAFEL_LOCALES) {
+            for (String locale : Env.INSTAFEL_LOCALES) {
                 getAndAddInstafelString(locale);
             }
             copyResourceAttr();
@@ -122,8 +121,8 @@ public class CreateIflSourceZip implements Command {
 
     private void copyRawResource(String folderName, File resFolder) throws IOException {
         Log.info("Copying " + folderName + " files...");
-        File source = new File(Utils.mergePaths(Environment.PROJECT_DIR, "sources", "res", folderName));
-        File dest = new File(Utils.mergePaths(Environment.PROJECT_DIR, "res", folderName));
+        File source = new File(Utils.mergePaths(Env.PROJECT_DIR, "sources", "res", folderName));
+        File dest = new File(Utils.mergePaths(Env.PROJECT_DIR, "res", folderName));
         Collection<File> files = FileUtils.listFiles(source, 
             new PrefixFileFilter("ifl_"), null);
         
@@ -136,7 +135,7 @@ public class CreateIflSourceZip implements Command {
 
     private void exportManifestThingsToResData() throws ParserConfigurationException, IOException, SAXException {
         Log.info("Exporting activities from Instafel base");
-        File fPath = new File(Utils.mergePaths(Environment.PROJECT_DIR, "sources", "AndroidManifest.xml"));
+        File fPath = new File(Utils.mergePaths(Env.PROJECT_DIR, "sources", "AndroidManifest.xml"));
         List<Element> activities = ResourceParser.getActivitiesFromManifest(fPath);
 
         for (Element element : activities) {
