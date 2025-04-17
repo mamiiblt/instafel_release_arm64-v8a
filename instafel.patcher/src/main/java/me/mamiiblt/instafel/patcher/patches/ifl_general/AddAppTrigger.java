@@ -66,12 +66,14 @@ public class AddAppTrigger extends InstafelPatch {
             
                 if (line.contains("iput-object")) {
                     if (fContent.get(i + 2).contains("return-void")) {
-                        int sVal = i + 2;
-                        for (int a = 0; a < callerLines.length; a++) { 
-                            fContent.add(sVal, callerLines[a]);
-                            sVal++;
+                        if (callerLines != null) {
+                            int sVal = i + 2;
+                            for (int a = 0; a < callerLines.length; a++) { 
+                                fContent.add(sVal, callerLines[a]);
+                                sVal++;
+                            }
+                            status = true;
                         }
-                        status = true;
                     }
                 }
             }
