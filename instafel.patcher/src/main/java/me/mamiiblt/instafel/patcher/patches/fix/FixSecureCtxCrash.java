@@ -77,6 +77,7 @@ public class FixSecureCtxCrash extends InstafelPatch {
 
             if (secureCtxFile != null) {
                 Log.info("Totally scanned " + scannedFileSize + " file in X folders");
+                Log.info(secureCtxFile.getAbsolutePath());
                 success("IgSecureContext X file is find succesfully.");
             } else {
                 failure("IgSecureContext file cannot be found.");
@@ -140,20 +141,28 @@ public class FixSecureCtxCrash extends InstafelPatch {
                 for (Map.Entry<Integer, String> line : methodLines.entrySet()) {
                     String value = line.getValue();
                     if (
-                        value.contains("invoke-virtual") &&
-                        value.contains(invokerClassName) 
+                        value.contains("invoke-static") &&
+                        value.contains("{}") &&
+                        !value.contains("Ljava/lang")
                     ) {
-                        String oldCallerArgPart = value.split(";->")[1];
+                        /*String oldCallerArgPart = value.split(";->")[1];
                         String sCallerPart = sCtxFContent.get(invokerLine).split(";->")[1];
                         Log.info("Old: " + sCtxFContent.get(invokerLine).trim());
                         sCtxFContent.set(invokerLine, sCtxFContent.get(invokerLine).replace(sCallerPart, oldCallerArgPart));
+                        Log.info("Arg updated " + sCallerPart.trim() + " -> " + oldCallerArgPart.trim());*/
+                        Log.info("Old: " + sCtxFContent.get(invokerLine).trim());
+                        String oldInvokerParam = value.split("\\(\\)")[1];
+                        String ctxInvokerParam = sCtxFContent.get(invokerLine).split("\\(\\)")[1];
+                        Log.info(ctxInvokerParam + " -> " + oldInvokerParam);
+                        String newInvoker = sCtxFContent.get(invokerLine).replace(ctxInvokerParam, oldInvokerParam);
+                        sCtxFContent.set(invokerLine, newInvoker.replace("A07", "A08"));
                         Log.info("New: " + sCtxFContent.get(invokerLine).trim());
-                        Log.info("Arg updated " + sCallerPart.trim() + " -> " + oldCallerArgPart.trim());
                         successLock = true;
                     }
                 }
 
                 if (successLock) {
+                    FileUtils.writeLines(secureCtxFile, sCtxFContent);
                     success("Patch succesfully applied.");
                 } else {
                     failure("invoke-virtual line cannot be found in restartApp method");
