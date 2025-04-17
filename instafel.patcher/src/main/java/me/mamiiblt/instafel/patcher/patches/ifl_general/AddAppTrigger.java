@@ -49,7 +49,6 @@ public class AddAppTrigger extends InstafelPatch {
             String[] callerLines = null;
             for (int i = 0; i < fContent.size(); i++) {
                 String line = fContent.get(i);
-                Log.info(line);
                 if (line.contains("invoke-direct ") && line.contains("Landroidx/fragment/app/Fragment")) {
                     String[] veriablesArr = line.split("    invoke-direct \\{")[1].split("\\}")[0].split(", ");
 
@@ -110,7 +109,7 @@ public class AddAppTrigger extends InstafelPatch {
                         File file = fileIterator.next();
                         List<String> fContent = smaliUtils.getSmaliFileContent(file.getAbsolutePath()); 
 
-                        boolean[] conditions = {false, false, false};
+                        boolean[] conditions = {false, false, false, false};
 
                         for (String line : fContent) {
                             if (line.contains("Landroid/content/res/Configuration;")) {
@@ -123,6 +122,10 @@ public class AddAppTrigger extends InstafelPatch {
 
                             if (line.contains("Lcom/instagram/quickpromotion/intf/QPTooltipAnchor")) {
                                 conditions[2] = true;
+                            }
+
+                            if (line.contains("DirectInboxFragment") || line.contains("MainFeedFragment")) {
+                                conditions[3] = true;
                             }
                         }
 
