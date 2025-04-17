@@ -18,7 +18,7 @@ import me.mamiiblt.instafel.utils.GeneralFn;
 
 public class ifl_a_build_info extends AppCompatActivity {
 
-    private TileLarge tileGenerationId, tilePatcherCommit, tileAppliedPatches, tileInstallationType;
+    private TileLarge tileGenerationId, tilePatcherVersion, tileAppliedPatches, tileInstallationType, tileCommit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,8 @@ public class ifl_a_build_info extends AppCompatActivity {
         setContentView(R.layout.ifl_at_build_info);
 
         tileGenerationId = findViewById(R.id.ifl_tile_generation_id);
-        tilePatcherCommit = findViewById(R.id.ifl_tile_patcher_commit);
+        tilePatcherVersion = findViewById(R.id.ifl_tile_patcher_version);
+        tileCommit = findViewById(R.id.ifl_tile_commit);
         tileAppliedPatches = findViewById(R.id.ifl_tile_applied_patches);
         tileInstallationType = findViewById(R.id.ifl_tile_installation_type);
 
@@ -40,11 +41,13 @@ public class ifl_a_build_info extends AppCompatActivity {
             }
         });
 
-        tilePatcherCommit.setSubtitleText(InstafelEnv.PATCHER_VERSION + " (" + InstafelEnv.PATCHER_COMMIT + "/" +InstafelEnv.PATCHER_TAG + ")");
-        tilePatcherCommit.setOnClickListener(new View.OnClickListener() {
+        tilePatcherVersion.setSubtitleText(InstafelEnv.PATCHER_VERSION + " (" + InstafelEnv.PATCHER_TAG + ")");
+        tileCommit.setSubtitleText(InstafelEnv.COMMIT + " (main)");
+
+        tileCommit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openUrlInWeb("https://github.com/mamiiblt/instafel/commit/" + InstafelEnv.PATCHER_COMMIT);
+                openUrlInWeb("https://github.com/mamiiblt/instafel/commit/" + InstafelEnv.COMMIT);
             }
         });
 

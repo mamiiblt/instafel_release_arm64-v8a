@@ -251,9 +251,10 @@ public class BuildProject implements Command {
             pairs.put("_genid_", isProductionMode ? GENERATION_ID : "NOT_PROD_MODE");
             pairs.put("_igver_", IG_VERSION);
             pairs.put("_igvercode_", IG_VER_CODE);
-            pairs.put("_pcommit_", Env.PROP_COMMIT_HASH);
+            pairs.put("_commit_", Env.PROP_COMMIT_HASH);
             pairs.put("_ptag", Env.PROP_PROJECT_TAG);
             pairs.put("_pversion_", "v" + Env.PROP_VERSION_STRING);
+            pairs.put("_branch_", "main");
             String apatches = "";
             for (String patch : appliedPatches) {
                 if (!patch.contains("clone")) {
@@ -307,12 +308,8 @@ public class BuildProject implements Command {
         }
         JSONObject patcherInfo = new JSONObject();
         patcherInfo.put("version", Env.PROP_VERSION_STRING);
-        patcherInfo.put("commit", Env.PROP_COMMIT_HASH + "/" + Env.PROP_PROJECT_TAG);
-        JSONArray appliedP = new JSONArray();
-        for (String applied : appliedPatches) {
-            appliedP.put(applied);
-        }
-        patcherInfo.put("applied_patches", appliedP);
+        patcherInfo.put("commit", Env.PROP_COMMIT_HASH);
+        patcherInfo.put("channel", Env.PROP_PROJECT_TAG);
         buildInfo.put("patcher", patcherInfo);
 
         JSONObject patcherData = new JSONObject();
