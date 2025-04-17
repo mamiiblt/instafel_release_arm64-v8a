@@ -49,6 +49,7 @@ public class AddAppTrigger extends InstafelPatch {
             String[] callerLines = null;
             for (int i = 0; i < fContent.size(); i++) {
                 String line = fContent.get(i);
+                Log.info(line);
                 if (line.contains("invoke-direct ") && line.contains("Landroidx/fragment/app/Fragment")) {
                     String[] veriablesArr = line.split("    invoke-direct \\{")[1].split("\\}")[0].split(", ");
 
