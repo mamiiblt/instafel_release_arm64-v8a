@@ -10,7 +10,6 @@
     "format": "npx prettier **/*.{js,jsx,ts,tsx,json} --write"
   },
   "dependencies": {
-    "@hugeicons/core-free-icons": "^1.0.10",
     "@hugeicons/react": "^1.0.4",
     "@radix-ui/react-accordion": "^1.2.5",
     "@radix-ui/react-alert-dialog": "^1.1.8",
@@ -34,11 +33,6 @@
     "next-themes": "^0.4.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-markdown": "^10.1.0",
-    "rehype-autolink-headings": "^7.1.0",
-    "rehype-highlight": "^7.0.1",
-    "rehype-slug": "^6.0.0",
-    "remark-gfm": "^4.0.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7"
   },
@@ -51,7 +45,6 @@
     "eslint-config-next": "^15.3.1",
     "postcss": "^8",
     "tailwindcss": "^4.1.4",
-    "tailwindcss-border-image": "^1.1.2",
     "typescript": "^5.8.3"
   }
 }
