@@ -1,21 +1,13 @@
 "use client";
 import React from "react";
 import * as Icons from "@/components/Icons";
-import Link from "next/link";
-import { SITE_CONFIG } from "@/config/config";
 import { FooterLoading } from "./loading";
-import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
 import {
   Book,
   Download,
   FileCog2Icon,
-  Github,
   GithubIcon,
-  Link2,
-  LinkIcon,
-  LucideFlag,
   RefreshCcwDot,
   Send,
   User,
@@ -57,7 +49,7 @@ export default function Footer() {
           <div className="relative container mx-auto px-4 pt-8 md:pt-8 pb-8 md:pb-8">
             <div className="max-w-6xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="space-y-4">
+                <div className="space-y-4 lg:col-span-3">
                   <div className="flex items-center gap-2">
                     <div className="w-10 h-10 rounded-xl bg-instafelcolor flex items-center justify-center">
                       <Icons.Instagram className="text-black font-bold text-xl" />
@@ -71,7 +63,7 @@ export default function Footer() {
                   </p>
                 </div>
 
-                <div>
+                <div className="lg:col-span-1">
                   <h3 className="font-semibold mb-4 text-lg">Quick Links</h3>
                   <ul className="space-y-3">
                     <li>
@@ -105,6 +97,7 @@ export default function Footer() {
                       <a
                         href="https://github.com/mamiiblt/instafel"
                         className="text-muted-foreground hover:text-foreground flex items-center gap-2 transition-colors group"
+                        target="_blank"
                       >
                         <GithubIcon className="w-4 h-4 transition-colors" />
                         Source Code
@@ -123,14 +116,25 @@ export default function Footer() {
                 </div>
               </div>
 
-              <div className="mt-8 pt-8 border-t border-t border-border ">
+              <div className="mt-8 pt-8 border-t border-border ">
                 <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                  <p className="text-sm">Developed with ❤️ by mamiiblt</p>
+                  <p className="text-sm">
+                    Developed with ❤️ by{" "}
+                    <a
+                      href="https://github.com/mamiiblt"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:underline"
+                    >
+                      mamiiblt
+                    </a>
+                  </p>
                   <div className="flex items-center gap-4">
                     <a
                       href="https://mamiiblt.me/about"
                       className="text-gray-400 "
                       aria-label="GitHub"
+                      target="_blank"
                     >
                       <User className="w-5 h-5" />
                     </a>
@@ -138,6 +142,7 @@ export default function Footer() {
                       href="https://github.com/mamiiblt"
                       className="text-gray-400 "
                       aria-label="GitHub"
+                      target="_blank"
                     >
                       <GithubIcon className="w-5 h-5" />
                     </a>
@@ -145,6 +150,7 @@ export default function Footer() {
                       href="https://t.me/mamiiblt"
                       className="text-gray-400"
                       aria-label="Telegram"
+                      target="_blank"
                     >
                       <Send className="w-5 h-5" />
                     </a>
