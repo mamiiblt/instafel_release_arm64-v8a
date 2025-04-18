@@ -2,11 +2,9 @@
 
 import { AnimatePresence } from "framer-motion";
 import { getAllPostsSync } from "@/lib/blog";
-import { useState } from "react";
 import Footer from "@/components/Footer";
 
 export default function GuidePage() {
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
   const guides = getAllPostsSync();
 
   const getColorClasses = (color: string) => {
@@ -21,11 +19,11 @@ export default function GuidePage() {
   };
 
   return (
-    <AnimatePresence>
+    <>
       <div className="flex min-h-screen flex-col items-center justify-center bg-linear-to-b from-gray-50 to-gray-100 p-4">
         <main className="flex w-full max-w-5xl flex-1 flex-col items-center justify-center text-center">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl md:text-7xl">
-            Comming soon...
+            Coming soon...
           </h1>
           <p className="mt-6 text-lg text-gray-600">
             This part is still not finished, so we have to wait...
@@ -33,6 +31,6 @@ export default function GuidePage() {
         </main>
       </div>
       <Footer />
-    </AnimatePresence>
+    </>
   );
 }
