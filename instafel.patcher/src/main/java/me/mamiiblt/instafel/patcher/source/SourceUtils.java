@@ -17,7 +17,6 @@ public class SourceUtils {
     public static Config getDefaultIflConfigDecoder(Config config) {
         config.setBaksmaliDebugMode(false);
         config.setJobs(getSuggesstedThreadCount());
-        config.setAaptVersion(1); // use aapt1 for decompiltion processes too
         return config;
     }
 

@@ -1,6 +1,7 @@
 package me.mamiiblt.instafel.patcher.patches.fix;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 
+import me.mamiiblt.instafel.patcher.source.SmaliParser;
+import me.mamiiblt.instafel.patcher.source.SmaliParser.SmaliInstruction;
 import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.SmaliUtils;
 import me.mamiiblt.instafel.patcher.utils.Utils;
@@ -29,18 +32,16 @@ public class FixSecureCtxCrash extends InstafelPatch {
     private SmaliUtils smaliUtils = getSmaliUtils();
     private File secureCtxFile = null;
     private List<String> sCtxFContent = null;
-    private int invokerLine = 0;
-    private String invokerClassName = null;
+    private int invokeA01Line = 0, invokeA02Line = 0;
 
     @Override
     public List<InstafelTask> initializeTasks() throws Exception {
         return List.of(
             findSecureContext,
-            getMethodFromSecureCtx,
-            findOldCallerInterface
+            getInvokeLinesFromCtx,
+            replaceValuesBetweenInvoke
         );
     }
-
 
     InstafelTask findSecureContext = new InstafelTask("Find IgSecureContext part in X") {
 
@@ -77,7 +78,7 @@ public class FixSecureCtxCrash extends InstafelPatch {
 
             if (secureCtxFile != null) {
                 Log.info("Totally scanned " + scannedFileSize + " file in X folders");
-                Log.info(secureCtxFile.getAbsolutePath());
+                Log.info("File name is " + secureCtxFile.getName());
                 success("IgSecureContext X file is find succesfully.");
             } else {
                 failure("IgSecureContext file cannot be found.");
@@ -85,91 +86,97 @@ public class FixSecureCtxCrash extends InstafelPatch {
         }
     };
 
-    InstafelTask getMethodFromSecureCtx = new InstafelTask("Get invoke line from caller") {
+    InstafelTask getInvokeLinesFromCtx = new InstafelTask("Get invoke parts from A01 and A02 method") {
 
         @Override
         public void execute() throws Exception {
             sCtxFContent = smaliUtils.getSmaliFileContent(secureCtxFile.getAbsolutePath());
-            List<LineData> methodA01 = smaliUtils.getContainLines(sCtxFContent, 
-            ".method", "A01", "Landroid/content/Context;Landroid/content/Intent;");            
+            List<LineData> methodStarts = smaliUtils.getContainLines(sCtxFContent, 
+            ".method", "A0", "Landroid/content/Context;Landroid/content/Intent;");    
+            
+            if (methodStarts.size() == 0) {
+                failure("No any A0X method found in IgSecureContext");
+            } else {
+                for (int i = 0; i < methodStarts.size(); i++) {
+                    LineData methodStart = methodStarts.get(i);
 
-            if (methodA01.size() != 0) {
-                Map<Integer, String> methodLines = smaliUtils.getMethodContent(sCtxFContent, methodA01.get(0).getNum());
+                    if (methodStart.getContent().contains("A01")) {
+                        Log.info("Method A01 found succesfully.");
+                        Map<Integer, String> mContent = smaliUtils.getMethodContent(sCtxFContent, methodStart.getNum());
+                        List<SmaliInstruction> instructions = getInvokeVirtualsFromMethod(mContent);
+                        if (instructions.size() == 0 || instructions.size() > 1) {
+                            failure("No any invoke-direct instr. found in A01");
+                        } else {
+                            invokeA01Line = instructions.get(0).getNum();
+                            Log.info("Instruction found in A01");
+                        }
+                    }
 
-                for (Map.Entry<Integer, String> line : methodLines.entrySet()) {
-                    String value = line.getValue();
-                    int num = line.getKey();
-                    if (value.contains("invoke-virtual") && value.contains("{v0}")) {
-                        invokerLine = num;
-                        invokerClassName = value.split(", ")[1].split(";")[0];
-                        Log.info("Invoke line is " + value.trim());
+                    if (methodStart.getContent().contains("A02")) {
+                        Log.info("Method A02 found succesfully.");
+                        Map<Integer, String> mContent = smaliUtils.getMethodContent(sCtxFContent, methodStart.getNum());
+                        List<SmaliInstruction> instructions = getInvokeVirtualsFromMethod(mContent);
+                        if (instructions.size() == 0 || instructions.size() > 1) {
+                            failure("No any invoke-direct instr. found in A02");
+                        } else {
+                            invokeA02Line = instructions.get(0).getNum();
+                            Log.info("Instruction found in A02");
+                        }
                     }
                 }
-
-                if (invokerLine == 0) {
-                    failure("Invoke line is not found in A01 method.");
-                } else {
-                    success("Invoker line is succesfully found, " + invokerLine);
-                }
-            } else {
-                failure("A01 method not found.");
+                success("Invoke virtual instructions founded succesfully.");
             }
         }
     };
 
-    InstafelTask findOldCallerInterface = new InstafelTask("Find old caller interface from AppRestartUtil") {
+    InstafelTask replaceValuesBetweenInvoke = new InstafelTask("Use old method for A01 instruction") {
 
         @Override
         public void execute() throws Exception {
-            List<File> appRestartUtilQuery = smaliUtils.getSmaliFilesByName(
-                "com/instagram/debug/devoptions/refresh/AppRestartUtil.smali");
-            File appRestartUtilSmali = null;
-            if (appRestartUtilQuery.size() == 0 || appRestartUtilQuery.size() > 1) {
-                failure("AppRestartUtil file can't be found / selected.");
-            } else {
-                appRestartUtilSmali = appRestartUtilQuery.get(0);
-                Log.info("AppRestartUtil file is " + appRestartUtilSmali.getPath());
+            String valueA01 = sCtxFContent.get(invokeA01Line);
+            String valueA02 = sCtxFContent.get(invokeA02Line);
+            SmaliInstruction instA01 = SmaliParser.parseInstruction(valueA01, invokeA01Line);
+            SmaliInstruction instA02 = SmaliParser.parseInstruction(valueA02, invokeA02Line);
+            Log.info("Old: " + valueA01.trim());
+
+            if (instA01.getMethodName().equals(instA02.getMethodName())) {
+                failure("Method names are same, patch outdated...");
             }
-            List<String> fContent = smaliUtils.getSmaliFileContent(appRestartUtilSmali.getAbsolutePath());
-            List<LineData> mRestartApp = smaliUtils.getContainLines(fContent, 
-            ".method", "restartApp");
-            
-            if (mRestartApp.size() != 0) {
-                Map<Integer, String> methodLines = smaliUtils.getMethodContent(fContent, mRestartApp.get(0).getNum());
 
-                boolean successLock = false;
-                for (Map.Entry<Integer, String> line : methodLines.entrySet()) {
-                    String value = line.getValue();
-                    if (
-                        value.contains("invoke-static") &&
-                        value.contains("{}") &&
-                        !value.contains("Ljava/lang")
-                    ) {
-                        /*String oldCallerArgPart = value.split(";->")[1];
-                        String sCallerPart = sCtxFContent.get(invokerLine).split(";->")[1];
-                        Log.info("Old: " + sCtxFContent.get(invokerLine).trim());
-                        sCtxFContent.set(invokerLine, sCtxFContent.get(invokerLine).replace(sCallerPart, oldCallerArgPart));
-                        Log.info("Arg updated " + sCallerPart.trim() + " -> " + oldCallerArgPart.trim());*/
-                        Log.info("Old: " + sCtxFContent.get(invokerLine).trim());
-                        String oldInvokerParam = value.split("\\(\\)")[1];
-                        String ctxInvokerParam = sCtxFContent.get(invokerLine).split("\\(\\)")[1];
-                        Log.info(ctxInvokerParam + " -> " + oldInvokerParam);
-                        String newInvoker = sCtxFContent.get(invokerLine).replace(ctxInvokerParam, oldInvokerParam);
-                        sCtxFContent.set(invokerLine, newInvoker.replace("A07", "A08"));
-                        Log.info("New: " + sCtxFContent.get(invokerLine).trim());
-                        successLock = true;
-                    }
-                }
+            if (instA01.getReturnType().equals(instA02.getReturnType())) {
+                failure("Return types are same, patch outdated...");
+            }
 
-                if (successLock) {
-                    FileUtils.writeLines(secureCtxFile, sCtxFContent);
-                    success("Patch succesfully applied.");
-                } else {
-                    failure("invoke-virtual line cannot be found in restartApp method");
+            valueA01 = valueA01.replace(
+                instA01.getMethodName(), instA02.getMethodName());
+            valueA01 = valueA01.replace(
+                instA01.getReturnType(), instA02.getReturnType());
+
+            sCtxFContent.set(invokeA01Line, valueA01);
+            Log.info("New: " + valueA01.trim());
+
+            FileUtils.writeLines(secureCtxFile, sCtxFContent);
+            success("Line modified succesfully.");
+        }        
+    };
+
+    private List<SmaliInstruction> getInvokeVirtualsFromMethod(Map<Integer, String> mContent) {
+        List<SmaliInstruction> instructions = new ArrayList<>();
+        for (Map.Entry<Integer, String> line : mContent.entrySet()) {
+            int num = line.getKey();
+            String content = line.getValue();
+            if (content.contains("invoke-virtual")) {
+                SmaliInstruction parsedInstruction = SmaliParser.parseInstruction(content, num);
+                if (
+                    parsedInstruction.getRegisters().length == 1 && 
+                    !parsedInstruction.getReturnType().equals("Z")
+                ) {
+                    Log.info("A invoke-virtual opcode found at line " + num);
+                    instructions.add(parsedInstruction);
                 }
-            } else {
-                failure("restartApp method cannot be found in AppRestartUtil");
             }
         }
-    }; 
+        return instructions;
+    }
 }
+

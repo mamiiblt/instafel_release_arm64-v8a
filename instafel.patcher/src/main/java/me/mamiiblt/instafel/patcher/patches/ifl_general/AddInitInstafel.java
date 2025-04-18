@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
+import me.mamiiblt.instafel.patcher.source.SmaliParser;
+import me.mamiiblt.instafel.patcher.source.SmaliParser.SmaliInstruction;
 import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.SmaliUtils;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatch;
@@ -58,7 +60,9 @@ public class AddInitInstafel extends InstafelPatch {
                         Log.severe("onCreateMethod cannot found before caller.");
                     }
 
-                    String onCreateVeriableName = line.split("\\}")[0].split("\\{")[1];
+                    SmaliInstruction callerInstruction = SmaliParser.parseInstruction(line, i);
+                    String onCreateVeriableName = callerInstruction.getRegisters()[0];
+                    
                     int unusedRegister = smaliUtils.getUnusedRegistersOfMethod(fContent, onCreateMethodLine, i);
                     Log.info("Unused register is v" + unusedRegister + " before line " + i + " in onCreate method");
 

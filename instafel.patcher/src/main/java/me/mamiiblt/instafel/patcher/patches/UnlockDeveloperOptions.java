@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.mamiiblt.instafel.patcher.source.SmaliParser;
+import me.mamiiblt.instafel.patcher.source.SmaliParser.SmaliInstruction;
 import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.SmaliUtils;
 import me.mamiiblt.instafel.patcher.utils.models.LineData;
@@ -71,8 +73,9 @@ public class UnlockDeveloperOptions extends InstafelPatch {
                 failure("callLies is more than 1");
             }
             LineData callLine = callLines.get(0);
-            className = callLine.getContent().split("/")[1].split(";")[0];
+            SmaliInstruction callLineInstruction = SmaliParser.parseInstruction(callLine.getContent(), callLine.getNum());
             success("DevOptions class is " + className);
+            className = callLineInstruction.getClassName().replace("LX/", "").replace(";", "");
         }
     };
 
@@ -91,7 +94,7 @@ public class UnlockDeveloperOptions extends InstafelPatch {
             LineData moveResultLine = moveResultLines.get(0);
             if (devOptionsContent.get(moveResultLine.getNum() + 2).contains("const v0, 0x1")) {
                 failure("Developer options already unlocked.");
-            } 
+            }
 
             devOptionsContent.add(moveResultLine.getNum() + 1, "    ");
             devOptionsContent.add(moveResultLine.getNum() + 2, "    const v0, 0x1");
