@@ -1,36 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { getAllPostsSync } from "@/lib/blog";
 import Footer from "@/components/Footer";
 import { BookOpen, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
-import { useEffect, useState } from "react";
-
-interface Guide {
-  id: number;
-  title: string;
-  subtitle: string;
-  description: string;
-  color: string;
-  slug: string;
-}
+import { useBlogs } from "@/hooks/useBlog";
 
 export default function GuidePage() {
-  const [guides, setGuides] = useState<Guide[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const loadGuides = async () => {
-      const allGuides = getAllPostsSync();
-      setGuides(allGuides);
-      setLoading(false);
-    };
-
-    loadGuides();
-  }, []);
+  const { guides, loading, error } = useBlogs();
 
   const getColorClasses = (color: string) => {
     const classes = {
@@ -85,6 +64,10 @@ export default function GuidePage() {
             {loading ? (
               <div className="flex justify-center py-20">
                 <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full"></div>
+              </div>
+            ) : error ? (
+              <div className="text-center p-12 border rounded-lg col-span-2">
+                <p className="text-red-500">Error loading guides: {error}</p>
               </div>
             ) : (
               <div className="grid md:grid-cols-2 gap-6">

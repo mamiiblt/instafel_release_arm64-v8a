@@ -2,37 +2,40 @@
 
 import { useParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { getAllPostsSync, getPostByIdSync } from "@/lib/blog";
 import Footer from "@/components/Footer";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
+import { useBlogPost } from "@/hooks/useBlog";
 
 export default function GuidePage() {
   const router = useRouter();
   const { id } = useParams<{ id: string }>();
-  const [guide, setGuide] = useState<any>(null);
+  const { guide, loading, error } = useBlogPost(id as string);
 
-  useEffect(() => {
-    const selectedGuide = getPostByIdSync(id as string);
-    if (selectedGuide) {
-      setGuide(selectedGuide);
-    } else {
-      // If guide not found, redirect to guides list
-      router.push("/guides");
-    }
-  }, [id, router]);
+  // Redirect if there's an error
+  if (error) {
+    router.push("/guides");
+    return null;
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full"></div>
+      </div>
+    );
+  }
 
   if (!guide) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full"></div>
+        <div>Guide not found</div>
       </div>
     );
   }
@@ -117,6 +120,12 @@ export default function GuidePage() {
                     className="text-primary hover:underline"
                     target="_blank"
                     rel="noopener noreferrer"
+                    {...props}
+                  />
+                ),
+                code: ({ node, ...props }) => (
+                  <code
+                    className="bg-muted text-primary rounded-md px-1 py-0.5"
                     {...props}
                   />
                 ),

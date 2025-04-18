@@ -21,18 +21,14 @@ interface FrontMatter {
 
 export function getAllPostsSync() {
   try {
-    console.log("Blog directory path:", BLOG_DIR);
-
     try {
       fs.accessSync(BLOG_DIR, fs.constants.F_OK);
-      console.log("Blog directory exists");
     } catch (error) {
       console.warn(`Blog directory not found: ${BLOG_DIR}`, error);
       return [];
     }
 
     const fileNames = fs.readdirSync(BLOG_DIR);
-    console.log("Found files:", fileNames);
 
     const posts = fileNames
       .filter((fileName) => fileName.endsWith(".md"))
