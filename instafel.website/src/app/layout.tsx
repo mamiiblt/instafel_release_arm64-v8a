@@ -23,13 +23,10 @@ export default function RootLayout({
       <head>
         <meta name="apple-mobile-web-app-title" content={appleTitle} />
       </head>
-      <body className={`${geist.className} flex min-h-screen flex-col`}>
-        <ThemeProvider
-          attribute="class"
-          enableSystem={false}
-          defaultTheme="light"
-          storageKey="theme"
-        >
+      <body
+        className={`${geist.className} flex min-h-screen flex-col bg-background text-foreground`}
+      >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Toaster />
           <Navbar />
           <main className="flex-1">{children}</main>

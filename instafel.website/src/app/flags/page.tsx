@@ -89,7 +89,7 @@ function FlagListPageContent() {
       const res = await fetch(requestUrl);
       const result: ResponseScheme = await res.json();
       const sortedResult = result.flags.sort(
-        (a, b) => new Date(b.addate).getTime() - new Date(a.addate).getTime()
+        (a, b) => new Date(b.addate).getTime() - new Date(a.addate).getTime(),
       );
       result.flags = sortedResult;
 
@@ -97,7 +97,7 @@ function FlagListPageContent() {
       setRefreshData(false);
     };
     fetchData();
-  }, [recallAPI]);
+  }, [recallAPI, categoryId, pageNumber, paramSearchQuery, paramSelectedUser]);
 
   useEffect(() => {
     if (refreshData == false) {
@@ -109,7 +109,7 @@ function FlagListPageContent() {
     if (pageNumber == 2589) {
       setPageNumber(1);
     } else {
-      setRecallAPI(!recallAPI);
+      setRecallAPI((prevState) => !prevState);
     }
   }, [pageNumber]);
 
@@ -269,7 +269,7 @@ function FlagListPageContent() {
                       value={paramSearchQuery}
                       onChange={handleChange}
                       onKeyDown={searchEvent}
-                      className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:border-gray-300 focus:ring-0 focus:outline-none"
+                      className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:border-gray-300 focus:ring-0 focus:outline-hidden"
                     />
                     <svg
                       className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
@@ -307,7 +307,7 @@ function FlagListPageContent() {
                     <select
                       value={paramSelectedUser || ""}
                       onChange={(e) => changeSelectedUser(e.target.value)}
-                      className="appearance-none pl-8 pr-2 py-2 rounded-lg border border-gray-200 focus:border-gray-300 focus:ring-0 focus:outline-none text-sm font-medium bg-white text-gray-700"
+                      className="appearance-none pl-8 pr-2 py-2 rounded-lg border border-gray-200 focus:border-gray-300 focus:ring-0 focus:outline-hidden text-sm font-medium bg-white text-gray-700"
                     >
                       <option value="">All Users</option>
                       {data.info.authors_of_all_flags.map((user, index) => (
@@ -357,7 +357,7 @@ function FlagListPageContent() {
                           className={`
           relative overflow-hidden bg-white rounded-xl border border-gray-200
           transition-all duration-300
-          ${hoveredId === index ? "shadow-lg scale-[1.01]" : "hover:shadow"}
+          ${hoveredId === index ? "shadow-lg scale-[1.01]" : "hover:shadow-sm"}
         `}
                         >
                           <div className="p-4 sm:p-6">
@@ -414,7 +414,7 @@ function FlagListPageContent() {
                                     </svg>
                                     Uploaded at{" "}
                                     {new Date(flag.addate).toLocaleDateString(
-                                      "en-US"
+                                      "en-US",
                                     )}
                                   </div>
                                   {flag.rv === 1 && (
@@ -448,8 +448,8 @@ function FlagListPageContent() {
 
                           <div
                             className={`
-              absolute inset-0 
-              bg-gradient-to-tr from-gray-100/0 via-gray-100/0 to-gray-100/50
+              absolute inset-0
+              bg-linear-to-tr from-gray-100/0 via-gray-100/0 to-gray-100/50
               transition-opacity duration-300`}
                           />
                         </div>

@@ -5,11 +5,11 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-interface FlagLibrartCarouselProps {
+interface FlagLibraryCarouselProps {
   images: string[];
 }
 
-export function FlagLibrartCarousel({ images }: FlagLibrartCarouselProps) {
+export function FlagLibraryCarousel({ images }: FlagLibraryCarouselProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const totalPairs = Math.ceil(images.length / 2);
@@ -42,7 +42,7 @@ export function FlagLibrartCarousel({ images }: FlagLibrartCarouselProps) {
                 alt={`App Screenshot ${index + 1}`}
                 width={300}
                 height={20}
-                className="rounded-xl shadow-sm mx-auto"
+                className="rounded-xl shadow-xs mx-auto"
               />
             </div>
           ))}
