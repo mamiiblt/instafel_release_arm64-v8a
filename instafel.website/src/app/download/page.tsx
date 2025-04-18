@@ -7,7 +7,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import {
-  ArrowRight,
   ChevronRight,
   Download,
   DownloadIcon,
@@ -28,6 +27,40 @@ import { Badge } from "@/components/ui/badge";
 import { LoadingBar } from "@/components/ifl";
 import Footer from "@/components/Footer";
 
+interface InstafelData {
+  build_date: string | null;
+  gen_id: string | null;
+  app: {
+    ifl_version: string | null;
+    version_name: string | null;
+    version_code: string | null;
+  };
+  hash: {
+    uc: string | null;
+    c: string | null;
+  };
+  download_urls: {
+    unclone: string | null;
+    clone: string | null;
+  };
+  patcher: {
+    version: string | null;
+    commit: string | null;
+  };
+  changelogs: string[] | null;
+}
+
+interface GithubAsset {
+  name: string;
+  browser_download_url: string;
+}
+
+interface GithubRelease {
+  body: string;
+  status?: string;
+  assets: GithubAsset[];
+}
+
 export default function DownloadInstafelPage() {
   return (
     <Suspense fallback={<LoadingBar />}>
@@ -37,17 +70,17 @@ export default function DownloadInstafelPage() {
 }
 
 function DownloadIflContent() {
-  const [activeTab, setActiveTab] = useState("download");
+  const [activeTab, setActiveTab] = useState<string>("download");
 
   const searchParams = useSearchParams();
   const version = searchParams.get("version");
 
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<InstafelData | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      var requestUrl = "";
-      if (version == "latest") {
+      let requestUrl = "";
+      if (version === "latest") {
         requestUrl =
           "https://api.github.com/repos/mamiiblt/instafel/releases/latest";
       } else {
@@ -56,9 +89,9 @@ function DownloadIflContent() {
           version;
       }
       const res = await fetch(requestUrl);
-      const result = await res.json();
+      const result: GithubRelease = await res.json();
 
-      var values = {
+      const values: InstafelData = {
         build_date: null,
         gen_id: null,
         app: {
@@ -81,25 +114,25 @@ function DownloadIflContent() {
         changelogs: null,
       };
 
-      if (result.status != "Not Found") {
+      if (result.status !== "Not Found") {
         const releaseBody = result.body.split("\n");
-        let changeLogs = [];
+        let changeLogs: string[] = [];
 
-        releaseBody.forEach((line) => {
-          if (!line.startsWith("|") && line != "" && line != "# Changelog") {
+        releaseBody.forEach((line: string) => {
+          if (!line.startsWith("|") && line !== "" && line !== "# Changelog") {
             changeLogs.push(line.trim().substring(2));
           } else {
             const lineParts = line.split("|");
             for (let i = 0; i < lineParts.length; i++) {
-              var part = lineParts[i].trim();
+              const part = lineParts[i].trim();
               if (
                 !part.includes("PROPERTY") &&
                 !part.includes("VALUE") &&
                 !part.includes("Changelog") &&
                 !part.includes("-------------") &&
-                !part.length != 1
+                !(part.length === 1)
               ) {
-                var nextValue = lineParts[i + 1].trim();
+                const nextValue = lineParts[i + 1]?.trim();
                 switch (part) {
                   case "build_date":
                     values.build_date = nextValue;
@@ -134,7 +167,7 @@ function DownloadIflContent() {
           }
         });
 
-        result.assets.forEach((asset) => {
+        result.assets.forEach((asset: GithubAsset) => {
           if (asset.name.includes("instafel_uc")) {
             values.download_urls.unclone = asset.browser_download_url;
           }
@@ -151,9 +184,10 @@ function DownloadIflContent() {
       }
     };
     fetchData();
-  }, []);
+  }, [version]);
 
-  const download = (url) => {
+  const download = (url: string | null): void => {
+    if (!url) return;
     const link = document.createElement("a");
     link.href = url;
     document.body.appendChild(link);
@@ -300,7 +334,7 @@ function DownloadIflContent() {
                                 className="mt-6 w-full"
                                 onClick={() =>
                                   download(
-                                    data ? data.download_urls.unclone : null
+                                    data ? data.download_urls.unclone : null,
                                   )
                                 }
                               >
@@ -335,7 +369,7 @@ function DownloadIflContent() {
                                 className="mt-6 w-full"
                                 onClick={() =>
                                   download(
-                                    data ? data.download_urls.clone : null
+                                    data ? data.download_urls.clone : null,
                                   )
                                 }
                               >

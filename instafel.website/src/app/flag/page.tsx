@@ -23,7 +23,7 @@ import {
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { FlagLibrartCarousel } from "@/components/carousel";
+import { FlagLibraryCarousel } from "@/components/carousel";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 
@@ -114,7 +114,7 @@ function FlagListPageContent() {
       setData(result);
     };
     fetchData();
-  }, []);
+  }, [flagId]);
 
   const getTypeColor = (type: string) => {
     const colors = {
@@ -240,7 +240,7 @@ function FlagListPageContent() {
                       <span className="h-4 w-1 bg-primary rounded-full"></span>
                       Screenshots
                     </h3>
-                    <FlagLibrartCarousel images={data.data.imgs} />
+                    <FlagLibraryCarousel images={data.data.imgs} />
                   </div>
                 )}
 
@@ -365,7 +365,7 @@ function FlagListPageContent() {
                                       </div>
                                     </div>
                                   </div>
-                                )
+                                ),
                               )}
                             </div>
                           </div>
