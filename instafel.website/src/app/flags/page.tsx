@@ -89,7 +89,7 @@ function FlagListPageContent() {
       const res = await fetch(requestUrl);
       const result: ResponseScheme = await res.json();
       const sortedResult = result.flags.sort(
-        (a, b) => new Date(b.addate).getTime() - new Date(a.addate).getTime()
+        (a, b) => new Date(b.addate).getTime() - new Date(a.addate).getTime(),
       );
       result.flags = sortedResult;
 
@@ -97,7 +97,7 @@ function FlagListPageContent() {
       setRefreshData(false);
     };
     fetchData();
-  }, [recallAPI]);
+  }, [recallAPI, categoryId, pageNumber, paramSearchQuery, paramSelectedUser]);
 
   useEffect(() => {
     if (refreshData == false) {
@@ -109,7 +109,7 @@ function FlagListPageContent() {
     if (pageNumber == 2589) {
       setPageNumber(1);
     } else {
-      setRecallAPI(!recallAPI);
+      setRecallAPI((prevState) => !prevState);
     }
   }, [pageNumber]);
 
@@ -414,7 +414,7 @@ function FlagListPageContent() {
                                     </svg>
                                     Uploaded at{" "}
                                     {new Date(flag.addate).toLocaleDateString(
-                                      "en-US"
+                                      "en-US",
                                     )}
                                   </div>
                                   {flag.rv === 1 && (
@@ -448,7 +448,7 @@ function FlagListPageContent() {
 
                           <div
                             className={`
-              absolute inset-0 
+              absolute inset-0
               bg-linear-to-tr from-gray-100/0 via-gray-100/0 to-gray-100/50
               transition-opacity duration-300`}
                           />

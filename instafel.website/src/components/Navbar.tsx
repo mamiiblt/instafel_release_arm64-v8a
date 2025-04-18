@@ -3,7 +3,6 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ThemeToggle } from "./ThemeToggle";
 import {
   Book,
   Code,
@@ -32,7 +31,6 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { SITE_CONFIG } from "@/config/config";
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { NavbarLoading } from "./loading";
 import { NavigationItem } from "./NavigationItem";
 import { motion, AnimatePresence } from "framer-motion";
@@ -70,7 +68,7 @@ export default function Navbar() {
           <Link href="/">
             <div className="flex items-center space-x-2 sm:ml-8">
               <LucideInstagram className="" />
-              <span className="text-lg font-normal text-foreground text-2xl">
+              <span className="text-lg font-normal text-foreground">
                 Instafel
               </span>
             </div>
@@ -161,7 +159,7 @@ export default function Navbar() {
                 className="border-b border-border p-6"
               >
                 <div className="flex items-center space-x-2">
-                  <span className="text-lg font-bold text-foreground text-2xl">
+                  <span className="text-lg font-bold text-foreground">
                     Instafel
                   </span>
                 </div>

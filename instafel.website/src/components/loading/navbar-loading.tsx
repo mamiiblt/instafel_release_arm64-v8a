@@ -22,13 +22,8 @@ export function NavbarLoading() {
           </div>
         </div>
 
-        {/* Right section - Theme toggle + menu */}
+        {/* Right section - menu */}
         <div className="flex w-1/4 justify-end items-center space-x-4">
-          <div className="flex items-center space-x-2">
-            <Skeleton className="h-5 w-5 rounded-full" />
-            <Skeleton className="h-5 w-9 rounded-full" />
-            <Skeleton className="h-5 w-5 rounded-full" />
-          </div>
           <Skeleton className="h-9 w-9 md:hidden" /> {/* Mobile menu button */}
         </div>
       </div>
