@@ -3,16 +3,14 @@
 import { motion } from "framer-motion";
 import {
   Book,
-  IflDownload,
-  IflFeature_32BitSupport,
-  IflFeature_CrashReports,
-  IflFeature_OTAUpdates,
-  IflFeature_RemoveAds,
-  IflLibrary,
-  Instagram,
-  Notification,
-  Telegram,
-} from "@/components/Icons";
+  LucideInstagram,
+  Bug,
+  Library,
+  MinusCircle,
+  RefreshCw,
+  Download,
+  Send,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,27 +19,27 @@ import Footer from "@/components/Footer";
 export default function Home() {
   const features = [
     {
-      icon: <Instagram />,
+      icon: <LucideInstagram />,
       title: "Clone Support",
       desc: "If you don't want to install the Alpha versions instead of the Instagram, you can install it as a secondary app!",
     },
     {
-      icon: <IflFeature_OTAUpdates />,
+      icon: <RefreshCw />,
       title: "OTA Updates",
       desc: "You can update Instafel flawlessly using the in-app updater or the automatic update plugin Instafel Updater",
     },
     {
-      icon: <IflFeature_RemoveAds />,
+      icon: <MinusCircle />,
       title: "Ads Removed",
       desc: "Use it comfortably without any ads in the app!",
     },
     {
-      icon: <IflFeature_CrashReports />,
+      icon: <Bug />,
       title: "Crash Reports",
       desc: "It is very common for the application to crash when using Alpha versions, Instafel always keeps a crash report for such cases",
     },
     {
-      icon: <IflLibrary />,
+      icon: <Library />,
       title: "Libraries",
       desc: "You can find useful flags, backups in Instafel Library!",
     },
@@ -110,7 +108,7 @@ export default function Home() {
                   className="w-full flex justify-center items-center group hover:scale-105 transition-transform duration-300"
                 >
                   <Link href="/download?version=latest">
-                    <IflDownload className="shrink-0 w-5 h-5 mr-2 group-hover:animate-pulse" />
+                    <Download className="shrink-0 w-5 h-5 mr-2 group-hover:animate-pulse" />
                     Download
                   </Link>
                 </Button>
@@ -145,7 +143,7 @@ export default function Home() {
                   className="group hover:scale-105 transition-transform duration-300"
                 >
                   <Link href="https://t.me/instafel">
-                    <Telegram className="shrink-0 w-4 h-4 mr-2 group-hover:translate-y-[-2px] transition-transform duration-300" />
+                    <Send className="shrink-0 w-4 h-4 mr-2 group-hover:translate-y-[-2px] transition-transform duration-300" />
                     Join Community
                   </Link>
                 </Button>
@@ -265,7 +263,7 @@ export default function Home() {
                         rel="noopener noreferrer"
                         className="flex items-center"
                       >
-                        <Telegram
+                        <Send
                           size={18}
                           className="mr-2 group-hover:translate-y-[-2px] transition-all duration-300"
                         />
@@ -355,7 +353,7 @@ export default function Home() {
               className="hover:scale-105 transition-transform duration-300"
             >
               <Link href="/download?version=latest">
-                <IflDownload className="mr-2" />
+                <Download className="mr-2" />
                 Download Now
               </Link>
             </Button>
@@ -366,7 +364,7 @@ export default function Home() {
               className="hover:scale-105 transition-transform duration-300"
             >
               <Link href="/about_updater">
-                <IflFeature_OTAUpdates className="mr-2" />
+                <RefreshCw className="mr-2" />
                 Get Auto Updates
               </Link>
             </Button>

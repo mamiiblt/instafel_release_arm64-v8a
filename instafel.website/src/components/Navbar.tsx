@@ -4,7 +4,6 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Github, Menu, X, Sun, Moon } from "@/components/Icons";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
@@ -21,6 +20,11 @@ import {
   LucideInstagram,
   Monitor,
   RefreshCcwDot,
+  Github,
+  Menu,
+  X,
+  Sun,
+  Moon,
 } from "lucide-react";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { useTheme } from "next-themes";

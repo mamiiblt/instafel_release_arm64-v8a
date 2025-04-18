@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Home } from "@/components/Icons";
+import { Home } from "lucide-react";
 
 export default function NotFound() {
   return (

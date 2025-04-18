@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import * as Icons from "@/components/Icons";
 import { FooterLoading } from "./loading";
 import { usePathname } from "next/navigation";
 import {
@@ -8,6 +7,7 @@ import {
   Download,
   FileCog2Icon,
   GithubIcon,
+  LucideInstagram,
   RefreshCcwDot,
   Send,
   User,
@@ -46,7 +46,7 @@ export default function Footer() {
             <div className="space-y-4 lg:col-span-2">
               <div className="flex items-center gap-2">
                 <div className="w-10 h-10 rounded-xl bg-instafelcolor flex items-center justify-center">
-                  <Icons.Instagram className="text-black font-bold text-xl" />
+                  <LucideInstagram className="text-black font-bold text-xl" />
                 </div>
                 <span className="font-bold text-xl text-foreground">
                   Instafel

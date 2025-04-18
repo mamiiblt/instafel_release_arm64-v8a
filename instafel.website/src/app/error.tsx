@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Home, RotateCcw } from "@/components/Icons";
+import { Home, RotateCcw } from "lucide-react";
 
 export default function Error({
   error,
