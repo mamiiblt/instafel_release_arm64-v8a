@@ -1,18 +1,24 @@
 "use client";
 
+import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Suspense, useEffect, useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import {
   ChevronRight,
   Download,
-  DownloadIcon,
+  FileText,
   Info,
-  LucideFileText,
   Shapes,
+  Smartphone,
+  Calendar,
+  Code,
+  CheckCircle,
+  ShieldCheck,
+  HardDrive,
 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import {
@@ -76,9 +82,15 @@ function DownloadIflContent() {
   const version = searchParams.get("version");
 
   const [data, setData] = useState<InstafelData | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [downloadStarted, setDownloadStarted] = useState<{
+    unclone: boolean;
+    clone: boolean;
+  }>({ unclone: false, clone: false });
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       let requestUrl = "";
       if (version === "latest") {
         requestUrl =
@@ -88,441 +100,525 @@ function DownloadIflContent() {
           "https://api.github.com/repos/mamiiblt/instafel/releases/tags/" +
           version;
       }
-      const res = await fetch(requestUrl);
-      const result: GithubRelease = await res.json();
+      try {
+        const res = await fetch(requestUrl);
+        const result: GithubRelease = await res.json();
 
-      const values: InstafelData = {
-        build_date: null,
-        gen_id: null,
-        app: {
-          ifl_version: null,
-          version_name: null,
-          version_code: null,
-        },
-        hash: {
-          uc: null,
-          c: null,
-        },
-        download_urls: {
-          unclone: null,
-          clone: null,
-        },
-        patcher: {
-          version: null,
-          commit: null,
-        },
-        changelogs: null,
-      };
+        const values: InstafelData = {
+          build_date: null,
+          gen_id: null,
+          app: {
+            ifl_version: null,
+            version_name: null,
+            version_code: null,
+          },
+          hash: {
+            uc: null,
+            c: null,
+          },
+          download_urls: {
+            unclone: null,
+            clone: null,
+          },
+          patcher: {
+            version: null,
+            commit: null,
+          },
+          changelogs: null,
+        };
 
-      if (result.status !== "Not Found") {
-        const releaseBody = result.body.split("\n");
-        let changeLogs: string[] = [];
+        if (result.status !== "Not Found") {
+          const releaseBody = result.body.split("\n");
+          let changeLogs: string[] = [];
 
-        releaseBody.forEach((line: string) => {
-          if (!line.startsWith("|") && line !== "" && line !== "# Changelog") {
-            changeLogs.push(line.trim().substring(2));
-          } else {
-            const lineParts = line.split("|");
-            for (let i = 0; i < lineParts.length; i++) {
-              const part = lineParts[i].trim();
-              if (
-                !part.includes("PROPERTY") &&
-                !part.includes("VALUE") &&
-                !part.includes("Changelog") &&
-                !part.includes("-------------") &&
-                !(part.length === 1)
-              ) {
-                const nextValue = lineParts[i + 1]?.trim();
-                switch (part) {
-                  case "build_date":
-                    values.build_date = nextValue;
-                    break;
-                  case "gen_id":
-                    values.gen_id = nextValue;
-                    break;
-                  case "app.ifl_version":
-                    values.app.ifl_version = nextValue;
-                    break;
-                  case "app.version_name":
-                    values.app.version_name = nextValue;
-                    break;
-                  case "app.version_code":
-                    values.app.version_code = nextValue;
-                    break;
-                  case "hash.uc":
-                    values.hash.uc = nextValue;
-                    break;
-                  case "hash.c":
-                    values.hash.c = nextValue;
-                    break;
-                  case "patcher.version":
-                    values.patcher.version = nextValue;
-                    break;
-                  case "patcher.commit":
-                    values.patcher.commit = nextValue;
-                    break;
+          releaseBody.forEach((line: string) => {
+            if (
+              !line.startsWith("|") &&
+              line !== "" &&
+              line !== "# Changelog"
+            ) {
+              changeLogs.push(line.trim().substring(2));
+            } else {
+              const lineParts = line.split("|");
+              for (let i = 0; i < lineParts.length; i++) {
+                const part = lineParts[i].trim();
+                if (
+                  !part.includes("PROPERTY") &&
+                  !part.includes("VALUE") &&
+                  !part.includes("Changelog") &&
+                  !part.includes("-------------") &&
+                  !(part.length === 1)
+                ) {
+                  const nextValue = lineParts[i + 1]?.trim();
+                  switch (part) {
+                    case "build_date":
+                      values.build_date = nextValue;
+                      break;
+                    case "gen_id":
+                      values.gen_id = nextValue;
+                      break;
+                    case "app.ifl_version":
+                      values.app.ifl_version = nextValue;
+                      break;
+                    case "app.version_name":
+                      values.app.version_name = nextValue;
+                      break;
+                    case "app.version_code":
+                      values.app.version_code = nextValue;
+                      break;
+                    case "hash.uc":
+                      values.hash.uc = nextValue;
+                      break;
+                    case "hash.c":
+                      values.hash.c = nextValue;
+                      break;
+                    case "patcher.version":
+                      values.patcher.version = nextValue;
+                      break;
+                    case "patcher.commit":
+                      values.patcher.commit = nextValue;
+                      break;
+                  }
                 }
               }
             }
-          }
-        });
+          });
 
-        result.assets.forEach((asset: GithubAsset) => {
-          if (asset.name.includes("instafel_uc")) {
-            values.download_urls.unclone = asset.browser_download_url;
-          }
+          result.assets.forEach((asset: GithubAsset) => {
+            if (asset.name.includes("instafel_uc")) {
+              values.download_urls.unclone = asset.browser_download_url;
+            }
 
-          if (asset.name.includes("instafel_c")) {
-            values.download_urls.clone = asset.browser_download_url;
-          }
-        });
-        values.changelogs = changeLogs;
-        console.log(changeLogs);
-        setData(values);
-      } else {
+            if (asset.name.includes("instafel_c")) {
+              values.download_urls.clone = asset.browser_download_url;
+            }
+          });
+          values.changelogs = changeLogs;
+          setData(values);
+        } else {
+          setData(null);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
         setData(null);
+      } finally {
+        setLoading(false);
       }
     };
+
     fetchData();
   }, [version]);
 
-  const download = (url: string | null): void => {
+  const download = (url: string | null, type: "unclone" | "clone"): void => {
     if (!url) return;
+
+    // Set the download state
+    setDownloadStarted((prev) => ({ ...prev, [type]: true }));
+
+    // Create a temporary link
     const link = document.createElement("a");
     link.href = url;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+
+    // Reset the download state after animation completes
+    setTimeout(() => {
+      setDownloadStarted((prev) => ({ ...prev, [type]: false }));
+    }, 2000);
   };
 
   return (
     <AnimatePresence>
-      {data ? (
-        <div>
-          {" "}
-          <div className="min-h-screen  font-sans">
-            <div className="container mx-auto px-4 pt-20 text-center">
-              <motion.h1
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.8,
-                  ease: "easeInOut",
-                }}
-                className="mb-2 text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl"
-              >
-                Download <br />
-              </motion.h1>
-              <motion.h1
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.8,
-                  ease: "easeInOut",
-                }}
-                className="mb-2 text-3xl font-regular tracking-tight sm:text-4xl md:text-5xl"
-              >
-                Instafel v{data ? data.app.ifl_version : "..."}
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  delay: 0.5,
-                  duration: 0.6,
-                  ease: "easeOut",
-                }}
-                className="mx-auto mt-4 max-w-2xl text-xl text-muted-foreground"
-              >
-                You can download the APK files that suits you by selecting it
-                from here!
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  delay: 0.8,
-                  duration: 0.8,
-                  ease: "easeOut",
-                }}
-              >
-                <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                  <Button
-                    onClick={() =>
-                      download(data ? data.download_urls.unclone : null)
-                    }
-                    size="lg"
-                    className="h-14 w-full rounded-full px-8 text-lg sm:w-auto"
-                  >
-                    <Download className="mr-2 h-5 w-5" />
-                    Download Unclone
-                  </Button>
-
-                  <Button
-                    variant="outline-gradient"
-                    size="lg"
-                    onClick={() =>
-                      download(data ? data.download_urls.clone : null)
-                    }
-                    className="h-14 w-full rounded-full px-8 text-lg sm:w-auto"
-                  >
-                    <Download className="mr-2 h-5 w-5" />
-                    Download Clone
-                  </Button>
-                </div>
-              </motion.div>
-            </div>
-
+      {loading ? (
+        <LoadingBar />
+      ) : (
+        <div className="min-h-screen">
+          <div className="container mx-auto px-4 pt-12 sm:pt-16 md:pt-20 pb-16">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
-                delay: 1.2,
-                duration: 0.8,
+                duration: 0.7,
                 ease: "easeOut",
               }}
+              className="text-center mb-12"
             >
-              <div className="container mx-auto px-4 mt-12 pb-12">
-                <Tabs
-                  defaultValue="download"
-                  className="w-full mt-8"
-                  onValueChange={setActiveTab}
-                >
-                  <TabsContent
-                    value="download"
-                    className="mt-0 animate-fade-in space-y-8"
+              <div className="flex justify-center mb-6">
+                <div className="relative">
+                  <div
+                    className="absolute inset-0 rounded-full bg-primary/20 animate-ping"
+                    style={{ animationDuration: "3s" }}
+                  ></div>
+                  <div className="relative bg-primary/30 p-5 rounded-full">
+                    <Download className="h-12 w-12 text-primary" />
+                  </div>
+                </div>
+              </div>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-4">
+                Download <span className="text-primary">Instafel</span>
+              </h1>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.7 }}
+                className="text-xl text-muted-foreground max-w-2xl mx-auto"
+              >
+                {data
+                  ? `Version ${data.app.ifl_version}`
+                  : "Choose your version"}
+              </motion.p>
+            </motion.div>
+
+            {data && (
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.7 }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12"
+              >
+                {[
+                  {
+                    title: "Standard Version",
+                    subtitle: "Unclone Variant",
+                    description:
+                      "Replace the standard Instagram app with Instafel. Original app must be uninstalled.",
+                    icon: <Smartphone className="size-6 text-primary" />,
+                    downloadUrl: data.download_urls.unclone,
+                    type: "unclone" as const,
+                    benefits: [
+                      "Full feature set",
+                      "Better performance",
+                      "Recommended for most users",
+                    ],
+                    delay: 0.5,
+                  },
+                  {
+                    title: "Parallel Version",
+                    subtitle: "Clone Variant",
+                    description:
+                      "Install alongside the original Instagram app. Perfect for testing while keeping your original app.",
+                    icon: <Shapes className="size-6 text-primary" />,
+                    downloadUrl: data.download_urls.clone,
+                    type: "clone" as const,
+                    benefits: [
+                      "Keep original Instagram",
+                      "Test new features",
+                      "Separate accounts",
+                    ],
+                    delay: 0.6,
+                  },
+                ].map((variant, index) => (
+                  <motion.div
+                    key={variant.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: variant.delay, duration: 0.5 }}
+                    whileHover={{ scale: 1.02 }}
+                    className="relative"
                   >
-                    <Card>
-                      <CardContent className="p-6">
-                        <h2 className="mb-4 flex items-center gap-2 text-2xl font-bold">
-                          <Shapes className="h-5 w-5 text-primary" />
-                          Variant Infos
-                        </h2>
-                        <div className="mb-8 flex justify-center">
-                          <TabsList className="grid w-full max-w-md grid-cols-3">
-                            <TabsTrigger value="download">Variants</TabsTrigger>
-                            <TabsTrigger value="changelog">
-                              Changelog
-                            </TabsTrigger>
-                            <TabsTrigger value="build">Build Info</TabsTrigger>
-                          </TabsList>
-                        </div>
-
-                        <div className="overflow-x-auto">
-                          <div className="grid gap-8 md:grid-cols-2">
-                            <div className="flex flex-col h-full rounded-xl border-2 bg-card p-6 transition-all duration-200 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5 [&:has([data-state=checked])]:border-primary [&:has([data-state=checked])]:bg-primary/5 cursor-pointer">
-                              <div className="flex items-center gap-4 mb-4">
-                                <div className="bg-primary/10 p-3 rounded-full">
-                                  <DownloadIcon className="h-6 w-6 text-primary" />
-                                </div>
-                                <div>
-                                  <h3 className="text-xl font-bold">
-                                    Unclone Variant
-                                  </h3>
-                                </div>
-                              </div>
-
-                              <div className="grid gap-6 mt-2">
-                                <span>
-                                  In order to install this variant, the original
-                                  Instagram app must be uninstalled, as it will
-                                  replace the standard Instagram application.
-                                </span>
-                              </div>
-                              <Button
-                                className="mt-6 w-full"
-                                onClick={() =>
-                                  download(
-                                    data ? data.download_urls.unclone : null,
-                                  )
-                                }
-                              >
-                                <Download className="mr-2 h-4 w-4" />
-                                Download Unclone
-                              </Button>
+                    <Card className="h-full border-2 hover:border-primary/60 transition-all duration-300 overflow-hidden shadow-lg">
+                      <CardContent className="p-0">
+                        <div className="p-6 pb-0">
+                          <div className="flex items-center gap-4 mb-4">
+                            <div className="p-3 rounded-full bg-gradient-to-r from-primary/20 to-primary/5">
+                              {variant.icon}
                             </div>
-
-                            <div className="flex flex-col h-full rounded-xl border-2 bg-card p-6 transition-all duration-200 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5 [&:has([data-state=checked])]:border-primary [&:has([data-state=checked])]:bg-primary/5 cursor-pointer">
-                              <div className="flex items-center gap-4 mb-4">
-                                <div className="bg-primary/10 p-3 rounded-full">
-                                  <DownloadIcon className="h-6 w-6 text-primary" />
-                                </div>
-                                <div>
-                                  <h3 className="text-xl font-bold">
-                                    Clone Variant
-                                  </h3>
-                                </div>
-                              </div>
-
-                              <div className="grid gap-6 mt-2">
-                                <span>
-                                  In order to install this clone variant, you
-                                  can keep the original Instagram app installed,
-                                  as this version works alongside the standard
-                                  Instagram application. Compared to the unclone
-                                  version, this variant may have some stability
-                                  issues.
-                                </span>
-                              </div>
-                              <Button
-                                className="mt-6 w-full"
-                                onClick={() =>
-                                  download(
-                                    data ? data.download_urls.clone : null,
-                                  )
-                                }
-                              >
-                                <Download className="mr-2 h-4 w-4" />
-                                Download Clone
-                              </Button>
+                            <div>
+                              <h3 className="text-2xl font-bold">
+                                {variant.title}
+                              </h3>
+                              <p className="text-primary font-medium">
+                                {variant.subtitle}
+                              </p>
                             </div>
                           </div>
+
+                          <p className="text-muted-foreground mb-5">
+                            {variant.description}
+                          </p>
+                        </div>
+
+                        <div className="px-6 pb-4">
+                          <h4 className="text-sm font-medium mb-2 flex items-center">
+                            <CheckCircle className="h-4 w-4 mr-1.5 text-primary" />
+                            Benefits
+                          </h4>
+                          <ul className="space-y-1 mb-6">
+                            {variant.benefits.map((benefit, i) => (
+                              <li key={i} className="text-sm flex items-center">
+                                <ChevronRight className="h-3.5 w-3.5 text-primary/70 mr-1" />
+                                {benefit}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-primary/5 to-primary/10 p-6">
+                          <Button
+                            size="lg"
+                            className={`w-full ${downloadStarted[variant.type] ? "bg-green-600 hover:bg-green-700" : ""}`}
+                            onClick={() =>
+                              download(variant.downloadUrl, variant.type)
+                            }
+                            disabled={!variant.downloadUrl}
+                          >
+                            {downloadStarted[variant.type] ? (
+                              <>
+                                <motion.div
+                                  initial={{ width: 0 }}
+                                  animate={{ width: "100%" }}
+                                  transition={{ duration: 1.5 }}
+                                  className="absolute left-0 top-0 bottom-0 bg-green-500/20"
+                                />
+                                <span className="relative z-10 flex items-center">
+                                  <svg
+                                    className="w-5 h-5 mr-2"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      fill="currentColor"
+                                      d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+                                    />
+                                  </svg>
+                                  Download Started
+                                </span>
+                              </>
+                            ) : (
+                              <span className="flex items-center">
+                                <Download className="mr-2 h-5 w-5" />
+                                Download {variant.subtitle}
+                              </span>
+                            )}
+                          </Button>
                         </div>
                       </CardContent>
                     </Card>
-                  </TabsContent>
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
 
-                  <TabsContent value="build" className="mt-0 animate-fade-in">
-                    <Card>
-                      <CardContent className="p-6">
-                        <h2 className="mb-4 flex items-center gap-2 text-2xl font-bold">
-                          <Info className="h-5 w-5 text-primary" />
-                          Build Information
+            {data && (
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7, duration: 0.7 }}
+                className="mt-10"
+              >
+                <Card className="shadow-md border-2">
+                  <CardContent className="p-0">
+                    <Tabs
+                      defaultValue="download"
+                      value={activeTab}
+                      onValueChange={setActiveTab}
+                      className="w-full"
+                    >
+                      <div className="border-b p-4">
+                        <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+                          <Info className="h-6 w-6 text-primary" />
+                          Release Information
                         </h2>
-                        <div className="mb-8 flex justify-center">
-                          <TabsList className="grid w-full max-w-md grid-cols-3">
-                            <TabsTrigger value="download">Variants</TabsTrigger>
-                            <TabsTrigger value="changelog">
-                              Changelog
-                            </TabsTrigger>
-                            <TabsTrigger value="build">Build Info</TabsTrigger>
-                          </TabsList>
-                        </div>
+                        <TabsList className="grid w-full max-w-md grid-cols-3 mx-auto">
+                          <TabsTrigger value="download">Details</TabsTrigger>
+                          <TabsTrigger value="changelog">Changelog</TabsTrigger>
+                          <TabsTrigger value="build">Build Info</TabsTrigger>
+                        </TabsList>
+                      </div>
 
-                        <div className="overflow-x-auto">
-                          <Table>
-                            <TableHeader>
-                              <TableRow>
-                                <TableHead>Property</TableHead>
-                                <TableHead>Value</TableHead>
-                              </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                              <TableRow>
-                                <TableCell className="font-medium">
-                                  Build Date
-                                </TableCell>
-                                <TableCell>
-                                  {data
-                                    ? new Date(parseInt(data.build_date))
-                                        .toLocaleString("en-US", {
-                                          day: "2-digit",
-                                          month: "2-digit",
-                                          year: "numeric",
-                                          hour: "2-digit",
-                                          minute: "2-digit",
-                                        })
-                                        .replace(",", "")
-                                    : "..."}
-                                </TableCell>
-                              </TableRow>
-                              <TableRow>
-                                <TableCell className="font-medium">
-                                  IFL Version
-                                </TableCell>
-                                <TableCell>
-                                  Release v{data ? data.app.ifl_version : "..."}
-                                </TableCell>
-                              </TableRow>
-                              <TableRow>
-                                <TableCell className="font-medium">
-                                  IG Version
-                                </TableCell>
-                                <TableCell>
-                                  v{data ? data.app.version_name : "..."}
-                                </TableCell>
-                              </TableRow>
-                              <TableRow>
-                                <TableCell className="font-medium">
-                                  IG Ver-code
-                                </TableCell>
-                                <TableCell>
-                                  {data ? data.app.version_code : "..."}
-                                </TableCell>
-                              </TableRow>
-                              <TableRow>
-                                <TableCell className="font-medium">
-                                  Patcher Version
-                                </TableCell>
-                                <TableCell>
-                                  {data.patcher.version != null
-                                    ? `v${data.patcher.version} (${data.patcher.commit})`
-                                    : "Uses old patcher"}
-                                </TableCell>
-                              </TableRow>
-                              <TableRow>
-                                <TableCell className="font-medium">
-                                  Generation ID
-                                </TableCell>
-                                <TableCell>
-                                  {data ? data.gen_id : "..."}
-                                </TableCell>
-                              </TableRow>
-                              <TableRow>
-                                <TableCell className="font-medium">
-                                  MD5 Hash (UC)
-                                </TableCell>
-                                <TableCell>
-                                  {data ? data.hash.uc : "..."}
-                                </TableCell>
-                              </TableRow>
-                              <TableRow>
-                                <TableCell className="font-medium">
-                                  MD5 Hash (C)
-                                </TableCell>
-                                <TableCell>
-                                  {data ? data.hash.c : "..."}
-                                </TableCell>
-                              </TableRow>
-                            </TableBody>
-                          </Table>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </TabsContent>
+                      <div className="p-6">
+                        <TabsContent
+                          value="download"
+                          className="animate-in fade-in-50 data-[state=inactive]:animate-out data-[state=inactive]:fade-out-0"
+                        >
+                          <div className="grid md:grid-cols-2 gap-8">
+                            {[
+                              {
+                                title: "Unclone Installation",
+                                description: (
+                                  <>
+                                    <p className="mb-4">
+                                      This variant requires the original
+                                      Instagram app to be uninstalled first, as
+                                      it replaces the standard Instagram
+                                      application with Instafel.
+                                    </p>
+                                    <p>
+                                      After uninstalling the original app,
+                                      install the Unclone variant for the full
+                                      Instafel experience.
+                                    </p>
+                                  </>
+                                ),
+                                buttonText: "Download Unclone",
+                                onClick: () =>
+                                  download(
+                                    data.download_urls.unclone,
+                                    "unclone",
+                                  ),
+                                color: "primary",
+                              },
+                              {
+                                title: "Clone Installation",
+                                description: (
+                                  <>
+                                    <p className="mb-4">
+                                      The Clone variant can be installed
+                                      alongside the original Instagram app,
+                                      allowing you to use both apps
+                                      simultaneously.
+                                    </p>
+                                    <p>
+                                      Note that compared to the Unclone version,
+                                      this variant may have some stability
+                                      issues in certain situations.
+                                    </p>
+                                  </>
+                                ),
+                                buttonText: "Download Clone",
+                                onClick: () =>
+                                  download(data.download_urls.clone, "clone"),
+                                color: "secondary",
+                              },
+                            ].map((info, index) => (
+                              <div
+                                key={index}
+                                className="border rounded-xl p-5 hover:shadow-md transition-shadow duration-200"
+                              >
+                                <h3 className="text-xl font-bold mb-3">
+                                  {info.title}
+                                </h3>
+                                <div className="text-muted-foreground mb-5">
+                                  {info.description}
+                                </div>
+                                <Button
+                                  variant={index === 0 ? "default" : "outline"}
+                                  className="w-full"
+                                  onClick={info.onClick}
+                                >
+                                  <Download className="mr-2 h-4 w-4" />
+                                  {info.buttonText}
+                                </Button>
+                              </div>
+                            ))}
+                          </div>
+                        </TabsContent>
 
-                  <TabsContent
-                    value="changelog"
-                    className="mt-0 animate-fade-in"
-                  >
-                    <Card>
-                      <CardContent className="p-6">
-                        <h2 className="mb-4 flex items-center gap-2 text-2xl font-bold">
-                          <LucideFileText className="h-5 w-5 text-primary" />
-                          Changelog
-                        </h2>
+                        <TabsContent
+                          value="build"
+                          className="animate-in fade-in-50 data-[state=inactive]:animate-out data-[state=inactive]:fade-out-0"
+                        >
+                          <div className="overflow-x-auto">
+                            <Table>
+                              <TableHeader>
+                                <TableRow>
+                                  <TableHead className="w-1/3 font-semibold">
+                                    Property
+                                  </TableHead>
+                                  <TableHead className="w-2/3">Value</TableHead>
+                                </TableRow>
+                              </TableHeader>
+                              <TableBody>
+                                <TableRow className="hover:bg-muted/30">
+                                  <TableCell className="font-medium">
+                                    Build Date
+                                  </TableCell>
+                                  <TableCell>
+                                    {data.build_date
+                                      ? new Date(parseInt(data.build_date))
+                                          .toLocaleString("en-US", {
+                                            day: "2-digit",
+                                            month: "2-digit",
+                                            year: "numeric",
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                          })
+                                          .replace(",", "")
+                                      : "Not available"}
+                                  </TableCell>
+                                </TableRow>
+                                <TableRow className="hover:bg-muted/30">
+                                  <TableCell className="font-medium">
+                                    IFL Version
+                                  </TableCell>
+                                  <TableCell>
+                                    Release v
+                                    {data.app.ifl_version || "Not available"}
+                                  </TableCell>
+                                </TableRow>
+                                <TableRow className="hover:bg-muted/30">
+                                  <TableCell className="font-medium">
+                                    Instagram Version
+                                  </TableCell>
+                                  <TableCell>
+                                    v{data.app.version_name || "Not available"}
+                                  </TableCell>
+                                </TableRow>
+                                <TableRow className="hover:bg-muted/30">
+                                  <TableCell className="font-medium">
+                                    Instagram Version Code
+                                  </TableCell>
+                                  <TableCell>
+                                    {data.app.version_code || "Not available"}
+                                  </TableCell>
+                                </TableRow>
+                                <TableRow className="hover:bg-muted/30">
+                                  <TableCell className="font-medium">
+                                    Patcher Version
+                                  </TableCell>
+                                  <TableCell>
+                                    {data.patcher.version != null
+                                      ? `v${data.patcher.version} (${data.patcher.commit})`
+                                      : "Uses older patcher"}
+                                  </TableCell>
+                                </TableRow>
+                                <TableRow className="hover:bg-muted/30">
+                                  <TableCell className="font-medium">
+                                    Generation ID
+                                  </TableCell>
+                                  <TableCell>
+                                    <code className="px-1 py-0.5 bg-muted rounded text-sm font-mono">
+                                      {data.gen_id || "Not available"}
+                                    </code>
+                                  </TableCell>
+                                </TableRow>
+                                <TableRow className="hover:bg-muted/30">
+                                  <TableCell className="font-medium">
+                                    MD5 Hash (Unclone)
+                                  </TableCell>
+                                  <TableCell>
+                                    <code className="px-1 py-0.5 bg-muted rounded text-sm font-mono break-all">
+                                      {data.hash.uc || "Not available"}
+                                    </code>
+                                  </TableCell>
+                                </TableRow>
+                                <TableRow className="hover:bg-muted/30">
+                                  <TableCell className="font-medium">
+                                    MD5 Hash (Clone)
+                                  </TableCell>
+                                  <TableCell>
+                                    <code className="px-1 py-0.5 bg-muted rounded text-sm font-mono break-all">
+                                      {data.hash.c || "Not available"}
+                                    </code>
+                                  </TableCell>
+                                </TableRow>
+                              </TableBody>
+                            </Table>
+                          </div>
+                        </TabsContent>
 
-                        <div className="mb-8 flex justify-center">
-                          <TabsList className="grid w-full max-w-md grid-cols-3">
-                            <TabsTrigger value="download">Variants</TabsTrigger>
-                            <TabsTrigger value="changelog">
-                              Changelog
-                            </TabsTrigger>
-                            <TabsTrigger value="build">Build Info</TabsTrigger>
-                          </TabsList>
-                        </div>
-
-                        <div className="space-y-8">
+                        <TabsContent
+                          value="changelog"
+                          className="animate-in fade-in-50 data-[state=inactive]:animate-out data-[state=inactive]:fade-out-0"
+                        >
                           <div>
-                            <div className="mb-2 flex items-center gap-2">
-                              <Badge>
-                                {" "}
-                                v{data ? data.app.ifl_version : "..."}
+                            <div className="mb-4 flex items-center gap-2">
+                              <Badge variant="secondary" className="py-1.5">
+                                v{data.app.ifl_version || "Unknown"}
                               </Badge>
                               <span className="text-sm text-muted-foreground">
                                 Released on{" "}
-                                {data
+                                {data.build_date
                                   ? new Date(parseInt(data.build_date))
                                       .toLocaleString("en-US", {
                                         day: "2-digit",
@@ -530,37 +626,62 @@ function DownloadIflContent() {
                                         year: "numeric",
                                       })
                                       .replace(",", "")
-                                  : "..."}
+                                  : "Unknown date"}
                               </span>
                             </div>
-                            <ul className="space-y-2">
-                              {data ? (
+
+                            <div className="space-y-1 pl-2">
+                              {data.changelogs && data.changelogs.length > 0 ? (
                                 data.changelogs.map((item, index) => (
-                                  <li
-                                    key="index"
-                                    className="flex items-start gap-2"
+                                  <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{
+                                      delay: 0.1 * index,
+                                      duration: 0.4,
+                                    }}
                                   >
-                                    <ChevronRight className="mt-1 h-4 w-4 shrink-0 text-primary" />
-                                    <span>{item}</span>
-                                  </li>
+                                    <div className="flex items-start gap-2 py-1.5 group">
+                                      <ChevronRight className="mt-1 h-4 w-4 shrink-0 text-primary group-hover:translate-x-1 transition-transform duration-200" />
+                                      <span className="group-hover:text-primary transition-colors duration-200">
+                                        {item}
+                                      </span>
+                                    </div>
+                                  </motion.div>
                                 ))
                               ) : (
-                                <li>Loading...</li>
+                                <p className="text-muted-foreground italic">
+                                  No changelog entries available for this
+                                  version.
+                                </p>
                               )}
-                            </ul>
+                            </div>
                           </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </TabsContent>
-                </Tabs>
+                        </TabsContent>
+                      </div>
+                    </Tabs>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            )}
+
+            {!data && !loading && (
+              <div className="text-center p-12 border rounded-lg">
+                <FileText className="mx-auto h-16 w-16 text-muted-foreground mb-4 opacity-50" />
+                <h3 className="text-2xl font-medium mb-2">Release Not Found</h3>
+                <p className="text-muted-foreground mb-6">
+                  We couldn&apos;t find the version you&apos;re looking for. It
+                  may have been removed or doesn&apos;t exist.
+                </p>
+                <Button asChild>
+                  <a href="/download?version=latest">Get Latest Version</a>
+                </Button>
               </div>
-            </motion.div>
+            )}
           </div>
           <Footer />
         </div>
-      ) : (
-        <LoadingBar />
       )}
     </AnimatePresence>
   );

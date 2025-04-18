@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
@@ -12,21 +12,21 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow-sm hover:bg-primary/90",
+          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
         destructive:
-          "bg-destructive text-destructive-foreground shadow-xs hover:bg-destructive/90",
+          "bg-destructive text-destructive-foreground shadow hover:bg-destructive/90",
         outline:
-          "border border-input bg-background shadow-xs hover:bg-accent hover:text-accent-foreground",
+          "border border-input bg-transparent shadow hover:bg-accent hover:text-accent-foreground",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
+          "bg-secondary text-secondary-foreground shadow hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         gradient:
-          "bg-linear-to-r from-primary to-primary/60 text-primary-foreground shadow-sm hover:opacity-90",
+          "bg-gradient-to-r from-primary to-primary/80 text-primary-foreground shadow hover:opacity-90",
         "gradient-secondary":
-          "bg-linear-to-r from-secondary to-secondary/60 text-secondary-foreground shadow-xs hover:opacity-90",
+          "bg-gradient-to-r from-secondary to-secondary/80 text-secondary-foreground shadow hover:opacity-90",
         "outline-gradient":
-          "border border-primary bg-background shadow-xs hover:bg-linear-to-r hover:from-primary/10 hover:to-primary/5 hover:text-primary transition-all duration-300",
+          "border border-primary bg-transparent shadow hover:bg-primary/10 text-primary transition-all duration-300",
       },
       size: {
         default: "h-9 px-4 py-2",
