@@ -21,6 +21,20 @@ const nextConfig: NextConfig = {
   env: {
     NEXT_PUBLIC_SITE_URL: "https://instafel.mamiiblt.me",
   },
+  redirects: async () => {
+    return [
+      {
+        source: "/home",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/guide",
+        destination: "/guides",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
