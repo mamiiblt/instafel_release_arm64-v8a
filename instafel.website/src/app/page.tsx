@@ -66,14 +66,14 @@ export default function Home() {
                     className="flex justify-center items-center"
                   >
                     <Link href="/download?version=latest">
-                      <IflDownload className="flex-shrink-0 w-5 h-5 mr-1" />
+                      <IflDownload className="shrink-0 w-5 h-5 mr-1" />
                       Download
                     </Link>
                   </Button>
 
                   <Button asChild size={"lg"} variant={"outline-gradient"}>
                     <Link href="/guides">
-                      <Book className="flex-shrink-0 w-4 h-4 mr-1" />
+                      <Book className="shrink-0 w-4 h-4 mr-1" />
                       Read Guide
                     </Link>
                   </Button>
@@ -95,7 +95,7 @@ export default function Home() {
                     className="flex justify-center items-center col-span-1 mb-11"
                   >
                     <Link href="https://t.me/instafel">
-                      <Telegram className="flex-shrink-0 w-4 h-4 mr-1" />
+                      <Telegram className="shrink-0 w-4 h-4 mr-1" />
                       Join Community
                     </Link>
                   </Button>

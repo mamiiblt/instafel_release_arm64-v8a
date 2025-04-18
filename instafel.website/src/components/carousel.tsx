@@ -42,7 +42,7 @@ export function FlagLibrartCarousel({ images }: FlagLibrartCarouselProps) {
                 alt={`App Screenshot ${index + 1}`}
                 width={300}
                 height={20}
-                className="rounded-xl shadow-sm mx-auto"
+                className="rounded-xl shadow-xs mx-auto"
               />
             </div>
           ))}

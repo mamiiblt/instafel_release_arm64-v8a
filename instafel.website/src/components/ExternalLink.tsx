@@ -22,7 +22,7 @@ const ExternalLink: React.FC<ExternalLinkProps> = ({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex items-center gap-1 text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary ${className}`}
+      className={`inline-flex items-center gap-1 text-primary hover:underline focus:outline-hidden focus:ring-2 focus:ring-primary ${className}`}
     >
       {children}
       {hasOnlyText && <ExternalLinkIcon />}

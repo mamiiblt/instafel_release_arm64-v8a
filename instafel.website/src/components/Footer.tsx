@@ -51,7 +51,7 @@ export default function Footer() {
   return (
     <div>
       {pathname !== "/about" && (
-        <footer className="relative border-t border-border g-gradient-to-b from-background to-background/50 backdrop-blur-sm">
+        <footer className="relative border-t border-border g-gradient-to-b from-background to-background/50 backdrop-blur-xs">
           <div className="absolute inset-0 pointer-events-none" />
 
           <div className="relative container mx-auto px-4 pt-8 md:pt-8 pb-8 md:pb-8">

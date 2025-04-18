@@ -145,7 +145,7 @@ function FlagListPageContent() {
               <div className="flex-1">
                 <div className="flex justify-between items-start">
                   <div>
-                    <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+                    <h1 className="text-2xl font-bold bg-linear-to-r from-primary to-primary/70 bg-clip-text text-transparent">
                       {data.data.name}
                     </h1>
                   </div>
@@ -392,9 +392,9 @@ function FlagListPageContent() {
                           >
                             <div className="flex items-start gap-3">
                               {note.type === 0 ? (
-                                <Info className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                                <Info className="h-4 w-4 text-primary mt-0.5 shrink-0" />
                               ) : (
-                                <AlertTriangle className="h-4 w-4 text-amber-500 mt-0.5 flex-shrink-0" />
+                                <AlertTriangle className="h-4 w-4 text-amber-500 mt-0.5 shrink-0" />
                               )}
                               <div>
                                 <p

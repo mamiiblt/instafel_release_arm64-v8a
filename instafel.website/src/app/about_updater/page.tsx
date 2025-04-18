@@ -190,7 +190,7 @@ export default function UpdaterPage() {
                       "A lightweight app that is efficient with system resources",
                     ].map((benefit, index) => (
                       <li key={index} className="flex items-start">
-                        <CheckCircle className="h-6 w-6 text-primary mr-2 flex-shrink-0" />
+                        <CheckCircle className="h-6 w-6 text-primary mr-2 shrink-0" />
                         <span>{benefit}</span>
                       </li>
                     ))}
