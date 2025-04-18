@@ -426,12 +426,12 @@ function DownloadIflContent() {
                         </TabsList>
                       </div>
 
-                      <div className="p-6">
+                      <div className="p-6 pb-8 min-h-[450px] md:min-h-[400px] relative">
                         <TabsContent
                           value="download"
-                          className="animate-in fade-in-50 data-[state=inactive]:animate-out data-[state=inactive]:fade-out-0"
+                          className="w-full space-y-6 absolute top-6 left-0 right-0 px-0 md:px-4 transition-all duration-300 data-[state=inactive]:opacity-0 data-[state=inactive]:pointer-events-none data-[state=active]:opacity-100 data-[state=active]:z-10 data-[state=active]:animate-in data-[state=inactive]:animate-out data-[state=active]:fade-in-0 data-[state=inactive]:fade-out-0 data-[state=active]:zoom-in-95 data-[state=active]:slide-in-from-bottom-2"
                         >
-                          <div className="grid md:grid-cols-2 gap-8">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8">
                             {[
                               {
                                 title: "Unclone Installation",
@@ -457,6 +457,7 @@ function DownloadIflContent() {
                                     "unclone",
                                   ),
                                 color: "primary",
+                                icon: <Smartphone className="h-4 w-4" />,
                               },
                               {
                                 title: "Clone Installation",
@@ -479,24 +480,28 @@ function DownloadIflContent() {
                                 onClick: () =>
                                   download(data.download_urls.clone, "clone"),
                                 color: "secondary",
+                                icon: <Shapes className="h-4 w-4" />,
                               },
-                            ].map((info, index) => (
+                            ].map((info, i) => (
                               <div
-                                key={index}
-                                className="border rounded-xl p-5 hover:shadow-md transition-shadow duration-200"
+                                key={i}
+                                className="border rounded-xl p-5 hover:shadow-md transition-all duration-300 hover:border-primary/30 bg-card"
                               >
-                                <h3 className="text-xl font-bold mb-3">
+                                <h3 className="text-xl font-bold mb-3 flex items-center">
+                                  <div className="mr-2 p-1.5 rounded-md bg-primary/10 text-primary">
+                                    {info.icon}
+                                  </div>
                                   {info.title}
                                 </h3>
-                                <div className="text-muted-foreground mb-5">
+                                <div className="text-muted-foreground mb-5 text-sm md:text-base">
                                   {info.description}
                                 </div>
                                 <Button
-                                  variant={index === 0 ? "default" : "outline"}
-                                  className="w-full"
+                                  variant={i === 0 ? "default" : "outline"}
+                                  className="w-full transition-all group"
                                   onClick={info.onClick}
                                 >
-                                  <Download className="mr-2 h-4 w-4" />
+                                  <Download className="mr-2 h-4 w-4 group-hover:animate-bounce" />
                                   {info.buttonText}
                                 </Button>
                               </div>
@@ -506,12 +511,12 @@ function DownloadIflContent() {
 
                         <TabsContent
                           value="build"
-                          className="animate-in fade-in-50 data-[state=inactive]:animate-out data-[state=inactive]:fade-out-0"
+                          className="w-full space-y-4 absolute top-6 left-0 right-0 px-0 md:px-4 transition-all duration-300 data-[state=inactive]:opacity-0 data-[state=inactive]:pointer-events-none data-[state=active]:opacity-100 data-[state=active]:z-10 data-[state=active]:animate-in data-[state=inactive]:animate-out data-[state=active]:fade-in-0 data-[state=inactive]:fade-out-0 data-[state=active]:zoom-in-95 data-[state=active]:slide-in-from-bottom-2"
                         >
-                          <div className="overflow-x-auto">
+                          <div className="overflow-x-auto rounded-lg border">
                             <Table>
                               <TableHeader>
-                                <TableRow>
+                                <TableRow className="bg-muted/50">
                                   <TableHead className="w-1/3 font-semibold">
                                     Property
                                   </TableHead>
@@ -521,7 +526,10 @@ function DownloadIflContent() {
                               <TableBody>
                                 <TableRow className="hover:bg-muted/30">
                                   <TableCell className="font-medium">
-                                    Build Date
+                                    <div className="flex items-center">
+                                      <Calendar className="h-4 w-4 mr-2 text-primary/70" />
+                                      Build Date
+                                    </div>
                                   </TableCell>
                                   <TableCell>
                                     {data.build_date
@@ -539,16 +547,26 @@ function DownloadIflContent() {
                                 </TableRow>
                                 <TableRow className="hover:bg-muted/30">
                                   <TableCell className="font-medium">
-                                    IFL Version
+                                    <div className="flex items-center">
+                                      <Code className="h-4 w-4 mr-2 text-primary/70" />
+                                      IFL Version
+                                    </div>
                                   </TableCell>
                                   <TableCell>
-                                    Release v
-                                    {data.app.ifl_version || "Not available"}
+                                    <Badge
+                                      variant="outline"
+                                      className="font-medium"
+                                    >
+                                      v{data.app.ifl_version || "Not available"}
+                                    </Badge>
                                   </TableCell>
                                 </TableRow>
                                 <TableRow className="hover:bg-muted/30">
                                   <TableCell className="font-medium">
-                                    Instagram Version
+                                    <div className="flex items-center">
+                                      <Smartphone className="h-4 w-4 mr-2 text-primary/70" />
+                                      Instagram Version
+                                    </div>
                                   </TableCell>
                                   <TableCell>
                                     v{data.app.version_name || "Not available"}
@@ -556,7 +574,10 @@ function DownloadIflContent() {
                                 </TableRow>
                                 <TableRow className="hover:bg-muted/30">
                                   <TableCell className="font-medium">
-                                    Instagram Version Code
+                                    <div className="flex items-center">
+                                      <Code className="h-4 w-4 mr-2 text-primary/70" />
+                                      Instagram Version Code
+                                    </div>
                                   </TableCell>
                                   <TableCell>
                                     {data.app.version_code || "Not available"}
@@ -564,7 +585,10 @@ function DownloadIflContent() {
                                 </TableRow>
                                 <TableRow className="hover:bg-muted/30">
                                   <TableCell className="font-medium">
-                                    Patcher Version
+                                    <div className="flex items-center">
+                                      <ShieldCheck className="h-4 w-4 mr-2 text-primary/70" />
+                                      Patcher Version
+                                    </div>
                                   </TableCell>
                                   <TableCell>
                                     {data.patcher.version != null
@@ -574,32 +598,45 @@ function DownloadIflContent() {
                                 </TableRow>
                                 <TableRow className="hover:bg-muted/30">
                                   <TableCell className="font-medium">
-                                    Generation ID
+                                    <div className="flex items-center">
+                                      <HardDrive className="h-4 w-4 mr-2 text-primary/70" />
+                                      Generation ID
+                                    </div>
                                   </TableCell>
                                   <TableCell>
-                                    <code className="px-1 py-0.5 bg-muted rounded text-sm font-mono">
+                                    <code className="px-2 py-1 bg-muted rounded text-sm font-mono">
                                       {data.gen_id || "Not available"}
                                     </code>
                                   </TableCell>
                                 </TableRow>
                                 <TableRow className="hover:bg-muted/30">
                                   <TableCell className="font-medium">
-                                    MD5 Hash (Unclone)
+                                    <div className="flex items-center">
+                                      <ShieldCheck className="h-4 w-4 mr-2 text-primary/70" />
+                                      MD5 Hash (Unclone)
+                                    </div>
                                   </TableCell>
                                   <TableCell>
-                                    <code className="px-1 py-0.5 bg-muted rounded text-sm font-mono break-all">
-                                      {data.hash.uc || "Not available"}
-                                    </code>
+                                    <div className="overflow-x-auto max-w-full">
+                                      <code className="px-2 py-1 bg-muted rounded text-sm font-mono block whitespace-nowrap">
+                                        {data.hash.uc || "Not available"}
+                                      </code>
+                                    </div>
                                   </TableCell>
                                 </TableRow>
                                 <TableRow className="hover:bg-muted/30">
                                   <TableCell className="font-medium">
-                                    MD5 Hash (Clone)
+                                    <div className="flex items-center">
+                                      <ShieldCheck className="h-4 w-4 mr-2 text-primary/70" />
+                                      MD5 Hash (Clone)
+                                    </div>
                                   </TableCell>
                                   <TableCell>
-                                    <code className="px-1 py-0.5 bg-muted rounded text-sm font-mono break-all">
-                                      {data.hash.c || "Not available"}
-                                    </code>
+                                    <div className="overflow-x-auto max-w-full">
+                                      <code className="px-2 py-1 bg-muted rounded text-sm font-mono block whitespace-nowrap">
+                                        {data.hash.c || "Not available"}
+                                      </code>
+                                    </div>
                                   </TableCell>
                                 </TableRow>
                               </TableBody>
@@ -609,14 +646,18 @@ function DownloadIflContent() {
 
                         <TabsContent
                           value="changelog"
-                          className="animate-in fade-in-50 data-[state=inactive]:animate-out data-[state=inactive]:fade-out-0"
+                          className="w-full space-y-4 absolute top-6 left-0 right-0 px-0 md:px-4 transition-all duration-300 data-[state=inactive]:opacity-0 data-[state=inactive]:pointer-events-none data-[state=active]:opacity-100 data-[state=active]:z-10"
                         >
                           <div>
-                            <div className="mb-4 flex items-center gap-2">
-                              <Badge variant="secondary" className="py-1.5">
+                            <div className="mb-6 flex flex-wrap items-center gap-3">
+                              <Badge
+                                variant="secondary"
+                                className="py-1.5 px-3"
+                              >
                                 v{data.app.ifl_version || "Unknown"}
                               </Badge>
-                              <span className="text-sm text-muted-foreground">
+                              <span className="text-sm text-muted-foreground flex items-center gap-1.5">
+                                <Calendar className="h-3.5 w-3.5" />
                                 Released on{" "}
                                 {data.build_date
                                   ? new Date(parseInt(data.build_date))
@@ -630,7 +671,7 @@ function DownloadIflContent() {
                               </span>
                             </div>
 
-                            <div className="space-y-1 pl-2">
+                            <div className="space-y-2 pl-2 pr-2 max-h-[280px] md:max-h-[320px] overflow-y-auto rounded-lg border bg-card/30 p-4">
                               {data.changelogs && data.changelogs.length > 0 ? (
                                 data.changelogs.map((item, index) => (
                                   <motion.div
@@ -638,11 +679,11 @@ function DownloadIflContent() {
                                     initial={{ opacity: 0, x: -10 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{
-                                      delay: 0.1 * index,
-                                      duration: 0.4,
+                                      delay: 0.05 * index,
+                                      duration: 0.3,
                                     }}
                                   >
-                                    <div className="flex items-start gap-2 py-1.5 group">
+                                    <div className="flex items-start gap-2 py-2 group hover:bg-muted/40 px-2 rounded-md transition-colors duration-150">
                                       <ChevronRight className="mt-1 h-4 w-4 shrink-0 text-primary group-hover:translate-x-1 transition-transform duration-200" />
                                       <span className="group-hover:text-primary transition-colors duration-200">
                                         {item}
@@ -651,7 +692,7 @@ function DownloadIflContent() {
                                   </motion.div>
                                 ))
                               ) : (
-                                <p className="text-muted-foreground italic">
+                                <p className="text-muted-foreground italic flex items-center justify-center h-24">
                                   No changelog entries available for this
                                   version.
                                 </p>
