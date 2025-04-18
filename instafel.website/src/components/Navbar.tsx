@@ -25,6 +25,7 @@ import {
   X,
   Sun,
   Moon,
+  Download,
 } from "lucide-react";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { useTheme } from "next-themes";
@@ -105,14 +106,13 @@ export default function Navbar() {
             <NavigationMenuList className="flex gap-1 md:gap-2">
               <AnimatePresence>
                 {SITE_CONFIG.navItems.map((link, index) => {
-                  const isActive = pathname === link.href;
+                  const isActive =
+                    pathname === (link.href.split("?")[0] || link.href);
 
-                  // Skip rendering Source Code in desktop nav
                   if (link.title === "Source Code") {
                     return null;
                   }
 
-                  // Change "Backup Library" to "Backups"
                   if (link.title === "Backup Library") {
                     return (
                       <motion.div
@@ -183,6 +183,20 @@ export default function Navbar() {
             </Button>
           </motion.div>
 
+          {/* Mobile nav indicator - Shows current page name */}
+          <div className="md:hidden flex items-center mr-1">
+            <div className="text-sm font-medium text-primary">
+              {SITE_CONFIG.navItems.map((link) =>
+                pathname === link.href ? (
+                  <span key={link.href} className="flex items-center">
+                    <span className="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                    {link.title === "Backup Library" ? "Backups" : link.title}
+                  </span>
+                ) : null,
+              )}
+            </div>
+          </div>
+
           <div className="md:hidden">
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
@@ -213,7 +227,8 @@ export default function Navbar() {
 
                   <nav className="flex flex-col p-5 gap-2">
                     {SITE_CONFIG.navItems.map((link, index) => {
-                      const isActive = pathname === link.href;
+                      const isActive =
+                        pathname === (link.href.split("?")[0] || link.href);
                       const MobileIcon = getMobileIcon(link.title);
 
                       return (
@@ -229,12 +244,12 @@ export default function Navbar() {
                             className={`flex items-center space-x-4 rounded-lg px-4 py-3 text-sm font-medium transition-all duration-200 group
                               ${
                                 isActive
-                                  ? "bg-primary/10 text-primary border-l-4 border-primary"
+                                  ? "bg-primary/15 text-primary border-l-4 border-primary"
                                   : "text-foreground hover:bg-accent/40 hover:text-accent-foreground hover:border-l-4 hover:border-primary/50"
                               }`}
                           >
                             <span
-                              className={`flex items-center justify-center w-9 h-9 rounded-full ${isActive ? "bg-primary/15" : "bg-background/90"} text-foreground group-hover:scale-110 transition-transform shadow-sm`}
+                              className={`flex items-center justify-center w-9 h-9 rounded-full ${isActive ? "bg-primary/20" : "bg-background/90"} text-foreground group-hover:scale-110 transition-transform shadow-sm`}
                             >
                               <MobileIcon
                                 className={`h-5 w-5 ${isActive ? "text-primary" : ""}`}
@@ -243,6 +258,15 @@ export default function Navbar() {
                             <span className={isActive ? "font-semibold" : ""}>
                               {link.title}
                             </span>
+                            {isActive && (
+                              <motion.span
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                className="ml-auto bg-primary text-primary-foreground text-xs rounded-full px-1.5 py-0.5"
+                              >
+                                Active
+                              </motion.span>
+                            )}
                           </Link>
                         </motion.div>
                       );
@@ -303,6 +327,8 @@ function getMobileIcon(title: string) {
       return RefreshCcwDot;
     case "Source Code":
       return Github;
+    case "Download":
+      return Download;
     default:
       return BookOpenText;
   }

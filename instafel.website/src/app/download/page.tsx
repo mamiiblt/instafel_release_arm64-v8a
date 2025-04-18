@@ -13,12 +13,12 @@ import {
   FileText,
   Info,
   Shapes,
-  Smartphone,
   Calendar,
   Code,
   CheckCircle,
   ShieldCheck,
   HardDrive,
+  Smartphone,
 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import {
@@ -233,8 +233,8 @@ function DownloadIflContent() {
       {loading ? (
         <LoadingBar />
       ) : (
-        <div className="min-h-screen">
-          <div className="container mx-auto px-4 pt-12 sm:pt-16 md:pt-20 pb-16">
+        <div className="min-h-screen flex flex-col bg-background">
+          <div className="container mx-auto px-2 sm:px-4 md:px-8 pt-8 sm:pt-12 md:pt-16 lg:pt-20 pb-32 sm:pb-12 flex-grow">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -242,27 +242,27 @@ function DownloadIflContent() {
                 duration: 0.7,
                 ease: "easeOut",
               }}
-              className="text-center mb-12"
+              className="text-center mb-8 sm:mb-12"
             >
-              <div className="flex justify-center mb-6">
+              <div className="flex justify-center mb-4 sm:mb-6">
                 <div className="relative">
                   <div
                     className="absolute inset-0 rounded-full bg-primary/20 animate-ping"
                     style={{ animationDuration: "3s" }}
                   ></div>
-                  <div className="relative bg-primary/30 p-5 rounded-full">
-                    <Download className="h-12 w-12 text-primary" />
+                  <div className="relative bg-primary/30 p-3 sm:p-4 md:p-5 rounded-full">
+                    <Download className="h-6 w-6 sm:h-8 sm:w-8 md:h-12 md:w-12 text-primary" />
                   </div>
                 </div>
               </div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-4">
+              <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-3 sm:mb-4">
                 Download <span className="text-primary">Instafel</span>
               </h1>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.7 }}
-                className="text-xl text-muted-foreground max-w-2xl mx-auto"
+                className="text-base xs:text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto"
               >
                 {data
                   ? `Version ${data.app.ifl_version}`
@@ -275,7 +275,7 @@ function DownloadIflContent() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.7 }}
-                className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12"
+                className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 "
               >
                 {[
                   {
@@ -283,7 +283,9 @@ function DownloadIflContent() {
                     subtitle: "Unclone Variant",
                     description:
                       "Replace the standard Instagram app with Instafel. Original app must be uninstalled.",
-                    icon: <Smartphone className="size-6 text-primary" />,
+                    icon: (
+                      <Smartphone className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+                    ),
                     downloadUrl: data.download_urls.unclone,
                     type: "unclone" as const,
                     benefits: [
@@ -298,7 +300,9 @@ function DownloadIflContent() {
                     subtitle: "Clone Variant",
                     description:
                       "Install alongside the original Instagram app. Perfect for testing while keeping your original app.",
-                    icon: <Shapes className="size-6 text-primary" />,
+                    icon: (
+                      <Shapes className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+                    ),
                     downloadUrl: data.download_urls.clone,
                     type: "clone" as const,
                     benefits: [
@@ -308,56 +312,59 @@ function DownloadIflContent() {
                     ],
                     delay: 0.6,
                   },
-                ].map((variant, index) => (
+                ].map((variant) => (
                   <motion.div
                     key={variant.title}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: variant.delay, duration: 0.5 }}
-                    whileHover={{ scale: 1.02 }}
+                    whileHover={{ scale: 1.025 }}
                     className="relative"
                   >
-                    <Card className="h-full border-2 hover:border-primary/60 transition-all duration-300 overflow-hidden shadow-lg">
+                    <Card className="h-full border-2 hover:border-primary/70 transition-all duration-300 overflow-hidden shadow-lg bg-card/80">
                       <CardContent className="p-0">
-                        <div className="p-6 pb-0">
-                          <div className="flex items-center gap-4 mb-4">
-                            <div className="p-3 rounded-full bg-gradient-to-r from-primary/20 to-primary/5">
+                        <div className="p-4 sm:p-6 pb-0">
+                          <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+                            <div className="p-2 sm:p-3 rounded-full bg-gradient-to-r from-primary/20 to-primary/5">
                               {variant.icon}
                             </div>
                             <div>
-                              <h3 className="text-2xl font-bold">
+                              <h3 className="text-lg sm:text-xl font-bold">
                                 {variant.title}
                               </h3>
-                              <p className="text-primary font-medium">
+                              <p className="text-primary text-xs sm:text-sm font-medium">
                                 {variant.subtitle}
                               </p>
                             </div>
                           </div>
 
-                          <p className="text-muted-foreground mb-5">
+                          <p className="text-xs sm:text-sm md:text-base text-muted-foreground mb-4 sm:mb-5">
                             {variant.description}
                           </p>
                         </div>
 
-                        <div className="px-6 pb-4">
-                          <h4 className="text-sm font-medium mb-2 flex items-center">
-                            <CheckCircle className="h-4 w-4 mr-1.5 text-primary" />
+                        <div className="px-4 sm:px-6 pb-3 sm:pb-4">
+                          <h4 className="text-xs sm:text-sm font-medium mb-2 flex items-center">
+                            <CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 text-primary" />
                             Benefits
                           </h4>
-                          <ul className="space-y-1 mb-6">
-                            {variant.benefits.map((benefit, i) => (
-                              <li key={i} className="text-sm flex items-center">
-                                <ChevronRight className="h-3.5 w-3.5 text-primary/70 mr-1" />
+                          <ul className="space-y-0.5 sm:space-y-1 mb-5 sm:mb-6">
+                            {variant.benefits.map((benefit, benefitIndex) => (
+                              <li
+                                key={benefitIndex}
+                                className="text-xs sm:text-sm flex items-center"
+                              >
+                                <ChevronRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-primary/70 mr-1" />
                                 {benefit}
                               </li>
                             ))}
                           </ul>
                         </div>
 
-                        <div className="bg-gradient-to-r from-primary/5 to-primary/10 p-6">
+                        <div className="bg-gradient-to-r from-primary/5 to-primary/10 p-4 sm:p-6">
                           <Button
-                            size="lg"
-                            className={`w-full ${downloadStarted[variant.type] ? "bg-green-600 hover:bg-green-700" : ""}`}
+                            size="default"
+                            className={`w-full relative overflow-hidden ${downloadStarted[variant.type] ? "bg-green-600 hover:bg-green-700" : ""}`}
                             onClick={() =>
                               download(variant.downloadUrl, variant.type)
                             }
@@ -371,9 +378,9 @@ function DownloadIflContent() {
                                   transition={{ duration: 1.5 }}
                                   className="absolute left-0 top-0 bottom-0 bg-green-500/20"
                                 />
-                                <span className="relative z-10 flex items-center">
+                                <span className="relative z-10 flex items-center text-xs sm:text-sm md:text-base">
                                   <svg
-                                    className="w-5 h-5 mr-2"
+                                    className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 mr-1 sm:mr-1.5 md:mr-2"
                                     viewBox="0 0 24 24"
                                   >
                                     <path
@@ -385,8 +392,8 @@ function DownloadIflContent() {
                                 </span>
                               </>
                             ) : (
-                              <span className="flex items-center">
-                                <Download className="mr-2 h-5 w-5" />
+                              <span className="flex items-center text-xs sm:text-sm md:text-base">
+                                <Download className="mr-1 sm:mr-1.5 md:mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5" />
                                 Download {variant.subtitle}
                               </span>
                             )}
@@ -404,9 +411,9 @@ function DownloadIflContent() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7, duration: 0.7 }}
-                className="mt-10"
+                className="mt-8 sm:mt-10"
               >
-                <Card className="shadow-md border-2">
+                <Card className="shadow-md border-2 bg-card/90">
                   <CardContent className="p-0">
                     <Tabs
                       defaultValue="download"
@@ -414,30 +421,45 @@ function DownloadIflContent() {
                       onValueChange={setActiveTab}
                       className="w-full"
                     >
-                      <div className="border-b p-4">
-                        <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
-                          <Info className="h-6 w-6 text-primary" />
+                      <div className="border-b p-3 sm:p-4">
+                        <h2 className="text-lg xs:text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 flex items-center gap-2">
+                          <Info className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                           Release Information
                         </h2>
-                        <TabsList className="grid w-full max-w-md grid-cols-3 mx-auto">
-                          <TabsTrigger value="download">Details</TabsTrigger>
-                          <TabsTrigger value="changelog">Changelog</TabsTrigger>
-                          <TabsTrigger value="build">Build Info</TabsTrigger>
+                        <TabsList className="flex w-full max-w-xs mx-auto gap-1 sm:gap-2">
+                          <TabsTrigger
+                            value="download"
+                            className="text-xs sm:text-sm flex-1"
+                          >
+                            Details
+                          </TabsTrigger>
+                          <TabsTrigger
+                            value="changelog"
+                            className="text-xs sm:text-sm flex-1"
+                          >
+                            Changelog
+                          </TabsTrigger>
+                          <TabsTrigger
+                            value="build"
+                            className="text-xs sm:text-sm flex-1"
+                          >
+                            Build Info
+                          </TabsTrigger>
                         </TabsList>
                       </div>
 
-                      <div className="p-6 pb-8 min-h-[450px] md:min-h-[400px] relative">
+                      <div className="p-3 sm:p-6 pb-6 sm:pb-8 min-h-[450px] sm:min-h-[550px] md:min-h-[500px] relative">
                         <TabsContent
                           value="download"
-                          className="w-full space-y-6 absolute top-6 left-0 right-0 px-0 md:px-4 transition-all duration-300 data-[state=inactive]:opacity-0 data-[state=inactive]:pointer-events-none data-[state=active]:opacity-100 data-[state=active]:z-10 data-[state=active]:animate-in data-[state=inactive]:animate-out data-[state=active]:fade-in-0 data-[state=inactive]:fade-out-0 data-[state=active]:zoom-in-95 data-[state=active]:slide-in-from-bottom-2"
+                          className="w-full space-y-4 sm:space-y-6 absolute top-3 sm:top-6 left-0 right-0 px-0 sm:px-2 md:px-4 transition-all duration-300 data-[state=inactive]:opacity-0 data-[state=inactive]:pointer-events-none data-[state=active]:opacity-100 data-[state=active]:z-10 data-[state=active]:animate-in data-[state=inactive]:animate-out data-[state=active]:fade-in-0 data-[state=inactive]:fade-out-0 data-[state=active]:zoom-in-95 data-[state=active]:slide-in-from-bottom-2"
                         >
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8">
+                          <div className="grid grid-cols-1 gap-4 md:gap-6 sm:grid-cols-2">
                             {[
                               {
                                 title: "Unclone Installation",
                                 description: (
                                   <>
-                                    <p className="mb-4">
+                                    <p className="mb-2 sm:mb-3">
                                       This variant requires the original
                                       Instagram app to be uninstalled first, as
                                       it replaces the standard Instagram
@@ -457,13 +479,15 @@ function DownloadIflContent() {
                                     "unclone",
                                   ),
                                 color: "primary",
-                                icon: <Smartphone className="h-4 w-4" />,
+                                icon: (
+                                  <Smartphone className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                                ),
                               },
                               {
                                 title: "Clone Installation",
                                 description: (
                                   <>
-                                    <p className="mb-4">
+                                    <p className="mb-2 sm:mb-3">
                                       The Clone variant can be installed
                                       alongside the original Instagram app,
                                       allowing you to use both apps
@@ -480,28 +504,30 @@ function DownloadIflContent() {
                                 onClick: () =>
                                   download(data.download_urls.clone, "clone"),
                                 color: "secondary",
-                                icon: <Shapes className="h-4 w-4" />,
+                                icon: (
+                                  <Shapes className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                                ),
                               },
-                            ].map((info, i) => (
+                            ].map((info, idx) => (
                               <div
-                                key={i}
-                                className="border rounded-xl p-5 hover:shadow-md transition-all duration-300 hover:border-primary/30 bg-card"
+                                key={idx}
+                                className="border rounded-xl p-3 sm:p-4 hover:shadow-md transition-all duration-300 hover:border-primary/30 bg-card/95"
                               >
-                                <h3 className="text-xl font-bold mb-3 flex items-center">
+                                <h3 className="text-base sm:text-lg font-bold mb-2 flex items-center">
                                   <div className="mr-2 p-1.5 rounded-md bg-primary/10 text-primary">
                                     {info.icon}
                                   </div>
                                   {info.title}
                                 </h3>
-                                <div className="text-muted-foreground mb-5 text-sm md:text-base">
+                                <div className="text-muted-foreground mb-3 sm:mb-4 text-xs sm:text-sm">
                                   {info.description}
                                 </div>
                                 <Button
-                                  variant={i === 0 ? "default" : "outline"}
-                                  className="w-full transition-all group"
+                                  variant={idx === 0 ? "default" : "outline"}
+                                  className="w-full transition-all group text-xs sm:text-sm"
                                   onClick={info.onClick}
                                 >
-                                  <Download className="mr-2 h-4 w-4 group-hover:animate-bounce" />
+                                  <Download className="mr-1.5 sm:mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4 group-hover:animate-bounce" />
                                   {info.buttonText}
                                 </Button>
                               </div>
@@ -511,27 +537,29 @@ function DownloadIflContent() {
 
                         <TabsContent
                           value="build"
-                          className="w-full space-y-4 absolute top-6 left-0 right-0 px-0 md:px-4 transition-all duration-300 data-[state=inactive]:opacity-0 data-[state=inactive]:pointer-events-none data-[state=active]:opacity-100 data-[state=active]:z-10 data-[state=active]:animate-in data-[state=inactive]:animate-out data-[state=active]:fade-in-0 data-[state=inactive]:fade-out-0 data-[state=active]:zoom-in-95 data-[state=active]:slide-in-from-bottom-2"
+                          className="w-full absolute top-3 sm:top-6 left-0 right-0 px-0 sm:px-2 md:px-4 transition-all duration-300 data-[state=inactive]:opacity-0 data-[state=inactive]:pointer-events-none data-[state=active]:opacity-100 data-[state=active]:z-10 data-[state=active]:animate-in data-[state=inactive]:animate-out data-[state=active]:fade-in-0 data-[state=inactive]:fade-out-0 data-[state=active]:zoom-in-95 data-[state=active]:slide-in-from-bottom-2"
                         >
-                          <div className="overflow-x-auto rounded-lg border">
+                          <div className="overflow-x-auto rounded-lg border bg-background/80">
                             <Table>
                               <TableHeader>
                                 <TableRow className="bg-muted/50">
-                                  <TableHead className="w-1/3 font-semibold">
+                                  <TableHead className="w-1/3 font-semibold text-xs sm:text-sm">
                                     Property
                                   </TableHead>
-                                  <TableHead className="w-2/3">Value</TableHead>
+                                  <TableHead className="w-2/3 text-xs sm:text-sm">
+                                    Value
+                                  </TableHead>
                                 </TableRow>
                               </TableHeader>
-                              <TableBody>
+                              <TableBody className="text-xs sm:text-sm">
                                 <TableRow className="hover:bg-muted/30">
-                                  <TableCell className="font-medium">
+                                  <TableCell className="font-medium py-2 sm:py-3">
                                     <div className="flex items-center">
-                                      <Calendar className="h-4 w-4 mr-2 text-primary/70" />
+                                      <Calendar className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-primary/70" />
                                       Build Date
                                     </div>
                                   </TableCell>
-                                  <TableCell>
+                                  <TableCell className="py-2 sm:py-3">
                                     {data.build_date
                                       ? new Date(parseInt(data.build_date))
                                           .toLocaleString("en-US", {
@@ -546,94 +574,94 @@ function DownloadIflContent() {
                                   </TableCell>
                                 </TableRow>
                                 <TableRow className="hover:bg-muted/30">
-                                  <TableCell className="font-medium">
+                                  <TableCell className="font-medium py-2 sm:py-3">
                                     <div className="flex items-center">
-                                      <Code className="h-4 w-4 mr-2 text-primary/70" />
+                                      <Code className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-primary/70" />
                                       IFL Version
                                     </div>
                                   </TableCell>
-                                  <TableCell>
+                                  <TableCell className="py-2 sm:py-3">
                                     <Badge
                                       variant="outline"
-                                      className="font-medium"
+                                      className="font-medium text-xs sm:text-sm"
                                     >
                                       v{data.app.ifl_version || "Not available"}
                                     </Badge>
                                   </TableCell>
                                 </TableRow>
                                 <TableRow className="hover:bg-muted/30">
-                                  <TableCell className="font-medium">
+                                  <TableCell className="font-medium py-2 sm:py-3">
                                     <div className="flex items-center">
-                                      <Smartphone className="h-4 w-4 mr-2 text-primary/70" />
+                                      <Smartphone className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-primary/70" />
                                       Instagram Version
                                     </div>
                                   </TableCell>
-                                  <TableCell>
+                                  <TableCell className="py-2 sm:py-3">
                                     v{data.app.version_name || "Not available"}
                                   </TableCell>
                                 </TableRow>
                                 <TableRow className="hover:bg-muted/30">
-                                  <TableCell className="font-medium">
+                                  <TableCell className="font-medium py-2 sm:py-3">
                                     <div className="flex items-center">
-                                      <Code className="h-4 w-4 mr-2 text-primary/70" />
+                                      <Code className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-primary/70" />
                                       Instagram Version Code
                                     </div>
                                   </TableCell>
-                                  <TableCell>
+                                  <TableCell className="py-2 sm:py-3">
                                     {data.app.version_code || "Not available"}
                                   </TableCell>
                                 </TableRow>
                                 <TableRow className="hover:bg-muted/30">
-                                  <TableCell className="font-medium">
+                                  <TableCell className="font-medium py-2 sm:py-3">
                                     <div className="flex items-center">
-                                      <ShieldCheck className="h-4 w-4 mr-2 text-primary/70" />
+                                      <ShieldCheck className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-primary/70" />
                                       Patcher Version
                                     </div>
                                   </TableCell>
-                                  <TableCell>
+                                  <TableCell className="py-2 sm:py-3">
                                     {data.patcher.version != null
                                       ? `v${data.patcher.version} (${data.patcher.commit})`
                                       : "Uses older patcher"}
                                   </TableCell>
                                 </TableRow>
                                 <TableRow className="hover:bg-muted/30">
-                                  <TableCell className="font-medium">
+                                  <TableCell className="font-medium py-2 sm:py-3">
                                     <div className="flex items-center">
-                                      <HardDrive className="h-4 w-4 mr-2 text-primary/70" />
+                                      <HardDrive className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-primary/70" />
                                       Generation ID
                                     </div>
                                   </TableCell>
-                                  <TableCell>
-                                    <code className="px-2 py-1 bg-muted rounded text-sm font-mono">
+                                  <TableCell className="py-2 sm:py-3 overflow-hidden">
+                                    <code className="px-1 sm:px-2 py-0.5 bg-muted rounded text-xs font-mono overflow-x-auto inline-block max-w-full truncate">
                                       {data.gen_id || "Not available"}
                                     </code>
                                   </TableCell>
                                 </TableRow>
                                 <TableRow className="hover:bg-muted/30">
-                                  <TableCell className="font-medium">
+                                  <TableCell className="font-medium py-2 sm:py-3">
                                     <div className="flex items-center">
-                                      <ShieldCheck className="h-4 w-4 mr-2 text-primary/70" />
+                                      <ShieldCheck className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-primary/70" />
                                       MD5 Hash (Unclone)
                                     </div>
                                   </TableCell>
-                                  <TableCell>
+                                  <TableCell className="py-2 sm:py-3">
                                     <div className="overflow-x-auto max-w-full">
-                                      <code className="px-2 py-1 bg-muted rounded text-sm font-mono block whitespace-nowrap">
+                                      <code className="px-1 sm:px-2 py-0.5 bg-muted rounded text-xs font-mono block whitespace-nowrap">
                                         {data.hash.uc || "Not available"}
                                       </code>
                                     </div>
                                   </TableCell>
                                 </TableRow>
                                 <TableRow className="hover:bg-muted/30">
-                                  <TableCell className="font-medium">
+                                  <TableCell className="font-medium py-2 sm:py-3">
                                     <div className="flex items-center">
-                                      <ShieldCheck className="h-4 w-4 mr-2 text-primary/70" />
+                                      <ShieldCheck className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-primary/70" />
                                       MD5 Hash (Clone)
                                     </div>
                                   </TableCell>
-                                  <TableCell>
+                                  <TableCell className="py-2 sm:py-3">
                                     <div className="overflow-x-auto max-w-full">
-                                      <code className="px-2 py-1 bg-muted rounded text-sm font-mono block whitespace-nowrap">
+                                      <code className="px-1 sm:px-2 py-0.5 bg-muted rounded text-xs font-mono block whitespace-nowrap">
                                         {data.hash.c || "Not available"}
                                       </code>
                                     </div>
@@ -646,18 +674,18 @@ function DownloadIflContent() {
 
                         <TabsContent
                           value="changelog"
-                          className="w-full space-y-4 absolute top-6 left-0 right-0 px-0 md:px-4 transition-all duration-300 data-[state=inactive]:opacity-0 data-[state=inactive]:pointer-events-none data-[state=active]:opacity-100 data-[state=active]:z-10"
+                          className="w-full absolute top-3 sm:top-6 left-0 right-0 px-0 sm:px-2 md:px-4 transition-all duration-300 data-[state=inactive]:opacity-0 data-[state=inactive]:pointer-events-none data-[state=active]:opacity-100 data-[state=active]:z-10"
                         >
                           <div>
-                            <div className="mb-6 flex flex-wrap items-center gap-3">
+                            <div className="mb-3 sm:mb-4 flex flex-wrap items-center gap-2">
                               <Badge
                                 variant="secondary"
-                                className="py-1.5 px-3"
+                                className="py-0.5 sm:py-1 px-1.5 sm:px-2 text-xs"
                               >
                                 v{data.app.ifl_version || "Unknown"}
                               </Badge>
-                              <span className="text-sm text-muted-foreground flex items-center gap-1.5">
-                                <Calendar className="h-3.5 w-3.5" />
+                              <span className="text-xs text-muted-foreground flex items-center gap-1 sm:gap-1.5">
+                                <Calendar className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                                 Released on{" "}
                                 {data.build_date
                                   ? new Date(parseInt(data.build_date))
@@ -671,28 +699,28 @@ function DownloadIflContent() {
                               </span>
                             </div>
 
-                            <div className="space-y-2 pl-2 pr-2 max-h-[280px] md:max-h-[320px] overflow-y-auto rounded-lg border bg-card/30 p-4">
+                            <div className="space-y-1 pl-1 pr-1 max-h-[180px] sm:max-h-[280px] overflow-y-auto rounded-lg border bg-card/30 p-2 sm:p-3">
                               {data.changelogs && data.changelogs.length > 0 ? (
-                                data.changelogs.map((item, index) => (
+                                data.changelogs.map((item, idx) => (
                                   <motion.div
-                                    key={index}
+                                    key={idx}
                                     initial={{ opacity: 0, x: -10 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{
-                                      delay: 0.05 * index,
+                                      delay: 0.05 * idx,
                                       duration: 0.3,
                                     }}
                                   >
-                                    <div className="flex items-start gap-2 py-2 group hover:bg-muted/40 px-2 rounded-md transition-colors duration-150">
-                                      <ChevronRight className="mt-1 h-4 w-4 shrink-0 text-primary group-hover:translate-x-1 transition-transform duration-200" />
-                                      <span className="group-hover:text-primary transition-colors duration-200">
+                                    <div className="flex items-start gap-1.5 py-1 group hover:bg-muted/40 px-1.5 rounded-md transition-colors duration-150">
+                                      <ChevronRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary group-hover:translate-x-1 transition-transform duration-200" />
+                                      <span className="text-xs sm:text-sm group-hover:text-primary transition-colors duration-200">
                                         {item}
                                       </span>
                                     </div>
                                   </motion.div>
                                 ))
                               ) : (
-                                <p className="text-muted-foreground italic flex items-center justify-center h-24">
+                                <p className="text-xs sm:text-sm text-muted-foreground italic flex items-center justify-center h-16">
                                   No changelog entries available for this
                                   version.
                                 </p>
@@ -708,14 +736,16 @@ function DownloadIflContent() {
             )}
 
             {!data && !loading && (
-              <div className="text-center p-12 border rounded-lg">
-                <FileText className="mx-auto h-16 w-16 text-muted-foreground mb-4 opacity-50" />
-                <h3 className="text-2xl font-medium mb-2">Release Not Found</h3>
-                <p className="text-muted-foreground mb-6">
+              <div className="text-center p-4 xs:p-6 sm:p-10 md:p-12 border rounded-lg bg-card/90">
+                <FileText className="mx-auto h-12 w-12 sm:h-16 sm:w-16 text-muted-foreground mb-3 sm:mb-4 opacity-50" />
+                <h3 className="text-xl sm:text-2xl font-medium mb-2">
+                  Release Not Found
+                </h3>
+                <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">
                   We couldn&apos;t find the version you&apos;re looking for. It
                   may have been removed or doesn&apos;t exist.
                 </p>
-                <Button asChild>
+                <Button asChild size="default">
                   <a href="/download?version=latest">Get Latest Version</a>
                 </Button>
               </div>

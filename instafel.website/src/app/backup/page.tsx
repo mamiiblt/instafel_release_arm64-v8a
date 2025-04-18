@@ -87,9 +87,6 @@ function LibraryBackupPageContent() {
   const handleImportInstafel = () => {
     setImportStarted(true);
 
-    // Here we would typically trigger the deep link to Instafel
-    //window.location.href = `instafel://import-backup?id=${id}`;
-
     // Reset state after animation completes
     setTimeout(() => {
       setImportStarted(false);
@@ -126,7 +123,7 @@ function LibraryBackupPageContent() {
 
   return (
     <>
-      <div className="min-h-screen py-8 px-4 sm:px-6">
+      <div className="min-h-screen py-6 sm:py-8 px-3 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <div className="mb-6">
             <Link
@@ -144,14 +141,14 @@ function LibraryBackupPageContent() {
             transition={{ duration: 0.5 }}
           >
             <Card className="border-2 shadow-lg overflow-hidden">
-              <div className="bg-gradient-to-r from-primary/10 to-primary/5 p-6">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+              <div className="bg-gradient-to-r from-primary/10 to-primary/5 p-4 sm:p-6">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
                   <div>
                     <motion.h1
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.4, delay: 0.1 }}
-                      className="text-3xl font-bold"
+                      className="text-xl sm:text-2xl md:text-3xl font-bold"
                     >
                       {data.manifest.name}
                     </motion.h1>
@@ -164,15 +161,15 @@ function LibraryBackupPageContent() {
                     >
                       <Badge
                         variant="outline"
-                        className="bg-white/80 text-sm font-medium flex items-center gap-1 py-1.5"
+                        className="bg-white/80 text-xs font-medium flex items-center gap-1 py-1 dark:text-background"
                       >
-                        <User className="h-3 w-3 text-primary" />
+                        <User className="h-3 w-3 text-primary dark:text-background" />
                         {data.manifest.author}
                       </Badge>
 
                       <Badge
                         variant="secondary"
-                        className="text-sm font-medium flex items-center gap-1 py-1.5"
+                        className="text-xs font-medium flex items-center gap-1 py-1"
                       >
                         <History className="h-3 w-3" />
                         Version {data.manifest.version_name}
@@ -205,15 +202,17 @@ function LibraryBackupPageContent() {
                               transition={{ duration: 2 }}
                               className="absolute inset-y-0 left-0 bg-green-500/20"
                             />
-                            <span className="relative z-10 flex items-center">
-                              <FileDown className="mr-2 h-4 w-4" />
+                            <span className="relative z-10 flex items-center text-xs sm:text-sm">
+                              <FileDown className="mr-1.5 sm:mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
                               Downloading...
                             </span>
                           </>
                         ) : (
                           <>
-                            <Download className="mr-2 h-4 w-4" />
-                            Download Backup
+                            <Download className="mr-1.5 sm:mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                            <span className="text-xs sm:text-sm">
+                              Download Backup
+                            </span>
                           </>
                         )}
                       </Button>
@@ -242,15 +241,17 @@ function LibraryBackupPageContent() {
                               transition={{ duration: 2 }}
                               className="absolute inset-y-0 left-0 bg-primary/10"
                             />
-                            <span className="relative z-10 flex items-center">
-                              <Smartphone className="mr-2 h-4 w-4" />
+                            <span className="relative z-10 flex items-center text-xs sm:text-sm">
+                              <Smartphone className="mr-1.5 sm:mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
                               Opening Instafel...
                             </span>
                           </>
                         ) : (
                           <>
-                            <Smartphone className="mr-2 h-4 w-4" />
-                            Import in Instafel
+                            <Smartphone className="mr-1.5 sm:mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                            <span className="text-xs sm:text-sm">
+                              Import in Instafel
+                            </span>
                           </>
                         )}
                       </Button>
@@ -259,40 +260,40 @@ function LibraryBackupPageContent() {
                 </div>
               </div>
 
-              <CardContent className="p-6">
+              <CardContent className="p-4 sm:p-6">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5, delay: 0.3 }}
                 >
-                  <div className="mb-8">
-                    <h2 className="text-lg font-semibold mb-3 flex items-center">
-                      <Info className="h-5 w-5 mr-2 text-primary" />
+                  <div className="mb-6 sm:mb-8">
+                    <h2 className="text-base sm:text-lg font-semibold mb-2 sm:mb-3 flex items-center">
+                      <Info className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-primary" />
                       About This Backup
                     </h2>
-                    <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-4">
-                      <p className="text-foreground/90">
+                    <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-3 sm:p-4">
+                      <p className="text-sm text-foreground/90">
                         {data.manifest.description}
                       </p>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
                     <div className="space-y-4">
                       <div>
-                        <h3 className="text-sm font-medium text-muted-foreground flex items-center mb-1">
-                          <Calendar className="h-4 w-4 mr-1.5" />
+                        <h3 className="text-xs sm:text-sm font-medium text-muted-foreground flex items-center mb-1">
+                          <Calendar className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5" />
                           Last Updated
                         </h3>
-                        <p className="font-medium mb-4">
+                        <p className="text-sm sm:text-base font-medium mb-3 sm:mb-4">
                           {data.manifest.last_updated}
                         </p>
 
-                        <h3 className="text-sm font-medium text-muted-foreground flex items-center mb-2">
-                          <FileDown className="h-4 w-4 mr-1.5" />
+                        <h3 className="text-xs sm:text-sm font-medium text-muted-foreground flex items-center mb-1 sm:mb-2">
+                          <FileDown className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5" />
                           Backup ID
                         </h3>
-                        <code className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-sm font-mono">
+                        <code className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-xs sm:text-sm font-mono break-all">
                           {id}
                         </code>
                       </div>
@@ -300,16 +301,16 @@ function LibraryBackupPageContent() {
                   </div>
 
                   {changelogItems.length > 0 && (
-                    <div className="mt-6">
-                      <Separator className="my-6" />
+                    <div className="mt-4 sm:mt-6">
+                      <Separator className="my-4 sm:my-6" />
 
-                      <h2 className="text-lg font-semibold mb-3 flex items-center">
-                        <History className="h-5 w-5 mr-2 text-primary" />
+                      <h2 className="text-base sm:text-lg font-semibold mb-2 sm:mb-3 flex items-center">
+                        <History className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-primary" />
                         Changelog
                       </h2>
 
-                      <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-4">
-                        <ul className="space-y-2">
+                      <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-3 sm:p-4">
+                        <ul className="space-y-1.5 sm:space-y-2">
                           {changelogItems.map((item, index) => (
                             <motion.li
                               key={index}
@@ -321,8 +322,8 @@ function LibraryBackupPageContent() {
                               }}
                               className="flex items-start"
                             >
-                              <div className="mr-3 mt-1.5 h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0"></div>
-                              <span>{item}</span>
+                              <div className="mr-2 sm:mr-3 mt-1.5 h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0"></div>
+                              <span className="text-xs sm:text-sm">{item}</span>
                             </motion.li>
                           ))}
                         </ul>
@@ -330,14 +331,14 @@ function LibraryBackupPageContent() {
                     </div>
                   )}
 
-                  <Separator className="my-6" />
+                  <Separator className="my-4 sm:my-6" />
 
-                  <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 mt-6">
-                    <h3 className="text-sm font-medium text-blue-700 dark:text-blue-300 flex items-center mb-2">
-                      <Info className="h-4 w-4 mr-1.5" />
+                  <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 sm:p-4 mt-4 sm:mt-6">
+                    <h3 className="text-xs sm:text-sm font-medium text-blue-700 dark:text-blue-300 flex items-center mb-1 sm:mb-2">
+                      <Info className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5" />
                       How to use this backup
                     </h3>
-                    <p className="text-blue-700/80 dark:text-blue-300/80 text-sm">
+                    <p className="text-xs sm:text-sm text-blue-700/80 dark:text-blue-300/80">
                       You can either download this backup file and manually
                       import it into Instafel, or use the &quot;Import in
                       Instafel&quot; button to automatically open the app and
@@ -353,11 +354,11 @@ function LibraryBackupPageContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="mt-10 text-center"
+            className="mt-6 sm:mt-10 text-center"
           >
             <Button asChild variant="outline">
               <Link href="/library_backup" className="flex items-center">
-                <FileSpreadsheet className="mr-2 h-4 w-4" />
+                <FileSpreadsheet className="mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
                 View All Backups
               </Link>
             </Button>
