@@ -296,7 +296,7 @@ function DownloadIflContent() {
                     delay: 0.5,
                   },
                   {
-                    title: "Parallel Version",
+                    title: "Clone Version",
                     subtitle: "Clone Variant",
                     description:
                       "Install alongside the original Instagram app. Perfect for testing while keeping your original app.",
@@ -413,7 +413,7 @@ function DownloadIflContent() {
                 transition={{ delay: 0.7, duration: 0.7 }}
                 className="mt-8 sm:mt-10"
               >
-                <Card className="shadow-md border-2 bg-card/90">
+                <Card className="shadow-md border-2 bg-card/90 transition-all duration-300">
                   <CardContent className="p-0">
                     <Tabs
                       defaultValue="download"
@@ -421,310 +421,315 @@ function DownloadIflContent() {
                       onValueChange={setActiveTab}
                       className="w-full"
                     >
-                      <div className="border-b p-3 sm:p-4">
-                        <h2 className="text-lg xs:text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 flex items-center gap-2">
+                      <div className="border-b p-4 sm:p-5">
+                        <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-4 flex items-center gap-2">
                           <Info className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                           Release Information
                         </h2>
-                        <TabsList className="flex w-full max-w-xs mx-auto gap-1 sm:gap-2">
+                        <TabsList className="grid w-full grid-cols-3 h-auto">
                           <TabsTrigger
                             value="download"
-                            className="text-xs sm:text-sm flex-1"
+                            className="py-2.5 text-xs sm:text-sm md:text-base"
                           >
-                            Details
+                            <span className="flex items-center gap-1.5">
+                              <Download className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                              <span className="hidden xs:inline">
+                                Download
+                              </span>{" "}
+                              Details
+                            </span>
                           </TabsTrigger>
                           <TabsTrigger
                             value="changelog"
-                            className="text-xs sm:text-sm flex-1"
+                            className="py-2.5 text-xs sm:text-sm md:text-base"
                           >
-                            Changelog
+                            <span className="flex items-center gap-1.5">
+                              <FileText className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                              Changelog
+                            </span>
                           </TabsTrigger>
                           <TabsTrigger
                             value="build"
-                            className="text-xs sm:text-sm flex-1"
+                            className="py-2.5 text-xs sm:text-sm md:text-base"
                           >
-                            Build Info
+                            <span className="flex items-center gap-1.5">
+                              <Code className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                              Build Info
+                            </span>
                           </TabsTrigger>
                         </TabsList>
                       </div>
 
-                      <div className="p-3 sm:p-6 pb-6 sm:pb-8 min-h-[450px] sm:min-h-[550px] md:min-h-[500px] relative">
+                      <div className="p-4 sm:p-5 md:p-6">
                         <TabsContent
                           value="download"
-                          className="w-full space-y-4 sm:space-y-6 absolute top-3 sm:top-6 left-0 right-0 px-0 sm:px-2 md:px-4 transition-all duration-300 data-[state=inactive]:opacity-0 data-[state=inactive]:pointer-events-none data-[state=active]:opacity-100 data-[state=active]:z-10 data-[state=active]:animate-in data-[state=inactive]:animate-out data-[state=active]:fade-in-0 data-[state=inactive]:fade-out-0 data-[state=active]:zoom-in-95 data-[state=active]:slide-in-from-bottom-2"
+                          className="mt-0 space-y-4"
                         >
-                          <div className="grid grid-cols-1 gap-4 md:gap-6 sm:grid-cols-2">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                             {[
                               {
-                                title: "Unclone Installation",
-                                description: (
-                                  <>
-                                    <p className="mb-2 sm:mb-3">
-                                      This variant requires the original
-                                      Instagram app to be uninstalled first, as
-                                      it replaces the standard Instagram
-                                      application with Instafel.
-                                    </p>
-                                    <p>
-                                      After uninstalling the original app,
-                                      install the Unclone variant for the full
-                                      Instafel experience.
-                                    </p>
-                                  </>
-                                ),
-                                buttonText: "Download Unclone",
+                                title: "Standard Version",
+                                badge: "Recommended",
+                                badgeVariant: "default",
+                                description:
+                                  "Replace the original Instagram app with Instafel for the best experience.",
+                                steps: [
+                                  "Uninstall the original Instagram app",
+                                  "Install this APK file",
+                                  "Login with your Instagram credentials",
+                                ],
+                                buttonText: "Download Standard Version",
                                 onClick: () =>
                                   download(
                                     data.download_urls.unclone,
                                     "unclone",
                                   ),
-                                color: "primary",
-                                icon: (
-                                  <Smartphone className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                                ),
+                                icon: <Smartphone className="h-5 w-5" />,
                               },
                               {
-                                title: "Clone Installation",
-                                description: (
-                                  <>
-                                    <p className="mb-2 sm:mb-3">
-                                      The Clone variant can be installed
-                                      alongside the original Instagram app,
-                                      allowing you to use both apps
-                                      simultaneously.
-                                    </p>
-                                    <p>
-                                      Note that compared to the Unclone version,
-                                      this variant may have some stability
-                                      issues in certain situations.
-                                    </p>
-                                  </>
-                                ),
-                                buttonText: "Download Clone",
+                                title: "Clone Version",
+                                badge: "Alternative",
+                                badgeVariant: "outline",
+                                description:
+                                  "Install alongside the original Instagram app. Great for testing.",
+                                steps: [
+                                  "Keep your original Instagram app",
+                                  "Install this APK file",
+                                  "Both apps will work independently",
+                                ],
+                                buttonText: "Download Clone Version",
                                 onClick: () =>
                                   download(data.download_urls.clone, "clone"),
-                                color: "secondary",
-                                icon: (
-                                  <Shapes className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                                ),
+                                icon: <Shapes className="h-5 w-5" />,
                               },
-                            ].map((info, idx) => (
+                            ].map((variant, idx) => (
                               <div
                                 key={idx}
-                                className="border rounded-xl p-3 sm:p-4 hover:shadow-md transition-all duration-300 hover:border-primary/30 bg-card/95"
+                                className="border rounded-xl overflow-hidden transition-all bg-card/50 hover:shadow-md hover:border-primary/30"
                               >
-                                <h3 className="text-base sm:text-lg font-bold mb-2 flex items-center">
-                                  <div className="mr-2 p-1.5 rounded-md bg-primary/10 text-primary">
-                                    {info.icon}
+                                <div className="bg-muted/50 p-4">
+                                  <div className="flex justify-between items-center">
+                                    <div className="flex items-center gap-2.5">
+                                      <div className="p-2 rounded-md bg-primary/10 text-primary">
+                                        {variant.icon}
+                                      </div>
+                                      <h3 className="font-bold text-base sm:text-lg">
+                                        {variant.title}
+                                      </h3>
+                                    </div>
+                                    <Badge
+                                      variant={
+                                        variant.badgeVariant as
+                                          | "default"
+                                          | "outline"
+                                      }
+                                      className={`${variant.badgeVariant === "outline" ? "border-muted-foreground/50" : ""}`}
+                                    >
+                                      {variant.badge}
+                                    </Badge>
                                   </div>
-                                  {info.title}
-                                </h3>
-                                <div className="text-muted-foreground mb-3 sm:mb-4 text-xs sm:text-sm">
-                                  {info.description}
                                 </div>
-                                <Button
-                                  variant={idx === 0 ? "default" : "outline"}
-                                  className="w-full transition-all group text-xs sm:text-sm"
-                                  onClick={info.onClick}
-                                >
-                                  <Download className="mr-1.5 sm:mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4 group-hover:animate-bounce" />
-                                  {info.buttonText}
-                                </Button>
+
+                                <div className="p-4">
+                                  <p className="text-sm text-muted-foreground mb-4">
+                                    {variant.description}
+                                  </p>
+
+                                  <div className="mb-4">
+                                    <h4 className="text-sm font-medium mb-2">
+                                      Installation:
+                                    </h4>
+                                    <ol className="list-decimal list-inside space-y-1">
+                                      {variant.steps.map((step, stepIdx) => (
+                                        <li
+                                          key={stepIdx}
+                                          className="text-xs sm:text-sm text-muted-foreground"
+                                        >
+                                          {step}
+                                        </li>
+                                      ))}
+                                    </ol>
+                                  </div>
+
+                                  <Button
+                                    variant={idx === 0 ? "default" : "outline"}
+                                    className="w-full group"
+                                    onClick={variant.onClick}
+                                  >
+                                    <Download className="mr-2 h-4 w-4 group-hover:animate-bounce" />
+                                    {variant.buttonText}
+                                  </Button>
+                                </div>
                               </div>
                             ))}
                           </div>
                         </TabsContent>
 
-                        <TabsContent
-                          value="build"
-                          className="w-full absolute top-3 sm:top-6 left-0 right-0 px-0 sm:px-2 md:px-4 transition-all duration-300 data-[state=inactive]:opacity-0 data-[state=inactive]:pointer-events-none data-[state=active]:opacity-100 data-[state=active]:z-10 data-[state=active]:animate-in data-[state=inactive]:animate-out data-[state=active]:fade-in-0 data-[state=inactive]:fade-out-0 data-[state=active]:zoom-in-95 data-[state=active]:slide-in-from-bottom-2"
-                        >
-                          <div className="overflow-x-auto rounded-lg border bg-background/80">
-                            <Table>
-                              <TableHeader>
-                                <TableRow className="bg-muted/50">
-                                  <TableHead className="w-1/3 font-semibold text-xs sm:text-sm">
-                                    Property
-                                  </TableHead>
-                                  <TableHead className="w-2/3 text-xs sm:text-sm">
-                                    Value
-                                  </TableHead>
-                                </TableRow>
-                              </TableHeader>
-                              <TableBody className="text-xs sm:text-sm">
-                                <TableRow className="hover:bg-muted/30">
-                                  <TableCell className="font-medium py-2 sm:py-3">
-                                    <div className="flex items-center">
-                                      <Calendar className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-primary/70" />
-                                      Build Date
-                                    </div>
-                                  </TableCell>
-                                  <TableCell className="py-2 sm:py-3">
-                                    {data.build_date
-                                      ? new Date(parseInt(data.build_date))
-                                          .toLocaleString("en-US", {
-                                            day: "2-digit",
-                                            month: "2-digit",
-                                            year: "numeric",
-                                            hour: "2-digit",
-                                            minute: "2-digit",
-                                          })
-                                          .replace(",", "")
-                                      : "Not available"}
-                                  </TableCell>
-                                </TableRow>
-                                <TableRow className="hover:bg-muted/30">
-                                  <TableCell className="font-medium py-2 sm:py-3">
-                                    <div className="flex items-center">
-                                      <Code className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-primary/70" />
-                                      IFL Version
-                                    </div>
-                                  </TableCell>
-                                  <TableCell className="py-2 sm:py-3">
-                                    <Badge
-                                      variant="outline"
-                                      className="font-medium text-xs sm:text-sm"
-                                    >
-                                      v{data.app.ifl_version || "Not available"}
-                                    </Badge>
-                                  </TableCell>
-                                </TableRow>
-                                <TableRow className="hover:bg-muted/30">
-                                  <TableCell className="font-medium py-2 sm:py-3">
-                                    <div className="flex items-center">
-                                      <Smartphone className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-primary/70" />
-                                      Instagram Version
-                                    </div>
-                                  </TableCell>
-                                  <TableCell className="py-2 sm:py-3">
-                                    v{data.app.version_name || "Not available"}
-                                  </TableCell>
-                                </TableRow>
-                                <TableRow className="hover:bg-muted/30">
-                                  <TableCell className="font-medium py-2 sm:py-3">
-                                    <div className="flex items-center">
-                                      <Code className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-primary/70" />
-                                      Instagram Version Code
-                                    </div>
-                                  </TableCell>
-                                  <TableCell className="py-2 sm:py-3">
-                                    {data.app.version_code || "Not available"}
-                                  </TableCell>
-                                </TableRow>
-                                <TableRow className="hover:bg-muted/30">
-                                  <TableCell className="font-medium py-2 sm:py-3">
-                                    <div className="flex items-center">
-                                      <ShieldCheck className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-primary/70" />
-                                      Patcher Version
-                                    </div>
-                                  </TableCell>
-                                  <TableCell className="py-2 sm:py-3">
-                                    {data.patcher.version != null
-                                      ? `v${data.patcher.version} (${data.patcher.commit})`
-                                      : "Uses older patcher"}
-                                  </TableCell>
-                                </TableRow>
-                                <TableRow className="hover:bg-muted/30">
-                                  <TableCell className="font-medium py-2 sm:py-3">
-                                    <div className="flex items-center">
-                                      <HardDrive className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-primary/70" />
-                                      Generation ID
-                                    </div>
-                                  </TableCell>
-                                  <TableCell className="py-2 sm:py-3 overflow-hidden">
-                                    <code className="px-1 sm:px-2 py-0.5 bg-muted rounded text-xs font-mono overflow-x-auto inline-block max-w-full truncate">
-                                      {data.gen_id || "Not available"}
-                                    </code>
-                                  </TableCell>
-                                </TableRow>
-                                <TableRow className="hover:bg-muted/30">
-                                  <TableCell className="font-medium py-2 sm:py-3">
-                                    <div className="flex items-center">
-                                      <ShieldCheck className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-primary/70" />
-                                      MD5 Hash (Unclone)
-                                    </div>
-                                  </TableCell>
-                                  <TableCell className="py-2 sm:py-3">
-                                    <div className="overflow-x-auto max-w-full">
-                                      <code className="px-1 sm:px-2 py-0.5 bg-muted rounded text-xs font-mono block whitespace-nowrap">
-                                        {data.hash.uc || "Not available"}
-                                      </code>
-                                    </div>
-                                  </TableCell>
-                                </TableRow>
-                                <TableRow className="hover:bg-muted/30">
-                                  <TableCell className="font-medium py-2 sm:py-3">
-                                    <div className="flex items-center">
-                                      <ShieldCheck className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-primary/70" />
-                                      MD5 Hash (Clone)
-                                    </div>
-                                  </TableCell>
-                                  <TableCell className="py-2 sm:py-3">
-                                    <div className="overflow-x-auto max-w-full">
-                                      <code className="px-1 sm:px-2 py-0.5 bg-muted rounded text-xs font-mono block whitespace-nowrap">
-                                        {data.hash.c || "Not available"}
-                                      </code>
-                                    </div>
-                                  </TableCell>
-                                </TableRow>
-                              </TableBody>
-                            </Table>
-                          </div>
-                        </TabsContent>
+                        <TabsContent value="changelog" className="mt-0">
+                          <div className="bg-card/50 rounded-xl border p-4">
+                            <div className="flex items-center justify-between mb-4">
+                              <div className="flex items-center gap-2">
+                                <Badge
+                                  variant="secondary"
+                                  className="px-2.5 py-1"
+                                >
+                                  v{data.app.ifl_version || "Unknown"}
+                                </Badge>
+                                <span className="text-sm text-muted-foreground">
+                                  {data.app.version_name &&
+                                    `Based on Instagram v${data.app.version_name}`}
+                                </span>
+                              </div>
 
-                        <TabsContent
-                          value="changelog"
-                          className="w-full absolute top-3 sm:top-6 left-0 right-0 px-0 sm:px-2 md:px-4 transition-all duration-300 data-[state=inactive]:opacity-0 data-[state=inactive]:pointer-events-none data-[state=active]:opacity-100 data-[state=active]:z-10"
-                        >
-                          <div>
-                            <div className="mb-3 sm:mb-4 flex flex-wrap items-center gap-2">
-                              <Badge
-                                variant="secondary"
-                                className="py-0.5 sm:py-1 px-1.5 sm:px-2 text-xs"
-                              >
-                                v{data.app.ifl_version || "Unknown"}
-                              </Badge>
-                              <span className="text-xs text-muted-foreground flex items-center gap-1 sm:gap-1.5">
-                                <Calendar className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
-                                Released on{" "}
+                              <div className="text-xs text-muted-foreground flex items-center gap-1.5">
+                                <Calendar className="h-3.5 w-3.5" />
                                 {data.build_date
-                                  ? new Date(parseInt(data.build_date))
-                                      .toLocaleString("en-US", {
-                                        day: "2-digit",
-                                        month: "2-digit",
-                                        year: "numeric",
-                                      })
-                                      .replace(",", "")
+                                  ? new Date(
+                                      parseInt(data.build_date),
+                                    ).toLocaleString("en-US", {
+                                      day: "2-digit",
+                                      month: "2-digit",
+                                      year: "numeric",
+                                    })
                                   : "Unknown date"}
-                              </span>
+                              </div>
                             </div>
 
-                            <div className="space-y-1 pl-1 pr-1 max-h-[180px] sm:max-h-[280px] overflow-y-auto rounded-lg border bg-card/30 p-2 sm:p-3">
-                              {data.changelogs && data.changelogs.length > 0 ? (
-                                data.changelogs.map((item, idx) => (
+                            {data.changelogs && data.changelogs.length > 0 ? (
+                              <div className="space-y-1 max-h-[320px] overflow-y-auto pr-2 custom-scrollbar">
+                                {data.changelogs.map((item, idx) => (
                                   <motion.div
                                     key={idx}
-                                    initial={{ opacity: 0, x: -10 }}
-                                    animate={{ opacity: 1, x: 0 }}
+                                    initial={{ opacity: 0, y: 5 }}
+                                    animate={{ opacity: 1, y: 0 }}
                                     transition={{
                                       delay: 0.05 * idx,
                                       duration: 0.3,
                                     }}
                                   >
-                                    <div className="flex items-start gap-1.5 py-1 group hover:bg-muted/40 px-1.5 rounded-md transition-colors duration-150">
-                                      <ChevronRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary group-hover:translate-x-1 transition-transform duration-200" />
-                                      <span className="text-xs sm:text-sm group-hover:text-primary transition-colors duration-200">
+                                    <div className="flex group items-start gap-2 py-2 px-3 hover:bg-muted/40 rounded-md transition-colors">
+                                      <ChevronRight className="h-4 w-4 shrink-0 text-primary mt-0.5 group-hover:translate-x-0.5 transition-transform" />
+                                      <span className="text-sm group-hover:text-foreground/90 transition-colors">
                                         {item}
                                       </span>
                                     </div>
                                   </motion.div>
-                                ))
-                              ) : (
-                                <p className="text-xs sm:text-sm text-muted-foreground italic flex items-center justify-center h-16">
+                                ))}
+                              </div>
+                            ) : (
+                              <div className="bg-muted/30 rounded-lg py-10 text-center">
+                                <FileText className="h-10 w-10 mx-auto text-muted-foreground/40 mb-3" />
+                                <p className="text-sm text-muted-foreground">
                                   No changelog entries available for this
                                   version.
                                 </p>
-                              )}
+                              </div>
+                            )}
+                          </div>
+                        </TabsContent>
+
+                        <TabsContent value="build" className="mt-0">
+                          <div className="bg-card/50 rounded-xl border p-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                              <InfoCard
+                                icon={
+                                  <Calendar className="h-5 w-5 text-primary" />
+                                }
+                                title="Build Date"
+                                value={
+                                  data.build_date
+                                    ? new Date(parseInt(data.build_date))
+                                        .toLocaleString("en-US", {
+                                          day: "2-digit",
+                                          month: "2-digit",
+                                          year: "numeric",
+                                          hour: "2-digit",
+                                          minute: "2-digit",
+                                        })
+                                        .replace(",", "")
+                                    : "Not available"
+                                }
+                              />
+
+                              <InfoCard
+                                icon={<Code className="h-5 w-5 text-primary" />}
+                                title="Instafel Version"
+                                value={
+                                  <Badge
+                                    variant="outline"
+                                    className="font-medium"
+                                  >
+                                    v{data.app.ifl_version || "Not available"}
+                                  </Badge>
+                                }
+                              />
+
+                              <InfoCard
+                                icon={
+                                  <Smartphone className="h-5 w-5 text-primary" />
+                                }
+                                title="Instagram Version"
+                                value={`v${data.app.version_name || "Not available"}`}
+                              />
+
+                              <InfoCard
+                                icon={
+                                  <HardDrive className="h-5 w-5 text-primary" />
+                                }
+                                title="Version Code"
+                                value={data.app.version_code || "Not available"}
+                              />
+
+                              <InfoCard
+                                icon={
+                                  <ShieldCheck className="h-5 w-5 text-primary" />
+                                }
+                                title="Patcher Version"
+                                value={
+                                  data.patcher.version != null
+                                    ? `v${data.patcher.version}`
+                                    : "Uses older patcher"
+                                }
+                                subtitle={
+                                  data.patcher.commit
+                                    ? `Commit: ${data.patcher.commit}`
+                                    : null
+                                }
+                              />
+
+                              <InfoCard
+                                icon={
+                                  <Shapes className="h-5 w-5 text-primary" />
+                                }
+                                title="Generation ID"
+                                value={
+                                  <code className="text-xs bg-muted px-1.5 py-0.5 rounded">
+                                    {data.gen_id || "Not available"}
+                                  </code>
+                                }
+                              />
+                            </div>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 pt-4 border-t">
+                              <div className="bg-muted/30 rounded-lg p-3">
+                                <h4 className="text-sm font-medium flex items-center gap-2 mb-2 text-primary">
+                                  <ShieldCheck className="h-4 w-4" />
+                                  MD5 Hash (Standard Version)
+                                </h4>
+                                <code className="text-xs block bg-background/80 p-2 rounded overflow-x-auto whitespace-nowrap">
+                                  {data.hash.uc || "Not available"}
+                                </code>
+                              </div>
+
+                              <div className="bg-muted/30 rounded-lg p-3">
+                                <h4 className="text-sm font-medium flex items-center gap-2 mb-2 text-primary">
+                                  <ShieldCheck className="h-4 w-4" />
+                                  MD5 Hash (Clone Version)
+                                </h4>
+                                <code className="text-xs block bg-background/80 p-2 rounded overflow-x-auto whitespace-nowrap">
+                                  {data.hash.c || "Not available"}
+                                </code>
+                              </div>
                             </div>
                           </div>
                         </TabsContent>
@@ -755,5 +760,23 @@ function DownloadIflContent() {
         </div>
       )}
     </AnimatePresence>
+  );
+}
+
+// Helper function to render info cards
+function InfoCard({ icon, title, value, subtitle = null }) {
+  return (
+    <div className="bg-muted/30 rounded-lg p-3 flex flex-col">
+      <div className="flex items-center gap-2 mb-1">
+        {icon}
+        <h3 className="text-sm font-medium">{title}</h3>
+      </div>
+      <div className="mt-1">
+        <div className="font-medium text-sm">{value}</div>
+        {subtitle && (
+          <div className="text-xs text-muted-foreground mt-0.5">{subtitle}</div>
+        )}
+      </div>
+    </div>
   );
 }
