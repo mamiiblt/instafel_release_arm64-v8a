@@ -87,6 +87,14 @@ public class CloneGeneral extends InstafelPatch {
                         ));
                         Log.info("Background copied to clone_ref in " + dir.getName());
                     }
+
+                    File fForeground = new File(Utils.mergePaths(dir.getAbsolutePath(), "ig_launcher_foreground.png"));
+                    if (fForeground.exists()) {
+                        copyAssetFromResources("/clone_assets/ifl_clone_foreground.png", new File(
+                            fForeground.getAbsolutePath().replace("sources", "clone_ref")
+                        ));
+                        Log.info("Foreground copied to clone_ref in " + dir.getName());
+                    }
                 }
             }
             success("Icon images succesfully copied.");
