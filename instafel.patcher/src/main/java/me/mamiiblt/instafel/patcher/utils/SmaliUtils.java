@@ -157,21 +157,40 @@ public class SmaliUtils {
         return size;
     }
 
-    public File[] getSmaliFolders() {
-
+    public File[] getSmaliFolders() {   
         File decompiledClassesFolder = new File(Utils.mergePaths(projectDir, "sources"));
         if (decompiledClassesFolder.exists() && decompiledClassesFolder.isDirectory()) {
             File[] folders = decompiledClassesFolder.listFiles(File::isDirectory);
+
             folders = Arrays.stream(folders)
-                .filter(f -> f.getName().toLowerCase().contains("smali"))
-                .toArray(File[]::new);
-            Arrays.sort(folders, (f1, f2) -> f1.getName().compareToIgnoreCase(f2.getName()));
+                .filter(f -> f.getName().toLowerCase().startsWith("smali"))
+                .sorted((f1, f2) -> {
+                    String n1 = f1.getName();
+                    String n2 = f2.getName();
+                    if (n1.equals("smali")) return -1;
+                    if (n2.equals("smali")) return 1;
+                    int num1 = extractNumber(n1);
+                    int num2 = extractNumber(n2);
+                    return Integer.compare(num1, num2);
+                }).toArray(File[]::new);
+            
             return folders;
         } else {
             Log.severe("classesX folders not found.");
             System.exit(-1);
             return null;
         }
+    }
+
+    private int extractNumber(String name) {
+        try {
+            if (name.startsWith("smali_classes")) {
+                return Integer.parseInt(name.substring("smali_classes".length()));
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace(); 
+        }  
+        return Integer.MAX_VALUE;
     }
 
     private boolean containsAllKeys(String input, String... keys) {
