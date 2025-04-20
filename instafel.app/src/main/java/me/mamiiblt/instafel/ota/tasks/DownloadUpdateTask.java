@@ -178,7 +178,7 @@ public class DownloadUpdateTask extends AsyncTask<String, Integer, String> {
         File ifl_update_file = new File(f.getPath(), "ifl_update.apk");
 
         if (ifl_update_file.length() == fileSize) {
-           if(ifl_update_file.exists()) {
+           if (ifl_update_file.exists()) {
                Intent intent = new Intent(Intent.ACTION_VIEW);
                intent.setDataAndType(uriFromFile(new File(ifl_update_file.getPath())), "application/vnd.android.package-archive");
                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -199,15 +199,11 @@ public class DownloadUpdateTask extends AsyncTask<String, Integer, String> {
                                .setContentIntent(pendingIntent)
                                .setProgress(0, 0, false);
                        notificationManager.notify(notificationId, notificationBuilder.build());
-
-                       PreferenceManager preferenceManager = new PreferenceManager(activity);
-                       preferenceManager.setPreferenceLong(PreferenceKeys.ifl_ota_last_success_install, System.currentTimeMillis());
                    }
 
-               } catch (ActivityNotFoundException e) {
+               } catch (Exception e) {
                    e.printStackTrace();
                    if (!downloadMethod) {
-                       instafelDialog.dismiss();
                        Toast.makeText(activity, activity.getString(R.string.ifl_t1_01) ,Toast.LENGTH_LONG).show();
                    } else {
                        notificationBuilder
@@ -217,7 +213,7 @@ public class DownloadUpdateTask extends AsyncTask<String, Integer, String> {
                        notificationManager.notify(notificationId, notificationBuilder.build());
                    }
                }
-           } else{
+           } else {
                if (!downloadMethod) {
                    instafelDialog.dismiss();
                    Toast.makeText(activity, activity.getString(R.string.ifl_t1_03), Toast.LENGTH_LONG).show();

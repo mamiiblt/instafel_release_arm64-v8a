@@ -42,7 +42,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="me.mamiiblt.instafel.test"
+            android:authorities="me.mamiiblt.instafel.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

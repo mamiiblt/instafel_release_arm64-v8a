@@ -2743,7 +2743,7 @@
             <string name="ifl_t1_03">Σφάλμα ενημέρωσης του Instafel.</string>
         </vcategory>
         <vcategory name="providers">
-            <provider android:authorities="me.mamiiblt.instafel.test" android:exported="false" android:grantUriPermissions="true" android:name="androidx.core.content.FileProvider">
+            <provider android:authorities="me.mamiiblt.instafel.provider" android:exported="false" android:grantUriPermissions="true" android:name="androidx.core.content.FileProvider">
                             
                 <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/ifl_file_provider"/>
                         
