@@ -99,6 +99,8 @@ public class CopyInstafelSources extends InstafelPatch {
             File destFolder = new File(
                 Utils.mergePaths(Env.PROJECT_DIR, "sources", smallDexFolder.getName(), "me", "mamiiblt"));
 
+            Env.Project.setString(Env.Project.Keys.IFL_SOURCES_FOLDER, smallDexFolder.getName());
+
             Utils.unzipFromResources(false, "/ifl_sources/ifl_sources.zip", destFolder.getAbsolutePath());
             Log.info("Copying instafel resources");
             File igResourcesFolder = new File(Utils.mergePaths(Env.PROJECT_DIR, "sources", "res"));

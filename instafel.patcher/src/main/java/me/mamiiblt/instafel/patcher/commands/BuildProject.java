@@ -234,9 +234,13 @@ public class BuildProject implements Command {
     private void updateInstafelEnv() throws IOException {
         if (appliedPatches.contains("copy_instafel_src")) {
             Log.info("Updating Instafel app environment...");
-            File smallDexFolder = smaliUtils.getSmallSizeSmaliFolder(smaliUtils.getSmaliFolders());
+            String iflSourceFolder = Env.Project.getString(Env.Project.Keys.IFL_SOURCES_FOLDER, null);
+            if (iflSourceFolder == null) {
+                Log.severe("IFL_SOURCES_FOLDER is null");
+                System.exit(-1);
+            }
             File envFile = new File(
-                Utils.mergePaths(Env.PROJECT_DIR, "sources", smallDexFolder.getName(), "me", "mamiiblt", "instafel", "InstafelEnv.smali"));
+                Utils.mergePaths(Env.PROJECT_DIR, "sources", iflSourceFolder, "me", "mamiiblt", "instafel", "InstafelEnv.smali"));
             File origEnvFile = new File(Utils.mergePaths(Env.PROJECT_DIR, "sources", "InstafelEnv_orig.smali"));
 
             if (origEnvFile.exists()) {
