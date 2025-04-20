@@ -1,4 +1,4 @@
-package me.mamiiblt.instafel.patcher.patches.ifl_general;
+package me.mamiiblt.instafel.patcher.patches.general;
 
 import java.io.File;
 import java.io.IOException;
@@ -98,6 +98,8 @@ public class CopyInstafelSources extends InstafelPatch {
             File smallDexFolder = smaliUtils.getSmallSizeSmaliFolder(smaliUtils.getSmaliFolders());
             File destFolder = new File(
                 Utils.mergePaths(Env.PROJECT_DIR, "sources", smallDexFolder.getName(), "me", "mamiiblt"));
+
+            Env.Project.setString(Env.Project.Keys.IFL_SOURCES_FOLDER, smallDexFolder.getName());
 
             Utils.unzipFromResources(false, "/ifl_sources/ifl_sources.zip", destFolder.getAbsolutePath());
             Log.info("Copying instafel resources");

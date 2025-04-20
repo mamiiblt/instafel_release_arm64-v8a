@@ -125,7 +125,8 @@ public class Env {
             INSTAGRAM_VERSION_CODE,
             GENID,
             INSTAFEL_VERSION,
-            APPLIED_PATCHES
+            APPLIED_PATCHES,
+            IFL_SOURCES_FOLDER
         }
     
         public static String SAVE_STR = "Update Project Environment File";

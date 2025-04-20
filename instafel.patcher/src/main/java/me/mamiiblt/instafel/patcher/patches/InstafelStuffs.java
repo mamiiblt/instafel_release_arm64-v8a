@@ -2,7 +2,7 @@ package me.mamiiblt.instafel.patcher.patches;
 
 import java.util.List;
 
-import me.mamiiblt.instafel.patcher.patches.ifl_general.*;
+import me.mamiiblt.instafel.patcher.patches.general.*;
 import me.mamiiblt.instafel.patcher.utils.patch.*;
 
 @PInfos.PatchGroupInfo(

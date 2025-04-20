@@ -1,11 +1,9 @@
-package me.mamiiblt.instafel.patcher.patches.ifl_general;
+package me.mamiiblt.instafel.patcher.patches.general;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 
@@ -132,7 +130,7 @@ public class AddAppTrigger extends InstafelPatch {
                         File file = fileIterator.next();
                         List<String> fContent = smaliUtils.getSmaliFileContent(file.getAbsolutePath()); 
 
-                        boolean[] conditions = {false, false, false, false, false};
+                        boolean[] conditions = {false, false, false, false};
 
                         for (String line : fContent) {
                             if (line.contains("Landroid/content/res/Configuration;")) {
@@ -147,12 +145,8 @@ public class AddAppTrigger extends InstafelPatch {
                                 conditions[2] = true;
                             }
                             
-                            if (line.contains("Lcom/instagram/notifications/badging/ui/component/ToastingBadge")) {
-                                conditions[3] = true;
-                            }
-
                             if (line.contains(".super Ljava/lang/Object;")) {
-                                conditions[4] = true;
+                                conditions[3] = true;
                             }
                         }
 

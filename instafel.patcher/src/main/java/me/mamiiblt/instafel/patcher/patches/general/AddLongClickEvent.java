@@ -1,4 +1,4 @@
-package me.mamiiblt.instafel.patcher.patches.ifl_general;
+package me.mamiiblt.instafel.patcher.patches.general;
 
 import java.io.File;
 import java.util.Iterator;
