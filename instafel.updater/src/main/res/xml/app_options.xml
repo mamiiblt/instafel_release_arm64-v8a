@@ -6,113 +6,100 @@
 
     <PreferenceCategory
         android:title="@string/cname_general"
+        app:allowDividerAbove="false"
         app:iconSpaceReserved="false">
-        <SwitchPreferenceCompat
-            android:key="material_you"
-            android:title="@string/material_you"
-            app:iconSpaceReserved="false"
-            android:summary="@string/material_you_s"
-            android:defaultValue="true" />
-        <ListPreference
+        <com.github.tttt55.materialyoupreferences.preferences.MaterialListPreference
             android:key="language"
             android:title="@string/language"
             android:summary="@string/language_s"
             android:entries="@array/languages"
             android:entryValues="@array/languages"
+            app:allowDividerAbove="false"
             android:defaultValue="Use Device Language"
-            app:iconSpaceReserved="false" />
-        <ListPreference
+            app:icon="@drawable/language" />
+        <com.github.tttt55.materialyoupreferences.preferences.MaterialListPreference
             android:key="checker_interval"
             android:title="@string/checker_interval"
             android:summary="@string/checker_interval_s"
             android:entries="@array/checker_interval_list"
             android:entryValues="@array/checker_interval_list"
             android:defaultValue="4 hour"
-            app:iconSpaceReserved="false" />
-        <ListPreference
-            android:key="checker_arch"
-            android:title="@string/arch"
-            android:summary="@string/arch_s"
-            android:entries="@array/app_arch"
-            android:entryValues="@array/app_arch"
-            android:defaultValue="NULL"
-            app:iconSpaceReserved="false" />
-        <ListPreference
+            app:allowDividerAbove="false"
+            app:icon="@drawable/check_interval"/>
+        <com.github.tttt55.materialyoupreferences.preferences.MaterialListPreference
             android:key="checker_type"
             android:title="@string/itype"
             android:summary="@string/itype_s"
             android:entries="@array/app_type"
             android:entryValues="@array/app_type"
             android:defaultValue="NULL"
-            app:iconSpaceReserved="false" />
+            app:allowDividerAbove="false"
+            app:icon="@drawable/installation_type"/>
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/cname_behavior" app:iconSpaceReserved="false">
-        <SwitchPreferenceCompat
+    <PreferenceCategory android:title="@string/cname_behavior" app:iconSpaceReserved="false" app:allowDividerAbove="false">
+        <com.github.tttt55.materialyoupreferences.preferences.MaterialSwitchGooglePreference
             android:key="send_notification"
             android:title="@string/send_notif"
-            app:iconSpaceReserved="false"
             android:enabled="false"
+            app:allowDividerAbove="false"
             android:summary="@string/send_notif_s"
-            android:defaultValue="true" />
-        <SwitchPreferenceCompat
-            android:key="send_toast"
-            android:title="@string/send_toast"
-            android:summary="@string/send_toast_s"
-            app:iconSpaceReserved="false"
-            android:defaultValue="false" />
-        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            app:icon="@drawable/send_notification"/>
+        <com.github.tttt55.materialyoupreferences.preferences.MaterialSwitchGooglePreference
             android:key="use_mobile_data"
             android:title="@string/use_mobile_data"
-            app:iconSpaceReserved="false"
             android:summary="@string/use_mobile_data_s"
-            android:defaultValue="false" />
-        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            app:allowDividerAbove="false"
+            app:icon="@drawable/mobile_data" />
+        <com.github.tttt55.materialyoupreferences.preferences.MaterialSwitchGooglePreference
             android:key="12_hour_rule"
             android:title="@string/hour12_rule"
-            app:iconSpaceReserved="false"
+            app:icon="@drawable/hour_12_rule"
+            app:allowDividerAbove="false"
             android:summary="@string/hour12_rule_s"
             android:defaultValue="false" />
-        <SwitchPreferenceCompat
-            android:key="use_instafel_api"
-            android:title="@string/use_instafel"
-            android:defaultValue="true"
-            app:iconSpaceReserved="false"
-            android:summary="@string/use_instafel_s" />
-        <SwitchPreferenceCompat
+        <com.github.tttt55.materialyoupreferences.preferences.MaterialSwitchGooglePreference
             android:key="crash_logger"
             android:title="@string/crash_logs"
             android:defaultValue="true"
-            app:iconSpaceReserved="false"
+            app:allowDividerAbove="false"
+            app:icon="@drawable/show_crash_logs"
             android:summary="@string/crash_logs_s" />
-        <SwitchPreferenceCompat
+        <com.github.tttt55.materialyoupreferences.preferences.MaterialSwitchGooglePreference
             android:key="disable_error_notifications"
             android:title="@string/disable_error"
             android:defaultValue="false"
-            app:iconSpaceReserved="false"
+            app:icon="@drawable/bell_off"
+            app:allowDividerAbove="false"
             android:summary="@string/disable_error_s" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/cname_about" app:iconSpaceReserved="false">
-        <Preference
+    <PreferenceCategory android:title="@string/cname_about" app:iconSpaceReserved="false" app:allowDividerAbove="false">
+        <com.github.tttt55.materialyoupreferences.preferences.MaterialPreference
             android:key="source_code"
             android:title="@string/source_code"
-            android:summary="https://github.com/mamiiblt/instafel-updater"
-            app:iconSpaceReserved="false" />
-        <Preference
+            app:allowDividerAbove="false"
+            android:summary="@string/source_code_s"
+            app:icon="@drawable/source_code_2" />
+        <com.github.tttt55.materialyoupreferences.preferences.MaterialPreference
             android:key="updater_guide"
+            app:allowDividerAbove="false"
             android:title="@string/updater_guide"
             android:summary="@string/updater_guide_s"
-            app:iconSpaceReserved="false" />
-        <Preference
+            app:icon="@drawable/updater_guide"/>
+        <com.github.tttt55.materialyoupreferences.preferences.MaterialPreference
             android:key="create_issue"
+            app:allowDividerAbove="false"
             android:title="@string/create_issue"
             android:summary="@string/create_issue_s"
-            app:iconSpaceReserved="false" />
-        <Preference
+            app:icon="@drawable/create_issue" />
+        <com.github.tttt55.materialyoupreferences.preferences.MaterialPreference
             android:key="app_version"
             android:title="@string/app_version"
             android:summary="_appVersion"
-            app:iconSpaceReserved="false" />
+            app:allowDividerAbove="false"
+            app:icon="@drawable/app_info" />
     </PreferenceCategory>
 </PreferenceScreen>

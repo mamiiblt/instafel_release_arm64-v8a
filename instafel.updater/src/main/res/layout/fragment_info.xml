@@ -76,36 +76,6 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/selected_arch"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/statusTextView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="_arch"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -178,6 +148,7 @@
                         android:layout_marginEnd="8dp"
                         android:layout_weight="1"
                         android:enabled="false"
+                        app:icon="@drawable/start"
                         android:text="@string/start" />
 
                     <com.google.android.material.button.MaterialButton
@@ -186,6 +157,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:enabled="false"
+                        app:icon="@drawable/stop"
                         android:text="@string/stop" />
                 </LinearLayout>
             </LinearLayout>

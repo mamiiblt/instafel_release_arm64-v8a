@@ -12,16 +12,18 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
-import androidx.preference.SwitchPreferenceCompat;
 
 import android.widget.Toast;
+
+import com.github.tttt55.materialyoupreferences.preferences.MaterialListPreference;
+import com.github.tttt55.materialyoupreferences.preferences.MaterialPreference;
+import com.github.tttt55.materialyoupreferences.preferences.MaterialSwitchGooglePreference;
 
 import me.mamiiblt.instafel.updater.BuildConfig;
 import me.mamiiblt.instafel.updater.MainActivity;
 import me.mamiiblt.instafel.updater.R;
 import me.mamiiblt.instafel.updater.update.UpdateWorkHelper;
 import me.mamiiblt.instafel.updater.utils.LocalizationUtils;
-import me.mamiiblt.instafel.updater.utils.MaterialListPreference;
 import me.mamiiblt.instafel.updater.utils.Utils;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
@@ -31,7 +33,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
         setPreferencesFromResource(R.xml.app_options, rootKey);
 
-        SwitchPreferenceCompat dynamicColorPreference = findPreference("material_you");
+        MaterialSwitchGooglePreference dynamicColorPreference = findPreference("material_you");
         if (dynamicColorPreference != null) {
             dynamicColorPreference.setOnPreferenceChangeListener((preference, newValue) -> {
                 boolean isDynamicColorEnabled = (Boolean) newValue;
@@ -44,7 +46,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             });
         }
 
-        ListPreference checkerInterval = findPreference("checker_interval");
+        MaterialListPreference checkerInterval = findPreference("checker_interval");
         checkerInterval.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
@@ -56,7 +58,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             }
         });
 
-        ListPreference language = findPreference("language");
+        MaterialListPreference language = findPreference("language");
         language.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
@@ -72,7 +74,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             }
         });
 
-        Preference sourceCode = findPreference("source_code");
+        MaterialPreference sourceCode = findPreference("source_code");
         sourceCode.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(@NonNull Preference preference) {
@@ -83,28 +85,28 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             }
         });
 
-        Preference createIssue = findPreference("create_issue");
+        MaterialPreference createIssue = findPreference("create_issue");
         createIssue.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(@NonNull Preference preference) {
-                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse(sourceCode.getSummary().toString() + "/issues"));
+                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("https://github.com/mamiiblt/instafel/issues"));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getContext().startActivity(intent);
                 return false;
             }
         });
 
-        Preference updaterGuide = findPreference("updater_guide");
+        MaterialPreference updaterGuide = findPreference("updater_guide");
         updaterGuide.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(@NonNull Preference preference) {
-                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("https://mamiiblt.me/_makaleler/how_i_can_use_instafel_updater"));
+                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("https://instafel.mamiiblt.me/about_updater"));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getContext().startActivity(intent);
                 return false;
             }
         });
-        Preference appVersion = findPreference("app_version");
+        MaterialPreference appVersion = findPreference("app_version");
         String[] versionName = BuildConfig.VERSION_NAME.split("-");
         String version = versionName[0];
         String tag = versionName[1];
@@ -128,7 +130,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void showPreferenceDialog(ListPreference preference) {
-        DialogFragment dialogFragment = new MaterialListPreference();
+        DialogFragment dialogFragment = new me.mamiiblt.instafel.updater.utils.MaterialListPreference();
         Bundle bundle = new Bundle(1);
         bundle.putString("key", preference.getKey());
         dialogFragment.setArguments(bundle);

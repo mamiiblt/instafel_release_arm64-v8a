@@ -71,23 +71,18 @@
     <string name="cname_general">General</string>
     <string name="cname_behavior">Behavior</string>
     <string name="cname_about">About Updater</string>
-    <string name="material_you" translatable="false">Material You</string>
-    <string name="material_you_s">Enable Material You design system for A12+</string>
     <string name="checker_interval">Checker Interval</string>
     <string name="checker_interval_s">Change checker interval</string>
-    <string name="arch">Architecture</string>
-    <string name="arch_s">Change architecture</string>
     <string name="itype">Installation Type</string>
     <string name="itype_s">Change installation type</string>
     <string name="send_notif">Send Notification</string>
     <string name="send_notif_s">Updater sends a notification after updating Instafel</string>
-    <string name="send_toast">Send Toast After Update</string>
-    <string name="send_toast_s">Updater sends a toast after updating Instafel</string>
-    <string name="use_mobile_data">Use Mobile Data</string>
-    <string name="use_mobile_data_s">Use mobile data for downloading update too</string>
+    <string name="use_mobile_data">Mobile Data</string>
+    <string name="use_mobile_data_s">Allows downloading updates with mobile data</string>
     <string name="hour12_rule">12 Hour Rule</string>
     <string name="hour12_rule_s">Allows you to install the update after released 12 hours</string>
     <string name="source_code">Source Code</string>
+    <string name="source_code_s">Visit source code of Instafel</string>
     <string name="instafel_website">Instafel Website</string>
     <string name="create_issue">Create Issue</string>
     <string name="create_issue_s">Create a issue on GitHub for feedback!</string>
@@ -97,12 +92,10 @@
     <string name="language_s">Set the language of app</string>
     <string name="developed_by">Developed with ❤️ by mamiiblt</string>
     <string name="about_app">About</string>
-    <string name="use_instafel">Use Instafel API (Recommended)</string>
-    <string name="use_instafel_s">Use new Instafel API instead GitHub API for checking updates.</string>
     <string name="crash_logs">Save Crash Logs</string>
     <string name="crash_logs_s">Logger will be write every crash into daily log.</string>
-    <string name="disable_error">Disable Warning Notifications</string>
-    <string name="disable_error_s">Disable non critical error notifications</string>
+    <string name="disable_error">Disable Warning Notif.</string>
+    <string name="disable_error_s">Disables non critical error notifications</string>
     <string name="updater_guide">Updater Guide</string>
-    <string name="updater_guide_s">Learn how to use Instafel Updater</string>
+    <string name="updater_guide_s">Learn more things about updater</string>
 </resources>
