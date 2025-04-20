@@ -16,16 +16,16 @@
     <string name="selected_arch">Kontrolcü Mimarisi</string>
     <string name="selected_installation_type">Kontrolcü Kurulum Türü</string>
     <string name="battery_restiriction">Pil Kısıtlaması</string>
-    <string name="battery_restiricted">❌ Kısıtlı</string>
-    <string name="battery_unrestiricted">✔ Kısıtlama Yok</string>
+    <string name="battery_restiricted">Kısıtlı</string>
+    <string name="battery_unrestiricted">Kısıtlama Yok</string>
     <string name="battery_dialog_title">Kısıtlama Modunu Kaldırın</string>
     <string name="battery_dialog_msg">Instafel Updater\'ın düzgün çalışabilmesi için uygulamanın pil modunun kısıtlanmamış olması gerekmektedir.</string>
     <string name="updater_status">Güncelleyici Durumu</string>
     <string name="start">Başlat</string>
     <string name="stop">Durdur</string>
     <string name="permission_rejected">İzin Reddedildi</string>
-    <string name="stopped">❌ Durduruldu</string>
-    <string name="unauthorized">❌ Yetkilendirilmedi</string>
+    <string name="stopped">Durduruldu</string>
+    <string name="unauthorized">Yetkilendirilmedi</string>
     <string name="please_install_root">Cihazınızda root bulunamadı, lütfen cihazınızı rootlayın.</string>
     <string name="please_allow_unrestiracted">Please set app battery restiraction mode to unrestiracted mode</string>
     <string name="dialog_title">İzin Al</string>
@@ -41,7 +41,7 @@
     <string name="n2_waiting">Bağlantı Bekleniyor</string>
     <string name="n2_sub">Sunucu bağlantısı bekleniyor</string>
     <string name="n3_installing">Güncelleme Kuruluyor</string>
-    <string name="n3_sub">İndirme tamamlandı, kuruluyor...</string>
+    <string name="n3_sub">İndirme tamamlandı, kuruluyor…</string>
     <string name="n4_complete">Güncelleme Başarıyla Kuruldu</string>
     <string name="error">Hata</string>
     <string name="cname_general">Genel</string>
@@ -66,7 +66,7 @@
 
     <!-- FORMATTED STRINGS -->
     <string name="please_give_permission">Lütfen Shizuku\'dan Instafel Updater\'e izin verin.</string>
-    <string name="running">✔ %1$s modunda çalışıyor</string>
+    <string name="running">%1$s modunda çalışıyor</string>
     <string name="n4_sub">Instafel v%1$s sürümüne güncellendi</string>
     <string name="app_version_s">Sürüm v%1$s (commit %2$s)</string>
     <string name="developed_by">mamiiblt tarafından ❤️ ile geliştirilmiştir</string>
@@ -80,11 +80,11 @@
     <string name="updater_guide">Updater Kılavuzu</string>
     <string name="updater_guide_s">Instafel Updater\'i nasıl kullanacağınızı öğrenin</string>
     <string name="checking">Kontrol ediliyor..</string>
-    <string name="not_found">❌ SU cihazda bulunamadı</string>
+    <string name="not_found">SU cihazda bulunamadı</string>
     <string name="please_allow_root">Root erişimi reddedildi, lütfen managerden izin verin.</string>
-    <string name="authorized">✔ Yetkilendirildi</string>
-    <string name="not_installed">❌ Shizuku Kurulu Değil</string>
-    <string name="start_service">❌ Shizuku Çalışmıyor</string>
+    <string name="authorized">Yetkilendirildi</string>
+    <string name="not_installed">Shizuku Kurulu Değil</string>
+    <string name="start_service">Shizuku Çalışmıyor</string>
     <string name="perm_rejected_desc">Lütfen Shizuku uygulamasından Instafle Updater\'e izin verin.</string>
     <string name="please_start_shizuku">Lütfen Shizuku servisini başlatın</string>
     <string name="please_install_shizuku">Lütfen Play Store\'den Shizuku\'yu indirin.</string>

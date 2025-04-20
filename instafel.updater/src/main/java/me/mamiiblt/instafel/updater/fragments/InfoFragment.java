@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,11 +64,12 @@ public class InfoFragment extends Fragment {
         }
 
     }
-    private TextView viewStatusDesc, viewStatusTitle, viewArchitecture, viewIType, viewStatus, viewBatteryStatus;
+    private TextView viewStatusDesc, viewStatusTitle, viewIType, viewStatus, viewBatteryStatus;
     private Button viewStartBtn, viewStopBtn;
     private FloatingActionButton viewFab;
     private SharedPreferences sharedPreferences;
     public String STRING_AUTHORIZED, STRING_NOT_INSTALLED, STRING_START_SERVICE, STRING_UNAUTHORIZED, STRING_STOPPED, STRING_RESTRICTED, STRING_NOT_FOUND, STRING_UNRESTICTED;
+    public ImageView iconProvider, iconBattery, warIconProvider, warIconBattery;
     private LogUtils logUtils;
 
     @Override
@@ -75,7 +77,6 @@ public class InfoFragment extends Fragment {
        View view = inflater.inflate(R.layout.fragment_info, container, false);
        viewStatusTitle = view.findViewById(R.id.viewStatusTitle);
        viewStatusDesc = view.findViewById(R.id.statusTextView);
-       viewArchitecture = view.findViewById(R.id.statusTextView2);
        viewIType = view.findViewById(R.id.statusTextView3);
        viewStatus = view.findViewById(R.id.statusTextView4);
        viewStartBtn = view.findViewById(R.id.startButton);
@@ -97,7 +98,6 @@ public class InfoFragment extends Fragment {
        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
        SharedPreferences.Editor prefEditor = sharedPreferences.edit();
 
-       viewArchitecture.setText(sharedPreferences.getString("checker_arch", "NULL"));
        viewIType.setText(sharedPreferences.getString("checker_type", "NULL"));
 
        if (Utils.getBatteryRestrictionStatus(getActivity())) {
