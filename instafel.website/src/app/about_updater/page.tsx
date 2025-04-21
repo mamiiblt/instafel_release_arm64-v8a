@@ -15,10 +15,7 @@ import {
   RefreshCcwDot,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
-import { LoadingBar } from "@/components/ifl";
 import Footer from "@/components/Footer";
-import Image from "next/image";
 
 interface Asset {
   name: string;
@@ -31,40 +28,11 @@ interface Release {
 }
 
 export default function UpdaterPage() {
-  const [apkUrl, setApkUrl] = useState<string | null>(null);
-  const [versionTag, setVersionTag] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchApkUrl = async () => {
-      try {
-        const response = await fetch(
-          "https://api.github.com/repos/mamiiblt/instafel-updater/releases/latest",
-        );
-        const data: Release = await response.json();
-        setVersionTag(data.tag_name);
-
-        const apkAsset = data.assets.find((asset) =>
-          asset.name.endsWith(".apk"),
-        );
-        setApkUrl(apkAsset ? apkAsset.browser_download_url : null);
-      } catch (error) {
-        console.error("Failed to fetch updater information:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchApkUrl();
-  }, []);
-
-  if (isLoading) {
-    return <LoadingBar />;
-  }
+  const apkUrl = "https://bitbucket.org/mamiiblt_ws/ifl-updater-releases/downloads/ifl-updater-v2.0.3.apk";
+  const versionTag = "v2.0.3";
 
   return (
     <AnimatePresence>
-      {versionTag ? (
         <div>
           <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
@@ -117,7 +85,7 @@ export default function UpdaterPage() {
                     variant="outline-gradient"
                     className="group"
                   >
-                    <Link href="https://github.com/mamiiblt/instafel-updater">
+                    <Link href="https://github.com/mamiiblt/instafel">
                       <GitBranch className="mr-2 group-hover:rotate-12 transition-transform duration-300" />
                       Source Code
                     </Link>
@@ -306,18 +274,6 @@ export default function UpdaterPage() {
           </div>
           <Footer />
         </div>
-      ) : (
-        <div className="py-12 px-6 text-center">
-          <Card className="max-w-md mx-auto p-6">
-            <h2 className="text-xl font-bold mb-4">Download Error</h2>
-            <p className="text-muted-foreground mb-6">
-              We couldn&apos;t retrieve the latest version information. Please
-              check your connection or try again later.
-            </p>
-            <Button onClick={() => window.location.reload()}>Retry</Button>
-          </Card>
-        </div>
-      )}
     </AnimatePresence>
   );
 }

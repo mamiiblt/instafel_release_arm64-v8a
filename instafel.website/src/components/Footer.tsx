@@ -20,7 +20,6 @@ export default function Footer() {
   const pathname = usePathname();
 
   React.useEffect(() => {
-    // Simulating loading for a very short time
     const timer = setTimeout(() => {
       setLoading(false);
     }, 300);
@@ -55,6 +54,9 @@ export default function Footer() {
               <p className="text-muted-foreground">
                 Provides fast & up-to-date Instagram Alpha experience with
                 enhanced features and community-driven development
+                <br />
+                <br />
+                Instafel has no any affiliation with Meta or Instagram.
               </p>
             </div>
 

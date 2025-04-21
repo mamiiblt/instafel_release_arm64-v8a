@@ -10,14 +10,21 @@ import {
   RefreshCw,
   Download,
   Send,
+  Wrench,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/components/Footer";
+import HomeMockup from "@/components/HomeMockup";
 
 export default function Home() {
   const features = [
+    {
+      icon: <Wrench />,
+      title: "Developer Options",
+      desc: "Access the developer-exclusive tools in latest Alpha bases."
+    },
     {
       icon: <LucideInstagram />,
       title: "Clone Support",
@@ -74,7 +81,7 @@ export default function Home() {
                 }}
                 className="mb-6 text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent dark:from-gray-100 dark:to-gray-400"
               >
-                Better Alpha Experience
+                The Best Alpha Experience
               </motion.h1>
 
               <motion.p
@@ -159,16 +166,8 @@ export default function Home() {
                 }}
                 className="mt-12 w-full max-w-4xl mx-auto relative"
               >
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/30 to-primary/10 rounded-2xl blur-xl opacity-50 animate-pulse"></div>
-                <div className="relative overflow-hidden rounded-xl shadow-xl">
-                  <Image
-                    alt="Instafel App Screenshot"
-                    src="/instafel_hero.png"
-                    width="800"
-                    height="800"
-                    quality="100"
-                    className="w-full h-auto object-cover rounded-xl hover:scale-[1.02] transition-transform duration-700"
-                  />
+                <div className="relative overflow-hidden rounded-xl">
+                  <HomeMockup />
                 </div>
               </motion.div>
             </div>
@@ -322,7 +321,7 @@ export default function Home() {
                     </div>
 
                     <div className="flex items-center justify-between mt-4 text-xs text-gray-500">
-                      <span>1,239 members</span>
+                      <span>5,500+ members</span>
                       <span>325 online</span>
                     </div>
                   </div>
@@ -344,7 +343,7 @@ export default function Home() {
           </h2>
           <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
             Experience the latest Instagram Alpha features with our enhanced
-            app. Download now and join thousands of satisfied users.
+            app, download now and join thousands of satisfied users
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
@@ -365,7 +364,7 @@ export default function Home() {
             >
               <Link href="/about_updater">
                 <RefreshCw className="mr-2" />
-                Get Auto Updates
+                View Updater
               </Link>
             </Button>
           </div>
