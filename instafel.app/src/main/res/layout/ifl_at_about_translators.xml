@@ -101,7 +101,7 @@
             app:ifl_attr_ui_spaceBottom="visible"
             app:ifl_attr_ui_subIconRes="@drawable/ifl_open_in_browser"
             app:ifl_attr_ui_subtitleText="हिंदी"
-            app:ifl_attr_ui_titleText="Sahil Ensari" />
+            app:ifl_attr_ui_titleText="@imsahilansarii" />
         <me.mamiiblt.instafel.ui.TileLarge
             android:id="@id/ifl_tile_lang_portugal"
             android:layout_width="fill_parent"
