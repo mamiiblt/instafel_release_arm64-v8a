@@ -81,7 +81,6 @@ public class CreateIflSourceZip implements Command {
 
         copyRawResource("drawable", resFolder);
         copyRawResource("layout", resFolder);
-        copyRawResource("xml", resFolder);
         parseResources();
         Utils.zipDirectory(
             Paths.get(Utils.mergePaths(Env.PROJECT_DIR, "smali_sources")),

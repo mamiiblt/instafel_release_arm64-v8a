@@ -41,14 +41,10 @@
             android:exported="false" />
 
         <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="me.mamiiblt.instafel.provider"
+            android:name="me.mamiiblt.instafel.utils.InstafelFileProvider"
+            android:authorities="me.mamiiblt.instafel.fileprovider"
             android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/ifl_file_provider" />
-        </provider>
+            android:grantUriPermissions="true" />
 
         <activity
             android:name=".activity.ifl_a_ota"

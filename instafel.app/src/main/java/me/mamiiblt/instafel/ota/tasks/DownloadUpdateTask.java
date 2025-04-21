@@ -28,6 +28,7 @@ import java.text.DecimalFormat;
 import me.mamiiblt.instafel.R;
 import me.mamiiblt.instafel.managers.NotificationOtaManager;
 import me.mamiiblt.instafel.managers.PreferenceManager;
+import me.mamiiblt.instafel.utils.InstafelFileProvider;
 import me.mamiiblt.instafel.utils.PreferenceKeys;
 import me.mamiiblt.instafel.utils.dialog.InstafelDialog;
 
@@ -54,7 +55,7 @@ public class DownloadUpdateTask extends AsyncTask<String, Integer, String> {
         this.instafelDialog = _dialog;
         this.df = new DecimalFormat("#.##");
 
-        if (method == "NEW") {
+        if (method.equals("NEW")) {
             this.downloadMethod = true;
         } else {
             this.downloadMethod = false;
@@ -87,7 +88,7 @@ public class DownloadUpdateTask extends AsyncTask<String, Integer, String> {
     protected String doInBackground(String... f_url) {
         int count;
         try {
-            File f = new File(activity.getExternalFilesDir(null), "ifl_update_files");
+            File f = new File(activity.getExternalFilesDir(null), "instafel_files");
             if (!f.exists()) {
                 f.mkdirs();
             } else {
@@ -174,13 +175,13 @@ public class DownloadUpdateTask extends AsyncTask<String, Integer, String> {
     
     @Override
     protected void onPostExecute(String file_url) {
-        File f = new File(activity.getExternalFilesDir(null), "ifl_update_files");
+        File f = new File(activity.getExternalFilesDir(null), "instafel_files");
         File ifl_update_file = new File(f.getPath(), "ifl_update.apk");
 
         if (ifl_update_file.length() == fileSize) {
            if (ifl_update_file.exists()) {
                Intent intent = new Intent(Intent.ACTION_VIEW);
-               intent.setDataAndType(uriFromFile(new File(ifl_update_file.getPath())), "application/vnd.android.package-archive");
+               intent.setDataAndType(InstafelFileProvider.getFileUri(ifl_update_file.getName()), "application/vnd.android.package-archive");
                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
@@ -237,16 +238,5 @@ public class DownloadUpdateTask extends AsyncTask<String, Integer, String> {
                 notificationManager.notify(notificationId, notificationBuilder.build());
             }
        }
-    }
-
-    Uri uriFromFile(File file) {
-        if (new PreferenceManager(this.activity).getPreferenceBoolean(PreferenceKeys.ifl_enable_debug_mode, false).booleanValue()) {
-            Uri.Builder builder = new Uri.Builder();
-            builder.scheme("content").authority("me.mamiiblt.instafel.test").appendPath("app_files").appendPath("ifl_update_files").appendPath(file.getName());
-            return builder.build();
-        }
-        Uri.Builder builder2 = new Uri.Builder();
-        builder2.scheme("content").authority("me.mamiiblt.instafel.provider").appendPath("app_files").appendPath("ifl_update_files").appendPath(file.getName());
-        return builder2.build();
     }
 }

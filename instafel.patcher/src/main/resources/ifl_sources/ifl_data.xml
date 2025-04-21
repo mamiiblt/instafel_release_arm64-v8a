@@ -2070,7 +2070,6 @@
             <public name="ifl_theme_amoled" type="style"/>
             <public name="ifl_theme_dark" type="style"/>
             <public name="ifl_theme_light" type="style"/>
-            <public name="ifl_file_provider" type="xml"/>
         </vcategory>
         <vcategory name="strings">
             <string name="ifl_a0_01">Backup Options</string>
@@ -2743,11 +2742,7 @@
             <string name="ifl_t1_03">Σφάλμα ενημέρωσης του Instafel.</string>
         </vcategory>
         <vcategory name="providers">
-            <provider android:authorities="me.mamiiblt.instafel.provider" android:exported="false" android:grantUriPermissions="true" android:name="androidx.core.content.FileProvider">
-                            
-                <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/ifl_file_provider"/>
-                        
-            </provider>
+            <provider android:authorities="me.mamiiblt.instafel.fileprovider" android:exported="false" android:grantUriPermissions="true" android:name="me.mamiiblt.instafel.utils.InstafelFileProvider"/>
         </vcategory>
         <vcategory name="strings-fr">
             <string name="ifl_a0_01">Options de sauvegarde</string>
