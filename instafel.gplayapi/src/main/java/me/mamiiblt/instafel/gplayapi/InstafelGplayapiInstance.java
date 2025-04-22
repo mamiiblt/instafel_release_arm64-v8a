@@ -2,8 +2,6 @@ package me.mamiiblt.instafel.gplayapi;
 
 import me.mamiiblt.instafel.gplayapi.utils.AppInfo;
 import me.mamiiblt.instafel.gplayapi.utils.General;
-import me.mamiiblt.instafel.gplayapi.utils.Log;
-import com.aurora.gplayapi.data.models.App;
 import com.aurora.gplayapi.data.models.AuthData;
 import com.aurora.gplayapi.data.models.File;
 import com.aurora.gplayapi.helpers.AppDetailsHelper;

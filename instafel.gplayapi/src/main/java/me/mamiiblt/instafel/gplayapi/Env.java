@@ -96,8 +96,9 @@ public class Env {
                         if (!lastCheckedVersion[0].equals(appInfo.getVer_name())) {
                             lastCheckedVersion[0] = appInfo.getVer_name();
                             String latestIflVersion = getLatestInstafelVersion(); // get latest instafel version
-                            if (latestIflVersion != null && latestIflVersion.equals(appInfo.getVer_name())) { // this version released or not
-                                triggerUpdate(appInfo); // trigger the generator
+                            if (latestIflVersion != null && !latestIflVersion.equals(appInfo.getVer_name())) { // this version released or not
+                                Log.println("I", "Triggering update, " + latestIflVersion + " -> " + appInfo.getVer_name());
+                                triggerUpdate(appInfo); 
                             }
                         }
                     }
@@ -157,7 +158,6 @@ public class Env {
                     String[] verNameLines = line.split("\\|");
                     for (String part : verNameLines) {
                         if (!part.isEmpty() && isNumeric(part)) {
-                            Log.println("I", "Latest Instafel version is " + part.trim());
                             return part.trim();
                         }
                     }
