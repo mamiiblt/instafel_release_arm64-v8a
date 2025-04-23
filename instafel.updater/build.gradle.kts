@@ -47,7 +47,9 @@ android {
         minSdk = 26
         targetSdk = 34
         versionCode = androidConfig["versionCode"] as Int
-        versionName = "$projectVersion-$commitHash"
+        versionName = projectVersion
+        buildConfigField("String", "COMMIT", "\"$commitHash\"")
+        buildConfigField("String", "BRANCH", "\"main\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

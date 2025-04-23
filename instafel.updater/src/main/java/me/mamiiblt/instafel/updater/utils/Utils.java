@@ -74,15 +74,20 @@ public class Utils {
     public static void showAppInfoDialog(Context ctx) {
         new MaterialAlertDialogBuilder(ctx)
                 .setTitle(ctx.getString(R.string.about_app))
-                .setMessage("version: v" + BuildConfig.VERSION_NAME + "-" + BuildConfig.BUILD_TYPE +
-                        "\nsdk: API " + Build.VERSION.SDK_INT + " (" + Build.VERSION.RELEASE + ")" +
-                        "\ndevice: " + Build.DEVICE +
-                        "\nproduct: " +  Build.PRODUCT +
-                        "\nbuild_id: " + Build.ID  +
+                .setMessage("version: v" + BuildConfig.VERSION_NAME +
+                        "\ncommit: " + BuildConfig.COMMIT + "@" + BuildConfig.BRANCH +
+                        "\nchannel: " + BuildConfig.BUILD_TYPE +
                         "\n\n" + ctx.getString(R.string.developed_by)
                 )
+                .setNegativeButton("View Commit", (dialog, which) -> openInBrowser(ctx, Uri.parse("https://github.com/mamiiblt/instafel/commit/" + BuildConfig.COMMIT)))
                 .setPositiveButton(ctx.getString(R.string.dialog_ok), (dialog, which) -> openBatterySettings(ctx))
                 .show();
+    }
+
+    public static void openInBrowser(Context ctx, Uri uri) {
+        Intent intent = new Intent("android.intent.action.VIEW", uri);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        ctx.startActivity(intent);
     }
 
     private static void openBatterySettings(Context ctx) {

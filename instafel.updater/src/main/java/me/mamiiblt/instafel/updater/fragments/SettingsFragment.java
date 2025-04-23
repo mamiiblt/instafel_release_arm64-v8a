@@ -107,10 +107,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             }
         });
         MaterialPreference appVersion = findPreference("app_version");
-        String[] versionName = BuildConfig.VERSION_NAME.split("-");
-        String version = versionName[0];
-        String tag = versionName[1];
-        appVersion.setSummary(getActivity().getString(R.string.app_version_s, version, tag));
+        appVersion.setSummary(getActivity().getString(R.string.app_version_s, BuildConfig.VERSION_NAME, BuildConfig.COMMIT, BuildConfig.BRANCH));
         appVersion.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(@NonNull Preference preference) {
