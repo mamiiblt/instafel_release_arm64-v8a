@@ -78,7 +78,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         sourceCode.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(@NonNull Preference preference) {
-                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse(sourceCode.getSummary().toString()));
+                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("https://github.com/mamiiblt/instafel"));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getContext().startActivity(intent);
                 return false;

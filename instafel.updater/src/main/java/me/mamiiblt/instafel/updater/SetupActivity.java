@@ -32,10 +32,8 @@ public class SetupActivity extends AppCompatActivity {
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = preferences.edit();
 
-        if (preferences.getBoolean("material_you", true)) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                DynamicColors.applyToActivityIfAvailable(this);
-            }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            DynamicColors.applyToActivityIfAvailable(this);
         } else {
             setTheme(R.style.Base_Theme_InstafelUpdater);
         }
@@ -47,17 +45,8 @@ public class SetupActivity extends AppCompatActivity {
             return insets;
         });
 
-        RadioGroup radioGroupArch = findViewById(R.id.architecture_radio_group);
         RadioGroup radioGroupInstallType = findViewById(R.id.install_type_radio_group);
         RadioGroup radioGroupIMethod = findViewById(R.id.method_radio_group);
-        radioGroupArch.setOnCheckedChangeListener((group, checkedId) -> {
-            if (checkedId == R.id.radio_arm64) {
-                editor.putString("checker_arch", "arm64-v8a (64-bit)");
-            } else if (checkedId == R.id.radio_arm32) {
-                editor.putString("checker_arch", "armeabi-v7a (32-bit)");
-            }
-            editor.apply();
-        });
 
         radioGroupInstallType.setOnCheckedChangeListener((group, checkedId) -> {
             if (checkedId == R.id.radio_unclone) {
@@ -80,7 +69,7 @@ public class SetupActivity extends AppCompatActivity {
 
     public void next(View view) {
 
-        if (!preferences.getString("checker_method", "NULL").equals("NULL") && !preferences.getString("checker_arch", "NULL").equals("NULL") && !preferences.getString("checker_type", "MULL").equals("NULL")) {
+        if (!preferences.getString("checker_method", "NULL").equals("NULL") && !preferences.getString("checker_type", "MULL").equals("NULL")) {
 
             // set app preferences too
             editor.putString("checker_interval", "4 hour");

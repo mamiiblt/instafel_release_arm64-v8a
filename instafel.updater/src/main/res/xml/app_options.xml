@@ -41,7 +41,6 @@
         <com.github.tttt55.materialyoupreferences.preferences.MaterialSwitchGooglePreference
             android:key="send_notification"
             android:title="@string/send_notif"
-            android:enabled="false"
             app:allowDividerAbove="false"
             android:summary="@string/send_notif_s"
             android:defaultValue="true"

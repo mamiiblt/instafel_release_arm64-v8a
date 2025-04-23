@@ -36,40 +36,13 @@ import rikka.shizuku.Shizuku;
 
 public class InfoFragment extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     private static boolean rootStatus = false;
 
-    private String mParam1;
-    private String mParam2;
-
-    public InfoFragment() {
-    }
-
-    public static InfoFragment newInstance(String param1, String param2) {
-        InfoFragment fragment = new InfoFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
-    }
     private TextView viewStatusDesc, viewStatusTitle, viewIType, viewStatus, viewBatteryStatus;
     private Button viewStartBtn, viewStopBtn;
-    private FloatingActionButton viewFab;
     private SharedPreferences sharedPreferences;
     public String STRING_AUTHORIZED, STRING_NOT_INSTALLED, STRING_START_SERVICE, STRING_UNAUTHORIZED, STRING_STOPPED, STRING_RESTRICTED, STRING_NOT_FOUND, STRING_UNRESTICTED;
-    public ImageView iconProvider, iconBattery, warIconProvider, warIconBattery;
+    public ImageView iconProvider, warIconProvider, warIconBattery;
     private LogUtils logUtils;
 
     @Override
@@ -82,7 +55,9 @@ public class InfoFragment extends Fragment {
        viewStartBtn = view.findViewById(R.id.startButton);
        viewStopBtn = view.findViewById(R.id.stopButton);
        viewBatteryStatus = view.findViewById(R.id.statusTextView5);
-       viewFab = view.findViewById(R.id.fab);
+       iconProvider = view.findViewById(R.id.iview_1);
+       warIconProvider = view.findViewById(R.id.wview_1);
+       warIconBattery = view.findViewById(R.id.wview_2);
        logUtils = new LogUtils(getActivity());
 
        Context ctx = getContext();
@@ -102,6 +77,7 @@ public class InfoFragment extends Fragment {
 
        if (Utils.getBatteryRestrictionStatus(getActivity())) {
            viewBatteryStatus.setText(STRING_RESTRICTED);
+           warIconBattery.setVisibility(View.VISIBLE);
            view.findViewById(R.id.battery_status).setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View view) {
@@ -110,10 +86,13 @@ public class InfoFragment extends Fragment {
            });
        } else {
            viewBatteryStatus.setText(STRING_UNRESTICTED);
+           warIconBattery.setVisibility(View.GONE);
        }
 
        if (Utils.getMethod(getContext()) == 1) {
            viewStatusTitle.setText(this.getString(R.string.root_status));
+           iconProvider.setImageDrawable(getActivity().getDrawable(R.drawable.root));
+           warIconProvider.setVisibility(View.GONE);
            if (sharedPreferences.getBoolean("root_request_complete", false)) {
                if (RootManager.isDeviceRooted()) {
                    CommandOutput commandOutput = RootManager.execSuCommands("su -v", "su -V");
@@ -124,6 +103,8 @@ public class InfoFragment extends Fragment {
                    } else {
                        rootStatus = false;
                        viewStatusDesc.setText(STRING_UNAUTHORIZED);
+                       warIconProvider.setVisibility(View.VISIBLE);
+
                        view.findViewById(R.id.root_status).setOnClickListener(new View.OnClickListener() {
                            @Override
                            public void onClick(View view) {
@@ -133,23 +114,28 @@ public class InfoFragment extends Fragment {
                    }
                } else {
                    viewStatusDesc.setText(STRING_NOT_FOUND);
+                   warIconProvider.setVisibility(View.VISIBLE);
                }
            } else {
                viewStatusDesc.setText(this.getString(R.string.checking));
            }
        } else {
            viewStatusTitle.setText(this.getString(R.string.shiuku_status));
+           iconProvider.setImageDrawable(getActivity().getDrawable(R.drawable.shizuku));
+           warIconProvider.setVisibility(View.GONE);
            if (Utils.isShizukuInstalled(getActivity())) {
                if (Shizuku.pingBinder()) {
                    if (Utils.hasShizukuPermission()) {
                        viewStatusDesc.setText(STRING_AUTHORIZED);
                    } else {
                        viewStatusDesc.setText(STRING_UNAUTHORIZED);
+                       warIconProvider.setVisibility(View.VISIBLE);
                        view.findViewById(R.id.root_status).setOnClickListener(new View.OnClickListener() {
                            @Override
                            public void onClick(View view) {
                                if (Utils.hasShizukuPermission()) {
                                    viewStatusDesc.setText(STRING_AUTHORIZED);
+                                   warIconProvider.setVisibility(View.GONE);
                                } else {
                                    Shizuku.requestPermission(100);
                                }
@@ -158,10 +144,12 @@ public class InfoFragment extends Fragment {
                    }
                } else {
                    Toast.makeText(ctx, ctx.getString(R.string.please_start_shizuku), Toast.LENGTH_SHORT).show();
+                   warIconProvider.setVisibility(View.VISIBLE);
                    viewStatusDesc.setText(STRING_START_SERVICE);
                }
            } else {
                viewStatusDesc.setText(STRING_NOT_INSTALLED);
+               warIconProvider.setVisibility(View.VISIBLE);
                view.findViewById(R.id.root_status).setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View view) {
@@ -223,23 +211,6 @@ public class InfoFragment extends Fragment {
                logUtils.w(getContext().getString(R.string.upd_stopped));
                UpdateWorkHelper.cancelWork(getActivity());
                updateUI();
-           }
-       });
-
-       viewFab.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-                UpdateWorkHelper.restartWork(getActivity());
-               Toast.makeText(getActivity(), ctx.getString(R.string.work_restarted), Toast.LENGTH_SHORT).show();
-           }
-       });
-       viewFab.setOnLongClickListener(new View.OnLongClickListener() {
-           @Override
-           public boolean onLongClick(View view) {
-               prefEditor.putBoolean("15m_rule", !sharedPreferences.getBoolean("15m_rule", false));
-               prefEditor.apply();
-               Toast.makeText(getActivity(), "15M Rule changed, restarting work.", Toast.LENGTH_SHORT).show();
-               return false;
            }
        });
        return view;

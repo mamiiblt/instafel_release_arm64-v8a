@@ -69,17 +69,8 @@ public class UpdateWork extends Worker {
 
         // Get arch and type from SharedPreferences
 
-        String arch; String type;
-        String prefArch = preferences.getString("checker_arch", "non");
+        String type;
         String prefType = preferences.getString("checker_type", "non");
-        if (prefArch.equals("arm64-v8a (64-bit)")) {
-            arch = "arm64";
-        } else if (prefArch.equals("armeabi-v7a (32-bit)")) {
-            arch = "arm32";
-        } else {
-            arch = null;
-            sendError("You selected invalid arch, work is stopped.", true, null);
-        }
 
         if (prefType.equals("Unclone")) {
             type = "uc";
@@ -90,19 +81,12 @@ public class UpdateWork extends Worker {
             sendError("You selected invalid installation type, work is stopped.", true, null);
         }
 
-        logUtils.w("Work arch is " + arch + " and type is " + type);
-
-
         // Set AppPreferences
 
         appPreferences = new AppPreferences(
-                preferences.getString("checker_interval", "4"),
-                arch, type,
                 preferences.getBoolean("send_notification", true),
-                preferences.getBoolean("send_toast", true),
                 preferences.getBoolean("use_mobile_data", false),
                 preferences.getBoolean("12_hour_rule", false),
-                preferences.getBoolean("use_instafel_api", true),
                 preferences.getBoolean("disable_error_notifications", false),
                 preferences.getBoolean("crash_logger", false));
 
@@ -141,37 +125,15 @@ public class UpdateWork extends Worker {
                             logUtils.w("Installed IG version is " + versionName);
                             try {
                                 OkHttpClient client = new OkHttpClient();
-                                String urlPart;
-                                if (arch.equals("arm64")) {
-                                    urlPart = "arm64-v8a";
-                                } else {
-                                    urlPart = "armeabi-v7a";
-                                }
-                                Request request;
-                                if (appPreferences.isUseInstafelApi()) {
-                                    request  = new Request.Builder()
-                                            .url("https://api.mamiiblt.me/ifl/check?arch=" + arch)
-                                            .build();
-                                } else {
-                                    request = new Request.Builder()
-                                            .url("https://api.github.com/repos/mamiiblt/instafel_release_" + urlPart + "/releases/latest")
-                                            .build();
-                                }
+                                Request request = new Request.Builder()
+                                        .url("https://api.mamiiblt.me/ifl/check")
+                                        .build();
                                 Response response = client.newCall(request).execute();
                                 if (response.isSuccessful()) {
 
-                                    String version;
-                                    String published_at;
-                                    JSONObject res;
-                                    if (appPreferences.isUseInstafelApi()) {
-                                        res = new JSONObject(response.body().string());
-                                        version = res.getString("ig_version");
-                                        published_at = res.getString("published_at");
-                                    } else {
-                                        res = new JSONObject(response.body().string());
-                                        version = res.getString("body").split("\n")[1].split("v")[1].split(" ")[0];
-                                        published_at = res.getString("published_at");
-                                    }
+                                    JSONObject res = new JSONObject(response.body().string());
+                                    String version = res.getString("ig_version");
+                                    String published_at = res.getString("published_at");
 
                                     if (versionName.equals(version)) {
                                         logUtils.w("Update not needed, app is up-to-date.");
@@ -197,30 +159,23 @@ public class UpdateWork extends Worker {
                                         }
 
                                         String b_download_url = null;
-                                        if (appPreferences.isUseInstafelApi()) {
-                                            if (type.equals("uc")) {
-                                                b_download_url = res.getString("download_link_uc");
-                                            } else {
-                                                b_download_url = res.getString("download_link_c");
-                                            }
+                                        if (type.equals("uc")) {
+                                            b_download_url = res.getString("download_link_uc");
                                         } else {
-                                            JSONArray assets = res.getJSONArray("assets");
-                                            for (int i = 0; i < assets.length(); i++) {
-                                                JSONObject asset = assets.getJSONObject(i);
-                                                if (asset.getString("name").contains("_" + type + "_")) {
-                                                    b_download_url = asset.getString("browser_download_url");
-                                                }
-                                            }
+                                            b_download_url = res.getString("download_link_c");
                                         }
 
                                         if (b_download_url != null) {
-
-                                            // DOWNLOAD & INSTALL UPDATE
-                                            uVersion = version;
-                                            Intent fgServiceIntent = new Intent(ctx, InstafelUpdateService.class);
-                                            fgServiceIntent.putExtra("file_url", b_download_url);
-                                            fgServiceIntent.putExtra("version", uVersion);
-                                            ctx.startService(fgServiceIntent);
+                                            try {
+                                                uVersion = version;
+                                                Intent fgServiceIntent = new Intent(ctx, InstafelUpdateService.class);
+                                                fgServiceIntent.putExtra("file_url", b_download_url);
+                                                fgServiceIntent.putExtra("version", uVersion);
+                                                ctx.startService(fgServiceIntent);
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                                logUtils.w("Error while starting service.");
+                                            }
                                         } else {
                                             sendError("Updater can't found update asset!", true, null);
                                         }

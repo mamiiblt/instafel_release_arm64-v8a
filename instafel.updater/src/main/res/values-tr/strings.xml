@@ -80,7 +80,7 @@
     <string name="updater_guide">Updater Kılavuzu</string>
     <string name="updater_guide_s">Instafel Updater\'i nasıl kullanacağınızı öğrenin</string>
     <string name="checking">Kontrol ediliyor..</string>
-    <string name="not_found">SU cihazda bulunamadı</string>
+    <string name="not_found">Cihazınızda root bulunamadı, lütfen manager\'den izin verin.</string>
     <string name="please_allow_root">Root erişimi reddedildi, lütfen managerden izin verin.</string>
     <string name="authorized">Yetkilendirildi</string>
     <string name="not_installed">Shizuku Kurulu Değil</string>

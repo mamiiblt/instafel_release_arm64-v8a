@@ -19,33 +19,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/checker_arch"
-        android:textSize="18sp"
-        android:layout_marginBottom="12dp"/>
-
-    <RadioGroup
-        android:id="@+id/architecture_radio_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/radio_arm64"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:text="arm64-v8a"/>
-
-        <RadioButton
-            android:id="@+id/radio_arm32"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="armeabi-v7a"/>
-    </RadioGroup>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/checker_itype"
         android:textSize="18sp"
         android:layout_marginTop="24dp"

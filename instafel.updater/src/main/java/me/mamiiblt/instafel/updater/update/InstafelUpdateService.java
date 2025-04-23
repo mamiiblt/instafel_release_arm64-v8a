@@ -6,12 +6,14 @@ import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
+import androidx.preference.PreferenceManager;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -23,6 +25,7 @@ import java.net.URLConnection;
 import java.text.DecimalFormat;
 
 import me.mamiiblt.instafel.updater.R;
+import me.mamiiblt.instafel.updater.utils.AppPreferences;
 import me.mamiiblt.instafel.updater.utils.CommandOutput;
 import me.mamiiblt.instafel.updater.utils.LogUtils;
 import me.mamiiblt.instafel.updater.utils.RootManager;
@@ -42,14 +45,23 @@ public class InstafelUpdateService extends Service {
     private String version;
     NotificationManager notificationManager;
     NotificationCompat.Builder notificationBuilder;
+    SharedPreferences preferences = null;
+    private AppPreferences appPreferences;
 
     @Override
     public void onCreate() {
         this.df = new DecimalFormat("#.##");
         this.ctx = getApplicationContext();
         this.logUtils = new LogUtils(ctx);
+        this.preferences = PreferenceManager.getDefaultSharedPreferences(ctx);
         this.notificationManager = ctx.getSystemService(NotificationManager.class);
         this.notificationBuilder = new NotificationCompat.Builder(ctx, CHANNEL_ID);
+        this.appPreferences = new AppPreferences(
+                preferences.getBoolean("send_notification", true),
+                preferences.getBoolean("use_mobile_data", false),
+                preferences.getBoolean("12_hour_rule", false),
+                preferences.getBoolean("disable_error_notifications", false),
+                preferences.getBoolean("crash_logger", false));
         super.onCreate();
     }
 
@@ -114,10 +126,14 @@ public class InstafelUpdateService extends Service {
                     input.close();
                 } catch (Exception e) {
                     e.printStackTrace();
-                    logUtils.w("Error while downloading update (IO). [" + e.getMessage() + "]");
-                    logUtils.w("MSG: " + e.getMessage());
-                    logUtils.w("CLASS: " + e.getClass().toString());
-                    logUtils.w("TRACE: " + Log.getStackTraceString(e));
+                    if (appPreferences.isCrashLoggerEnabled()) {
+                        logUtils.w("Error while downloading update (IO). [" + e.getMessage() + "]");
+                        logUtils.w("MSG: " + e.getMessage());
+                        logUtils.w("CLASS: " + e.getClass().toString());
+                        logUtils.w("TRACE: " + Log.getStackTraceString(e));
+                    } else {
+                        logUtils.w("An error occurred, " + e.getMessage());
+                    }
                     errorOccured = true;
                 } finally {
                     if (!errorOccured) {
@@ -130,10 +146,15 @@ public class InstafelUpdateService extends Service {
             }).start();
 
         } catch (Exception e) {
-            logUtils.w("Error while ensuring connection.");
-            logUtils.w("MSG: " + e.getMessage());
-            logUtils.w("CLASS: " + e.getClass().toString());
-            logUtils.w("TRACE: " + Log.getStackTraceString(e));
+
+            if (appPreferences.isCrashLoggerEnabled()) {
+                logUtils.w("Error while ensuring connection.");
+                logUtils.w("MSG: " + e.getMessage());
+                logUtils.w("CLASS: " + e.getClass().toString());
+                logUtils.w("TRACE: " + Log.getStackTraceString(e));
+            } else {
+                logUtils.w("An error occurred, " + e.getMessage());
+            }
             notifyError( "An error occured when downloading update");
             e.printStackTrace();
         }
@@ -173,7 +194,6 @@ public class InstafelUpdateService extends Service {
         logUtils.w("Download complete, installation is started.");
         new Thread(() -> {
             try {
-
                 if (Utils.getMethod(ctx) == 1) {
                     installApk(ifl_update_file, true);
                 } else {
@@ -249,6 +269,8 @@ public class InstafelUpdateService extends Service {
         notificationBuilder
                 .setContentTitle(ctx.getString(R.string.n1_downloading))
                 .setContentText(prog + "% (" + finalFormattedDownloadedSize + " / " + formattedFileSize +" MB)")
+                .setSound(null)
+                .setDefaults(0)
                 .setProgress(100, prog, false);
         notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
     }
@@ -259,7 +281,6 @@ public class InstafelUpdateService extends Service {
                 .setContentTitle(ctx.getString(R.string.n2_waiting))
                 .setContentText(ctx.getString(R.string.n2_sub))
                 .setSmallIcon(android.R.drawable.stat_sys_download)
-                .setOngoing(true)
                 .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE);
         return notificationBuilder.build();
     }
@@ -274,21 +295,29 @@ public class InstafelUpdateService extends Service {
     }
 
     private void notifyUpdateInstalled() {
-        notificationBuilder
-                .setContentTitle(ctx.getString(R.string.n4_complete))
-                .setContentText(ctx.getString(R.string.n4_sub, version))
-                .setSmallIcon(R.drawable.update_success)
-                .setProgress(0, 0, false);
-        notificationManager.notify(1, notificationBuilder.build());
+       if (appPreferences.isAllowNotification()) {
+           notificationBuilder
+                   .setContentTitle(ctx.getString(R.string.n4_complete))
+                   .setContentText(ctx.getString(R.string.n4_sub, version))
+                   .setSmallIcon(R.drawable.update_success)
+                   .setProgress(0, 0, false);
+           notificationManager.notify(1, notificationBuilder.build());
+       } else {
+           notificationManager.cancel(1);
+       }
     }
 
     private void notifyError(String error) {
-        notificationBuilder
-                .setContentTitle(ctx.getString(R.string.error))
-                .setContentText(error)
-                .setSmallIcon(android.R.drawable.stat_notify_error)
-                .setProgress(0, 0, false);
-        notificationManager.notify(1, notificationBuilder.build());
+        if (appPreferences.isDisable_error_notifications() == false) {
+            notificationBuilder
+                    .setContentTitle(ctx.getString(R.string.error))
+                    .setContentText(error)
+                    .setSmallIcon(android.R.drawable.stat_notify_error)
+                    .setProgress(0, 0, false);
+            notificationManager.notify(1, notificationBuilder.build());
+        } else {
+            notificationManager.cancel(1);
+        }
     }
 
     private void createNotificationChannel() {
@@ -298,6 +327,7 @@ public class InstafelUpdateService extends Service {
                     "Update Download Service Notif.",
                     NotificationManager.IMPORTANCE_DEFAULT
             );
+            notificationChannel.setSound(null, null);
             notificationManager.createNotificationChannel(notificationChannel);
         }
     }

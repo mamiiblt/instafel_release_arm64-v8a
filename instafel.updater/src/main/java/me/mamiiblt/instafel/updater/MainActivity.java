@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         localizationUtils.updateAppLanguage();
 
         if (!prefsApp.getBoolean("init", false)) {
-            prefsEditor.putString("checker_arch", "NULL");
             prefsEditor.putString("checker_type", "NULL");
             prefsEditor.putString("checker_method", "NULL");
             prefsEditor.putBoolean("root_request_complete", false);
@@ -64,15 +63,13 @@ public class MainActivity extends AppCompatActivity {
             prefsEditor.apply();
         }
 
-        if (prefsApp.getBoolean("material_you", true)) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                DynamicColors.applyToActivityIfAvailable(this);
-            }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            DynamicColors.applyToActivityIfAvailable(this);
         } else {
             setTheme(R.style.Base_Theme_InstafelUpdater);
         }
 
-        if (prefsApp.getString("checker_arch", "NULL").equals("NULL")) {
+        if (prefsApp.getString("checker_type", "NULL").equals("NULL")) {
             Intent intent = new Intent(MainActivity.this, SetupActivity.class);
             startActivity(intent);
             finish();
