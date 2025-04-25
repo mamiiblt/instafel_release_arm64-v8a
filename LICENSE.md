@@ -17,7 +17,7 @@ The following conditions apply:
    - Uploading this code to other repositories, code hosting platforms, or package managers is not permitted.
 
 3. **Ownership and Copyright**:
-   - All intellectual property rights remain with the original author (Esma).
+   - All intellectual property rights remain with the original author mami).
    - You must not remove or alter any copyright notices or license headers.
 
 4. **Disclaimer of Warranty**:
