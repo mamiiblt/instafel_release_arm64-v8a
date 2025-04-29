@@ -5,7 +5,6 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { type ThemeProviderProps } from "next-themes";
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
-  // Force a re-render on the client side to avoid hydration mismatch
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {

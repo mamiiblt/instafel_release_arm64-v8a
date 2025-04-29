@@ -1,0 +1,57 @@
+{
+  "heroHeader": {
+    "title": "Instafel Updater",
+    "subtitle": "Otomatik güncelleme, sıfır efor!",
+    "description": "Instafel'i Root ve Shizuku kullanarak sürekli güncel tutun!"
+  },
+  "buttons": {
+    "download": "İndir {{version}}",
+    "sourceCode": "Kaynak Kodu"
+  },
+  "howItWorks": {
+    "title": "Nasıl Çalışıyor?",
+    "steps": {
+      "install": {
+        "title": "İndir & İzin Ver",
+        "description": "Uygulamayı indir, ardından root veya Shizuku izini ver!"
+      },
+      "configure": {
+        "title": "Özelleştir",
+        "description": "Kontrol sıklığını ve bir çok ayarı özelleştirebilirsin!"
+      },
+      "automatic": {
+        "title": "Otomatik Güncellemeler",
+        "description": "Sadece rahatla, Updater her şeyi senin için yapacak!"
+      }
+    }
+  },
+  "features": {
+    "title": "Anahtar Özellikler",
+    "silent": {
+      "title": "Sessiz Kurulum",
+      "description": "Updater arka planda çalışarak sürekli olarak güncellemeleri kontrol eder ve sessizce kurar!"
+    },
+    "shizuku": {
+      "title": "Shizuku Desteği",
+      "description": "Eğer rootlu bir cihazın yoksa, Shizuku sayesinde ADB'yi kullanarak Updater'i kullanabilirsin."
+    },
+    "openSource": {
+      "title": "Açık Kaynak",
+      "description": "Updater tamamen açık kaynak kodludur, bu sayede izinleri güvenle verebilirsin."
+    }
+  },
+  "whyUse": {
+    "title": "Neden kullanmalıyım?",
+    "benefits": {
+      "latestFeatures": "Her zaman en güncel yamalara ve özelliklere sahip ol",
+      "saveTime": "Elle güncelleme kurarak zaman kaybetme!",
+      "lightweight": "Çok az kaynak kullanır, ruhun bile duymaz :)",
+      "notifications": "Sadece Instafel güncellendiğinde bildirim alırsın, sessizce!",
+      "compatibility": "Hem Root hem de Shizuku ile kusursuz çalışır!"
+    }
+  },
+  "callToAction": {
+    "title": "Şimdi İndir!",
+    "description": "Sıfır efor ile Updater'i daima güncel tut, hemen şimdi indir!"
+  }
+}

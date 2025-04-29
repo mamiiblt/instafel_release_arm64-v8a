@@ -10,34 +10,44 @@ import {
   NavigationMenu,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { SITE_CONFIG } from "@/config/config";
 import { NavbarLoading } from "./loading";
 import { NavigationItem } from "./NavigationItem";
 import {
   BookOpenText,
   FileCog2Icon,
-  LucideFlag,
   LucideInstagram,
-  Monitor,
   RefreshCcwDot,
   Github,
   Menu,
-  X,
-  Sun,
-  Moon,
   Download,
+  GithubIcon,
+  Box,
+  Globe,
 } from "lucide-react";
 import ThemeSwitcher from "./ThemeSwitcher";
-import { useTheme } from "next-themes";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+import { useTranslation } from "react-i18next";
+import { navLanguages } from "@/lib/i18n-config";
 
 export default function Navbar() {
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
   const [scrolled, setScrolled] = React.useState(false);
   const pathname = usePathname();
-  const { theme, setTheme } = useTheme();
+  const { t, i18n } = useTranslation("common");
 
-  // Track scroll position to add background opacity
+  const changeLanguage = (languageCode) => {
+    i18n.changeLanguage(languageCode);
+  };
+
+  const currentLanguage =
+    navLanguages.find((lang) => lang.code === i18n.language) || navLanguages[0];
+
   React.useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
@@ -58,7 +68,6 @@ export default function Navbar() {
     setLoading(false);
   }, []);
 
-  // Close mobile menu when route changes
   React.useEffect(() => {
     setOpen(false);
   }, [pathname]);
@@ -66,6 +75,29 @@ export default function Navbar() {
   if (loading) {
     return <NavbarLoading />;
   }
+
+  const navItems = [
+    {
+      title: t("navbar.items.guide"),
+      href: "/guides",
+    },
+    {
+      title: t("navbar.items.backups"),
+      href: "/library_backup",
+    },
+    {
+      title: t("navbar.items.updater"),
+      href: "/about_updater",
+    },
+    {
+      title: t("navbar.items.src_code"),
+      href: "https://github.com/mamiiblt/instafel",
+    },
+    {
+      title: t("navbar.items.download"),
+      href: "/download?version=latest",
+    },
+  ];
 
   return (
     <motion.header
@@ -105,30 +137,12 @@ export default function Navbar() {
           <NavigationMenu className="relative">
             <NavigationMenuList className="flex gap-1 md:gap-2">
               <AnimatePresence>
-                {SITE_CONFIG.navItems.map((link, index) => {
+                {navItems.map((link, index) => {
                   const isActive =
                     pathname === (link.href.split("?")[0] || link.href);
 
-                  if (link.title === "Source Code") {
+                  if (link.title === t("navbar.items.src_code")) {
                     return null;
-                  }
-
-                  if (link.title === "Backup Library") {
-                    return (
-                      <motion.div
-                        key={link.href}
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.3, delay: index * 0.05 }}
-                      >
-                        <NavigationItem
-                          href={link.href}
-                          title="Backups"
-                          isActive={isActive}
-                        />
-                      </motion.div>
-                    );
                   }
 
                   return (
@@ -153,6 +167,43 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-2">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+          >
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="transition-transform hover:scale-105"
+                >
+                  <Globe className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-40">
+                {navLanguages.map((lang) => (
+                  <DropdownMenuItem
+                    key={lang.code}
+                    onClick={() => changeLanguage(lang.code)}
+                    className={`cursor-pointer ${
+                      currentLanguage.code === lang.code
+                        ? "bg-accent/40 font-medium"
+                        : ""
+                    }`}
+                  >
+                    <span className="mr-2">{lang.flag}</span>
+                    {lang.name}
+                    {currentLanguage.code === lang.code && (
+                      <span className="ml-auto text-primary">•</span>
+                    )}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -183,25 +234,11 @@ export default function Navbar() {
             </Button>
           </motion.div>
 
-          {/* Mobile nav indicator - Shows current page name */}
-          <div className="md:hidden flex items-center mr-1">
-            <div className="text-sm font-medium text-primary">
-              {SITE_CONFIG.navItems.map((link) =>
-                pathname === link.href ? (
-                  <span key={link.href} className="flex items-center">
-                    <span className="w-2 h-2 bg-primary rounded-full mr-2"></span>
-                    {link.title === "Backup Library" ? "Backups" : link.title}
-                  </span>
-                ) : null,
-              )}
-            </div>
-          </div>
-
           <div className="md:hidden">
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
                 <Button
-                  variant="ghost"
+                  variant="outline"
                   size="icon"
                   className="relative transition-all duration-200 hover:bg-accent hover:scale-105"
                   aria-label="Toggle menu"
@@ -226,10 +263,24 @@ export default function Navbar() {
                   </div>
 
                   <nav className="flex flex-col p-5 gap-2">
-                    {SITE_CONFIG.navItems.map((link, index) => {
+                    {navItems.map((link, index) => {
                       const isActive =
                         pathname === (link.href.split("?")[0] || link.href);
-                      const MobileIcon = getMobileIcon(link.title);
+                      var MobileIcon = null;
+
+                      if (link.title == t("navbar.items.guide")) {
+                        MobileIcon = BookOpenText;
+                      } else if (link.title == t("navbar.items.backups")) {
+                        MobileIcon = FileCog2Icon;
+                      } else if (link.title == t("navbar.items.updater")) {
+                        MobileIcon = RefreshCcwDot;
+                      } else if (link.title == t("navbar.items.src_code")) {
+                        MobileIcon = GithubIcon;
+                      } else if (link.title == t("navbar.items.download")) {
+                        MobileIcon = Download;
+                      } else {
+                        MobileIcon = Box;
+                      }
 
                       return (
                         <motion.div
@@ -242,17 +293,21 @@ export default function Navbar() {
                             href={link.href}
                             onClick={() => setOpen(false)}
                             className={`flex items-center space-x-4 rounded-lg px-4 py-3 text-sm font-medium transition-all duration-200 group
-                              ${
-                                isActive
-                                  ? "bg-primary/15 text-primary border-l-4 border-primary"
-                                  : "text-foreground hover:bg-accent/40 hover:text-accent-foreground hover:border-l-4 hover:border-primary/50"
-                              }`}
+                            ${
+                              isActive
+                                ? "bg-primary/15 text-primary border-l-4 border-primary"
+                                : "text-foreground hover:bg-accent/40 hover:text-accent-foreground hover:border-l-4 hover:border-primary/50"
+                            }`}
                           >
                             <span
-                              className={`flex items-center justify-center w-9 h-9 rounded-full ${isActive ? "bg-primary/20" : "bg-background/90"} text-foreground group-hover:scale-110 transition-transform shadow-sm`}
+                              className={`flex items-center justify-center w-9 h-9 rounded-full ${
+                                isActive ? "bg-primary/20" : "bg-background/90"
+                              } text-foreground group-hover:scale-110 transition-transform shadow-sm`}
                             >
                               <MobileIcon
-                                className={`h-5 w-5 ${isActive ? "text-primary" : ""}`}
+                                className={`h-5 w-5 ${
+                                  isActive ? "text-primary" : ""
+                                }`}
                               />
                             </span>
                             <span className={isActive ? "font-semibold" : ""}>
@@ -264,7 +319,7 @@ export default function Navbar() {
                                 animate={{ scale: 1 }}
                                 className="ml-auto bg-primary text-primary-foreground text-xs rounded-full px-1.5 py-0.5"
                               >
-                                Active
+                                •
                               </motion.span>
                             )}
                           </Link>
@@ -272,38 +327,6 @@ export default function Navbar() {
                       );
                     })}
                   </nav>
-
-                  <div className="mt-auto border-t border-border p-5">
-                    <p className="mb-3 text-xs uppercase tracking-wider text-muted-foreground font-semibold pl-1">
-                      Appearance
-                    </p>
-                    <div className="grid grid-cols-3 gap-2 bg-accent/10 p-2 rounded-lg">
-                      <Button
-                        variant={theme === "light" ? "default" : "ghost"}
-                        size="sm"
-                        onClick={() => setTheme("light")}
-                        className={`flex-1 ${theme === "light" ? "shadow-md" : "hover:bg-background/80"}`}
-                      >
-                        <Sun className="mr-1.5 h-4 w-4" /> Light
-                      </Button>
-                      <Button
-                        variant={theme === "dark" ? "default" : "ghost"}
-                        size="sm"
-                        onClick={() => setTheme("dark")}
-                        className={`flex-1 ${theme === "dark" ? "shadow-md" : "hover:bg-background/80"}`}
-                      >
-                        <Moon className="mr-1.5 h-4 w-4" /> Dark
-                      </Button>
-                      <Button
-                        variant={theme === "system" ? "default" : "ghost"}
-                        size="sm"
-                        onClick={() => setTheme("system")}
-                        className={`flex-1 ${theme === "system" ? "shadow-md" : "hover:bg-background/80"}`}
-                      >
-                        <Monitor className="mr-1.5 h-4 w-4" /> Auto
-                      </Button>
-                    </div>
-                  </div>
                 </div>
               </SheetContent>
             </Sheet>
@@ -312,24 +335,4 @@ export default function Navbar() {
       </div>
     </motion.header>
   );
-}
-
-// Helper function to get the appropriate icon for mobile navigation
-function getMobileIcon(title: string) {
-  switch (title) {
-    case "Guide":
-      return BookOpenText;
-    case "Backup Library":
-      return FileCog2Icon;
-    case "Flag Library":
-      return LucideFlag;
-    case "Updater":
-      return RefreshCcwDot;
-    case "Source Code":
-      return Github;
-    case "Download":
-      return Download;
-    default:
-      return BookOpenText;
-  }
 }

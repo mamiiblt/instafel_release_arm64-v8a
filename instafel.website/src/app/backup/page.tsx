@@ -1,8 +1,8 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Suspense, useEffect, useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
+import { useTranslation } from "react-i18next";
 
 interface Manifest {
   version_name: string;
@@ -37,13 +38,15 @@ interface Resp {
 
 export default function LibraryBackupPage() {
   return (
-    <Suspense fallback={<LoadingBar />}>
+    <Suspense>
       <LibraryBackupPageContent />
     </Suspense>
   );
 }
 
 function LibraryBackupPageContent() {
+  const { t } = useTranslation("backup");
+
   const searchParams = useSearchParams();
   const id = searchParams.get("id") ?? "null";
 
@@ -60,14 +63,14 @@ function LibraryBackupPageContent() {
         const result: Resp = await res.json();
         setData(result);
       } catch (error) {
-        console.error("Failed to fetch backup data:", error);
+        console.error(t("errors.fetchFailed", { errStr: error }));
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchData();
-  }, [id]);
+  }, [id, t]);
 
   const handleDownloadBackup = (id: string, version: string) => {
     setDownloadStarted(true);
@@ -78,7 +81,6 @@ function LibraryBackupPageContent() {
     link.click();
     document.body.removeChild(link);
 
-    // Reset state after animation completes
     setTimeout(() => {
       setDownloadStarted(false);
     }, 2500);
@@ -87,7 +89,6 @@ function LibraryBackupPageContent() {
   const handleImportInstafel = () => {
     setImportStarted(true);
 
-    // Reset state after animation completes
     setTimeout(() => {
       setImportStarted(false);
     }, 2500);
@@ -101,13 +102,12 @@ function LibraryBackupPageContent() {
     return (
       <div className="container mx-auto py-12 px-4 text-center">
         <Card className="max-w-md mx-auto p-6 border-2">
-          <CardTitle className="text-xl mb-4">Backup Not Found</CardTitle>
+          <CardTitle className="text-xl mb-4">{t("notFound.title")}</CardTitle>
           <p className="text-muted-foreground mb-6">
-            We couldn&apos;t find the backup you&apos;re looking for. It may
-            have been removed or doesn&apos;t exist.
+            {t("notFound.description")}
           </p>
           <Link href="/library_backup">
-            <Button>Return to Backup Library</Button>
+            <Button>{t("notFound.returnButton")}</Button>
           </Link>
         </Card>
         <Footer />
@@ -131,7 +131,7 @@ function LibraryBackupPageContent() {
               className="text-primary hover:underline flex items-center"
             >
               <FileSpreadsheet className="mr-2 h-4 w-4" />
-              Back to Backup Library
+              {t("backToLibrary")}
             </Link>
           </div>
 
@@ -172,7 +172,9 @@ function LibraryBackupPageContent() {
                         className="text-xs font-medium flex items-center gap-1 py-1"
                       >
                         <History className="h-3 w-3" />
-                        Version {data.manifest.version_name}
+                        {t("version", {
+                          verStr: data.manifest.version_name,
+                        })}
                       </Badge>
                     </motion.div>
                   </div>
@@ -204,14 +206,14 @@ function LibraryBackupPageContent() {
                             />
                             <span className="relative z-10 flex items-center text-xs sm:text-sm">
                               <FileDown className="mr-1.5 sm:mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                              Downloading...
+                              {t("downloading")}
                             </span>
                           </>
                         ) : (
                           <>
                             <Download className="mr-1.5 sm:mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
                             <span className="text-xs sm:text-sm">
-                              Download Backup
+                              {t("downloadButton")}
                             </span>
                           </>
                         )}
@@ -243,14 +245,14 @@ function LibraryBackupPageContent() {
                             />
                             <span className="relative z-10 flex items-center text-xs sm:text-sm">
                               <Smartphone className="mr-1.5 sm:mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                              Opening Instafel...
+                              {t("openingInstafel")}
                             </span>
                           </>
                         ) : (
                           <>
                             <Smartphone className="mr-1.5 sm:mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
                             <span className="text-xs sm:text-sm">
-                              Import in Instafel
+                              {t("importButton")}
                             </span>
                           </>
                         )}
@@ -269,7 +271,7 @@ function LibraryBackupPageContent() {
                   <div className="mb-6 sm:mb-8">
                     <h2 className="text-base sm:text-lg font-semibold mb-2 sm:mb-3 flex items-center">
                       <Info className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-primary" />
-                      About This Backup
+                      {t("aboutTitle")}
                     </h2>
                     <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-3 sm:p-4">
                       <p className="text-sm text-foreground/90">
@@ -283,19 +285,11 @@ function LibraryBackupPageContent() {
                       <div>
                         <h3 className="text-xs sm:text-sm font-medium text-muted-foreground flex items-center mb-1">
                           <Calendar className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5" />
-                          Last Updated
+                          {t("lastUpdated")}
                         </h3>
-                        <p className="text-sm sm:text-base font-medium mb-3 sm:mb-4">
+                        <p className="text-sm sm:text-base font-medium">
                           {data.manifest.last_updated}
                         </p>
-
-                        <h3 className="text-xs sm:text-sm font-medium text-muted-foreground flex items-center mb-1 sm:mb-2">
-                          <FileDown className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5" />
-                          Backup ID
-                        </h3>
-                        <code className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-xs sm:text-sm font-mono break-all">
-                          {id}
-                        </code>
                       </div>
                     </div>
                   </div>
@@ -306,7 +300,7 @@ function LibraryBackupPageContent() {
 
                       <h2 className="text-base sm:text-lg font-semibold mb-2 sm:mb-3 flex items-center">
                         <History className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-primary" />
-                        Changelog
+                        {t("changelogTitle")}
                       </h2>
 
                       <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-3 sm:p-4">
@@ -322,7 +316,6 @@ function LibraryBackupPageContent() {
                               }}
                               className="flex items-start"
                             >
-                              <div className="mr-2 sm:mr-3 mt-1.5 h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0"></div>
                               <span className="text-xs sm:text-sm">{item}</span>
                             </motion.li>
                           ))}
@@ -336,13 +329,10 @@ function LibraryBackupPageContent() {
                   <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 sm:p-4 mt-4 sm:mt-6">
                     <h3 className="text-xs sm:text-sm font-medium text-blue-700 dark:text-blue-300 flex items-center mb-1 sm:mb-2">
                       <Info className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5" />
-                      How to use this backup
+                      {t("howToUseTitle")}
                     </h3>
                     <p className="text-xs sm:text-sm text-blue-700/80 dark:text-blue-300/80">
-                      You can either download this backup file and manually
-                      import it into Instafel, or use the &quot;Import in
-                      Instafel&quot; button to automatically open the app and
-                      import it directly.
+                      {t("howToUseDescription")}
                     </p>
                   </div>
                 </motion.div>
@@ -359,7 +349,7 @@ function LibraryBackupPageContent() {
             <Button asChild variant="outline">
               <Link href="/library_backup" className="flex items-center">
                 <FileSpreadsheet className="mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                View All Backups
+                {t("viewAllBackups")}
               </Link>
             </Button>
           </motion.div>

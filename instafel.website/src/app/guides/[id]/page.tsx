@@ -18,7 +18,6 @@ export default function GuidePage() {
   const { id } = useParams<{ id: string }>();
   const { guide, loading, error } = useBlogPost(id as string);
 
-  // Redirect if there's an error
   if (error) {
     router.push("/guides");
     return null;
@@ -40,20 +39,6 @@ export default function GuidePage() {
     );
   }
 
-  const getColorClasses = (color: string) => {
-    const classes = {
-      indigo:
-        "bg-indigo-50 text-indigo-600 border-indigo-100 dark:bg-indigo-900/20 dark:text-indigo-300 dark:border-indigo-800",
-      rose: "bg-rose-50 text-rose-600 border-rose-100 dark:bg-rose-900/20 dark:text-rose-300 dark:border-rose-800",
-      sky: "bg-sky-50 text-sky-600 border-sky-100 dark:bg-sky-900/20 dark:text-sky-300 dark:border-sky-800",
-      purple:
-        "bg-purple-50 text-purple-600 border-purple-100 dark:bg-purple-900/20 dark:text-purple-300 dark:border-purple-800",
-      orange:
-        "bg-orange-50 text-orange-600 border-orange-100 dark:bg-orange-900/20 dark:text-orange-300 dark:border-orange-800",
-    };
-    return classes[guide.color as keyof typeof classes] || classes.indigo;
-  };
-
   return (
     <>
       <div className="min-h-screen bg-background py-16">
@@ -71,14 +56,6 @@ export default function GuidePage() {
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to guides
             </Link>
-
-            <div className="mb-3">
-              <span
-                className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getColorClasses(guide.color)}`}
-              >
-                {guide.subtitle}
-              </span>
-            </div>
 
             <h1 className="text-3xl md:text-4xl font-bold mb-4">
               {guide.title}

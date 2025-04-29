@@ -1,0 +1,15 @@
+{
+  "title": "Yedek Kütüphanesi",
+  "description": "Topluluk tarafından oluşturulan ve doğrudan Instafel'e aktarabileceğiniz yedekleri buradan bulabilirsiniz.",
+  "createdBy": "{{author}} tarafından oluşturuldu",
+  "contribute": {
+    "title": "Katkıda Bulunmak İster misiniz?",
+    "description": "Instafel yedeklerinizi toplulukla paylaşın ve başkalarının en iyi yapılandırmaları keşfetmelerine yardımcı olun",
+    "button": "Topluluğumuza Katılın"
+  },
+  "error": {
+    "title": "Yedekler Yüklenemedi",
+    "description": "Yedek bilgilerini alamadık. Lütfen bağlantınızı kontrol edin veya daha sonra tekrar deneyin.",
+    "retryButton": "Tekrar Dene"
+  }
+}

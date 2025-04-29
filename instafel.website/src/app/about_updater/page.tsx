@@ -16,23 +16,18 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Footer from "@/components/Footer";
-
-interface Asset {
-  name: string;
-  browser_download_url: string;
-}
-
-interface Release {
-  tag_name: string;
-  assets: Asset[];
-}
+import { useTranslation } from "react-i18next";
+import { Suspense } from "react";
 
 export default function UpdaterPage() {
-  const apkUrl = "https://bitbucket.org/mamiiblt_ws/ifl-updater-releases/downloads/ifl-updater-v2.0.3.apk";
+  const { t } = useTranslation("updater");
+  const apkUrl =
+    "https://bitbucket.org/mamiiblt_ws/ifl-updater-releases/downloads/ifl-updater-v2.0.3.apk";
   const versionTag = "v2.0.3";
 
   return (
-    <AnimatePresence>
+    <Suspense>
+      <AnimatePresence>
         <div>
           <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
@@ -55,15 +50,13 @@ export default function UpdaterPage() {
                 </div>
 
                 <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
-                  Instafel <span className="text-primary">Updater</span>
+                  <span className="text-primary">{t("heroHeader.title")}</span>
                 </h1>
                 <h2 className="text-2xl font-bold mt-2 text-foreground/80">
-                  Automatic updates, zero effort
+                  {t("heroHeader.subtitle")}
                 </h2>
                 <p className="mt-6 max-w-2xl mx-auto text-lg text-muted-foreground">
-                  Keep Instafel always up-to-date with this powerful companion
-                  app that handles updates automatically through Shizuku or
-                  Root.
+                  {t("heroHeader.description")}
                 </p>
 
                 <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
@@ -76,7 +69,7 @@ export default function UpdaterPage() {
                     <Link href={apkUrl || "#"}>
                       <span className="absolute inset-0 bg-gradient-to-r from-primary/30 to-primary/0 group-hover:opacity-50 opacity-0 transition-opacity" />
                       <Download className="mr-2" />
-                      Download {versionTag}
+                      {t("buttons.download", { version: versionTag })}
                     </Link>
                   </Button>
                   <Button
@@ -87,7 +80,7 @@ export default function UpdaterPage() {
                   >
                     <Link href="https://github.com/mamiiblt/instafel">
                       <GitBranch className="mr-2 group-hover:rotate-12 transition-transform duration-300" />
-                      Source Code
+                      {t("buttons.sourceCode")}
                     </Link>
                   </Button>
                 </div>
@@ -100,30 +93,27 @@ export default function UpdaterPage() {
                 className="mb-16"
               >
                 <h2 className="text-2xl font-bold text-center mb-8">
-                  How It Works
+                  {t("howItWorks.title")}
                 </h2>
 
                 <div className="grid md:grid-cols-3 gap-4">
                   {[
                     {
                       step: "1",
-                      title: "Install & Grant Permissions",
-                      description:
-                        "Install the app and grant Shizuku or Root permissions.",
+                      title: t("howItWorks.steps.install.title"),
+                      description: t("howItWorks.steps.install.description"),
                       icon: <Shield className="h-6 w-6 text-emerald-500" />,
                     },
                     {
                       step: "2",
-                      title: "Configure Settings",
-                      description:
-                        "Choose your update preferences and check frequency.",
+                      title: t("howItWorks.steps.configure.title"),
+                      description: t("howItWorks.steps.configure.description"),
                       icon: <Smartphone className="h-6 w-6 text-blue-500" />,
                     },
                     {
                       step: "3",
-                      title: "Automatic Updates",
-                      description:
-                        "Relax and let Updater handle everything for you.",
+                      title: t("howItWorks.steps.automatic.title"),
+                      description: t("howItWorks.steps.automatic.description"),
                       icon: <Zap className="h-6 w-6 text-amber-500" />,
                     },
                   ].map((item, index) => (
@@ -156,27 +146,24 @@ export default function UpdaterPage() {
                 transition={{ delay: 0.5, duration: 0.6 }}
               >
                 <h2 className="text-2xl font-bold text-center mb-8">
-                  Key Features
+                  {t("features.title")}
                 </h2>
                 <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-16">
                   {[
                     {
                       icon: <AudioLines className="h-8 w-8 text-primary" />,
-                      title: "Silent Installation",
-                      description:
-                        "Runs in the background to automatically download and install the latest versions from our API.",
+                      title: t("features.silent.title"),
+                      description: t("features.silent.description"),
                     },
                     {
                       icon: <PawPrint className="h-8 w-8 text-primary" />,
-                      title: "Shizuku Support",
-                      description:
-                        "Works on non-rooted phones with Shizuku without requiring any additional root managers.",
+                      title: t("features.shizuku.title"),
+                      description: t("features.shizuku.description"),
                     },
                     {
                       icon: <GitBranch className="h-8 w-8 text-primary" />,
-                      title: "Open Source",
-                      description:
-                        "Completely transparent code so you can trust the app with the necessary permissions.",
+                      title: t("features.openSource.title"),
+                      description: t("features.openSource.description"),
                     },
                   ].map((feature, index) => (
                     <motion.div
@@ -212,15 +199,15 @@ export default function UpdaterPage() {
                   <div className="flex flex-col md:flex-row items-center">
                     <div className="md:w-1/2 mb-6 md:mb-0">
                       <h2 className="text-2xl font-bold mb-4">
-                        Why Use Updater?
+                        {t("whyUse.title")}
                       </h2>
                       <ul className="space-y-4">
                         {[
-                          "Always have the latest patches and features automatically",
-                          "Save time with background updates instead of manual OTA checks",
-                          "Lightweight and efficient with minimal resource usage",
-                          "Get notified only when updates are successfully installed",
-                          "Works seamlessly with both Shizuku and Root methods",
+                          t("whyUse.benefits.latestFeatures"),
+                          t("whyUse.benefits.saveTime"),
+                          t("whyUse.benefits.lightweight"),
+                          t("whyUse.benefits.notifications"),
+                          t("whyUse.benefits.compatibility"),
                         ].map((benefit, index) => (
                           <li key={index} className="flex items-start">
                             <CheckCircle className="h-5 w-5 text-green-500 mr-2 shrink-0 mt-0.5" />
@@ -229,20 +216,6 @@ export default function UpdaterPage() {
                         ))}
                       </ul>
                     </div>
-                    {/* <div className="md:w-1/2 flex justify-center">
-                      <div className="relative max-w-[220px]">
-                        <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 rounded-3xl blur-xl opacity-70"></div>
-                        <div className="relative rounded-3xl overflow-hidden border-8 border-gray-800 shadow-lg">
-                          <Image
-                            src="/updater-mockup.jpg"
-                            alt="Instafel Updater app screenshot"
-                            width={220}
-                            height={440}
-                            className="w-full"
-                          />
-                        </div>
-                      </div>
-                    </div> */}
                   </div>
                 </div>
               </motion.div>
@@ -253,10 +226,11 @@ export default function UpdaterPage() {
                 transition={{ delay: 0.9, duration: 0.6 }}
                 className="text-center bg-gradient-to-r from-primary/5 to-primary/10 p-8 rounded-2xl"
               >
-                <h2 className="text-2xl font-bold mb-4">Get Started Now</h2>
+                <h2 className="text-2xl font-bold mb-4">
+                  {t("callToAction.title")}
+                </h2>
                 <p className="text-lg text-muted-foreground mb-6">
-                  Keep your Instafel experience up-to-date with minimum effort.
-                  Download the updater now.
+                  {t("callToAction.description")}
                 </p>
                 <Button
                   asChild
@@ -266,7 +240,7 @@ export default function UpdaterPage() {
                 >
                   <Link href={apkUrl || "#"}>
                     <Download className="mr-2 h-5 w-5" />
-                    Download Updater {versionTag}
+                    {t("buttons.download", { version: versionTag })}
                   </Link>
                 </Button>
               </motion.div>
@@ -274,6 +248,7 @@ export default function UpdaterPage() {
           </div>
           <Footer />
         </div>
-    </AnimatePresence>
+      </AnimatePresence>
+    </Suspense>
   );
 }

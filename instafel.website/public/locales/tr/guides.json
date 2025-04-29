@@ -1,0 +1,8 @@
+{
+  "title": "Instafel Rehberleri",
+  "subtitle": "Kapsamlı rehberler ve adım adım eğitimlerle Instafel'den en iyi şekilde yararlanmayı öğrenin.",
+  "errorLoading": "Rehberler yüklenirken hata oluştu: {{errStr}}",
+  "readGuide": "Rehberi oku",
+  "communityHelp": "Yardıma mı ihtiyacınız var veya yeni rehberler için önerileriniz mi var? Telegram'daki topluluğumuza katılın.",
+  "joinCommunity": "Instafel Topluluğuna Katılın"
+}

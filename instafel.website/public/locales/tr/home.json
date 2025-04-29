@@ -1,0 +1,43 @@
+{
+  "landing": {
+    "1": "En İyi Alpha Deneyimi",
+    "2": "Instafel sayesinde en güncel Alpha yapılarını hızlıca deneyebilirsiniz!",
+    "3": "Şimdi İndir",
+    "4": "Rehberi Oku",
+    "5": "Topluluğa Katıl"
+  },
+  "features": {
+    "1": "Instafel Özellikleri",
+    "2": "Ne için Instafel kullanmanız gerektiğini maddeler ile açıklayalım",
+    "3": "Geliştirici Seçenekleri",
+    "4": "Sadece Instagram geliştiricilerine özel olan bir bölgeye erişin!",
+    "5": "Klon Desteği",
+    "6": "Normal uygulamanın yanına kurmak istemezseniz, ikincil bir uygulama olarak da kurabilirsiniz!",
+    "7": "OTA Güncellemeleri",
+    "8": "Instafel'i daima uygulama içi OTA güncelleyicisi veya Instafel Updater uygulaması sayesinde güncel tutabilirsiniz!",
+    "9": "Reklamsız Deneyim",
+    "10": "Uygulama içinde herhangi bir reklam olmadan rahatça takılın!",
+    "11": "Çökme Raporları",
+    "12": "Alpha sürümlerinde uygulamanın aniden çökmesi çok normaldir, bu tarz durumlarda hata kontrolü yapılabilmesi için Instafel daima günlük tutar.",
+    "13": "Kütüphaneler",
+    "14": "Her zaman Instafel Library'de işe yarayan yedekler, bayraklar buluabilirsiniz!"
+  },
+  "join_community": {
+    "1": "Bağlı Kal!",
+    "2": "Haberler için Telegram grubuna katıl!",
+    "3": "En güncel gelişmeler hakkında bilgi almak, geri dönüş yapmak ve öneride bulunmak için topluluğa katılmayı unutma!",
+    "4": "Instafel Topluluğuna Katıl!",
+    "5": "🎉 Yeni yamalayıcı yayınlandı!",
+    "6": "Bugün 12:25",
+    "7": "OTA güncellemeleri ile ilgili sorunları çözdüm!",
+    "8": "Dün 16:00",
+    "9": "5,500+ üye",
+    "10": "325 aktif"
+  },
+  "try_now": {
+    "1": "Instafel'i Dene!",
+    "2": "En güncel Alfa deneyimi için hemen Instafel'i indir!",
+    "3": "Şimdi İndir",
+    "4": "Updater Nedir?"
+  }
+}
