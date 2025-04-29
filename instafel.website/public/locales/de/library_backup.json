@@ -1,0 +1,15 @@
+{
+  "title": "Backup-Bibliothek",
+  "description": "Durchstöbere von der Community erstellte Backups, die du direkt in Instafel importieren kannst.",
+  "createdBy": "Erstellt von {{author}}",
+  "contribute": {
+    "title": "Möchtest du mitmachen?",
+    "description": "Teile dein Instafel-Backup mit der Community und hilf anderen, optimale Konfigurationen zu entdecken.",
+    "button": "Tritt unserer Community bei"
+  },
+  "error": {
+    "title": "Backups konnten nicht geladen werden",
+    "description": "Wir konnten die Backup-Informationen nicht abrufen. Bitte überprüfe deine Verbindung oder versuche es später erneut.",
+    "retryButton": "Erneut versuchen"
+  }
+}
