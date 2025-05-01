@@ -1,0 +1,57 @@
+{
+  "heroHeader": {
+    "title": "Instafel-Updater",
+    "subtitle": "Automatische Updates, ganz ohne Aufwand",
+    "description": "Halte Instafel immer auf dem neuesten Stand mit dieser leistungsstarken Begleit-App, die Updates automatisch über Shizuku oder Root verwaltet."
+  },
+  "buttons": {
+    "download": "{{version}} herunterladen",
+    "sourceCode": "Quellcode"
+  },
+  "howItWorks": {
+    "title": "So funktioniert es",
+    "steps": {
+      "install": {
+        "title": "Installieren & Berechtigungen erteilen",
+        "description": "Installiere die App und erteile Shizuku- oder Root-Berechtigungen."
+      },
+      "configure": {
+        "title": "Einstellungen konfigurieren",
+        "description": "Wähle deine Update-Präferenzen und die Häufigkeit der Überprüfung."
+      },
+      "automatic": {
+        "title": "Automatische Updates",
+        "description": "Lehn dich zurück und lass den Updater alles für dich erledigen."
+      }
+    }
+  },
+  "features": {
+    "title": "Hauptfunktionen",
+    "silent": {
+      "title": "Stille Installation",
+      "description": "Läuft im Hintergrund, um automatisch die neuesten Versionen über unsere API herunterzuladen und zu installieren."
+    },
+    "shizuku": {
+      "title": "Shizuku-Unterstützung",
+      "description": "Funktioniert auf nicht-gerooteten Geräten mit Shizuku, ohne dass zusätzliche Root-Manager erforderlich sind."
+    },
+    "openSource": {
+      "title": "Open Source",
+      "description": "Vollständig transparenter Code, dem du die erforderlichen Berechtigungen anvertrauen kannst."
+    }
+  },
+  "whyUse": {
+    "title": "Warum den Updater verwenden?",
+    "benefits": {
+      "latestFeatures": "Immer automatisch die neuesten Patches und Funktionen erhalten",
+      "saveTime": "Spare Zeit mit Hintergrund-Updates statt manuellen OTA-Prüfungen",
+      "lightweight": "Leichtgewichtig und effizient mit minimalem Ressourcenverbrauch",
+      "notifications": "Benachrichtigungen nur bei erfolgreich installierten Updates",
+      "compatibility": "Funktioniert nahtlos mit Shizuku- und Root-Methoden"
+    }
+  },
+  "callToAction": {
+    "title": "Jetzt herunterladen!",
+    "description": "Halte deine Instafel-Erfahrung mit minimalem Aufwand auf dem neuesten Stand. Lade den Updater jetzt herunter."
+  }
+}
