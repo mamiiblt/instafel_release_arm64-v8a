@@ -175,9 +175,9 @@ export default function Navbar() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
-                  variant="ghost"
+                  variant={"ghost"} 
                   size="icon"
-                  className="transition-transform hover:scale-105"
+                  className="relative"
                 >
                   <Globe className="h-4 w-4" />
                 </Button>

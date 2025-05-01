@@ -20,7 +20,7 @@ import HomeMockup from "@/components/HomeMockup";
 import { useTranslation } from "react-i18next";
 import { Suspense } from "react";
 
-export default function Home() {
+export default function Page() {
   return (
     <Suspense>
       <HomeContent />
@@ -28,7 +28,7 @@ export default function Home() {
   );
 }
 
-export function HomeContent() {
+function HomeContent() {
   const { t } = useTranslation("home");
 
   const features = [
