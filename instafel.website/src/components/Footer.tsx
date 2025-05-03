@@ -14,11 +14,11 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useTranslation } from "react-i18next";
+import { useT } from "@/i18n/client";
 
 export default function Footer() {
   const [loading, setLoading] = React.useState(true);
-  const { t } = useTranslation("common");
+  const { t } = useT("common");
 
   React.useEffect(() => {
     const timer = setTimeout(() => {

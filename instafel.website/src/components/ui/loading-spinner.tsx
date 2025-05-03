@@ -8,7 +8,7 @@ export function LoadingSpinner({ className }: { className?: string }) {
     <div
       className={cn(
         "h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent",
-        className,
+        className
       )}
     />
   );

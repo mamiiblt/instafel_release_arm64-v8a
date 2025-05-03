@@ -29,6 +29,7 @@ import { Badge } from "@/components/ui/badge";
 import { LoadingBar } from "@/components/ifl";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import { useT } from "@/i18n/client";
 
 interface InstafelData {
   build_date: string | null;
@@ -63,16 +64,8 @@ interface GithubRelease {
   assets: GithubAsset[];
 }
 
-export default function DownloadInstafelPage() {
-  return (
-    <Suspense>
-      <DownloadIflContent />
-    </Suspense>
-  );
-}
-
-function DownloadIflContent() {
-  const { t } = useTranslation("download");
+export default function DownloadPage() {
+  const { t } = useT("download");
   const [activeTab, setActiveTab] = useState<string>("build");
 
   const searchParams = useSearchParams();
@@ -618,7 +611,14 @@ function DownloadIflContent() {
                   {t("error.not_found_desc")}
                 </p>
                 <Button asChild size="default">
-                  <a href="/download?version=latest">{t("error.get_latest")}</a>
+                  <Link
+                    href={{
+                      pathname: "/download",
+                      query: { version: "latest" },
+                    }}
+                  >
+                    {t("error.get_latest")}
+                  </Link>
                 </Button>
               </div>
             )}

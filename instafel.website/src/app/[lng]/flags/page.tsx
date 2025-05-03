@@ -89,7 +89,7 @@ function FlagListPageContent() {
       const res = await fetch(requestUrl);
       const result: ResponseScheme = await res.json();
       const sortedResult = result.flags.sort(
-        (a, b) => new Date(b.addate).getTime() - new Date(a.addate).getTime(),
+        (a, b) => new Date(b.addate).getTime() - new Date(a.addate).getTime()
       );
       result.flags = sortedResult;
 
@@ -414,7 +414,7 @@ function FlagListPageContent() {
                                     </svg>
                                     Uploaded at{" "}
                                     {new Date(flag.addate).toLocaleDateString(
-                                      "en-US",
+                                      "en-US"
                                     )}
                                   </div>
                                   {flag.rv === 1 && (
