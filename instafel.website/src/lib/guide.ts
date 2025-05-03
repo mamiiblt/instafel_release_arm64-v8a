@@ -2,7 +2,7 @@ import * as fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-const BLOG_DIR = path.join(process.cwd(), "public", "content", "blogs");
+const BLOG_DIR = path.join(process.cwd(), "public", "content", "guides");
 
 export interface Post {
   slug: string;
@@ -24,7 +24,7 @@ export function getAllPostsSync() {
     try {
       fs.accessSync(BLOG_DIR, fs.constants.F_OK);
     } catch (error) {
-      console.warn(`Blog directory not found: ${BLOG_DIR}`, error);
+      console.warn(`Guide directory not found: ${BLOG_DIR}`, error);
       return [];
     }
 
@@ -33,18 +33,14 @@ export function getAllPostsSync() {
     const posts = fileNames
       .filter((fileName) => fileName.endsWith(".md"))
       .map((fileName) => {
-        // Extract id from filename (e.g., "1.example-post1.md" -> "1")
         const id = fileName.split(".")[0];
 
-        // Read markdown file
         const fullPath = path.join(BLOG_DIR, fileName);
         const fileContents = fs.readFileSync(fullPath, "utf8");
 
-        // Parse frontmatter
         const { data, content } = matter(fileContents);
         const frontmatter = data as FrontMatter;
 
-        // Create post object
         return {
           id: parseInt(id),
           title: frontmatter.title || "Untitled",
@@ -52,16 +48,16 @@ export function getAllPostsSync() {
           description: frontmatter.description || "",
           color: ["indigo", "rose", "sky", "purple", "orange"][
             Math.floor(Math.random() * 5)
-          ], // Random color
+          ],
           slug: fileName.replace(/\.md$/, ""),
           content,
         };
       })
-      .sort((a, b) => a.id - b.id); // Sort by ID
+      .sort((a, b) => a.id - b.id);
 
     return posts;
   } catch (error) {
-    console.error("Error loading blog posts:", error);
+    console.error("Error loading guide posts:", error);
     return [];
   }
 }
@@ -72,7 +68,7 @@ export function getPostByIdSync(id: string) {
 }
 
 export function extractHeadings(
-  content: string,
+  content: string
 ): Array<{ id: string; text: string; level: number }> {
   const headingRegex = /^(#{1,6})\s+(.+)$/gm;
   const headings: Array<{ id: string; text: string; level: number }> = [];
@@ -88,7 +84,6 @@ export function extractHeadings(
       .replace(/\s+/g, "-")
       .replace(/-+/g, "-");
 
-    // If this ID is already used, append a number
     if (usedIds.has(id)) {
       let counter = 1;
       while (usedIds.has(`${id}-${counter}`)) {

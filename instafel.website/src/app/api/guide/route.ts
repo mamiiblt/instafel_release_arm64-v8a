@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getAllPostsSync, getPostByIdSync } from "@/lib/blog";
+import { getAllPostsSync, getPostByIdSync } from "@/lib/guide";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);

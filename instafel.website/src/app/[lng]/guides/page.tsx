@@ -6,12 +6,12 @@ import { BookOpen, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
-import { useBlogs } from "@/hooks/useBlog";
+import { useGuides } from "@/hooks/useGuides";
 import { useT } from "@/i18n/client";
 
 export default function GuidePage() {
   const { t } = useT("guides");
-  const { guides, loading, error } = useBlogs();
+  const { guides, loading, error } = useGuides();
 
   return (
     <>

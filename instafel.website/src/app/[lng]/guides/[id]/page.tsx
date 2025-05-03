@@ -11,7 +11,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
-import { useBlogPost } from "@/hooks/useBlog";
+import { useBlogPost } from "@/hooks/useGuides";
 
 export default function GuidePage() {
   const router = useRouter();
