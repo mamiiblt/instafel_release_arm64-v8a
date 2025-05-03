@@ -10,12 +10,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useTranslation } from "react-i18next";
+import { useT } from "@/i18n/client";
 
 export default function ThemeSwitcher() {
   const [mounted, setMounted] = useState(false);
   const { setTheme } = useTheme();
-  const { t } = useTranslation("common");
+  const { t } = useT("common");
 
   useEffect(() => {
     setMounted(true);

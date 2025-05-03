@@ -37,14 +37,6 @@ interface Resp {
 }
 
 export default function LibraryBackupPage() {
-  return (
-    <Suspense>
-      <LibraryBackupPageContent />
-    </Suspense>
-  );
-}
-
-function LibraryBackupPageContent() {
   const { t } = useTranslation("backup");
 
   const searchParams = useSearchParams();

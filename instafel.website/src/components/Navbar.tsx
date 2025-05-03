@@ -25,28 +25,15 @@ import {
   Globe,
 } from "lucide-react";
 import ThemeSwitcher from "./ThemeSwitcher";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import { useTranslation } from "react-i18next";
-import { navLanguages } from "@/lib/i18n-config";
+import { useT } from "@/i18n/client";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Navbar() {
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
   const [scrolled, setScrolled] = React.useState(false);
   const pathname = usePathname();
-  const { t, i18n } = useTranslation("common");
-
-  const changeLanguage = (languageCode) => {
-    i18n.changeLanguage(languageCode);
-  };
-
-  const currentLanguage =
-    navLanguages.find((lang) => lang.code === i18n.language) || navLanguages[0];
+  const { t } = useT("common");
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -172,36 +159,7 @@ export default function Navbar() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4, delay: 0.2 }}
           >
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant={"ghost"} 
-                  size="icon"
-                  className="relative"
-                >
-                  <Globe className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-40">
-                {navLanguages.map((lang) => (
-                  <DropdownMenuItem
-                    key={lang.code}
-                    onClick={() => changeLanguage(lang.code)}
-                    className={`cursor-pointer ${
-                      currentLanguage.code === lang.code
-                        ? "bg-accent/40 font-medium"
-                        : ""
-                    }`}
-                  >
-                    <span className="mr-2">{lang.flag}</span>
-                    {lang.name}
-                    {currentLanguage.code === lang.code && (
-                      <span className="ml-auto text-primary">•</span>
-                    )}
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <LanguageSwitcher />
           </motion.div>
 
           <motion.div

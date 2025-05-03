@@ -17,19 +17,10 @@ import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import HomeMockup from "@/components/HomeMockup";
-import { useTranslation } from "react-i18next";
-import { Suspense } from "react";
+import { useT } from "@/i18n/client";
 
-export default function Page() {
-  return (
-    <Suspense>
-      <HomeContent />
-    </Suspense>
-  );
-}
-
-function HomeContent() {
-  const { t } = useTranslation("home");
+export default function HomeContent() {
+  const { t } = useT("home");
 
   const features = [
     {

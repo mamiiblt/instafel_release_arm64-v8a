@@ -7,15 +7,14 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { useBlogs } from "@/hooks/useBlog";
-import { useTranslation } from "react-i18next";
-import { Suspense } from "react";
+import { useT } from "@/i18n/client";
 
 export default function GuidePage() {
-  const { t } = useTranslation("guides");
+  const { t } = useT("guides");
   const { guides, loading, error } = useBlogs();
 
   return (
-    <Suspense>
+    <>
       <div className="min-h-screen bg-background py-16">
         <div className="container mx-auto px-4">
           <motion.div
@@ -115,6 +114,6 @@ export default function GuidePage() {
         </div>
       </div>
       <Footer />
-    </Suspense>
+    </>
   );
 }

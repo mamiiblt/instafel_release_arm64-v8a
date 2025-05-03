@@ -41,7 +41,7 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  },
+  }
 );
 
 type BaseButtonProps = {
@@ -62,7 +62,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       ref,
       ...props,
     });
-  },
+  }
 );
 Button.displayName = "Button";
 

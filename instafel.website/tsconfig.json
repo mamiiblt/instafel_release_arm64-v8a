@@ -27,10 +27,12 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/lib/i18n/I18nProvider.tsx",
-    "src/lib/i18n-config.ts",
-    "src/lib/i18n/hooks.ts",
-    "src/lib/i18n.ts"
+    "src/i18n/I18nProvider.tsx",
+    "src/i18n/settings.js",
+    "src/i18n/hooks.ts",
+    "src/lib/i18n.ts",
+    "src/i18n/index.js",
+    "src/i18n/i18next.js"
   ],
   "exclude": ["node_modules"]
 }
