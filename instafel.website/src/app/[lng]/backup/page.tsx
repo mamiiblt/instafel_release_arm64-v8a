@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
-import { useTranslation } from "react-i18next";
+import { useT } from "@/i18n/client";
 
 interface Manifest {
   version_name: string;
@@ -37,7 +37,7 @@ interface Resp {
 }
 
 export default function LibraryBackupPage() {
-  const { t } = useTranslation("backup");
+  const { t } = useT("backup");
 
   const searchParams = useSearchParams();
   const id = searchParams.get("id") ?? "null";

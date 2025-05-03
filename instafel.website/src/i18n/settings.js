@@ -8,5 +8,14 @@ export const navLanguages = [
 ];
 export const languages = navLanguages.map((lang) => lang.code);
 export const defaultNS = "common";
+export const namespaces = [
+  "backup",
+  "common",
+  "download",
+  "guides",
+  "home",
+  "library_backup",
+  "updater",
+];
 export const cookieName = "i18next";
 export const headerName = "x-i18next-current-language";
