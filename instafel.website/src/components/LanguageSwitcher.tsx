@@ -10,19 +10,22 @@ import {
 import { Globe } from "lucide-react";
 import { Button } from "./ui/button";
 import { useT } from "@/i18n/client";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function LanguageSwitcher() {
   const { i18n } = useT();
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const changeLanguage = (newLng: string) => {
-    i18n.changeLanguage(newLng);
-
-    const currentPath = window.location.pathname;
-    const newPath = currentPath.replace(/^\/[a-z]{2}/, `/${newLng}`);
-
-    router.push(newPath);
+    document.cookie = `i18next=${newLng}; path=/`;
+    const segments = pathname.split("/");
+    segments[1] = newLng;
+    const newPath = segments.join("/");
+    const queryString = searchParams.toString();
+    const fullPath = queryString ? `${newPath}?${queryString}` : newPath;
+    router.push(fullPath);
   };
 
   return (

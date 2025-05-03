@@ -23,6 +23,7 @@ i18next
     defaultNS,
     detection: {
       order: ["path", "htmlTag", "cookie", "navigator"],
+      caches: ["cookie"],
     },
     preload: runsOnServerSide ? languages : [],
   });
