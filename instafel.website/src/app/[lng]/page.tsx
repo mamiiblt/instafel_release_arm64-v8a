@@ -18,8 +18,17 @@ import Link from "next/link";
 import Footer from "@/components/Footer";
 import HomeMockup from "@/components/HomeMockup";
 import { useT } from "@/i18n/client";
+import { Suspense } from "react";
 
-export default function HomeContent() {
+export default function Home() {
+  return (
+    <Suspense>
+      <HomeContent />
+    </Suspense>
+  );
+}
+
+function HomeContent() {
   const { t } = useT("home");
 
   const features = [

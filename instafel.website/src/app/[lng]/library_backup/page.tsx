@@ -21,7 +21,15 @@ interface BackupInfo {
   backups: Backup[];
 }
 
-export default function LibraryBackupPage() {
+export default function LibraryBackup() {
+  return (
+    <Suspense>
+      <LibraryBackupContent />
+    </Suspense>
+  );
+}
+
+function LibraryBackupContent() {
   const { t } = useT("library_backup");
   const [data, setData] = useState<BackupInfo | null>(null);
   const [isLoading, setIsLoading] = useState(true);

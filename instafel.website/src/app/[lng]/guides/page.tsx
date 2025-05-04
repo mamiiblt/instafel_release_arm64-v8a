@@ -8,8 +8,17 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { useGuides } from "@/hooks/useGuides";
 import { useT } from "@/i18n/client";
+import { Suspense } from "react";
 
-export default function GuidePage() {
+export default function Guide() {
+  return (
+    <Suspense>
+      <GuideContent />
+    </Suspense>
+  );
+}
+
+function GuideContent() {
   const { t } = useT("guides");
   const { guides, loading, error } = useGuides();
 

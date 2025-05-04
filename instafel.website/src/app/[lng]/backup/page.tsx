@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -36,7 +36,15 @@ interface Resp {
   manifest: Manifest;
 }
 
-export default function LibraryBackupPage() {
+export default function BackupPage() {
+  return (
+    <Suspense>
+      <BackupContent />
+    </Suspense>
+  );
+}
+
+function BackupContent() {
   const { t } = useT("backup");
 
   const searchParams = useSearchParams();

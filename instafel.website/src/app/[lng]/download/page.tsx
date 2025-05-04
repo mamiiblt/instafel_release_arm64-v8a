@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
@@ -64,6 +64,14 @@ interface GithubRelease {
 }
 
 export default function DownloadPage() {
+  return (
+    <Suspense>
+      <DownloadContent />
+    </Suspense>
+  );
+}
+
+function DownloadContent() {
   const { t } = useT("download");
   const [activeTab, setActiveTab] = useState<string>("build");
 

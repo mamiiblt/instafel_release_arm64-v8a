@@ -17,8 +17,17 @@ import {
 import { Button } from "@/components/ui/button";
 import Footer from "@/components/Footer";
 import { useT } from "@/i18n/client";
+import { Suspense } from "react";
 
-export default function UpdaterPage() {
+export default function Updater() {
+  return (
+    <Suspense>
+      <UpdaterContent />
+    </Suspense>
+  );
+}
+
+function UpdaterContent() {
   const { t } = useT("updater");
   const apkUrl =
     "https://bitbucket.org/mamiiblt_ws/ifl-updater-releases/downloads/ifl-updater-v2.0.3.apk";
