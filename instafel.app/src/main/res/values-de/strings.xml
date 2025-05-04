@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	;Translated by Rüşan Gür
+	<!-- Translated by Rüşan Gür -->
     <!-- sa -->
     <string name="ifl_a5_10">Berechtigung verweigert</string>
     <string name="ifl_a5_11">"Die Benachrichtigungsberechtigung für Instafel wurde verweigert. Wenn dieses Problem weiterhin besteht, vergiss nicht, die Benachrichtigungen in den App-Einstellungen zu aktivieren."</string>
