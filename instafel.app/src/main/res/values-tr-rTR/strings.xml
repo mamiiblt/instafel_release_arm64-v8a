@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- sa -->
-    <string name="ifl_a5_10">Permission Denied</string>
-    <string name="ifl_a5_11">"Instafel's notification permission was denied. If this problem persists, do not forget to turn on notifications from the application settings."</string>
-    <string name="ifl_a0_08">Miscellaneous</string>
-    <string name="ifl_a0_09">Amoled Theme</string>
-    <string name="ifl_a0_10">Enable amoled theme for Instafel activities, dialogs and other parts.</string>
-    <string name="ifl_a0_11">Remove Ads</string>
-    <string name="ifl_a0_12">Removes ads displayed in the feed, reels, or other places.</string>
-    <string name="ifl_a0_13">Restart app for apply changes.</string>
-    <string name="ifl_a0_14">Enabled by default, cannot be changed.</string>
+    <string name="ifl_a5_10">İzin Reddedildi</string>
+    <string name="ifl_a5_11">"Instafel'in bildirim izni reddedildi. Eğer bu problem sorun devam ederse uygulama ayarlarından bildirim izinlerini açmayı unutmayın."</string>
+    <string name="ifl_a0_08">Çeşitli Seçenekler</string>
+    <string name="ifl_a0_09">Ağır Koyu Tema</string>
+    <string name="ifl_a0_10">Instafel aktiviteleri, diyalogları ve diğer kısımları için aşırı koyu temayı temayı açar.</string>
+    <string name="ifl_a0_11">Reklamları Kaldır</string>
+    <string name="ifl_a0_12">Ana akışta, reelslerde ve diğer yerlerde gösterilen reklamları gizler.</string>
+    <string name="ifl_a0_13">Değişikliklerin geçerli olması için uygulamayı yeniden başlatın.</string>
+    <string name="ifl_a0_14">Varsayılan olarak açıktır, değiştirilemez.</string>
     <string name="ifl_a0_15">Instafel Updater</string>
-    <string name="ifl_a0_16">Use Instafel Updater for automatic updates with Root and Shizuku</string>
+    <string name="ifl_a0_16">Root / Shizuku ile otomatik güncellemelerden faydalanmak için Instafel Updater\'ı kullanın</string>
     <!-- me.mamiiblt.instafel.ifl_a_menu -->
-    <string name="ifl_a0_02">Update Settings</string>
-    <string name="ifl_a0_03">Language</string>
-    <string name="ifl_a0_04">Library</string>
-    <string name="ifl_a0_05">About</string>
-    <string name="ifl_a0_06">This feature has not been added yet</string>
-    <string name="ifl_a0_07">Crash Reports</string>
+    <string name="ifl_a0_02">Güncelleme Ayarları</string>
+    <string name="ifl_a0_03">Dil Ayarları</string>
+    <string name="ifl_a0_04">Kütüphane</string>
+    <string name="ifl_a0_05">Hakkında</string>
+    <string name="ifl_a0_06">Bu özellik daha eklenmedi</string>
+    <string name="ifl_a0_07">Çökme Günlükleri</string>
     <!-- me.mamiiblt.instafel.ifl_a_about_ifl -->
-    <string name="ifl_a1_01">About Instafel</string>
-    <string name="ifl_a1_02">Instafel Version</string>
-    <string name="ifl_a1_03">Installation Type</string>
+    <string name="ifl_a1_01">Instafel Hakkında</string>
+    <string name="ifl_a1_02">Instafel Sürümü</string>
+    <string name="ifl_a1_03">Kurulum Türü</string>
     <string name="ifl_a1_04">Project</string>
     <string name="ifl_a1_05">Developer</string>
     <string name="ifl_a1_06">Everyone that contributed to this project</string>
