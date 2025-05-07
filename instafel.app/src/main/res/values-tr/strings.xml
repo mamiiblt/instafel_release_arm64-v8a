@@ -4,14 +4,14 @@
     <string name="ifl_a5_10">İzin Reddedildi</string>
     <string name="ifl_a5_11">"Instafel'in bildirim izni reddedildi. Eğer bu problem olmaya devam ederse uygulama ayarlarından bildirim izinlerini açmayı unutmayın."</string>
     <string name="ifl_a0_08">Çeşitli Seçenekler</string>
-    <string name="ifl_a0_09">Amoled Tema</string>
-    <string name="ifl_a0_10">Instafel aktiviteleri, diyalogları ve diğer kısımları için amoled temayı açar</string>
+    <string name="ifl_a0_09">Ağır Koyu Tema</string>
+    <string name="ifl_a0_10">Instafel aktiviteleri, diyalogları ve diğer kısımları için aşırı koyu temayı temayı açar.</string>
     <string name="ifl_a0_11">Reklamları Kaldır</string>
-    <string name="ifl_a0_12">Ana akışta, reelste ve diğer yerlerde gösterilen reklamları gizler</string>
+    <string name="ifl_a0_12">Ana akışta, reelslerde ve diğer yerlerde gösterilen reklamları gizler.</string>
     <string name="ifl_a0_13">Değişikliklerin geçerli olması için uygulamayı yeniden başlatın.</string>
     <string name="ifl_a0_14">Varsayılan olarak etkin, değiştirilemez.</string>
     <string name="ifl_a0_15">Instafel Updater</string>
-    <string name="ifl_a0_16">Root / Shizuku ile otomatik güncellemeler için Instafel Updater\'ı kullanın.</string>
+    <string name="ifl_a0_16">Root / Shizuku ile otomatik güncellemeler için Instafel Updater\'ı kullanın</string>
     <!-- me.mamiiblt.instafel.ifl_a_menu -->
     <string name="ifl_a0_02">Güncelleme Ayarları</string>
     <string name="ifl_a0_03">Dil Ayarları</string>
@@ -148,7 +148,7 @@
     <string name="ifl_a11_18">v%1$s sürümüne %2$s tarihinde güncellendi</string>
     <string name="ifl_a11_19">Yapımcı Hakkında</string>
     <string name="ifl_a11_20">Yapımcı Adı</string>
-    <string name="ifl_a11_21">Error while fetching author about info</string>
+    <string name="ifl_a11_21">Sahip bilgisini almaya çalışırken sorun oluştu</string>
     <string name="ifl_a11_22">Yedek dosyası indirilirken bir sorun oluştu</string>
     <string name="ifl_a11_23">Bu ayarı açmak için en az bir yedek dosyası kurmalısınız</string>
     <string name="ifl_a11_24">%1$s yedeği artık otomatik olarak güncellencek</string>
