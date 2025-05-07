@@ -1,3 +1,7 @@
 files:
   - source: /instafel.app/src/main/res/values/strings.xml
-    translation: instafel.app/src/main/res/values-%two_letters_code%/strings.xml
+    translation: /instafel.app/src/main/res/values-%two_letters_code%/strings.xml
+  - source: /instafel.website/src/locales/en/**
+    translation: /instafel.website/src/locales/%two_letters_code%/%original_file_name%
+  - source: /instafel.updater/src/main/res/values/strings.xml
+    translation: /instafel.updater/src/main/res/values-%two_letters_code%/strings.xml
