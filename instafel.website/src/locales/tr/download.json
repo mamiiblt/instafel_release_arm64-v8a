@@ -42,8 +42,8 @@
     "patcher_version": "Patcher Sürümü",
     "older_patcher": "Eski patcher kullanıyor",
     "generation_id": "Jenerasyon IDsi",
-    "md5_hash_unclone": "MD5 Hash (Unclone)",
-    "md5_hash_clone": "MD5 Hash (Clone)"
+    "md5_hash_unclone": "MD5 Hash (Klon Olmayan)",
+    "md5_hash_clone": "MD5 Hash (Klon)"
   },
   "tabs": {
     "build": "Yapı Bilgisi",
