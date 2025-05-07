@@ -1,8 +1,8 @@
 {
   "heroHeader": {
     "title": "Instafel Updater",
-    "subtitle": "Otomatik güncelleme, sıfır efor!",
-    "description": "Instafel'i Root ve Shizuku kullanarak sürekli güncel tutun!"
+    "subtitle": "Otomatik güncelleme, sıfır efor",
+    "description": "Instafel'i Root ve Shizuku kullanarak sürekli güncel tutun."
   },
   "buttons": {
     "download": "İndir {{version}}",
