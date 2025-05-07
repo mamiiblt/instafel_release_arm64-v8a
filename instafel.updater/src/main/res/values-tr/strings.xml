@@ -41,7 +41,7 @@
     <string name="not_found">Cihazınızda root bulunamadı, lütfen manager\'den izin verin.</string>
     <string name="please_allow_root">Root erişimi reddedildi, lütfen managerden izin verin.</string>
     <string name="please_install_root">Cihazınızda root bulunamadı, lütfen cihazınızı rootlayın.</string>
-    <string name="please_allow_unrestiracted">Please set app battery restiraction mode to unrestiracted mode</string>
+    <string name="please_allow_unrestiracted">Lütfen uygulamanım batarya modunu \"kısıtsız\" moda alın</string>
     <string name="dialog_title">İzin Al</string>
     <string name="dialog_desc">Instafel Updater\'in çalışabilmesi için bildirim ve root iznine gerek duymaktadır. İzin vermek için Tamam\'a basınız</string>
     <string name="dialog_ok">Tamam</string>
@@ -85,7 +85,7 @@
     <string name="language">Dil</string>
     <string name="language_s">Uygulamanın dilini ayarlayın</string>
     <string name="developed_by">mamiiblt tarafından ❤️ ile geliştirilmiştir</string>
-    <string name="about_app">About</string>
+    <string name="about_app">Hakkında</string>
     <string name="crash_logs">Hataları Kaydet</string>
     <string name="crash_logs_s">Logcu her hatayı günlüğe yazar.</string>
     <string name="disable_error">Uyarı Bild. Kapat</string>
