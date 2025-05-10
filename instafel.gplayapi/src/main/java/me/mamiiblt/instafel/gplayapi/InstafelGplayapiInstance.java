@@ -2,6 +2,8 @@ package me.mamiiblt.instafel.gplayapi;
 
 import me.mamiiblt.instafel.gplayapi.utils.AppInfo;
 import me.mamiiblt.instafel.gplayapi.utils.General;
+import me.mamiiblt.instafel.gplayapi.utils.Log;
+
 import com.aurora.gplayapi.data.models.AuthData;
 import com.aurora.gplayapi.data.models.File;
 import com.aurora.gplayapi.helpers.AppDetailsHelper;
@@ -23,11 +25,17 @@ public class InstafelGplayapiInstance {
         AppInfo appInfo = new AppInfo(new AppDetailsHelper(authData).getAppByPackageName(packageName));
         List<File> files = new PurchaseHelper(authData).purchase(appInfo.getApp().getPackageName(), appInfo.getApp().getVersionCode(), appInfo.getApp().getOfferType());
         for (File file : files) {
+            Log.println("I", "File found, " + file.getName());
             if (file.getName().equals("com.instagram.android.apk")) {
-                appInfo.addApkInfo(file.getUrl(), file.getSize());
-                return appInfo;
+                appInfo.addApkInfo("base_apk", file.getUrl(), file.getSize());
+            } else if (file.getName().contains("config") && file.getName().contains("dpi.apk")) {
+                appInfo.addApkInfo("rconf_apk", file.getUrl(), file.getSize());
             }
         }
-        return null;
+        if (appInfo.ifApkExist("base_apk") && appInfo.ifApkExist("rconf_apk")) {
+            return appInfo;
+        } else {
+            return null;
+        }
     }
 }

@@ -30,16 +30,24 @@ public class AppInfo {
         return infoObject.getInt("id");
     }
 
-    public void addApkInfo(String url, long size) {
-        infoObject.put("file", new JSONObject().put("url", url).put("size", size));
+    public void addApkInfo(String name, String url, long size) {
+        infoObject.put(name, new JSONObject().put("url", url).put("size", size));
     }
 
-    public long getApkSize() {
-        return infoObject.getJSONObject("file").getLong("size");
+    public boolean ifApkExist(String name) {
+        if (infoObject.has(name)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public String getApkUrl() {
-        return infoObject.getJSONObject("file").getString("url");
+    public long getApkSize(String name) {
+        return infoObject.getJSONObject(name).getLong("size");
+    }
+
+    public String getApkUrl(String name) {
+        return infoObject.getJSONObject(name).getString("url");
     }
 
     public String getVer_name() {

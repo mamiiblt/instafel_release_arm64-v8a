@@ -92,11 +92,11 @@ public class Env {
 
                     AppInfo appInfo = instance.getIgApk();
 
-                    if (appInfo.getVer_name().contains(".0.0.0.")) { // alpha version names always has this regex
+                    if (appInfo.getVer_name().contains(".0.0.0.")) { 
                         if (!lastCheckedVersion[0].equals(appInfo.getVer_name())) {
                             lastCheckedVersion[0] = appInfo.getVer_name();
-                            String latestIflVersion = getLatestInstafelVersion(); // get latest instafel version
-                            if (latestIflVersion != null && !latestIflVersion.equals(appInfo.getVer_name())) { // this version released or not
+                            String latestIflVersion = getLatestInstafelVersion();
+                            if (latestIflVersion != null && !latestIflVersion.equals(appInfo.getVer_name())) { 
                                 Log.println("I", "Triggering update, " + latestIflVersion + " -> " + appInfo.getVer_name());
                                 triggerUpdate(appInfo); 
                             }
@@ -109,7 +109,7 @@ public class Env {
             }
         };
 
-        long delayMs = 900000; // check every 15 minutes
+        long delayMs = 900000;
         timer.scheduleAtFixedRate(task, 0, delayMs);
     }
 
@@ -118,9 +118,10 @@ public class Env {
     private static void triggerUpdate(AppInfo appInfo) throws Exception {
         JSONObject workflowData = new JSONObject();
         workflowData.put("event_type", "generate_instafel");
-        workflowData.put("client_payload", new JSONObject()
-                .put("apk_url", appInfo.getApkUrl())
-        );
+        workflowData.put(
+            "client_payload", new JSONObject()
+                .put("base", new JSONObject().put("url", appInfo.getApkUrl("base_apk")))
+                .put("rconf", new JSONObject().put("url", appInfo.getApkUrl("rconf_apk"))));
 
         Log.println("I", "Calling patcher for new version: " + appInfo.getVer_name());
 
