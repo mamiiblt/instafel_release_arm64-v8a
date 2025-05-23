@@ -14,6 +14,7 @@ import me.mamiiblt.instafel.patcher.source.SmaliParser.SmaliInstruction;
 import me.mamiiblt.instafel.patcher.utils.Log;
 import me.mamiiblt.instafel.patcher.utils.SmaliUtils;
 import me.mamiiblt.instafel.patcher.utils.Utils;
+import me.mamiiblt.instafel.patcher.utils.SmaliUtils.MethodContent;
 import me.mamiiblt.instafel.patcher.utils.models.LineData;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelPatch;
 import me.mamiiblt.instafel.patcher.utils.patch.InstafelTask;
@@ -32,7 +33,7 @@ public class FixSecureCtxCrash extends InstafelPatch {
     private SmaliUtils smaliUtils = getSmaliUtils();
     private File secureCtxFile = null;
     private List<String> sCtxFContent = null;
-    private int invokeA01Line = 0, invokeA02Line = 0;
+    private int invokeA00Line = 0, invokeA01Line = 0;
 
     @Override
     public List<InstafelTask> initializeTasks() throws Exception {
@@ -86,7 +87,7 @@ public class FixSecureCtxCrash extends InstafelPatch {
         }
     };
 
-    InstafelTask getInvokeLinesFromCtx = new InstafelTask("Get invoke parts from A01 and A02 method") {
+    InstafelTask getInvokeLinesFromCtx = new InstafelTask("Get invoke parts from A00 and A01 method") {
 
         @Override
         public void execute() throws Exception {
@@ -100,9 +101,21 @@ public class FixSecureCtxCrash extends InstafelPatch {
                 for (int i = 0; i < methodStarts.size(); i++) {
                     LineData methodStart = methodStarts.get(i);
 
+                    if (methodStart.getContent().contains("A00")) {
+                        Log.info("Method A00 found succesfully.");
+                        MethodContent mContent = smaliUtils.getMethodContent(sCtxFContent, methodStart.getNum());
+                        List<SmaliInstruction> instructions = getInvokeVirtualsFromMethod(mContent);
+                        if (instructions.size() == 0 || instructions.size() > 1) {
+                            failure("No any invoke-direct instr. found in A00");
+                        } else {
+                            invokeA00Line = instructions.get(0).getNum();
+                            Log.info("Instruction found in A00");
+                        }
+                    }
+
                     if (methodStart.getContent().contains("A01")) {
-                        Log.info("Method A01 found succesfully.");
-                        Map<Integer, String> mContent = smaliUtils.getMethodContent(sCtxFContent, methodStart.getNum());
+                        Log.info("Method A01 found succesfully at line " + methodStart.getNum());
+                        MethodContent mContent = smaliUtils.getMethodContent(sCtxFContent, methodStart.getNum());
                         List<SmaliInstruction> instructions = getInvokeVirtualsFromMethod(mContent);
                         if (instructions.size() == 0 || instructions.size() > 1) {
                             failure("No any invoke-direct instr. found in A01");
@@ -111,71 +124,63 @@ public class FixSecureCtxCrash extends InstafelPatch {
                             Log.info("Instruction found in A01");
                         }
                     }
-
-                    if (methodStart.getContent().contains("A02")) {
-                        Log.info("Method A02 found succesfully.");
-                        Map<Integer, String> mContent = smaliUtils.getMethodContent(sCtxFContent, methodStart.getNum());
-                        List<SmaliInstruction> instructions = getInvokeVirtualsFromMethod(mContent);
-                        if (instructions.size() == 0 || instructions.size() > 1) {
-                            failure("No any invoke-direct instr. found in A02");
-                        } else {
-                            invokeA02Line = instructions.get(0).getNum();
-                            Log.info("Instruction found in A02");
-                        }
-                    }
                 }
                 success("Invoke virtual instructions founded succesfully.");
             }
         }
     };
 
-    InstafelTask replaceValuesBetweenInvoke = new InstafelTask("Use old method for A01 instruction") {
+    InstafelTask replaceValuesBetweenInvoke = new InstafelTask("Use old method for A00 instruction") {
 
         @Override
         public void execute() throws Exception {
+            String valueA00 = sCtxFContent.get(invokeA00Line);
             String valueA01 = sCtxFContent.get(invokeA01Line);
-            String valueA02 = sCtxFContent.get(invokeA02Line);
+            SmaliInstruction instA00 = SmaliParser.parseInstruction(valueA00, invokeA00Line);
             SmaliInstruction instA01 = SmaliParser.parseInstruction(valueA01, invokeA01Line);
-            SmaliInstruction instA02 = SmaliParser.parseInstruction(valueA02, invokeA02Line);
-            Log.info("Old: " + valueA01.trim());
+            Log.info("Old: " + valueA00.trim());
 
-            if (instA01.getMethodName().equals(instA02.getMethodName())) {
-                failure("Method names are same, patch outdated...");
+            if (
+                instA00.getMethodName().equals(instA01.getMethodName()) || 
+                instA00.getReturnType().equals(instA01.getReturnType())) {
+                failure("Method names are same");
             }
 
-            if (instA01.getReturnType().equals(instA02.getReturnType())) {
-                failure("Return types are same, patch outdated...");
-            }
+            valueA00 = valueA00.replace(
+                instA00.getMethodName(), instA01.getMethodName());
+            valueA00 = valueA00.replace(
+                instA00.getReturnType(), instA01.getReturnType());
 
-            valueA01 = valueA01.replace(
-                instA01.getMethodName(), instA02.getMethodName());
-            valueA01 = valueA01.replace(
-                instA01.getReturnType(), instA02.getReturnType());
-
-            sCtxFContent.set(invokeA01Line, valueA01);
-            Log.info("New: " + valueA01.trim());
+            sCtxFContent.set(invokeA00Line, valueA00);
+            Log.info("New: " + valueA00.trim());
 
             FileUtils.writeLines(secureCtxFile, sCtxFContent);
             success("Line modified succesfully.");
         }        
     };
 
-    private List<SmaliInstruction> getInvokeVirtualsFromMethod(Map<Integer, String> mContent) {
+    private List<SmaliInstruction> getInvokeVirtualsFromMethod(MethodContent mContent) {
         List<SmaliInstruction> instructions = new ArrayList<>();
-        for (Map.Entry<Integer, String> line : mContent.entrySet()) {
+
+        for (Map.Entry<Integer, String> line : mContent.lines.entrySet()) {
             int num = line.getKey();
             String content = line.getValue();
+
+            Log.info("Line: " + num + " - " + content);
+
             if (content.contains("invoke-virtual")) {
                 SmaliInstruction parsedInstruction = SmaliParser.parseInstruction(content, num);
                 if (
-                    parsedInstruction.getRegisters().length == 1 && 
-                    !parsedInstruction.getReturnType().equals("Z")
+                    parsedInstruction != null &&
+                    parsedInstruction.getRegisters().length == 1 &&
+                    !"Z".equals(parsedInstruction.getReturnType())
                 ) {
-                    Log.info("A invoke-virtual opcode found at line " + num);
+                    Log.info("An invoke-virtual opcode found at line " + num);
                     instructions.add(parsedInstruction);
                 }
             }
         }
+
         return instructions;
     }
 }

@@ -17,7 +17,6 @@ public class AboutCmd implements Command {
             "telegram   : t.me/instafel",
             "repository : github.com/mamiiblt/instafel",
             "",
-            "This project is licensed under the MIT license",
             "Developed with ❤️ by mamiiblt"
         };
 

@@ -74,8 +74,8 @@ public class UnlockDeveloperOptions extends InstafelPatch {
             }
             LineData callLine = callLines.get(0);
             SmaliInstruction callLineInstruction = SmaliParser.parseInstruction(callLine.getContent(), callLine.getNum());
-            success("DevOptions class is " + className);
             className = callLineInstruction.getClassName().replace("LX/", "").replace(";", "");
+            success("DevOptions class is " + className);
         }
     };
 
