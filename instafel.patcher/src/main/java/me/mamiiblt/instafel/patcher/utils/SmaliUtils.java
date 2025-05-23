@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -34,18 +35,35 @@ public class SmaliUtils {
         this.smaliFolders = getSmaliFolders();
     }
 
-    public Map<Integer, String> getMethodContent (List<String> fContent, int methodStart) {
-        Map<Integer, String> result = new HashMap<>();
+    public MethodContent getMethodContent(List<String> fContent, int methodStart) {
+        Map<Integer, String> lineMap = new LinkedHashMap<>();
+        StringBuilder textBuilder = new StringBuilder();
+
+        if (methodStart < 0 || methodStart >= fContent.size()) {
+            return new MethodContent(lineMap, "");
+        }
 
         for (int i = methodStart; i < fContent.size(); i++) {
             String line = fContent.get(i);
-            result.put(i, line);
-            if (line.contains(".end method")) {
+            lineMap.put(i, line);
+            textBuilder.append(line).append("\n");
+
+            if (line.trim().equals(".end method")) {
                 break;
             }
         }
 
-        return result;
+        return new MethodContent(lineMap, textBuilder.toString());
+    }
+
+    public class MethodContent {
+        public final Map<Integer, String> lines;
+        public final String fullText;
+
+        public MethodContent(Map<Integer, String> lines, String fullText) {
+            this.lines = lines;
+            this.fullText = fullText;
+        }
     }
 
     public int getUnusedRegistersOfMethod(List<String> fContent, int methodStart, int lineEnd) {
